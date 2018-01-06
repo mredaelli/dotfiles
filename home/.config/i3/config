@@ -13,7 +13,8 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -fn 'Hasklig:regular:pixelsize=23'
-bindsym $mod+l exec i3lock
+bindsym $mod+l exec ~/bin/fuzzy_lock.sh
+exec xautolock -time 15 -locker '~/bin/fuzzy_lock.sh' &
 
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -113,4 +114,5 @@ bar {
 exec --no-startup-id volumeicon
 exec --no-startup-id pasystray
 exec --no-startup-id np-applet
+exec --no-startup-id compton  -b
 
