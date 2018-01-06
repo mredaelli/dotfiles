@@ -1,0 +1,82 @@
+general {
+        colors = true
+        interval = 5
+}
+
+order += "disk /"
+order += "disk /home"
+order += "wireless wlan0"
+order += "ethernet eth0"
+order += "path_exists VPN"
+order += "battery 0"
+order += "cpu_usage"
+order += "load"
+order += "tztime local"
+
+#order += "ipv6"
+#order += "run_watch DHCP"
+#order += "run_watch VPNC"
+#order += "cpu_temperature 0"
+
+cpu_usage {
+  format = 'Cpu: %usage'
+}
+
+wireless wlan0 {
+        format_up = "%quality at %essid, %bitrate"
+        format_down = "W: down"
+}
+
+ethernet eth0 {
+        format_up = "E: %ip (%speed)"
+        format_down = "E: down"
+}
+
+battery 0 {
+        format = "%status %percentage %remaining %emptytime"
+        format_down = "No battery"
+        status_chr = "⚡ CHR"
+        status_bat = "🔋 BAT"
+        status_unk = "? UNK"
+        status_full = "☻ FULL"
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+}
+
+run_watch DHCP {
+        pidfile = "/var/run/dhclient*.pid"
+}
+
+run_watch VPNC {
+        pidfile = "/var/run/vpnc/pid"
+}
+
+path_exists VPN {
+        path = "/proc/sys/net/ipv4/conf/tun0"
+}
+
+tztime local {
+        format = "%Y-%m-%d %H:%M:%S"
+}
+
+load {
+	format = "L: %1min %5min"
+}
+
+cpu_temperature 0 {
+	format = "T: %degrees °C"
+	path = "/sys/devices/platform/coretemp.0/temp1_input"
+}
+
+disk "/" {
+	format = "/ %avail"
+	low_threshold = 800
+	threshold_type = mbytes_avail
+	prefix_type = binary
+}
+disk "/home" {
+	format = "/home %free"
+	low_threshold = 1
+	threshold_type = gbytes_avail
+	prefix_type = binary
+}
