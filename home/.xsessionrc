@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if [ -d "$HOME/bin" ] ; then
+	PATH="$HOME/bin:$PATH"
+fi
+
+if [ "$(hostname)" = "gimli" ] 
+then  
+   xrandr --output HDMI-0 --right-of DP-2
+fi

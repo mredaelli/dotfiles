@@ -5,7 +5,7 @@ font pango:Hasklig 13
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-bindsym $mod+Return exec python3 ~/bin/kitty fish
+bindsym $mod+Return exec kitty fish
 bindsym $mod+Shift+f exec ~/bin/firefox
 bindsym $mod+Shift+w exec ~/bin/wallpaper
 
