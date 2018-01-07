@@ -13,3 +13,5 @@ alias psg='ps au | grep'
 
 . "$HOME/.homesick/repos/homeshick/homeshick.fish"
 source "$HOME/.homesick/repos/homeshick/completions/homeshick.fish"
+
+set PATH ~/bin $PATH
