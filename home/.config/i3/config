@@ -8,6 +8,7 @@ floating_modifier $mod
 bindsym $mod+Return exec kitty fish
 bindsym $mod+Shift+f exec ~/bin/firefox
 bindsym $mod+Shift+w exec ~/bin/wallpaper
+bindsym $mod+Shift+o exec transset -a 2 -x 2 -t
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -118,3 +119,4 @@ exec --no-startup-id pasystray
 exec --no-startup-id np-applet
 exec --no-startup-id compton  -b
 exec --no-startup-id ~/bin/wallpaper
+
