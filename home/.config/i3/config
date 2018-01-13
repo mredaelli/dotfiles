@@ -119,4 +119,5 @@ exec --no-startup-id pasystray
 exec --no-startup-id np-applet
 exec --no-startup-id compton  -b
 exec --no-startup-id ~/bin/wallpaper
-
+exec --no-startup-id dropbox start --i
+exec --no-startup-id SpiderOakONE
