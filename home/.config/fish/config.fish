@@ -17,10 +17,16 @@ switch (uname)
       export HOMESHICK_DIR=/usr/local/opt/homeshick
 end
 
-set PATH ~/bin $PATH
 
 # bobthefish
 set -g theme_title_display_process yes
 # set -g theme_color_scheme terminal-dark
 set -g theme_color_scheme solarized-dark
 # set -g theme_color_scheme dark
+
+set PATH ~/bin $PATH
+
+if test -d ~/miniconda3
+  set PATH ~/miniconda3/bin $PATH
+  source (conda info --root)/etc/fish/conf.d/conda.fish
+end
