@@ -1,23 +1,37 @@
 set $mod Mod4
-
-font pango:Hasklig 13
-
-# Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-bindsym $mod+Return exec kitty fish
-bindsym $mod+Shift+f exec ~/bin/firefox
+bindsym $mod+Shift+Return exec kitty
+bindsym $mod+Shift+b exec firefox
 bindsym $mod+Shift+w exec ~/bin/wallpaper
-bindsym $mod+Shift+o exec transset -a 2 -x 2 -t
-
-# kill focused window
+bindsym $mod+Shift+f exec xfe 
 bindsym $mod+Shift+q kill
+bindsym $mod+Shift+r restart
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+d exec killall dunst && exec notify-send 'restart dunst'
 
-# start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run -fn 'Hasklig:regular:pixelsize=23'
-
 bindsym $mod+l exec ~/bin/fuzzy_lock.sh
-exec xautolock -detectsleep -time 5 -locker '~/bin/fuzzy_lock.sh' -notify 30 -notifier "notify-send -u critical -t 30000 -- 'LOCKING screen in 30 seconds'"
+bindsym $mod+o exec transset -a 2 -x 2 -t
+bindsym $mod+h split h;exec notify-send 'split horizontally'
+bindsym $mod+v split v;exec notify-send 'split vertically'
+
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+a focus parent
+#bindsym $mod+d focus child
+
+bindsym Print exec scrot -e 'mv $f ~/Pictures/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in ~/Pictures/screenshots'
+bindsym $mod+Print exec scrot -ue 'mv $f ~/Pictures/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in ~/Pictures/screenshots'
+bindsym $mod+Shift+Print exec notify-send 'selection will be saved in ~/Pictures/screenshots' & exec scrot -se 'mv $f ~/Pictures/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in ~/Pictures/screenshots'
+
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
 
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -29,33 +43,9 @@ bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# split in horizontal orientation
-bindsym $mod+h split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
-
-# toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
-# focus the parent container
-bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
-# switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -66,8 +56,9 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+bindsym $mod+Prior workspace prev
+bindsym $mod+Next workspace next
 
-# move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
@@ -79,31 +70,26 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-# reload the configuration file
-#bindsym $mod+Shift+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-
-# resize window (you can also use the mouse for that)
-#bindsym $mod+r mode "resize"
-#mode "resize" {
-        # same bindings, but for the arrow keys
-#        bindsym Left resize shrink width 10 px or 10 ppt
-#        bindsym Down resize grow height 10 px or 10 ppt
-#        bindsym Up resize shrink height 10 px or 10 ppt
-#        bindsym Right resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape
-#        bindsym Return mode "default"
-#        bindsym Escape mode "default"
-#}
-
 bindsym $mod+Control+Left resize shrink width 10 px or 10 ppt
 bindsym $mod+Control+Down resize grow height 10 px or 10 ppt
 bindsym $mod+Control+Up resize shrink height 10 px or 10 ppt
 bindsym $mod+Control+Right resize grow width 10 px or 10 ppt
+
+for_window [urgent=latest] focus
+
+bindsym $mod+Escape mode "$mode_system"
+set $mode_system (l)ock, (e)xit, (r)eboot, (s)hutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id  exec ~/bin/fuzzy_lock.sh, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot
+    bindsym s exec --no-startup-id systemctl poweroff
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+font pango:Hasklig 13
 
 bar {
         status_command i3status
@@ -115,9 +101,11 @@ bar {
 }
 
 exec --no-startup-id volumeicon
-exec --no-startup-id pasystray
-exec --no-startup-id np-applet
+exec --no-startup-id nm-applet
 exec --no-startup-id compton  -b
-exec --no-startup-id ~/bin/wallpaper
-exec --no-startup-id dropbox start --i
-exec --no-startup-id SpiderOakONE
+exec_always --no-startup-id ~/bin/wallpaper
+exec --no-startup-id nextcloud 
+# exec --no-startup-id SpiderOakONE
+exec --no-startup-id xbacklight -set 30
+
+exec xautolock -detectsleep -time 5 -locker '~/bin/fuzzy_lock.sh' -notify 30 -notifier "notify-send -u critical -t 30000 -- 'LOCKING screen in 30 seconds'"

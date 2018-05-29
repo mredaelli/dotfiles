@@ -1,2 +1,2 @@
-#!/bin/bash
-feh --recursive --randomize --bg-fill /home/turing/Pictures/wallpapers/
+#!/bin/sh
+feh --recursive --randomize --bg-fill /home/turing/pictures/wallpapers/

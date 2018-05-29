@@ -8,6 +8,7 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'neomake/neomake'
    Plug 'octol/vim-cpp-enhanced-highlight'
    Plug 'rhysd/vim-clang-format' 
+   Plug 'LnL7/vim-nix'
 
 " themes
    "Plug 'sjl/badwolf'
@@ -39,7 +40,7 @@ autocmd FileType markdown,pandoc noremap <buffer> <silent> <End> g$
 let g:deoplete#enable_at_startup = 1
 
 let g:clang_complete_auto = 0
-let g:clang_library_path = '/usr/lib/llvm-4.0/lib/libclang.so.1'
+let g:clang_library_path = '/nix/store/fggspvgd8sw122p322whbhim7k4myv8p-clang-5.0.1-lib/lib/libclang.so.5.0'
 let g:clang_auto_select = 0
 let g:clang_omnicppcomplete_compliance = 0
 let g:clang_make_default_keymappings = 0
