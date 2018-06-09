@@ -7,8 +7,7 @@ bindsym $mod+Shift+w exec ~/bin/wallpaper
 bindsym $mod+Shift+f exec xfe 
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+r restart
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+d exec killall dunst && exec notify-send 'restart dunst'
+bindsym $mod+Shift+d exec kill $(pgrep dunst) && exec dunst
 
 bindsym $mod+d exec dmenu_run -fn 'Hasklig:regular:pixelsize=23'
 bindsym $mod+l exec ~/bin/fuzzy_lock.sh
