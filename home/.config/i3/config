@@ -101,7 +101,7 @@ bar {
 }
 
 exec --no-startup-id volumeicon
-exec --no-startup-id nm-applet
+exec --no-startup-id pnmixer
 exec --no-startup-id compton  -b
 exec_always --no-startup-id ~/bin/wallpaper
 exec --no-startup-id nextcloud 
