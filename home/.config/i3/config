@@ -25,9 +25,11 @@ bindsym $mod+e layout toggle split
 bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
-bindsym Print exec scrot -e 'mv $f ~/Pictures/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in ~/Pictures/screenshots'
-bindsym $mod+Print exec scrot -ue 'mv $f ~/Pictures/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in ~/Pictures/screenshots'
-bindsym $mod+Shift+Print exec notify-send 'selection will be saved in ~/Pictures/screenshots' & exec scrot -se 'mv $f ~/Pictures/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in ~/Pictures/screenshots'
+set $picpath ~/media/pictures
+
+bindsym Print exec scrot -e 'mv $f $picpath/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in $picpath/screenshots'
+bindsym $mod+Print exec scrot -ue 'mv $f $picpath/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in $picpath/screenshots'
+bindsym $mod+Shift+Print exec notify-send 'selection will be saved in $picpath/screenshots' & exec scrot -se 'mv $f $picpath/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in $picpath/screenshots'
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
