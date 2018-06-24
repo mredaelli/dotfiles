@@ -20,6 +20,7 @@ call plug#end()
 
 
 set modeline
+set mouse=a
 
 " shifting text with arrows in visual mode
 vmap <A-Left> <gv
