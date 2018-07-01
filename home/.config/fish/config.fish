@@ -30,3 +30,9 @@ if test -d ~/miniconda3
   set PATH ~/miniconda3/bin $PATH
   source (conda info --root)/etc/fish/conf.d/conda.fish
 end
+
+function mutt
+    bash --login -c 'cd ~/downloads; neomutt' $argv;
+end
+
+
