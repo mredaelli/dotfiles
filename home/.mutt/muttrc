@@ -1,10 +1,15 @@
-set folder      = imaps://imap.gmail.com/
-set imap_user   = m.redaelli@gmail.com
-set imap_pass   = `secret-tool lookup user m.redaelli domain gmail.com`
-set spoolfile   = +INBOX
-mailboxes       = +INBOX
-set imap_list_subscribed
-set imap_check_subscribed
+# Folder hooks
+folder-hook 'account.com.gmail.mredaelli' 'source ~/.mutt/gmail-mredaelli'
+folder-hook 'account.com.gmail.mredaelli2' 'source ~/.mutt/gmail-mredaelli2'
+folder-hook 'account.com.gmail.international' 'source ~/.mutt/gmail-international'
+
+# Default account
+source ~/.mutt/gmail-mredaelli
+
+# Macros for switching accounts
+macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/gmail-mredaelli<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/gmail-mredaelli2<enter><change-folder>!<enter>'
+macro index <f4> '<sync-mailbox><enter-command>source ~/.mutt/gmail-international<enter><change-folder>!<enter>'
 
 # color schemes
 #source ~/.mutt/solarized
@@ -53,17 +58,9 @@ unset markers              # no ugly plus signs
 
 set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 
+bind index <Delete> delete-message
+
 bind attach <return> view-mailcap
-
-
-# Store message headers locally to speed things up.
-set header_cache = ~/.cache/mutt
-# Store messages locally to speed things up, like searching message bodies.
-set message_cachedir = "~/.cache/mutt"
-
-# Specify where to save and/or look for postponed messages.
-set postponed = +[Gmail]/Drafts
-set record = "+[Gmail]/Sent Mail"
 
 # Allow Mutt to open a new IMAP connection automatically.
 unset imap_passive
