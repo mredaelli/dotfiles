@@ -108,6 +108,6 @@ exec_always --no-startup-id ~/bin/wallpaper
 exec --no-startup-id nextcloud 
 # exec --no-startup-id SpiderOakONE
 exec --no-startup-id xbacklight -set 30
-exec --no-startup-id gnome-keyring-daemon
+#exec --no-startup-id gnome-keyring-daemon
 
 exec xautolock -detectsleep -time 5 -locker '~/bin/fuzzy_lock.sh' -notify 30 -notifier "notify-send -u critical -t 30000 -- 'LOCKING screen in 30 seconds'"
