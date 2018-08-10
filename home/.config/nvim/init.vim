@@ -1,4 +1,6 @@
 call plug#begin('~/.local/share/nvim/plugged')
+   Plug 'conradirwin/vim-bracketed-paste'
+
    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
    "Plug 'roxma/nvim-yarp'
    "Plug 'roxma/vim-hug-neovim-rpc'
