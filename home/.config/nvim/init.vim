@@ -37,6 +37,12 @@ call plug#end()
 set modeline
 set mouse=a
 
+" clear last search
+nnoremap <silent> <ESC> :nohlsearch<CR><CR> 
+nnoremap <esc>[ <esc>[
+
+autocmd BufNewFile,BufRead /tmp/mutt* set noautoindent filetype=mail wm=0 tw=78 comments+=n:> fo+=q nonumber digraph nolist
+
 " fuzzy finder with ctrl-p
 nnoremap <C-p> :FuzzyOpen<CR><Paste>
 

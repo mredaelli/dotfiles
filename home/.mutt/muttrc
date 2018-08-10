@@ -12,8 +12,8 @@ macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/gmail-mredaelli2<e
 macro index <f4> '<sync-mailbox><enter-command>source ~/.mutt/gmail-international<enter><change-folder>!<enter>'
 
 # color schemes
-#source ~/.mutt/solarized
-source ~/.mutt/vombatidae
+source ~/.mutt/solarized
+#source ~/.mutt/vombatidae
 
 # Mime handling
 
@@ -34,10 +34,21 @@ set sidebar_indent_string=" "
 set sidebar_visible
 set sidebar_format="%B%?F? [%F]?%* %?N?%N/?%S"
 
-# Exit
+
+macro index <Down> "<next-line><next-entry>"
+bind pager <Down> next-line
+macro index <Up> "<previous-line><previous-entry>"
+bind pager <Up> previous-line
+bind pager n next-undeleted 
+bind pager p previous-undeleted
+bind pager N next-entry
+bind pager P previous-entry
+bind index R toggle-new 
+bind index <Enter> display-message
+bind index <Return> display-message
+
 bind generic,compose,attach,pager,index i noop    
 bind generic,compose,attach,pager,index x noop    
-
 #bind index,generic,compose,attach,pager : noop      
 #bind index,generic,compose,attach,pager :q exit      
 
@@ -74,8 +85,8 @@ alternative_order text/enriched text/html text/plain text
 
 
 # Index View Options ---------------------------------
-set date_format = "%m/%d"
-set index_format = "[%Z]  %D  %-20.20F  %s"
+set date_format = "%d/%m %H:%M"
+set index_format = "[%Z%E] %D %4C %-20.20F  %s"
 set sort = threads                         # like gmail
 set sort_aux = reverse-last-date-received  # like gmail
 set uncollapse_jump                        # don't collapse on an unread message
