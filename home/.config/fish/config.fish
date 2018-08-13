@@ -3,6 +3,8 @@ alias cpvpn='pushd ~/.ssh; and sudo openvpn --config CPMassimoRedaelli-TO-cp-fw-
 alias ls='exa' 
 alias ll='exa -l --git'
 
+alias less='less -r'
+
 alias nano='nvim'
 alias vim='nvim'
 alias vi='nvim'
