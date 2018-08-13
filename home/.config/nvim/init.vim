@@ -19,8 +19,11 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'neomake/neomake', { 'for': ['scala', 'cpp'] }
 
    Plug 'LnL7/vim-nix', { 'for': 'nix' }
+   Plug 'dag/vim-fish', { 'for': 'fish' }
 
    Plug 'cloudhead/neovim-fuzzy' 
+
+   Plug 'easymotion/vim-easymotion'
 
    Plug 'bling/vim-airline'
 " themes
@@ -31,6 +34,9 @@ call plug#begin('~/.local/share/nvim/plugged')
    "Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
+if &shell =~# 'fish$'
+    set shell=sh
+endif
 
 set modeline
 set mouse=a
@@ -58,6 +64,7 @@ let g:deoplete#sources._=['buffer', 'member', 'tag', 'file', 'omni', 'ultisnips'
 " Markdown
 autocmd FileType markdown,pandoc call SetMarkdownOptions()
 function SetMarkdownOptions()
+	set  filetype=markdown.pandoc
 	noremap <buffer> <silent> k gk
 	noremap <buffer> <silent> j gj
 	noremap <buffer> <silent> 0 g0
@@ -127,12 +134,12 @@ function SetupScala()
 	  exe "EnTypeCheck"
 	endfunction
 	autocmd BufWritePost *.scala call Ensime_retypecheck()
-	let g:neomake_scala_enabled_makers = []
+	"	let g:neomake_scala_enabled_makers = []
 
 	nnoremap <C-b> :EnDeclaration<CR>
 
 	let g:deoplete#omni#input_patterns.scala='[^. *\t]\.\w*'
-	"let g:neomake_enabled_makers = ['sbt']
+	let g:neomake_scala_enabled_makers = ['sbt']
 	let g:neomake_verbose=3
 	call SetupDev()
 endfunction
