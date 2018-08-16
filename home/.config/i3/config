@@ -9,7 +9,9 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+d exec kill $(pgrep dunst) && exec dunst
 
-bindsym $mod+d exec dmenu_run -fn 'Hasklig:regular:pixelsize=23'
+bindsym $mod+d exec rofi -show run
+bindsym $mod+w exec rofi -show window
+# dmenu_run -fn 'Hasklig:regular:pixelsize=23'
 bindsym $mod+l exec ~/bin/fuzzy_lock.sh
 bindsym $mod+o exec transset -a 2 -x 2 -t
 bindsym $mod+h split h;exec notify-send 'split horizontally'
