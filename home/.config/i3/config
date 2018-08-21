@@ -49,8 +49,8 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
+bindsym $mod+1 workspace number 1: www
+bindsym $mod+2 workspace number 2: term
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
@@ -61,6 +61,7 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 bindsym $mod+Prior workspace prev
 bindsym $mod+Next workspace next
+bindsym $mod+Backslash workspace back_and_forth
 
 bindsym $mod+Shift+1 move container to workspace 1
 bindsym $mod+Shift+2 move container to workspace 2
@@ -112,4 +113,4 @@ exec --no-startup-id nextcloud
 exec --no-startup-id xbacklight -set 30
 #exec --no-startup-id gnome-keyring-daemon
 
-exec xautolock -detectsleep -time 5 -locker '~/bin/fuzzy_lock.sh' -notify 30 -notifier "notify-send -u critical -t 30000 -- 'LOCKING screen in 30 seconds'"
+exec --no-startup-id xautolock -detectsleep -time 5 -locker '~/bin/fuzzy_lock.sh' -notify 30 -notifier "notify-send -u critical -t 30000 -- 'LOCKING screen in 30 seconds'"
