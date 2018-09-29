@@ -43,6 +43,8 @@ endif
 set modeline
 set mouse=a
 
+set scrolloff=4
+
 " complete on TAB
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
 autocmd InsertLeave, CompletedDone * if pumvisible() == 0 | pclose | endif
