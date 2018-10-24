@@ -1,7 +1,7 @@
 alias cpvpn='pushd ~/.ssh; and sudo openvpn --config CPMassimoRedaelli-TO-cp-fw-01.ovpn; or  popd' 
 
-alias ls='exa' 
-alias ll='exa -l --git'
+#alias ls='exa' 
+#alias ll='exa -l --git'
 
 alias less='less -r'
 
