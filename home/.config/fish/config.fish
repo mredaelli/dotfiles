@@ -1,4 +1,4 @@
-alias cpvpn='pushd ~/.ssh; and sudo openvpn --config CPMassimoRedaelli-TO-cp-fw-01.ovpn; or  popd' 
+alias cpvpn='pushd ~/.ssh; and sudo openvpn --config CP-FW-01-UDP4-1194-massimo.redaelli-config.ovpn; or  popd' 
 
 alias ls='exa' 
 alias ll='exa -l --git'
