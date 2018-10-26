@@ -17,13 +17,25 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'https://github.com/Rip-Rip/clang_complete.git'
    Plug 'octol/vim-cpp-enhanced-highlight'
    Plug 'rhysd/vim-clang-format' 
-   
-   Plug 'neomake/neomake', { 'for': ['scala', 'cpp'] }
+
+   " R
+   Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
 
    Plug 'LnL7/vim-nix', { 'for': 'nix' }
    Plug 'dag/vim-fish', { 'for': 'fish' }
 
-   Plug 'cloudhead/neovim-fuzzy' 
+
+   Plug 'ctrlpvim/ctrlp.vim'
+
+   " Grepping
+   Plug 'mileszs/ack.vim'
+
+   Plug 'tpope/vim-commentary'
+
+   Plug 'neomake/neomake', { 'for': ['scala', 'cpp', 'python'] }
+
+   " linting
+   Plug 'w0rp/ale'
 
    Plug 'easymotion/vim-easymotion'
 
@@ -36,12 +48,32 @@ call plug#begin('~/.local/share/nvim/plugged')
    "Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
+let g:ctrlp_cmd = 'CtrlPMixed'
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
 if &shell =~# 'fish$'
     set shell=sh
 endif
 
 set modeline
+set cursorline
 set mouse=a
+set hidden
+set number
+
+set colorcolumn=80
+
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+set tabstop=4
+filetype indent on
+syntax on
+
+set scrolloff=4
 
 " complete on TAB
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
@@ -53,9 +85,6 @@ nnoremap <esc>[ <esc>[
 
 autocmd BufNewFile,BufRead /tmp/mutt* set noautoindent filetype=mail wm=0 tw=78 comments+=n:> fo+=q nonumber digraph nolist
 
-" fuzzy finder with ctrl-p
-nnoremap <C-p> :FuzzyOpen<CR><Paste>
-
 " shifting text with arrows in visual mode
 vmap <A-Left> <gv
 vmap <A-Right> >gv
@@ -66,6 +95,14 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#omni#input_patterns={} 
 let g:deoplete#sources={} 
 let g:deoplete#sources._=['buffer', 'member', 'tag', 'file', 'omni', 'ultisnips'] 
+
+" Markdown
+autocmd FileType python call SetPythonOptions()
+function SetPythonOptions()
+    let python_highlight_all=1
+
+    call SetupDev()
+endfunction
 
 " Markdown
 autocmd FileType markdown,pandoc call SetMarkdownOptions()
@@ -170,5 +207,5 @@ let g:gruvbox_italicize_comments = 1
 let g:gruvbox_italic = 1
 "let g:gruvbox_contrast_dark = 'light'
 colorscheme gruvbox
-let g:airline_theme='gruvbox'
+"let g:airline_theme='gruvbox'
 
