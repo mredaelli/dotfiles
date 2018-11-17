@@ -13,8 +13,8 @@ IMAPStore main-remote
 Account main
 
 MaildirStore main-local
-Path ~/Mail/main/
-Inbox ~/Mail/main/inbox
+Path ~/Maildir/main/
+Inbox ~/Maildir/main/inbox
 Subfolders Verbatim
 
 Channel main-inbox
@@ -58,8 +58,8 @@ IMAPStore cesgraf-remote
 Account cesgraf
 
 MaildirStore cesgraf-local
-Path ~/Mail/cesgraf/
-Inbox ~/Mail/cesgraf/inbox
+Path ~/Maildir/cesgraf/
+Inbox ~/Maildir/cesgraf/inbox
 Subfolders Verbatim
 
 Channel cesgraf-inbox
@@ -103,8 +103,8 @@ IMAPStore perizie-remote
 Account perizie
 
 MaildirStore perizie-local
-Path ~/Mail/perizie/
-Inbox ~/Mail/perizie/inbox
+Path ~/Maildir/perizie/
+Inbox ~/Maildir/perizie/inbox
 Subfolders Verbatim
 
 Channel perizie-inbox
@@ -148,8 +148,8 @@ IMAPStore uaar-remote
 Account uaar
 
 MaildirStore uaar-local
-Path ~/Mail/uaar/
-Inbox ~/Mail/uaar/inbox
+Path ~/Maildir/uaar/
+Inbox ~/Maildir/uaar/inbox
 Subfolders Verbatim
 
 Channel uaar-inbox
@@ -194,8 +194,8 @@ IMAPStore fast-remote
 Account fast
 
 MaildirStore fast-local
-Path ~/Mail/fast/
-Inbox ~/Mail/fast/inbox
+Path ~/Maildir/fast/
+Inbox ~/Maildir/fast/inbox
 Subfolders Verbatim
 
 Channel fast-inbox
