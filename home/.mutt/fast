@@ -1,0 +1,11 @@
+set smtp_url = "smtp://work@smtp.gmail.com:587"
+set smtp_pass = 
+
+set folder = "~/Maildir/fast"
+set spoolfile = +inbox
+set postponed = +drafts
+set trash = +trash
+set record = ""
+
+set from = "massimo@typish.io"
+set realname = "Massimo Redaelli"
