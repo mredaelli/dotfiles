@@ -14,7 +14,6 @@
 
 (require 'ido)
 
-
 (defun xah-get-fullpath (@file-relative-path)
   (concat (file-name-directory (or load-file-name buffer-file-name)) @file-relative-path)
 )

@@ -1,13 +1,15 @@
 (require 'mu4e)     
 
-(setq mail-user-agent 'mu4e-user-agent)
+(global-set-key  [(control ?x) (control ?m)] 'mu4e)
 
-(setq mu4e-maildir "~/Mail")
+(setq mail-user-agent 'mu4e-user-agent)
 
 (setq mu4e-contexts
       `(
 	,(make-mu4e-context
      :name "Main"
+     :enter-func (lambda () (mu4e-message "Entering account1 context"))
+     :leave-func (lambda () (mu4e-message "Leaving account1 context"))
      :match-func (lambda (msg) (when msg
        (string-prefix-p "/main" (mu4e-message-field msg :maildir))))
      :vars '(
@@ -15,6 +17,7 @@
 ;       (mu4e-refile-folder . "/mredaelli/archive")
        (mu4e-drafts-folder . "/main/drafts")
        (mu4e-sent-folder . "/main/sent")
+       (mu4e-sent-messages-behavior 'delete)
     (mu4e-maildir-shortcuts .
         ( ("/main/inbox"               . ?i)
            ("/main/sent"   . ?s)
@@ -24,6 +27,8 @@
        ))
 	,(make-mu4e-context
      :name "Fast"
+     :enter-func (lambda () (mu4e-message "Entering Fast context"))
+     :leave-func (lambda () (mu4e-message "Leaving Fast context"))
      :match-func (lambda (msg) (when msg
        (string-prefix-p "/fast" (mu4e-message-field msg :maildir))))
      :vars '(
@@ -47,6 +52,7 @@
 ;       (mu4e-refile-folder . "/cesgraf/Archive")
        (mu4e-drafts-folder . "/cesgraf/drafts")
        (mu4e-sent-folder . "/cesgraf/sent")
+       (mu4e-sent-messages-behavior 'delete)
        ))
 	,(make-mu4e-context
      :name "Perizie"
@@ -57,6 +63,7 @@
 ;       (mu4e-refile-folder . "/perizie/Archive")
        (mu4e-drafts-folder . "/perizie/drafts")
        (mu4e-sent-folder . "/perizie/sent")
+       (mu4e-sent-messages-behavior 'delete)
        ))
       	,(make-mu4e-context
      :name "UAAR"
@@ -67,14 +74,10 @@
 ;       (mu4e-refile-folder . "/uaar/[Gmail].Archive")
        (mu4e-drafts-folder . "/uaar/drafts")
        (mu4e-sent-folder . "/uaar/sent")
+       (mu4e-sent-messages-behavior 'delete)
        ))
    ))
 
-
-;; don't save message to Sent Messages, Gmail/IMAP takes care of this
-(setq mu4e-sent-messages-behavior 'delete)
-
-;(setq mu4e-get-mail-command "offlineimap")
 
 (setq
    user-mail-address "m.redaelli@gmail.com"
@@ -84,18 +87,19 @@
       "Massimo Redaelli"))
 
 
-(require 'smtpmail)
-(setq message-send-mail-function 'smtpmail-send-it
-   starttls-use-gnutls t
-   smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
-   smtpmail-auth-credentials
-     '(("smtp.gmail.com" 587 "m.redaelli@gmail.com" nil))
-   smtpmail-default-smtp-server "smtp.gmail.com"
-   smtpmail-smtp-server "smtp.gmail.com"
-   smtpmail-smtp-service 587)
+; (require 'smtpmail)
+; (setq message-send-mail-function 'smtpmail-send-it
+;    starttls-use-gnutls t
+;    smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+;    smtpmail-auth-credentials
+;      '(("smtp.gmail.com" 587 "m.redaelli@gmail.com" nil))
+;    smtpmail-default-smtp-server "smtp.gmail.com"
+;    smtpmail-smtp-server "smtp.gmail.com"
+;    smtpmail-smtp-service 587)
 
 (setq mu4e-sent-folder "/main/sent"
       mu4e-drafts-folder "/main/drafts"
+      mu4e-trash-folder "/main/trash"
       user-mail-address "m.redaelli@gmail.com"
       smtpmail-default-smtp-server "smtp.gmail.com"
       smtpmail-local-domain "gmail.com"
@@ -147,26 +151,42 @@
 
 (setq message-kill-buffer-on-exit t)
 
-;(setq mu4e-html2text-command "w3m -dump -s -T text/html"); -o display_link_number=true")
 
+
+;; HTML rendering
+
+(setq w3m-default-display-inline-images t)
+(defun mu4e-action-view-in-w3m (msg)
+  "View the body of the message in emacs w3m."
+  (w3m-browse-url (concat "file://"
+              (mu4e~write-body-to-html msg))))
+
+(setq mu4e-html2text-command "w3m -dump -s -T text/html -o display_link_number=true")
+
+;; show images
+(setq mu4e-view-show-images t
+       mu4e-show-images t
+       mu4e-view-image-max-width 800
+       mu4e-image-max-width 800)
+;; use imagemagick, if available
 (when (fboundp 'imagemagick-register-types)
   (imagemagick-register-types))
-(add-hook 'mu4e-view-mode-hook
-          (lambda ()
-   (setq mu4e-view-show-images t)
-   ))
 
-(global-set-key  [(control ?x) (control ?m)] 'mu4e)
+;(setq mu4e-view-prefer-html t)
 
 ;; Call EWW to display HTML messages
 (defun jcs-view-in-eww (msg)
 (eww-browse-url (concat "file://" (mu4e~write-body-to-html msg))))
 
 ;; Arrange to view messages in either the default browser or EWW
+(add-to-list 'mu4e-view-actions '("w3m view" . mu4e-action-view-in-w3m) t)
 (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
 (add-to-list 'mu4e-view-actions '("Eww view" . jcs-view-in-eww) t)
 
-;; start with the first (default) context; 
+
+
+
+
 (setq mu4e-context-policy 'pick-first)
 
 ;; compose with the current context if no context matches;
@@ -207,7 +227,7 @@
 
 (setq mu4e-maildirs-extension-custom-list 
       (flatten (list 
-           (prepend-to-all "mredaelli/" 
+           (prepend-to-all "main/" 
                            (append '("inbox" "sent" "Amazon" 
                                      "NoLabel" "JobHunting" 
                                      "Papers" "Shopping" "Social")
