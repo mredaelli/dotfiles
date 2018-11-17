@@ -1,15 +1,13 @@
 # Folder hooks
-folder-hook 'account.com.gmail.mredaelli' 'source ~/.mutt/gmail-mredaelli'
-folder-hook 'account.com.gmail.mredaelli2' 'source ~/.mutt/gmail-mredaelli2'
-folder-hook 'account.com.gmail.international' 'source ~/.mutt/gmail-international'
+folder-hook 'main' 'source ~/.mutt/mredaelli'
+folder-hook 'fast' 'source ~/.mutt/fast'
 
 # Default account
-source ~/.mutt/gmail-mredaelli
+source ~/.mutt/mredaelli
 
 # Macros for switching accounts
-macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/gmail-mredaelli<enter><change-folder>!<enter>'
-macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/gmail-mredaelli2<enter><change-folder>!<enter>'
-macro index <f4> '<sync-mailbox><enter-command>source ~/.mutt/gmail-international<enter><change-folder>!<enter>'
+macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/mredaelli<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/fast<enter><change-folder>!<enter>'
 
 # color schemes
 source ~/.mutt/solarized
