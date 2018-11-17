@@ -3,20 +3,20 @@ folder-hook 'main' 'source ~/.mutt/mredaelli'
 folder-hook 'fast' 'source ~/.mutt/fast'
 
 # Default account
-source ~/.mutt/mredaelli
+source ~/.mutt/fast
 
 # Macros for switching accounts
-macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/mredaelli<enter><change-folder>!<enter>'
-macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/fast<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/mredaelli<enter><change-folder>!<enter>'
+macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/fast<enter><change-folder>!<enter>'
 
 # color schemes
 source ~/.mutt/solarized
 #source ~/.mutt/vombatidae
 
-# Mime handling
-
 macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+
 
 set mailcap_path= ~/.mutt/mailcap
 
@@ -71,13 +71,14 @@ bind index <Delete> delete-message
 
 bind attach <return> view-mailcap
 
+## Make quick html view macro
+bind index,pager V  noop        ## Unbinds V from version
+macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>"
+
 alternative_order text/enriched text/plain text/html
-# render HTML and some other types as text
 auto_view text/html application/text application/pdf
 
-# many companies send very poor text/plain parts, so prefer html to text/plain
 alternative_order text/enriched text/html text/plain text
-
 
 # Index View Options ---------------------------------
 set date_format = "%d/%m %H:%M"

@@ -6,6 +6,7 @@ set spoolfile = +inbox
 set postponed = +drafts
 set trash = +trash
 set record = ""
+mailboxes `find ~/Maildir/fast -type d -name cur -printf '%h '`
 
 set from = "massimo@typish.io"
 set realname = "Massimo Redaelli"
