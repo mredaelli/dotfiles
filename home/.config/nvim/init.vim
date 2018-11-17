@@ -108,15 +108,18 @@ endfunction
 autocmd FileType markdown,pandoc call SetMarkdownOptions()
 function SetMarkdownOptions()
 	set  filetype=markdown.pandoc
-	noremap <buffer> <silent> k gk
-	noremap <buffer> <silent> j gj
-	noremap <buffer> <silent> 0 g0
-	noremap <buffer> <silent> $ g$
+    set fo+=t
+    set fo-=l
+    set tw=79
+	" noremap <buffer> <silent> k gk
+	" noremap <buffer> <silent> j gj
+	" noremap <buffer> <silent> 0 g0
+	" noremap <buffer> <silent> $ g$
 
-	noremap <buffer> <silent> <Up> gk
-	noremap <buffer> <silent> <Down> gj
-	noremap <buffer> <silent> <Home> g0
-	noremap <buffer> <silent> <End> g$
+	" noremap <buffer> <silent> <Up> gk
+	" noremap <buffer> <silent> <Down> gj
+	" noremap <buffer> <silent> <Home> g0
+	" noremap <buffer> <silent> <End> g$
 endfunction
 
 " C/C++
