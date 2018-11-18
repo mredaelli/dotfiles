@@ -8,7 +8,7 @@ set trash = +trash
 unset record
 
 unmailboxes *
-mailboxes `find ~/Maildir/main -type d -name cur -printf '%h '`
+mailboxes `find ~/Maildir/fast -type d -name cur | sort | sed 's_/cur__' | tr '\n' ' '`
 
 set from = "m.redaelli@gmail.com"
 set realname = "Massimo Redaelli"

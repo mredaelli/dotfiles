@@ -17,6 +17,9 @@ set beep_new=yes
 set sleep_time = 0
 unset wait_key
 
+
+set query_command= "khard email --parsable '%s'"
+
 # no confirm on send?
 #set fast_reply=yes
 #set include=yes

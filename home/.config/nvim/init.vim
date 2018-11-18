@@ -5,6 +5,12 @@ call plug#begin('~/.local/share/nvim/plugged')
    "Plug 'roxma/nvim-yarp'
    "Plug 'roxma/vim-hug-neovim-rpc'
    
+   " Text
+   Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
+   Plug 'reedes/vim-pencil', { 'for': ['markdown', 'pandoc', 'mail' ] }
+   Plug 'vim-scripts/UniCycle', { 'for': ['markdown', 'pandoc', 'mail' ] }
+
+
    " Pandoc
    Plug 'vim-pandoc/vim-pandoc', { 'for': ['markdown', 'pandoc'] }
    Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['markdown', 'pandoc'] }
@@ -83,7 +89,24 @@ autocmd InsertLeave, CompletedDone * if pumvisible() == 0 | pclose | endif
 nnoremap <silent> <ESC> :nohlsearch<CR><CR> 
 nnoremap <esc>[ <esc>[
 
-autocmd BufNewFile,BufRead /tmp/mutt* set noautoindent filetype=mail wm=0 tw=78 comments+=n:> fo+=q nonumber digraph nolist
+autocmd BufNewFile,BufRead /tmp/neomutt*  call Mutt()
+autocmd BufNewFile,BufRead ~/tmp/neomutt* call Mutt()
+
+function Mutt()
+  set noautoindent 
+  set filetype=mail 
+  set wm=0 
+  set tw=78 
+  set comments+=nb:> 
+  set fo+=q 
+  set nonumber 
+  set digraph 
+  set nolist
+
+  Goyo 80
+  Pencil
+  UniCycleOn
+endfunction
 
 " shifting text with arrows in visual mode
 vmap <A-Left> <gv
@@ -111,15 +134,9 @@ function SetMarkdownOptions()
     set fo+=t
     set fo-=l
     set tw=79
-	" noremap <buffer> <silent> k gk
-	" noremap <buffer> <silent> j gj
-	" noremap <buffer> <silent> 0 g0
-	" noremap <buffer> <silent> $ g$
-
-	" noremap <buffer> <silent> <Up> gk
-	" noremap <buffer> <silent> <Down> gj
-	" noremap <buffer> <silent> <Home> g0
-	" noremap <buffer> <silent> <End> g$
+    Goyo 80
+    Pencil
+    UniCycleOn
 endfunction
 
 " C/C++

@@ -19,15 +19,40 @@ macro index \\ "<shell-escape>mu4mutt<enter><change-folder-readonly>~/Maildir/se
 
 macro index,pager a ":set confirmappend=no delete=yes\n<tag-prefix><save-message>=Archive\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n" "Archive"
 
+bind editor <Tab> complete-query
+bind editor ^T    complete
+
+# Readline-like history browsing using up/down keys.
+bind editor <up> history-up
+bind editor <down> history-down
+
+bind index t tag-entry
+bind index Tt tag-thread
+bind index Tp tag-pattern
+bind index Ts tag-subthread
 
 bind attach <return> view-mailcap
 bind attach <space> view-mailcap
 
-macro index i  "<change-folder>!"<enter>
-macro index gi  "<change-folder>!"<enter>
-macro index ga  "<change-folder>+Archive"<enter>
-macro index gs  "<change-folder><"<enter>
-macro index g-  "<change-folder>-"<enter>
+macro index,pager i  "<change-folder>!<enter><buffy-list>" "open inbox"
+macro index,pager gi  "<change-folder>!<enter><buffy-list>" "open inbox"
+macro index,pager gd  "<change-folder>+postponed<enter><buffy-list>" "open drafts"
+macro index,pager ga  "<change-folder>+Archive<enter><buffy-list>" "open archive"
+macro index,pager gs  "<change-folder><<enter><buffy-list>" "open sent"
+macro index,pager g-  "<change-folder>-<enter><buffy-list>" "open last"
+macro index,pager gj "<change-folder>+spam<enter><buffy-list>"      "open junk mail (spam)"
+macro index,pager gr "<change-folder>^<enter><buffy-list>"          "refresh folder"
+
+
+# Limit messages quickly using ' + key.
+macro index \'d  "<limit>~D<enter>"       "limit to deleted messages"
+macro index \'f  "<limit>~F<enter>"       "limit to flagged messages"
+macro index \'D  "<limit>~=<enter>"       "limit to duplicate messages"
+macro index \'n  "<limit>~N|~O<enter>"    "limit to new messages"
+macro index \'s  "<limit>~g|~G<enter>"    "limit to signed or encrypted messages"
+macro index \'u  "<limit>!~Q<enter>"      "limit to unreplied messages"
+macro index \'\' "<limit>~A<enter>"       "reset all limits"
+
 
 bind generic,index,pager k previous-entry
 bind generic,index,pager j next-entry
@@ -78,7 +103,7 @@ bind index <Space> display-message
 
 macro index,pager l "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 
-bind index \Cs sync-mailbox
+bind index,pager \Cs sync-mailbox
 
 
 # Odds and ends
@@ -93,7 +118,8 @@ macro index N "<next-unread-mailbox><enter><next-new-then-unread><enter>" "Go to
 # Setting/clearing flags
 bind  index,pager W      clear-flag
 bind  index,pager w      set-flag
-macro index,pager ! wN  "Mark email as unread"
+#macro index,pager ! wN  "Mark email as unread"
+#bind index,pager ! toggle-new
 
 bind  index x toggle-read
 

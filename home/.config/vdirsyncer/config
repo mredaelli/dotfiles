@@ -1,0 +1,25 @@
+[general]
+status_path = "~/.config/vdirsyncer/status/"
+
+[storage cal_fastmail]
+type = "caldav"
+url = "https://caldav.fastmail.com/"
+username = "massimo@typish.io"
+password.fetch = ["command", "secret-tool", "lookup", "user", "massimo", "domain", "typish.io"]
+
+[storage card_fastmail]
+type = "carddav"
+url = "https://carddav.fastmail.com/"
+username = "massimo@typish.io"
+password.fetch = ["command", "secret-tool", "lookup", "user", "massimo", "domain", "typish.io"]
+
+[pair contacts]
+a = "card_fastmail"
+b = "my_contacts_local"
+collections = ["from a", "from b"]
+
+[storage my_contacts_local]
+type = "filesystem"
+path = "~/.contacts/"
+fileext = ".vcf"
+

@@ -2,7 +2,7 @@
 
 image/*;  t=$(mktemp /tmp/XXXXXXXXXX) \; cp %s "$t" \; /bin/sh -c "feh -. $t \; rm $t \;" &; test=test -n "$DISPLAY"
 
-text/html; firefox '%s' & sleep 3; description=HTML Text; test=test -n "$DISPLAY";  nametemplate=%s.html
+text/html; firefox '%s' & sleep .5; description=HTML Text; test=test -n "$DISPLAY";  nametemplate=%s.html
 
 text/html;\
 	w3m -T text/html -I %{charset} -dump %s;\

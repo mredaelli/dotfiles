@@ -28,7 +28,7 @@ Slave :main-local:spam
 
 Channel main-draft
 Master :main-remote:"[Gmail]/Drafts"
-Slave :main-local:draft
+Slave :main-local:drafts
 
 Channel main-sent
 Master :main-remote:"[Gmail]/Sent Mail"
