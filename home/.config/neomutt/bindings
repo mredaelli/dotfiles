@@ -1,0 +1,117 @@
+bind  generic,index,pager,index q exit
+macro generic,index,pager Q "qqq"
+
+# Reload configuration
+macro generic,index,pager,editor \Cr ":source ~/.config/neomutt/muttrc\n" "Reload mutt's configuration file"
+
+# Macros for switching accounts
+macro index A1 '<sync-mailbox><enter-command>source ~/.config/neomutt/fast<enter><change-folder>!<enter>'
+macro index A2 '<sync-mailbox><enter-command>source ~/.config/neomutt/mredaelli<enter><change-folder>!<enter>'
+
+# mu integration
+macro index <F8> "<shell-escape>mu find --clearlinks --format=links --linksdir=~/Maildir/search " \
+                                       "mu find"
+macro index <F9> "<change-folder-readonly>~/Maildir/search" \
+                                       "mu find results"
+
+macro index \\ "<shell-escape>mu4mutt<enter><change-folder-readonly>~/Maildir/search<enter>"  "mu find and show"                                       
+
+
+macro index,pager a ":set confirmappend=no delete=yes\n<tag-prefix><save-message>=Archive\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n" "Archive"
+
+
+bind attach <return> view-mailcap
+bind attach <space> view-mailcap
+
+macro index i  "<change-folder>!"<enter>
+macro index gi  "<change-folder>!"<enter>
+macro index ga  "<change-folder>+Archive"<enter>
+macro index gs  "<change-folder><"<enter>
+macro index g-  "<change-folder>-"<enter>
+
+bind generic,index,pager k previous-entry
+bind generic,index,pager j next-entry
+bind generic,index,pager K half-up
+bind generic,index,pager J half-down
+bind generic,index <Space> select-entry
+
+bind generic,pager,index ] next-unread 
+bind generic,pager,index [ previous-unread
+
+bind generic,index,pager / search
+bind generic,index,pager : enter-command
+
+## Make quick html view macro
+bind index,pager v  view-attachments
+macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>"
+
+### Browser bindings ###
+## Browser is used when viewing the list of mailboxes
+bind browser \Cr  check-new
+bind browser N select-new
+
+# sidebar
+bind index,pager S sidebar-toggle-visible
+bind index,pager H sidebar-prev
+bind index,pager L sidebar-next
+bind index,pager <Enter> sidebar-open
+bind index,pager <Return> sidebar-open
+
+
+### Index bindings ###
+
+bind index M change-folder 
+macro index m "M?\t" "Go back to the list of mailboxes"
+
+
+# Reply/forward/etc.
+bind index,pager c mail 
+bind index,pager r reply
+bind index,pager R list-reply
+bind index,pager f forward-message
+
+# Delete / junk
+bind index,pager d delete-message
+bind index,pager D delete-thread
+
+bind index <Space> display-message
+
+macro index,pager l "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+bind index \Cs sync-mailbox
+
+
+# Odds and ends
+bind  index @ display-address
+bind  index o sort-mailbox
+bind  index,pager s save-message
+bind  index,pager | pipe-message
+bind  index,pager u undelete-message
+bind  index,pager n next-unread
+macro index N "<next-unread-mailbox><enter><next-new-then-unread><enter>" "Go to new mail anywhere"
+
+# Setting/clearing flags
+bind  index,pager W      clear-flag
+bind  index,pager w      set-flag
+macro index,pager ! wN  "Mark email as unread"
+
+bind  index x toggle-read
+
+#bind  index P previous-new-then-unread
+#bind  index N next-new-then-unread
+#macro index r WN<up>n   "Mark as read, then go to next"
+#bind  index t read-thread
+#macro index T tn
+
+
+### Pager bindings ###
+## Pager is used on the 'help' screen, as well as when reading emails
+#bind pager <Up>   previous-line
+#bind pager <Down> next-line
+#bind pager k   previous-line
+#bind pager l next-line
+
+
+#bind index <Delete> delete-message
+
+#bind attach <return> view-mailcap

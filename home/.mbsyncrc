@@ -20,14 +20,14 @@ Subfolders Verbatim
 Channel main-inbox
 Master :main-remote:
 Slave :main-local:
-Pattern * ![Gmail]*
+Pattern * ![Gmail]* !drafts !spam !sent !trash
 
 Channel main-spam
 Master :main-remote:"[Gmail]/Spam"
 Slave :main-local:spam
 
 Channel main-draft
-Master :main-remote:"[Gmail]/Draft"
+Master :main-remote:"[Gmail]/Drafts"
 Slave :main-local:draft
 
 Channel main-sent
@@ -195,7 +195,7 @@ Account fast
 
 MaildirStore fast-local
 Path ~/Maildir/fast/
-Inbox ~/Maildir/fast/inbox
+Inbox ~/Maildir/fast/Inbox
 Subfolders Verbatim
 
 Channel fast-inbox
