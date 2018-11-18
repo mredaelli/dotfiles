@@ -5,8 +5,8 @@ macro generic,index,pager Q "qqq"
 macro generic,index,pager,editor \Cr ":source ~/.config/neomutt/muttrc\n" "Reload mutt's configuration file"
 
 # Macros for switching accounts
-macro index A1 '<sync-mailbox><enter-command>source ~/.config/neomutt/fast<enter><change-folder>!<enter>'
-macro index A2 '<sync-mailbox><enter-command>source ~/.config/neomutt/mredaelli<enter><change-folder>!<enter>'
+macro index A1 '<sync-mailbox><enter-command>source ~/.config/neomutt/fast<enter><change-folder>!<enter><check-stats>'
+macro index A2 '<sync-mailbox><enter-command>source ~/.config/neomutt/mredaelli<enter><change-folder>!<enter><check-stats>'
 
 # mu integration
 macro index <F8> "<shell-escape>mu find --clearlinks --format=links --linksdir=~/Maildir/search " \
@@ -79,8 +79,8 @@ bind browser N select-new
 bind index,pager S sidebar-toggle-visible
 bind index,pager H sidebar-prev
 bind index,pager L sidebar-next
-bind index,pager <Enter> sidebar-open
-bind index,pager <Return> sidebar-open
+macro index,pager <Enter> "<sidebar-open><check-stats>" "open folder from sidebar"
+macro index,pager <Return> "<sidebar-open><check-stats>" "open folder from sidebar"
 
 
 ### Index bindings ###
