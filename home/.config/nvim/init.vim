@@ -64,6 +64,8 @@ set mouse=a
 set hidden
 set number
 
+set scrolloff=12
+
 set colorcolumn=80
 
 set expandtab
@@ -100,6 +102,7 @@ let g:deoplete#sources._=['buffer', 'member', 'tag', 'file', 'omni', 'ultisnips'
 autocmd FileType python call SetPythonOptions()
 function SetPythonOptions()
     let python_highlight_all=1
+    let b:ale_fixers = ['black']
 
     call SetupDev()
 endfunction
