@@ -33,6 +33,7 @@ set tilde                  # show tildes like in vim
 unset markers              # no ugly plus signs
 
 set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set forward_format="Fw: %s"
 
 set sidebar_short_path
 set sidebar_delim_chars="/"
@@ -46,8 +47,8 @@ alternative_order text/enriched text/plain text/html
 auto_view text/html application/text application/pdf
 
 # Index View Options ---------------------------------
-set date_format = "%d/%m %H:%M"
-set index_format = "[%Z%E] %D %4C %-20.20F  %s"
+set date_format = "%d.%m.%y %H:%M"
+set index_format = "%5C [%Z%E] %D %-20.20F  %s"
 set sort = threads                         # like gmail
 set sort_aux = reverse-last-date-received  # like gmail
 set uncollapse_jump                        # don't collapse on an unread message

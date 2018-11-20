@@ -5,8 +5,8 @@ macro generic,index,pager Q "qqq"
 macro generic,index,pager,editor \Cr ":source ~/.config/neomutt/muttrc\n" "Reload mutt's configuration file"
 
 # Macros for switching accounts
-macro index A1 '<sync-mailbox><enter-command>source ~/.config/neomutt/fast<enter><change-folder>!<enter><check-stats>'
-macro index A2 '<sync-mailbox><enter-command>source ~/.config/neomutt/mredaelli<enter><change-folder>!<enter><check-stats>'
+macro index,pager A1 '<sync-mailbox><enter-command>source ~/.config/neomutt/fast<enter><change-folder>!<enter><check-stats>'
+macro index,pager A2 '<sync-mailbox><enter-command>source ~/.config/neomutt/mredaelli<enter><change-folder>!<enter><check-stats>'
 
 # mu integration
 macro index <F8> "<shell-escape>mu find --clearlinks --format=links --linksdir=~/Maildir/search " \
@@ -17,8 +17,7 @@ macro index <F9> "<change-folder-readonly>~/Maildir/search" \
 macro index \\ "<shell-escape>mu4mutt<enter><change-folder-readonly>~/Maildir/search<enter>"  "mu find and show"                                       
 
 
-macro index,pager a ":set confirmappend=no delete=yes\n<tag-prefix><save-message>=Archive\n<sync-mailbox>:set confirmappend=yes delete=ask-yes\n" "Archive"
-
+macro index,pager a '<enter-command>set confirmappend=no delete=yes<enter><tag-prefix><save-message>=Archive<enter><sync-mailbox><enter-command>set confirmappend=yes delete=ask-yes<enter>' "Archive" 
 bind editor <Tab> complete-query
 bind editor ^T    complete
 
@@ -92,7 +91,7 @@ macro index m "M?\t" "Go back to the list of mailboxes"
 # Reply/forward/etc.
 bind index,pager c mail 
 bind index,pager r reply
-bind index,pager R list-reply
+bind index,pager R group-reply
 bind index,pager f forward-message
 
 # Delete / junk
