@@ -1,0 +1,142 @@
+bind  generic,index,pager,index q exit
+macro generic,index,pager Q "qqq"
+
+# Reload configuration
+macro generic,index,pager,editor \Cr ":source ~/.config/neomutt/muttrc\n" "Reload mutt's configuration file"
+
+# Macros for switching accounts
+macro index,pager A1 '<sync-mailbox><enter-command>source ~/.config/neomutt/fast<enter><change-folder>!<enter><check-stats>'
+macro index,pager A2 '<sync-mailbox><enter-command>source ~/.config/neomutt/mredaelli<enter><change-folder>!<enter><check-stats>'
+
+# mu integration
+macro index <F8> "<shell-escape>mu find --clearlinks --format=links --linksdir=~/Maildir/search " \
+                                       "mu find"
+macro index <F9> "<change-folder-readonly>~/Maildir/search" \
+                                       "mu find results"
+
+macro index \\ "<shell-escape>mu4mutt<enter><change-folder-readonly>~/Maildir/search<enter>"  "mu find and show"                                       
+
+
+macro index,pager a '<enter-command>set confirmappend=no delete=yes<enter><tag-prefix><save-message>=Archive<enter><sync-mailbox><enter-command>set confirmappend=yes delete=ask-yes<enter>' "Archive" 
+bind editor <Tab> complete-query
+bind editor ^T    complete
+
+# Readline-like history browsing using up/down keys.
+bind editor <up> history-up
+bind editor <down> history-down
+
+bind index t tag-entry
+bind index Tt tag-thread
+bind index Tp tag-pattern
+bind index Ts tag-subthread
+
+bind attach <return> view-mailcap
+bind attach <space> view-mailcap
+
+macro index,pager i  "<change-folder>!<enter><buffy-list>" "open inbox"
+macro index,pager gi  "<change-folder>!<enter><buffy-list>" "open inbox"
+macro index,pager gd  "<change-folder>+postponed<enter><buffy-list>" "open drafts"
+macro index,pager ga  "<change-folder>+Archive<enter><buffy-list>" "open archive"
+macro index,pager gs  "<change-folder><<enter><buffy-list>" "open sent"
+macro index,pager g-  "<change-folder>-<enter><buffy-list>" "open last"
+macro index,pager gj "<change-folder>+spam<enter><buffy-list>"      "open junk mail (spam)"
+macro index,pager gr "<change-folder>^<enter><buffy-list>"          "refresh folder"
+
+
+# Limit messages quickly using ' + key.
+macro index \'d  "<limit>~D<enter>"       "limit to deleted messages"
+macro index \'f  "<limit>~F<enter>"       "limit to flagged messages"
+macro index \'D  "<limit>~=<enter>"       "limit to duplicate messages"
+macro index \'n  "<limit>~N|~O<enter>"    "limit to new messages"
+macro index \'s  "<limit>~g|~G<enter>"    "limit to signed or encrypted messages"
+macro index \'u  "<limit>!~Q<enter>"      "limit to unreplied messages"
+macro index \'\' "<limit>~A<enter>"       "reset all limits"
+
+
+bind generic,index,pager k previous-entry
+bind generic,index,pager j next-entry
+bind generic,index,pager K half-up
+bind generic,index,pager J half-down
+bind generic,index <Space> select-entry
+
+bind generic,pager,index ] next-unread 
+bind generic,pager,index [ previous-unread
+
+bind generic,index,pager / search
+bind generic,index,pager : enter-command
+
+## Make quick html view macro
+bind index,pager v  view-attachments
+macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>"
+
+### Browser bindings ###
+## Browser is used when viewing the list of mailboxes
+bind browser \Cr  check-new
+bind browser N select-new
+
+# sidebar
+bind index,pager S sidebar-toggle-visible
+bind index,pager H sidebar-prev
+bind index,pager L sidebar-next
+macro index,pager <Enter> "<sidebar-open><check-stats>" "open folder from sidebar"
+macro index,pager <Return> "<sidebar-open><check-stats>" "open folder from sidebar"
+
+
+### Index bindings ###
+
+bind index M change-folder 
+macro index m "M?\t" "Go back to the list of mailboxes"
+
+
+# Reply/forward/etc.
+bind index,pager c mail 
+bind index,pager r reply
+bind index,pager R group-reply
+bind index,pager f forward-message
+
+# Delete / junk
+bind index,pager d delete-message
+bind index,pager D delete-thread
+
+bind index <Space> display-message
+
+macro index,pager l "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+bind index,pager \Cs sync-mailbox
+
+
+# Odds and ends
+bind  index @ display-address
+bind  index o sort-mailbox
+bind  index,pager s save-message
+bind  index,pager | pipe-message
+bind  index,pager u undelete-message
+bind  index,pager n next-unread
+macro index N "<next-unread-mailbox><enter><next-new-then-unread><enter>" "Go to new mail anywhere"
+
+# Setting/clearing flags
+bind  index,pager W      clear-flag
+bind  index,pager w      set-flag
+#macro index,pager ! wN  "Mark email as unread"
+#bind index,pager ! toggle-new
+
+bind  index x toggle-read
+
+#bind  index P previous-new-then-unread
+#bind  index N next-new-then-unread
+#macro index r WN<up>n   "Mark as read, then go to next"
+#bind  index t read-thread
+#macro index T tn
+
+
+### Pager bindings ###
+## Pager is used on the 'help' screen, as well as when reading emails
+#bind pager <Up>   previous-line
+#bind pager <Down> next-line
+#bind pager k   previous-line
+#bind pager l next-line
+
+
+#bind index <Delete> delete-message
+
+#bind attach <return> view-mailcap

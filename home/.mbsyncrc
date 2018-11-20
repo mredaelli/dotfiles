@@ -1,0 +1,207 @@
+Create Both
+Expunge Both
+SyncState *
+
+IMAPAccount main
+Host imap.gmail.com
+User m.redaelli@gmail.com
+PassCmd "secret-tool lookup user m.redaelli domain gmail.com"
+SSLType IMAPS
+AuthMechs LOGIN
+
+IMAPStore main-remote
+Account main
+
+MaildirStore main-local
+Path ~/Maildir/main/
+Inbox ~/Maildir/main/inbox
+Subfolders Verbatim
+
+Channel main-inbox
+Master :main-remote:
+Slave :main-local:
+Pattern * ![Gmail]* !drafts !spam !sent !trash
+
+Channel main-spam
+Master :main-remote:"[Gmail]/Spam"
+Slave :main-local:spam
+
+Channel main-draft
+Master :main-remote:"[Gmail]/Drafts"
+Slave :main-local:drafts
+
+Channel main-sent
+Master :main-remote:"[Gmail]/Sent Mail"
+Slave :main-local:sent
+
+Channel main-trash
+Master :main-remote:"[Gmail]/Trash"
+Slave :main-local:trash
+
+Group main
+Channel main-inbox
+Channel main-draft
+Channel main-spam
+Channel main-sent
+Channel main-trash
+
+
+
+IMAPAccount cesgraf
+Host imap.gmail.com
+User cesgraf.nord@gmail.com
+PassCmd "secret-tool lookup user cesgraf.nord domain gmail.com"
+SSLType IMAPS
+AuthMechs LOGIN
+
+IMAPStore cesgraf-remote
+Account cesgraf
+
+MaildirStore cesgraf-local
+Path ~/Maildir/cesgraf/
+Inbox ~/Maildir/cesgraf/inbox
+Subfolders Verbatim
+
+Channel cesgraf-inbox
+Master :cesgraf-remote:
+Slave :cesgraf-local:
+Pattern * ![Gmail]*
+
+Channel cesgraf-spam
+Master :cesgraf-remote:"[Gmail]/Spam"
+Slave :cesgraf-local:spam
+
+Channel cesgraf-draft
+Master :cesgraf-remote:"[Gmail]/Draft"
+Slave :cesgraf-local:draft
+
+Channel cesgraf-sent
+Master :cesgraf-remote:"[Gmail]/Sent Mail"
+Slave :cesgraf-local:sent
+
+Channel cesgraf-trash
+Master :cesgraf-remote:"[Gmail]/Trash"
+Slave :cesgraf-local:trash
+
+Group cesgraf
+Channel cesgraf-inbox
+Channel cesgraf-spam
+Channel cesgraf-sent
+Channel cesgraf-draft
+Channel cesgraf-trash
+
+
+
+IMAPAccount perizie
+Host imap.gmail.com
+User periziemilano@gmail.com
+PassCmd "secret-tool lookup user periziemilano domain gmail.com"
+SSLType IMAPS
+AuthMechs LOGIN
+
+IMAPStore perizie-remote
+Account perizie
+
+MaildirStore perizie-local
+Path ~/Maildir/perizie/
+Inbox ~/Maildir/perizie/inbox
+Subfolders Verbatim
+
+Channel perizie-inbox
+Master :perizie-remote:
+Slave :perizie-local:
+Pattern * ![Gmail]*
+
+Channel perizie-spam
+Master :perizie-remote:"[Gmail]/Spam"
+Slave :perizie-local:spam
+
+Channel perizie-draft
+Master :perizie-remote:"[Gmail]/Draft"
+Slave :perizie-local:draft
+
+Channel perizie-sent
+Master :perizie-remote:"[Gmail]/Sent Mail"
+Slave :perizie-local:sent
+
+Channel perizie-trash
+Master :perizie-remote:"[Gmail]/Trash"
+Slave :perizie-local:trash
+
+Group perizie
+Channel perizie-inbox
+Channel perizie-spam
+Channel perizie-sent
+Channel perizie-draft
+Channel perizie-trash
+
+
+
+IMAPAccount uaar
+Host imap.gmail.com
+User m.redaelli2@gmail.com
+PassCmd "secret-tool lookup user m.redaelli2 domain gmail.com"
+SSLType IMAPS
+AuthMechs LOGIN
+
+IMAPStore uaar-remote
+Account uaar
+
+MaildirStore uaar-local
+Path ~/Maildir/uaar/
+Inbox ~/Maildir/uaar/inbox
+Subfolders Verbatim
+
+Channel uaar-inbox
+Master :uaar-remote:
+Slave :uaar-local:
+Pattern * ![Gmail]*
+
+Channel uaar-spam
+Master :uaar-remote:"[Gmail]/Spam"
+Slave :uaar-local:spam
+
+Channel uaar-draft
+Master :uaar-remote:"[Gmail]/Draft"
+Slave :uaar-local:draft
+
+Channel uaar-sent
+Master :uaar-remote:"[Gmail]/Sent Mail"
+Slave :uaar-local:sent
+
+Channel uaar-trash
+Master :uaar-remote:"[Gmail]/Trash"
+Slave :uaar-local:trash
+
+Group uaar
+Channel uaar-inbox
+Channel uaar-spam
+Channel uaar-sent
+Channel uaar-draft
+Channel uaar-trash
+
+
+
+
+IMAPAccount fast
+Host imap.fastmail.com
+User massimo@typish.io
+PassCmd "secret-tool lookup user massimo domain typish.io"
+SSLType IMAPS
+AuthMechs LOGIN
+
+IMAPStore fast-remote
+Account fast
+
+MaildirStore fast-local
+Path ~/Maildir/fast/
+Inbox ~/Maildir/fast/Inbox
+Subfolders Verbatim
+
+Channel fast-inbox
+Master :fast-remote:
+Slave :fast-local:
+Pattern *
+
+Group fast
+Channel fast-inbox

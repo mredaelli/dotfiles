@@ -1,2 +1,0 @@
-# HTML mail (rendered in Mutt's pager and also what you get when replying)
-text/html; w3m -dump -s -o display_link=yes -o display_link_number=yes -o decode_url=yes -T text/html -I %{charset}; copiousoutput; description=HTML Text
