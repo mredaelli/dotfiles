@@ -1,0 +1,5 @@
+#!/bin/sh 
+
+mbsync fast
+mbsync main
+mu index
