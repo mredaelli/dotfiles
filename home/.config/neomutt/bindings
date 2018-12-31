@@ -2,11 +2,11 @@ bind  generic,index,pager,index q exit
 macro generic,index,pager Q "qqq"
 
 # Reload configuration
-macro generic,index,pager,editor \Cr ":source ~/.config/neomutt/muttrc\n" "Reload mutt's configuration file"
+macro generic,index,pager,editor \Cr "<enter-command>source ~/.config/neomutt/muttrc<enter>" "Reload mutt's configuration file"
 
 # Macros for switching accounts
-macro index,pager A1 '<sync-mailbox><enter-command>source ~/.config/neomutt/fast<enter><change-folder>!<enter><check-stats>'
-macro index,pager A2 '<sync-mailbox><enter-command>source ~/.config/neomutt/mredaelli<enter><change-folder>!<enter><check-stats>'
+macro index,pager A1 "<sync-mailbox><enter-command>source ~/.config/neomutt/fast<enter><change-folder>!<enter><check-stats>"
+macro index,pager A2 "<sync-mailbox><enter-command>source ~/.config/neomutt/mredaelli<enter><change-folder>!<enter><check-stats>"
 
 # mu integration
 macro index <F8> "<shell-escape>mu find --clearlinks --format=links --linksdir=~/Maildir/search " \
@@ -17,7 +17,7 @@ macro index <F9> "<change-folder-readonly>~/Maildir/search" \
 macro index \\ "<shell-escape>mu4mutt<enter><change-folder-readonly>~/Maildir/search<enter>"  "mu find and show"                                       
 
 
-macro index,pager a '<enter-command>set confirmappend=no delete=yes<enter><tag-prefix><save-message>=Archive<enter><sync-mailbox><enter-command>set confirmappend=yes delete=ask-yes<enter>' "Archive" 
+macro index,pager a "<enter-command>set confirmappend=no delete=yes<enter><tag-prefix><save-message>=Archive<enter><sync-mailbox><enter-command>set confirmappend=yes delete=ask-yes<enter>" "Archive" 
 bind editor <Tab> complete-query
 bind editor ^T    complete
 
@@ -33,7 +33,7 @@ bind index Ts tag-subthread
 bind attach <return> view-mailcap
 bind attach <space> view-mailcap
 
-macro index,pager i  "<change-folder>!<enter><buffy-list>" "open inbox"
+macro index,pager i  "<change-folder>!<enter><buffy-list><check-stats>" "open inbox"
 macro index,pager gi  "<change-folder>!<enter><buffy-list>" "open inbox"
 macro index,pager gd  "<change-folder>+postponed<enter><buffy-list>" "open drafts"
 macro index,pager ga  "<change-folder>+Archive<enter><buffy-list>" "open archive"
@@ -53,6 +53,8 @@ macro index \'u  "<limit>!~Q<enter>"      "limit to unreplied messages"
 macro index \'\' "<limit>~A<enter>"       "reset all limits"
 
 
+bind generic,index,pager <Up> previous-entry
+bind generic,index,pager <Down> next-entry
 bind generic,index,pager k previous-entry
 bind generic,index,pager j next-entry
 bind generic,index,pager K half-up
@@ -85,7 +87,7 @@ macro index,pager <Return> "<sidebar-open><check-stats>" "open folder from sideb
 ### Index bindings ###
 
 bind index M change-folder 
-macro index m "M?\t" "Go back to the list of mailboxes"
+macro index m "<change-folder>?<Tab>" "Go back to the list of mailboxes"
 
 
 # Reply/forward/etc.
@@ -101,6 +103,7 @@ bind index,pager D delete-thread
 bind index <Space> display-message
 
 macro index,pager l "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro index,pager \Ct "<pipe-message> mu4mutt_thread<Enter><change-folder-readonly>~/Maildir/search<enter>" "show all messages in thread"
 
 bind index,pager \Cs sync-mailbox
 
@@ -124,6 +127,7 @@ bind  index x toggle-read
 
 #bind  index P previous-new-then-unread
 #bind  index N next-new-then-unread
+bind  index,pager N jump
 #macro index r WN<up>n   "Mark as read, then go to next"
 #bind  index t read-thread
 #macro index T tn
