@@ -1,0 +1,23 @@
+[calendars]
+
+[[personal]]
+path = ~/.calendars/personal/045618fc-ac5d-431a-adfd-0307a953943e
+color = dark blue
+
+[locale]
+timeformat = %H:%M
+dateformat = %Y-%m-%d
+longdateformat = %Y-%m-%d
+datetimeformat = %Y-%m-%d %H:%M
+longdatetimeformat = %Y-%m-%d %H:%M
+default_timezone = Europe/Zurich
+local_timezone = Europe/Zurich
+
+[default]
+default_calendar = personal
+highlight_event_days = True
+show_all_days = False
+timedelta = 5d
+
+[view]
+frame = width

@@ -10,3 +10,8 @@ text/html;\
 	copiousoutput
 
 application/vnd.ms-word; soffice '%s'
+
+application/pdf; zathura '%s'
+
+text/calendar; khal import -a personal '%s'
+application/ics; khal import -a personal '%s'

@@ -20,6 +20,16 @@ collections = ["from a", "from b"]
 
 [storage my_contacts_local]
 type = "filesystem"
-path = "~/.contacts/"
+path = "~/.contacts/personal/"
 fileext = ".vcf"
 
+[pair calendar]
+a = "cal_fastmail"
+b = "local_calendar"
+collections = ["from a", "from b"]
+metadata = ["color"]
+
+[storage local_calendar]
+type = "filesystem"
+path = "~/.calendars/personal/"
+fileext = ".ics"
