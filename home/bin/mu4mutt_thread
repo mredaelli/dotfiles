@@ -1,0 +1,12 @@
+#!/bin/sh
+
+res=$(grep "Message\-Id\: " <&0 | sed 's/.*<\(.*\)>/i:\1/')
+
+if [ -z "$res" ];
+then
+ echo sh mu4mutt
+else
+  mu find --clearlinks --format=links --linksdir=~/Maildir/search -r $res
+fi
+
+
