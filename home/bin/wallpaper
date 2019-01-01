@@ -1,2 +1,7 @@
 #!/usr/bin/env bash
-feh --recursive --randomize --bg-fill ~/media/pictures/wallpapers/
+N=$(xrandr | grep '\bconnected\b' | wc -l)
+NN=$((N - 1))
+for i in `seq 0 $NN`;
+do
+  nitrogen --random --set-zoom-fill --head=$i ~/media/pictures/wallpapers/
+done
