@@ -28,9 +28,8 @@ bindsym $mod+a focus parent
 
 set $picpath ~/media/pictures
 
-bindsym Print exec scrot -e 'mv $f $picpath/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in $picpath/screenshots'
-bindsym $mod+Print exec scrot -ue 'mv $f $picpath/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in $picpath/screenshots'
-bindsym $mod+Shift+Print exec notify-send 'selection will be saved in $picpath/screenshots' & exec scrot -se 'mv $f $picpath/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in $picpath/screenshots'
+bindsym Print exec flameshot gui -p $picpath/screenshots
+bindsym $mod+Print exec flameshot full -p $picpath/screenshots
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
@@ -109,7 +108,7 @@ exec --no-startup-id pnmixer
 exec --no-startup-id compton  -b
 exec_always --no-startup-id ~/bin/wallpaper
 exec --no-startup-id nextcloud 
-# exec --no-startup-id SpiderOakONE
+exec --no-startup-id flameshot
 exec --no-startup-id xbacklight -set 30
 #exec --no-startup-id gnome-keyring-daemon
 
