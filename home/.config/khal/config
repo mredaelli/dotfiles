@@ -21,3 +21,10 @@ timedelta = 5d
 
 [view]
 frame = width
+agenda_event_format = {calendar-color}{cancelled}{start-end-time-style} {title}{repeat-symbol}{description-separator}{white}{description}{reset} 
+
+[keybindings]
+external_edit = e
+export = s
+view = enter, space
+
