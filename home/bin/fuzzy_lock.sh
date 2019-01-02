@@ -1,9 +1,12 @@
 #!/bin/sh -e
 
-TMP=/tmp/screen_locked.png
+TMP=/tmp/screenshot.png
+
+rm -f $TMP
 
 # Take a screenshot
-scrot $TMP
+flameshot full -p /tmp
+sleep .5
 
 # Pixellate it 10x
 mogrify -scale 10% -scale 1000% $TMP
