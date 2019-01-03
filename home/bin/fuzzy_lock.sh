@@ -1,14 +1,29 @@
 #!/bin/sh -e
 
+TMP=/tmp/screenshot.png
+
+rm -f $TMP
+
 # Take a screenshot
-scrot /tmp/screen_locked.png
+flameshot full -p /tmp
+sleep .5
 
 # Pixellate it 10x
-mogrify -scale 10% -scale 1000% /tmp/screen_locked.png
+mogrify -scale 10% -scale 1000% $TMP
 
 # Turn the screen off after a delay.
 ( sleep 60; pgrep i3lock && xset dpms force off ) &
 
-# Lock screen displaying this image.
-i3lock -n -i /tmp/screen_locked.png
+# stop notifications while locked
+pkill -u "$USER" -USR1 dunst
 
+#xset s off dpms 0 10 0
+
+# Lock screen displaying this image.
+i3lock -n -i $TMP 
+
+#xset s off -dpms
+
+pkill -u "$USER" -USR2 dunst
+
+rm $TMP

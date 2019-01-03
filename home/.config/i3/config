@@ -8,6 +8,8 @@ bindsym $mod+Shift+f exec xfe
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+d exec kill $(pgrep dunst) && exec dunst
+bindsym $mod+Shift+s exec ~/bin/web-search.sh 
+bindsym $mod+Shift+m exec ~/bin/fetch-mail 
 
 bindsym $mod+d exec rofi -show run
 bindsym $mod+w exec rofi -show window
@@ -28,9 +30,8 @@ bindsym $mod+a focus parent
 
 set $picpath ~/media/pictures
 
-bindsym Print exec scrot -e 'mv $f $picpath/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in $picpath/screenshots'
-bindsym $mod+Print exec scrot -ue 'mv $f $picpath/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in $picpath/screenshots'
-bindsym $mod+Shift+Print exec notify-send 'selection will be saved in $picpath/screenshots' & exec scrot -se 'mv $f $picpath/screenshots' && sleep 1 && exec notify-send 'screenshot has been saved in $picpath/screenshots'
+bindsym Print exec flameshot gui -p $picpath/screenshots
+bindsym $mod+Print exec flameshot full -p $picpath/screenshots
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
@@ -82,12 +83,13 @@ bindsym $mod+Control+Right resize grow width 10 px or 10 ppt
 for_window [urgent=latest] focus
 
 bindsym $mod+Escape mode "$mode_system"
-set $mode_system (l)ock, (e)xit, (r)eboot, (s)hutdown
+set $mode_system (l)ock, (e)xit, (r)eboot, (s)uspend, (p)oweroff
 mode "$mode_system" {
-    bindsym l exec --no-startup-id  exec ~/bin/fuzzy_lock.sh, mode "default"
+    bindsym l exec --no-startup-id exec ~/bin/fuzzy_lock.sh, mode "default"
     bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym r exec --no-startup-id systemctl reboot
-    bindsym s exec --no-startup-id systemctl poweroff
+    bindsym s exec --no-startup-id exec ~/bin/fuzzy_lock.sh, exec --no-startup-id systemctl suspend, mode "default"
+    bindsym p exec --no-startup-id systemctl poweroff
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -109,7 +111,7 @@ exec --no-startup-id pnmixer
 exec --no-startup-id compton  -b
 exec_always --no-startup-id ~/bin/wallpaper
 exec --no-startup-id nextcloud 
-# exec --no-startup-id SpiderOakONE
+exec --no-startup-id flameshot
 exec --no-startup-id xbacklight -set 30
 #exec --no-startup-id gnome-keyring-daemon
 

@@ -1,0 +1,32 @@
+#!/bin/sh 
+
+echo
+echo "Examples:"
+echo
+echo "-    from:john and flag:attach and bananas"
+echo "-    subject:wombat and date:20170601..20170630"
+echo "-    maildir:/projects and mime:application/pdf"
+echo "-    "maildir:/Sent Items" and rupert"
+echo "-    flag:signed and prio:high"
+echo "-    from:jim and not flag:attach"
+echo "-    contact:alice"
+echo "-    date:20120301..20130831 and nightingale and flag:unread"
+echo "-    date:today..now"
+echo "-    date:2w.. and emacs"
+echo "-    list:mu-discuss.googlegroups.com"
+echo "-    subject:soc*"
+echo "-    NOT flag:list"
+echo "-    file:pic*"
+echo "-    mime:application/pdf"
+echo "-    mime:image/*"
+
+retVal=1
+query="$1"
+
+while [ $retVal -ne 0 ]
+do
+  echo
+  read -e -p "Enter query: " -i "$query" query
+  mu find --clearlinks --format=links --linksdir=~/Maildir/search $query
+  retVal=$?
+done
