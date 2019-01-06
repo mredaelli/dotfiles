@@ -19,6 +19,7 @@ echo "-    NOT flag:list"
 echo "-    file:pic*"
 echo "-    mime:application/pdf"
 echo "-    mime:image/*"
+echo "-    size:2k..2m"
 
 retVal=1
 query="$1"
