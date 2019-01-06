@@ -9,6 +9,8 @@ source ~/.config/neomutt/fast
 
 source ~/.config/neomutt/dracula.muttrc
 
+set signature = ~/.config/neomutt/signature
+
 set mailcap_path= ~/.config/neomutt/mailcap
 
 set quit=ask-yes                    
@@ -20,11 +22,12 @@ unset wait_key
 set fast_reply=yes
 set include=yes
 
-set query_command= "khard email --parsable '%s'"
+set query_command= "khard email --parsable --search-in-source-file '%s'"
 
-# no confirm on send?
-#set fast_reply=yes
-#set include=yes
+set mime_forward=yes
+set mime_forward_rest=yes
+
+set status_on_top
 
 # Pager View Options ---------------------------------
 set pager_index_lines = 10 # number of index lines to show
@@ -44,7 +47,6 @@ set sidebar_indent_string=" "
 set sidebar_visible
 set sidebar_format="%B%?F? [%F]?%* %?N?%N/?%S" 
 
-
 alternative_order text/enriched text/plain text/html
 auto_view text/html application/text application/pdf
 
@@ -54,7 +56,9 @@ set index_format = "%5C [%Z%E] %D %-20.20F  %s"
 set sort = threads                         # like gmail
 set sort_aux = reverse-last-date-received  # like gmail
 set uncollapse_jump                        # don't collapse on an unread message
-set sort_re                                # thread based on regex
+
+#set sort_re                                # thread based on reply regex from subject
+set strict_threads                          # thread based on headers
 set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 
 set mail_check_stats
