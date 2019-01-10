@@ -7,6 +7,12 @@ url = "https://caldav.fastmail.com/"
 username = "massimo@typish.io"
 password.fetch = ["command", "secret-tool", "lookup", "user", "massimo", "domain", "typish.io"]
 
+[storage cal_nextcloud]
+type = "caldav"
+url = "https://next.typish.io/"
+username = "admin"
+password.fetch = ["command", "secret-tool", "lookup", "user", "admin", "domain", "next.typish.io"]
+
 [storage card_fastmail]
 type = "carddav"
 url = "https://carddav.fastmail.com/"
@@ -24,7 +30,7 @@ path = "~/.contacts/personal/"
 fileext = ".vcf"
 
 [pair calendar]
-a = "cal_fastmail"
+a = "cal_nextcloud"
 b = "local_calendar"
 collections = ["from a", "from b"]
 metadata = ["color"]

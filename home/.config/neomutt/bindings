@@ -2,7 +2,7 @@ bind  generic,index,pager,index q exit
 macro generic,index,pager Q "qqq"
 
 # Reload configuration
-macro generic,index,pager,editor \Cr "<enter-command>source ~/.config/neomutt/muttrc<enter>" "Reload mutt's configuration file"
+macro generic,index,pager,editor \Cr "<enter-command>source ~/.config/neomutt/muttrc<enter><check-stats>" "Reload mutt's configuration file"
 
 # Macros for switching accounts
 macro index,pager A1 "<sync-mailbox><enter-command>source ~/.config/neomutt/fast<enter><change-folder>!<enter><check-stats>"
@@ -18,12 +18,20 @@ macro index \\ "<shell-escape>mu4mutt<enter><change-folder-readonly>~/Maildir/se
 
 
 macro index,pager a "<enter-command>set confirmappend=no delete=yes<enter><tag-prefix><save-message>=Archive<enter><sync-mailbox><enter-command>set confirmappend=yes delete=ask-yes<enter>" "Archive" 
-bind editor <Tab> complete-query
-bind editor ^T    complete
 
-# Readline-like history browsing using up/down keys.
-bind editor <up> history-up
-bind editor <down> history-down
+# Editor
+bind editor <Tab> complete-query
+bind editor <Up> history-up
+bind editor <Down> history-down
+bind editor <Home> bol
+bind editor <End> eol
+bind editor <Left> backward-char
+bind editor <Right> forward-char
+bind editor \Cdw kill-word
+bind editor \Cdd kill-line
+bind editor \Cw forward-word
+bind editor \Cb backward-word
+
 
 bind index t tag-entry
 bind index Tt tag-thread
@@ -34,13 +42,13 @@ bind attach <return> view-mailcap
 bind attach <space> view-mailcap
 
 macro index,pager i  "<change-folder>!<enter><buffy-list><check-stats>" "open inbox"
-macro index,pager gi  "<change-folder>!<enter><buffy-list>" "open inbox"
-macro index,pager gd  "<change-folder>+postponed<enter><buffy-list>" "open drafts"
-macro index,pager ga  "<change-folder>+Archive<enter><buffy-list>" "open archive"
-macro index,pager gs  "<change-folder><<enter><buffy-list>" "open sent"
-macro index,pager g-  "<change-folder>-<enter><buffy-list>" "open last"
-macro index,pager gj "<change-folder>+spam<enter><buffy-list>"      "open junk mail (spam)"
-macro index,pager gr "<change-folder>^<enter><buffy-list>"          "refresh folder"
+macro index,pager gi  "<change-folder>!<enter><buffy-list><check-stats>" "open inbox"
+macro index,pager gd  "<change-folder>+postponed<enter><buffy-list><check-stats>" "open drafts"
+macro index,pager ga  "<change-folder>+Archive<enter><buffy-list><check-stats>" "open archive"
+macro index,pager gs  "<change-folder><<enter><buffy-list><check-stats>" "open sent"
+macro index,pager g-  "<change-folder>-<enter><buffy-list><check-stats>" "open last"
+macro index,pager gj "<change-folder>+spam<enter><buffy-list><check-stats>"      "open junk mail (spam)"
+macro index,pager gr "<change-folder>^<enter><buffy-list><check-stats>"          "refresh folder"
 
 
 # Limit messages quickly using ' + key.
@@ -140,7 +148,3 @@ bind  index,pager N jump
 #bind pager k   previous-line
 #bind pager l next-line
 
-
-#bind index <Delete> delete-message
-
-#bind attach <return> view-mailcap
