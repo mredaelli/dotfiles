@@ -1,8 +1,12 @@
 [calendars]
 
 [[personal]]
-path = ~/.calendars/personal/045618fc-ac5d-431a-adfd-0307a953943e
+path = ~/.calendars/personal/personal
 color = dark blue
+
+[[privato]]
+path = ~/.calendars/personal/privato
+color = light blue
 
 [locale]
 timeformat = %H:%M

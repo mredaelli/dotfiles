@@ -6,7 +6,7 @@ rm -f $TMP
 
 # Take a screenshot
 flameshot full -p /tmp
-sleep .5
+sleep 2
 
 # Pixellate it 10x
 mogrify -scale 10% -scale 1000% $TMP

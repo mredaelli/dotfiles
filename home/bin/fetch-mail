@@ -1,5 +1,10 @@
 #!/bin/sh 
 
+if pgrep mbsync > /dev/null; then
+   echo Already running: exiting
+   exit 0
+fi
+
 mbsync fast
 mbsync main
 mu index
