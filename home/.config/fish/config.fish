@@ -37,4 +37,9 @@ function mutt
     bash --login -c 'cd ~/downloads; neomutt' $argv;
 end
 
+function mkcd
+    mkdir -pv $argv;
+    cd $argv;
+end
+
 
