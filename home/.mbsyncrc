@@ -2,6 +2,39 @@ Create Both
 Expunge Both
 SyncState *
 
+##### Fastmail
+
+IMAPAccount fast
+Host imap.fastmail.com
+User massimo@typish.io
+PassCmd "secret-tool lookup user massimo domain typish.io"
+SSLVersions TLSv1.2
+SSLType IMAPS
+AuthMechs LOGIN
+
+IMAPStore fast-remote
+Account fast
+
+MaildirStore fast-local
+Path ~/Maildir/fast/
+Inbox ~/Maildir/fast/Inbox
+Subfolders Verbatim
+
+Channel fast-inbox
+Master :fast-remote:
+Slave :fast-local:
+Patterns *
+Create Both
+Expunge Both
+SyncState *
+Sync all
+
+Group fast
+Channel fast-inbox
+
+
+### Gmails
+
 IMAPAccount main
 Host imap.gmail.com
 User m.redaelli@gmail.com
@@ -181,27 +214,3 @@ Channel uaar-draft
 Channel uaar-trash
 
 
-
-
-IMAPAccount fast
-Host imap.fastmail.com
-User massimo@typish.io
-PassCmd "secret-tool lookup user massimo domain typish.io"
-SSLType IMAPS
-AuthMechs LOGIN
-
-IMAPStore fast-remote
-Account fast
-
-MaildirStore fast-local
-Path ~/Maildir/fast/
-Inbox ~/Maildir/fast/Inbox
-Subfolders Verbatim
-
-Channel fast-inbox
-Master :fast-remote:
-Slave :fast-local:
-Pattern *
-
-Group fast
-Channel fast-inbox
