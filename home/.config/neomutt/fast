@@ -8,7 +8,7 @@ set trash = +Trash
 set record = +Sent
 
 unmailboxes *
-mailboxes `find ~/Maildir/fast -type d -name cur | sort | sed 's_/cur__' | tr '\n' ' '`
+mailboxes ` find ~/Maildir/fast -type d -name cur | grep -v "Archive/[12]" | grep -v "viaggi/201[1-8]" | sed 's_/cur__' | sort | tr '\n' ' '`
 
 set from = "massimo@typish.io"
 set realname = "Massimo Redaelli"
