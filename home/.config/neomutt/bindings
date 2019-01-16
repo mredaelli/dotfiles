@@ -17,7 +17,7 @@ macro index <F9> "<change-folder-readonly>~/Maildir/search" \
 macro index \\ "<shell-escape>mu4mutt<enter><change-folder-readonly>~/Maildir/search<enter>"  "mu find and show"                                       
 
 
-macro index,pager a "<enter-command>set confirmappend=no delete=yes<enter><tag-prefix><save-message>=Archive<enter><sync-mailbox><enter-command>set confirmappend=yes delete=ask-yes<enter>" "Archive" 
+macro index,pager a "<enter-command>set confirmappend=no delete=yes<enter><tag-prefix><clear-flag>N<enter><clear-flag>O<enter><tag-prefix><save-message>=Archive<enter><sync-mailbox><enter-command>set confirmappend=yes delete=ask-yes<enter>" "Archive" 
 
 # Editor
 bind editor <Tab> complete-query
@@ -33,13 +33,14 @@ bind editor \Cw forward-word
 bind editor \Cb backward-word
 
 
-bind index t tag-entry
+bind generic,index t tag-entry
 bind index Tt tag-thread
 bind index Tp tag-pattern
 bind index Ts tag-subthread
 
 bind attach <return> view-mailcap
 bind attach <space> view-mailcap
+bind browser <space> select-entry
 
 macro index,pager i  "<change-folder>!<enter><buffy-list><check-stats>" "open inbox"
 macro index,pager gi  "<change-folder>!<enter><buffy-list><check-stats>" "open inbox"
