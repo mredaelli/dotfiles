@@ -12,3 +12,9 @@ mailboxes ` find ~/Maildir/fast -type d -name cur | grep -v "Archive/[12]" | gre
 
 set from = "massimo@typish.io"
 set realname = "Massimo Redaelli"
+
+macro index,pager Aj "<enter-command>set confirmappend=no delete=yes<enter><tag-prefix><clear-flag>N<enter><clear-flag>O<enter><tag-prefix><save-message>=jobhunting<enter><sync-mailbox><enter-command>set confirmappend=yes delete=ask-yes<enter>" "Archive to job" 
+macro index,pager Ap "<enter-command>set confirmappend=no delete=yes<enter><tag-prefix><clear-flag>N<enter><clear-flag>O<enter><tag-prefix><save-message>=papers<enter><sync-mailbox><enter-command>set confirmappend=yes delete=ask-yes<enter>" "Archive to papers" 
+macro index,pager Ad "<enter-command>set confirmappend=no delete=yes<enter><tag-prefix><clear-flag>N<enter><clear-flag>O<enter><tag-prefix><save-message>=dev<enter><sync-mailbox><enter-command>set confirmappend=yes delete=ask-yes<enter>" "Archive to dev" 
+macro index,pager Aa "<enter-command>set confirmappend=no delete=yes<enter><tag-prefix><clear-flag>N<enter><clear-flag>O<enter><tag-prefix><save-message>=amazon<enter><sync-mailbox><enter-command>set confirmappend=yes delete=ask-yes<enter>" "Archive to amazon" 
+

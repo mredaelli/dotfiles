@@ -5,8 +5,8 @@ macro generic,index,pager Q "qqq"
 macro generic,index,pager,editor \Cr "<enter-command>source ~/.config/neomutt/muttrc<enter><check-stats>" "Reload mutt's configuration file"
 
 # Macros for switching accounts
-macro index,pager A1 "<sync-mailbox><enter-command>source ~/.config/neomutt/fast<enter><change-folder>!<enter><check-stats>"
-macro index,pager A2 "<sync-mailbox><enter-command>source ~/.config/neomutt/mredaelli<enter><change-folder>!<enter><check-stats>"
+macro index,pager 1 "<sync-mailbox><enter-command>source ~/.config/neomutt/fast<enter><change-folder>!<enter><check-stats>"
+macro index,pager 2 "<sync-mailbox><enter-command>source ~/.config/neomutt/mredaelli<enter><change-folder>!<enter><check-stats>"
 
 # mu integration
 macro index <F8> "<shell-escape>mu find --clearlinks --format=links --linksdir=~/Maildir/search " \
