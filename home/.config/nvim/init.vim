@@ -29,6 +29,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
    Plug 'LnL7/vim-nix', { 'for': 'nix' }
    Plug 'dag/vim-fish', { 'for': 'fish' }
+   Plug 'ledger/vim-ledger', { 'for': 'ledger' }
 
 
    Plug 'ctrlpvim/ctrlp.vim'
