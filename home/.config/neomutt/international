@@ -1,0 +1,15 @@
+set smtp_url = "smtp://international@uaar.it@smtp.gmail.com:587"
+set smtp_pass = `secret-tool lookup user international domain uaar.it` 
+
+set folder = "~/Maildir/international"
+set spoolfile = +inbox
+set postponed = +drafts
+set trash = +trash
+unset record
+
+unmailboxes *
+mailboxes `find ~/Maildir/international -type d -name cur | grep -v ' ' | sed 's_/cur__' | sort | tr '\n' ' '`
+set mail_check_stats
+
+set from = "international@uaar.it"
+set realname = "Massimo Redaelli"

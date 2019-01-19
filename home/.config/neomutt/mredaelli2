@@ -1,0 +1,15 @@
+set smtp_url = "smtp://m.redaelli2@gmail.com@smtp.gmail.com:587"
+set smtp_pass = `secret-tool lookup user m.redaelli2 domain gmail.com` 
+
+set folder = "~/Maildir/uaar"
+set spoolfile = +inbox
+set postponed = +drafts
+set trash = +trash
+unset record
+
+unmailboxes *
+mailboxes `find ~/Maildir/uaar -type d -name cur | grep -v ' ' | sed 's_/cur__' | sort | tr '\n' ' '`
+set mail_check_stats
+
+set from = "m.redaelli2@gmail.com"
+set realname = "Massimo Redaelli"

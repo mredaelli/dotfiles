@@ -5,8 +5,7 @@ if pgrep mbsync > /dev/null; then
    exit 0
 fi
 
-mbsync fast
-mbsync main
+mbsync -a
 mu index
 
 vdirsyncer sync calendar

@@ -82,6 +82,12 @@ syntax on
 
 set scrolloff=4
 
+set undofile
+set undodir=~/.local/share/nvim/undodir
+let s:undos = split(globpath(&undodir, '*'), "\n")
+call filter(s:undos, 'getftime(v:val) < localtime() - (60 * 60 * 24 * 90)')
+call map(s:undos, 'delete(v:val)')
+
 " complete on TAB
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
 autocmd InsertLeave, CompletedDone * if pumvisible() == 0 | pclose | endif

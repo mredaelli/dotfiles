@@ -1,0 +1,15 @@
+set smtp_url = "smtp://periziemilano@gmail.com@smtp.gmail.com:587"
+set smtp_pass = `secret-tool lookup user periziemilano domain gmail.com` 
+
+set folder = "~/Maildir/perizie"
+set spoolfile = +inbox
+set postponed = +drafts
+set trash = +trash
+unset record
+
+unmailboxes *
+mailboxes `find ~/Maildir/perizie -type d -name cur | grep -v ' ' | sed 's_/cur__' | sort | tr '\n' ' '`
+set mail_check_stats
+
+set from = "periziemilano@gmail.com"
+set realname = "Massimo Redaelli"

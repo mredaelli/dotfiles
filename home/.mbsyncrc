@@ -98,14 +98,14 @@ Subfolders Verbatim
 Channel cesgraf-inbox
 Master :cesgraf-remote:
 Slave :cesgraf-local:
-Pattern * ![Gmail]*
+Patterns * ![Gmail]* !drafts !spam !sent !trash
 
 Channel cesgraf-spam
 Master :cesgraf-remote:"[Gmail]/Spam"
 Slave :cesgraf-local:spam
 
 Channel cesgraf-draft
-Master :cesgraf-remote:"[Gmail]/Draft"
+Master :cesgraf-remote:"[Gmail]/Drafts"
 Slave :cesgraf-local:draft
 
 Channel cesgraf-sent
@@ -143,14 +143,14 @@ Subfolders Verbatim
 Channel perizie-inbox
 Master :perizie-remote:
 Slave :perizie-local:
-Pattern * ![Gmail]*
+Patterns % ![Gmail]* !drafts !spam !sent !trash
 
 Channel perizie-spam
 Master :perizie-remote:"[Gmail]/Spam"
 Slave :perizie-local:spam
 
 Channel perizie-draft
-Master :perizie-remote:"[Gmail]/Draft"
+Master :perizie-remote:"[Gmail]/Drafts"
 Slave :perizie-local:draft
 
 Channel perizie-sent
@@ -188,18 +188,19 @@ Subfolders Verbatim
 Channel uaar-inbox
 Master :uaar-remote:
 Slave :uaar-local:
-Pattern * ![Gmail]*
+Pattern * ![Gmail]* !drafts !spam !sent !trash
 
 Channel uaar-spam
 Master :uaar-remote:"[Gmail]/Spam"
 Slave :uaar-local:spam
 
 Channel uaar-draft
-Master :uaar-remote:"[Gmail]/Draft"
+Master :uaar-remote:"[Gmail]/Drafts"
 Slave :uaar-local:draft
 
 Channel uaar-sent
 Master :uaar-remote:"[Gmail]/Sent Mail"
+Patterns [Gmail]/Sent Mail*
 Slave :uaar-local:sent
 
 Channel uaar-trash
@@ -214,3 +215,50 @@ Channel uaar-draft
 Channel uaar-trash
 
 
+
+
+
+
+IMAPAccount international
+Host imap.gmail.com
+User international@uaar.it
+PassCmd "secret-tool lookup user international domain uaar.it"
+SSLType IMAPS
+AuthMechs LOGIN
+
+IMAPStore international-remote
+Account international
+
+MaildirStore international-local
+Path ~/Maildir/international/
+Inbox ~/Maildir/international/inbox
+Subfolders Verbatim
+
+Channel international-inbox
+Master :international-remote:
+Slave :international-local:
+Pattern * ![Gmail]* !drafts !spam !sent !trash
+
+Channel international-spam
+Master :international-remote:"[Gmail]/Spam"
+Slave :international-local:spam
+
+Channel international-draft
+Master :international-remote:"[Gmail]/Drafts"
+Slave :international-local:draft
+
+Channel international-sent
+Master :international-remote:"[Gmail]/Sent Mail"
+Patterns [Gmail]/Sent Mail*
+Slave :international-local:sent
+
+Channel international-trash
+Master :international-remote:"[Gmail]/Trash"
+Slave :international-local:trash
+
+Group international
+Channel international-inbox
+Channel international-spam
+Channel international-sent
+Channel international-draft
+Channel international-trash
