@@ -8,4 +8,13 @@ fi
 mbsync -a
 mu index
 
+for i in fast mredaelli mredaelli2 international cesgraf perizie
+do
+ N=$( mu find maildir:/$i/inbox/ flag:new 2> /dev/null | wc -l)
+ if [ "$N" -gt "0" ];
+ then
+     notify-send -t 0 "$N new emails in mailbox $i"
+ fi
+done
+
 vdirsyncer sync calendar
