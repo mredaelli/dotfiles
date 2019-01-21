@@ -1,13 +1,10 @@
 source ~/.config/neomutt/unbind
 source ~/.config/neomutt/bindings
 
-# Folder hooks
-folder-hook 'main' 'source ~/.config/neomutt/mredaelli'
-folder-hook 'fast' 'source ~/.config/neomutt/fast'
+source ~/.config/neomutt/dracula.muttrc
 
 source ~/.config/neomutt/fast
 
-source ~/.config/neomutt/dracula.muttrc
 
 set signature = ~/.config/neomutt/signature
 

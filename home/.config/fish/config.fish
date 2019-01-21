@@ -1,15 +1,53 @@
 alias cpvpn='pushd ~/.ssh; and sudo openvpn --config CP-FW-01-UDP4-1194-massimo.redaelli-config.ovpn; or  popd' 
 
-#alias ls='exa' 
-#alias ll='exa -l --git'
+alias du="du -h"
+alias df="df -h"
+alias free="free -m"
+
+if type -q htop
+  alias top="htop"
+end
+
+if type -q bat
+  alias cat="bat";
+  alias catt="bat --style plain";
+end
+
+if type -q exa
+  alias ls='exa' 
+  alias ll='exa -l --git'
+end
 
 alias less='less -r'
 
-alias nano='nvim'
-alias vim='nvim'
-alias vi='nvim'
+if type -q nvim
+  alias nano='nvim'
+  alias vim='nvim'
+  alias vi='nvim'
+end
 
 alias psg='ps au | grep'
+
+
+## git
+alias gs='git status -s'
+alias gd='git diff'
+alias gl='gitlog --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary --pretty=format:"%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset"'
+alias ga='git add'
+
+alias glb="git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+
+alias gc='git commit --verbose'
+alias gca='git commit -a --verbose'
+alias gcm='git commit --verbose -m'
+alias gcam='git commit --verbose -am'
+alias gamen='git commit --verbose --amend'
+
+alias gob='git checkout -b'
+alias go='git checkout'
+
+
+alias Idea="idea-community . > /dev/null 2>&1 &";
 
 switch (uname)
    case Linux
