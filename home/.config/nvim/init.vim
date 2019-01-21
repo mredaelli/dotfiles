@@ -14,6 +14,10 @@ call plug#begin('~/.local/share/nvim/plugged')
    " Pandoc
    Plug 'vim-pandoc/vim-pandoc', { 'for': ['markdown', 'pandoc'] }
    Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['markdown', 'pandoc'] }
+
+   " Haskell
+   Plug 'neovimhaskell/haskell-vim', { 'for': ['haskell', 'cabal'] }
+   Plug 'alx741/vim-hindent', { 'for': ['haskell'] }
    
    " Scala
    Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' , 'for': 'scala' }
@@ -29,6 +33,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
    Plug 'LnL7/vim-nix', { 'for': 'nix' }
    Plug 'dag/vim-fish', { 'for': 'fish' }
+   Plug 'ledger/vim-ledger', { 'for': 'ledger' }
 
 
    Plug 'ctrlpvim/ctrlp.vim'
@@ -38,7 +43,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
    Plug 'tpope/vim-commentary'
 
-   Plug 'neomake/neomake', { 'for': ['scala', 'cpp', 'python'] }
+   Plug 'neomake/neomake', { 'for': ['scala', 'cpp', 'python', 'haskell'] }
 
    " linting
    Plug 'w0rp/ale'
@@ -83,6 +88,12 @@ syntax on
 
 set scrolloff=4
 
+set undofile
+set undodir=~/.local/share/nvim/undodir
+let s:undos = split(globpath(&undodir, '*'), "\n")
+call filter(s:undos, 'getftime(v:val) < localtime() - (60 * 60 * 24 * 90)')
+call map(s:undos, 'delete(v:val)')
+
 " complete on TAB
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : deoplete#mappings#manual_complete()
 autocmd InsertLeave, CompletedDone * if pumvisible() == 0 | pclose | endif
@@ -120,6 +131,15 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#omni#input_patterns={} 
 let g:deoplete#sources={} 
 let g:deoplete#sources._=['buffer', 'member', 'tag', 'file', 'omni', 'ultisnips'] 
+
+
+" Haskell
+autocmd FileType Haskell call SetHaskellOptions()
+function SetHaskellOptions()
+    g:hindent_on_save = 1
+
+    call SetupDev()
+endfunction
 
 " Markdown
 autocmd FileType python call SetPythonOptions()
