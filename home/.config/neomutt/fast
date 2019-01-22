@@ -8,22 +8,30 @@ set postponed = +Drafts
 set trash = +Trash
 set record = +Sent
 
+save-hook . =
+
 unmailboxes *
 mailboxes ` find ~/Maildir/fast -type d -name cur | grep -v "Archive/[12]" | grep -v "viaggi/201[1-8]" | sed 's_/cur__' | sort | tr '\n' ' '`
 
 set from = "massimo@typish.io"
 set realname = "Massimo Redaelli"
 
+# Reload configuration
+macro generic,index,pager,editor \Cr "<enter-command>source ~/.config/neomutt/muttrc<enter><enter-command>source ~/.config/neomutt/fast<enter><check-stats>" "Reload mutt's configuration file"
 
 macro index,pager gJ  "<change-folder>=jobhunting<enter><buffy-list><check-stats>" "open job"
 macro index,pager gP  "<change-folder>=papers<enter><buffy-list><check-stats>" "open papers"
 macro index,pager gD  "<change-folder>=dev<enter><buffy-list><check-stats>" "open dev"
 macro index,pager gA  "<change-folder>=amazon<enter><buffy-list><check-stats>" "open amazon"
 
-macro index,pager mJ "_mr_cn<tag-prefix><save-message>=jobhunting<enter><sync-mailbox>_cy" "Archive to job" 
-macro index,pager mP "_mr_cn<tag-prefix><save-message>=papers<enter><sync-mailbox>_cy" "Archive to papers" 
-macro index,pager mD "_mr_cn<tag-prefix><save-message>=dev<enter><sync-mailbox>_cy" "Archive to dev" 
-macro index,pager mA "_mr_cn<tag-prefix><save-message>=amazon<enter><sync-mailbox>_cy" "Archive to amazon" 
+macro index mJ "_mr_cn<tag-prefix><save-message>=jobhunting<enter><sync-mailbox>_cy" "Archive to job" 
+macro pager mJ qmJ
+macro index mP "_mr_cn<tag-prefix><save-message>=papers<enter><sync-mailbox>_cy" "Archive to papers" 
+macro pager mP qmP
+macro index mD "_mr_cn<tag-prefix><save-message>=dev<enter><sync-mailbox>_cy" "Archive to dev" 
+macro pager mD qmD
+macro index mA "_mr_cn<tag-prefix><save-message>=amazon<enter><sync-mailbox>_cy" "Archive to amazon" 
+macro pager mA qmA
 
 set status_format = "-%r-Mutt: {fast} %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---"
 

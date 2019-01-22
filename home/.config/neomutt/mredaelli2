@@ -7,6 +7,8 @@ set postponed = +drafts
 set trash = +trash
 unset record
 
+save-hook . =
+
 unmailboxes *
 mailboxes `find ~/Maildir/uaar -type d -name cur | grep -v ' ' | sed 's_/cur__' | sort | tr '\n' ' '`
 set mail_check_stats
@@ -14,4 +16,7 @@ set mail_check_stats
 set from = "m.redaelli2@gmail.com"
 set realname = "Massimo Redaelli"
 
-set status_format = "-%r-Mutt: {mredaelli2} %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---"
+# Reload configuration
+macro generic,index,pager,editor \Cr "<enter-command>source ~/.config/neomutt/muttrc<enter><enter-command>source ~/.config/neomutt/mredaelli2<enter><check-stats>" "Reload mutt's configuration file"
+
+set status_format = "-%r-Mutt: {uaar} %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---"

@@ -67,12 +67,18 @@ macro index,pager gr "<change-folder>^<enter><buffy-list><check-stats>"         
 bind index \Cm change-folder 
 macro index M "<change-folder>?<Tab>" "Go back to the list of mailboxes"
 
-macro index,pager a "_mr_cn<tag-prefix><save-message>=Archive<enter><sync-mailbox>_cy" "Archive" 
-macro index,pager ma "_mr_cn<tag-prefix><save-message>=Archive<enter><sync-mailbox>_cy" "move to archive" 
-macro index,pager mi "_mr_cn<tag-prefix><save-message>!<enter><sync-mailbox>_cy" "move to inbox" 
-macro index,pager md "_mr_cn<tag-prefix><save-message>+postponed<enter><sync-mailbox>_cy" "move to draft" 
-macro index,pager ms "_mr_cn<tag-prefix><save-message><<enter><sync-mailbox>_cy" "move to sent" 
-macro index,pager mj "_mr_cn<tag-prefix><save-message>+spam<enter><sync-mailbox>_cy" "move to spam" 
+macro index a "_mr_cn<tag-prefix><save-message>=Archive<enter><sync-mailbox>_cy" "Archive" 
+macro pager a "qa" 
+macro index ma "_mr_cn<tag-prefix><save-message>=Archive<enter><sync-mailbox>_cy" "move to archive" 
+macro pager ma "qma" 
+macro index mi "_mr_cn<tag-prefix><save-message>!<enter><sync-mailbox>_cy" "move to inbox" 
+macro pager mi "qmi" 
+macro index md "_mr_cn<tag-prefix><save-message>+postponed<enter><sync-mailbox>_cy" "move to draft" 
+macro pager md "qmd" 
+macro index ms "_mr_cn<tag-prefix><save-message><<enter><sync-mailbox>_cy" "move to sent" 
+macro pager ms "qms" 
+macro index mj "_mr_cn<tag-prefix><save-message>+spam<enter><sync-mailbox>_cy" "move to spam" 
+macro pager mj "qmj" 
 
 
 # Limit messages quickly using ' + key.

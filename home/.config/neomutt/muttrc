@@ -5,12 +5,9 @@ source ~/.config/neomutt/dracula.muttrc
 
 source ~/.config/neomutt/fast
 
-
 set signature = ~/.config/neomutt/signature
-
 set mailcap_path= ~/.config/neomutt/mailcap
 
-save-hook . = # suggested folder where to move mails
 
 set quit=ask-yes                    
 set beep=no
@@ -33,6 +30,7 @@ set pager_index_lines = 10 # number of index lines to show
 set pager_context = 3      # number of context lines to show
 set pager_stop             # don't go to next message automatically
 set menu_scroll            # scroll in menus
+set wrap=80
 set tilde                  # show tildes like in vim
 unset markers              # no ugly plus signs
 
