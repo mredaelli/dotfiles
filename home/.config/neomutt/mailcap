@@ -1,11 +1,14 @@
-# text/html; w3m -dump -s -o display_link=yes -o display_link_number=yes -o decode_url=yes -T text/html -I %{charset}; copiousoutput; description=HTML Text
+#text/html; w3m -dump -s -o display_link=yes -o display_link_number=yes -o decode_url=yes -T text/html -I %{charset}; copiousoutput; description=HTML Text
 
 image/*;  t=$(mktemp /tmp/XXXXXXXXXX) \; cp %s "$t" \; /bin/sh -c "sxiv $t \; rm $t \;" &; test=test -n "$DISPLAY"
+
+text/plain; sed -E "s^https?://[a-zA-Z0-9_-?&/.=]*^<link>^g" %s | sed -E "s/^\\s+$//g" | less -s;
 
 text/html; t=$(mktemp /tmp/mutt.XXXXXXXXXX) \; cp %s "$t" \; firefox "$t" &; description=HTML Text; test=test -n "$DISPLAY";  nametemplate=%s.html
 
 text/html;\
-	w3m -T text/html -I %{charset} -dump %s;\
+	w3m -T text/html -I %{charset} -o display_link=no\
+    -o display_link_number=yes -dump %s;\
 	nametemplate=%s.html;\
 	copiousoutput
 

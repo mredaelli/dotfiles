@@ -42,7 +42,7 @@ bind editor \Cw forward-word
 bind editor \Cb backward-word
 
 
-bind generic,index,pager t tag-entry
+bind generic,index t tag-entry
 bind pager t tag-message
 bind generic,index \; tag-prefix
 bind index Tt tag-thread
