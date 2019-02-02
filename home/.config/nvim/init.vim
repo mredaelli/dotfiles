@@ -2,14 +2,15 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'conradirwin/vim-bracketed-paste'
 
    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-   "Plug 'roxma/nvim-yarp'
-   "Plug 'roxma/vim-hug-neovim-rpc'
    
    " Text
    Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'reedes/vim-pencil', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'vim-scripts/UniCycle', { 'for': ['markdown', 'pandoc', 'mail' ] }
 
+   " Rust
+   Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
+   Plug 'racer-rust/vim-racer', { 'for': ['rust'] }
 
    " Pandoc
    Plug 'vim-pandoc/vim-pandoc', { 'for': ['markdown', 'pandoc'] }
@@ -43,10 +44,10 @@ call plug#begin('~/.local/share/nvim/plugged')
 
    Plug 'tpope/vim-commentary'
 
-   Plug 'neomake/neomake', { 'for': ['scala', 'cpp', 'python', 'haskell'] }
+   Plug 'neomake/neomake', { 'for': ['scala', 'cpp', 'python', 'haskell', 'rust'] }
 
    " linting
-   Plug 'w0rp/ale'
+   Plug 'w0rp/ale', { 'for': ['scala', 'cpp', 'python', 'haskell', 'rust'] }
 
    Plug 'easymotion/vim-easymotion'
 
@@ -128,9 +129,9 @@ vmap <A-Down> :m '>+1<CR>gv=gv
 vmap <A-Up> :m '<-2<CR>gv=gv
 
 let g:deoplete#enable_at_startup = 1
-let g:deoplete#omni#input_patterns={} 
-let g:deoplete#sources={} 
-let g:deoplete#sources._=['buffer', 'member', 'tag', 'file', 'omni', 'ultisnips'] 
+"let g:deoplete#omni#input_patterns={} 
+"let g:deoplete#sources={} 
+"let g:deoplete#sources._=['buffer', 'member', 'tag', 'file', 'omni', 'ultisnips'] 
 
 
 " Haskell
@@ -139,6 +140,17 @@ function SetHaskellOptions()
     g:hindent_on_save = 1
 
     call SetupDev()
+endfunction
+
+" Rust
+autocmd FileType rust call SetRustOptions()
+function SetRustOptions()
+  let g:ale_linters = {'rust': ['cargo', 'rustfmt']}
+"  let g:racer_cmd = "/nix/store/xq7l7x7gswdk73slcrbjsrnah33ldsvd-racer-2.0.14/bin/racer"
+  au FileType rust nmap gd <Plug>(rust-def)
+  let g:rustfmt_autosave = 1
+
+  call SetupDev()
 endfunction
 
 " Markdown
