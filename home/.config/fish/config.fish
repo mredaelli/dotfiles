@@ -46,6 +46,9 @@ alias gamen='git commit --verbose --amend'
 alias gob='git checkout -b'
 alias go='git checkout'
 
+alias gP='git push'
+alias gp='git pull'
+
 
 alias Idea="idea-community . > /dev/null 2>&1 &";
 
