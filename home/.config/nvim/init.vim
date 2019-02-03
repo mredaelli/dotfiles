@@ -93,9 +93,9 @@ autocmd Syntax * syn match ExtraWhitespace /\s\+$/ containedin=ALL
 
 " Theme
 set background=dark
-let g:gruvbox_improved_strings = 1
-let g:gruvbox_italicize_comments = 1
-let g:gruvbox_italic = 1
+"let g:gruvbox_improved_strings = 1
+"let g:gruvbox_italicize_comments = 1
+"let g:gruvbox_italic = 1
 "let g:gruvbox_contrast_dark = 'light'
-colorscheme gruvbox
+colorscheme apprentice
 let g:airline_theme='luna'

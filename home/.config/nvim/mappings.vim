@@ -1,5 +1,7 @@
-noremap <space> :
+map <space> <leader>
+noremap ; :
 
+" Completion
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 
@@ -19,11 +21,25 @@ autocmd InsertLeave, CompletedDone * if pumvisible() == 0 | pclose | endif
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
+" d and c don't mess with default register
+nnoremap d "_d
+nnoremap c "_c
+
 " redo 
 nnoremap U <C-r>
 
+
 " reload config on Ctrl-R
 nnoremap <C-r> :so $MYVIMRC<CR>
+
+
+nnoremap <leader>q :q<cr>
+nnoremap <leader>Q :wq<cr>
+nnoremap <leader>w :w<cr>
+
+
+" go to the folder of the current file
+nnoremap <leader>cd :cd %:p:h<CR>
 
 " normal mode with jk
 imap jk <Esc>

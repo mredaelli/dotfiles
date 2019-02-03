@@ -63,7 +63,9 @@ call plug#begin('~/.local/share/nvim/plugged')
    "Plug 'sjl/badwolf'
    "Plug 'joshdick/onedark.vim'
    "Plug 'jacoborus/tender.vim'
-   Plug 'morhetz/gruvbox'
+   "Plug 'morhetz/gruvbox'
+   "Plug 'notpratheek/vim-luna'
+   Plug 'romainl/Apprentice'
    "Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
