@@ -27,6 +27,7 @@ call plug#begin('~/.local/share/nvim/plugged')
    if executable('ghc')
      Plug 'neovimhaskell/haskell-vim', { 'for': ['haskell', 'cabal'] }
      Plug 'alx741/vim-hindent', { 'for': ['haskell'] }
+     Plug 'bitc/vim-hdevtools', { 'for': ['haskell'] }
    endif
    
    " Scala
