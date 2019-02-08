@@ -5,8 +5,10 @@ function! SetMarkdownOptions()
     set fo+=t
     set fo-=l
     set tw=79
+    let g:pencil#wrapModeDefault = 'soft'
+    let g:pencil#conceallevel = 0
     Goyo 80
-    Pencil
+    SoftPencil
     UniCycleOn
 endfunction
 

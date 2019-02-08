@@ -66,6 +66,10 @@ let g:airline#extensions#ale#enabled = 1
 let g:airline_powerline_fonts = 1
 
 
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+
+
 source ~/.config/nvim/mappings.vim
 source ~/.config/nvim/dev.vim
 

@@ -13,7 +13,7 @@ function! Mutt()
   set nolist
 
   Goyo 80
-  Pencil
+  SoftPencil
   UniCycleOn
 endfunction
 

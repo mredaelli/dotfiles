@@ -8,6 +8,7 @@ call plug#begin('~/.local/share/nvim/plugged')
    
    " Text
    Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
+   Plug 'junegunn/limelight.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'reedes/vim-pencil', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'vim-scripts/UniCycle', { 'for': ['markdown', 'pandoc', 'mail' ] }
 
@@ -19,6 +20,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
    " Pandoc
    Plug 'vim-pandoc/vim-pandoc', { 'for': ['markdown', 'pandoc'] }
+   Plug 'vim-pandoc/vim-pandoc-after', { 'for': ['markdown', 'pandoc'] }
    Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['markdown', 'pandoc'] }
 
    " Haskell
