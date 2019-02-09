@@ -1,4 +1,3 @@
-source ~/.config/nvim/plugins.vim
 
 set modeline
 set cursorline
@@ -38,13 +37,15 @@ call map(s:undos, 'delete(v:val)')
 
 
 " ALE
-let g:ale_completion_enabled = 0
+let g:ale_completion_enabled = 1
 let g:ale_cursor_detail = 1
 "let g:ale_close_preview_on_insert = 1
 "let g:ale_open_list = 1
 let g:ale_list_window_size = 5
 "let g:ale_set_loclist = 1 " default
 "let g:ale_set_quickfix = 1
+
+source ~/.config/nvim/plugins.vim
 
 augroup CloseLoclistWindowGroup
     autocmd!
@@ -53,9 +54,9 @@ augroup END
 
 
 " Deoplete
-let g:deoplete#enable_at_startup = 1
-call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
-call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
+let g:deoplete#enable_at_startup = 0
+"call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
+"call deoplete#custom#source('_', 'matchers', ['matcher_full_fuzzy'])
 let g:deoplete#ignore_sources = {}
 let g:deoplete#ignore_sources._ = ['buffer', 'around']
 

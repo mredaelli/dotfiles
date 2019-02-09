@@ -2,7 +2,7 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'conradirwin/vim-bracketed-paste'
 
    " newer versions require pynvim 0.3.x, but NixOS is lagging behind
-   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '4.0' }
+   " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '4.0' }
    "Plug 'neomake/neomake', { 'for': ['scala', 'cpp', 'python', 'haskell', 'rust'] }
    Plug 'w0rp/ale', { 'for': ['scala', 'cpp', 'python', 'haskell', 'rust'] }
    
