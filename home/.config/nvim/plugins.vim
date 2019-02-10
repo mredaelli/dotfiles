@@ -5,6 +5,9 @@ call plug#begin('~/.local/share/nvim/plugged')
    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '4.0' }
    "Plug 'neomake/neomake', { 'for': ['scala', 'cpp', 'python', 'haskell', 'rust'] }
    Plug 'w0rp/ale', { 'for': ['scala', 'cpp', 'python', 'haskell', 'rust'] }
+
+   Plug 'airblade/vim-gitgutter'
+   Plug 'tpope/vim-fugitive'
    
    " Text
    Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
@@ -26,8 +29,8 @@ call plug#begin('~/.local/share/nvim/plugged')
    " Haskell
    if executable('ghc')
      Plug 'neovimhaskell/haskell-vim', { 'for': ['haskell', 'cabal'] }
-     Plug 'alx741/vim-hindent', { 'for': ['haskell'] }
-     Plug 'bitc/vim-hdevtools', { 'for': ['haskell'] }
+     " Plug 'alx741/vim-hindent', { 'for': ['haskell'] }
+     " Plug 'bitc/vim-hdevtools', { 'for': ['haskell'] }
    endif
    
    " Scala
