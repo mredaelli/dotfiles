@@ -30,24 +30,24 @@ alias psg='ps au | grep'
 
 
 ## git
-alias gs='git status -s'
-alias gd='git diff'
-alias gl='git log --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary --pretty=format:"%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset"'
-alias ga='git add'
+abbr gs='git status -s'
+abbr gd='git diff'
+abbr gl='git log --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary --pretty=format:"%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset"'
+abbr ga='git add'
 
-alias glb="git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+abbr glb="git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 
-alias gc='git commit --verbose'
-alias gca='git commit -a --verbose'
-alias gcm='git commit --verbose -m'
-alias gcam='git commit --verbose -am'
-alias gamen='git commit --verbose --amend'
+abbr gc='git commit --verbose'
+abbr gca='git commit -a --verbose'
+abbr gcm='git commit --verbose -m'
+abbr gcam='git commit --verbose -am'
+abbr gamen='git commit --verbose --amend'
 
-alias gob='git checkout -b'
-alias go='git checkout'
+abbr gob='git checkout -b'
+abbr go='git checkout'
 
-alias gP='git push'
-alias gp='git pull'
+abbr gP='git push'
+abbr gp='git pull'
 
 
 alias Idea="idea-community . > /dev/null 2>&1 &";

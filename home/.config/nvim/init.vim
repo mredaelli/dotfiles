@@ -23,6 +23,7 @@ let g:ctrlp_cmd = 'CtrlPMixed'
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
+  let g:gitgutter_grep = 'ag'
 endif
 
 if &shell =~# 'fish$'
@@ -34,6 +35,9 @@ set undodir=~/.local/share/nvim/undodir
 let s:undos = split(globpath(&undodir, '*'), "\n")
 call filter(s:undos, 'getftime(v:val) < localtime() - (60 * 60 * 24 * 90)')
 call map(s:undos, 'delete(v:val)')
+
+let g:gitgutter_map_keys = 0
+set updatetime=300
 
 
 " ALE
