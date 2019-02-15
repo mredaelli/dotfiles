@@ -95,6 +95,16 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
+mode "caps" {
+        bindsym Caps_Lock mode "default"
+}
+bindsym Caps_Lock mode "caps"
+
+mode "num" {
+        bindsym Num_Lock mode "default"
+}
+bindsym Num_Lock mode "num"
+
 font pango:Hasklig 13
 
 bar {
