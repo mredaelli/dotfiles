@@ -144,6 +144,7 @@ macro index,pager \Ct "<pipe-message> mu4mutt_thread<Enter><change-folder-readon
 
 bind index,pager \Cs sync-mailbox
 
+bind index,pager \Cl edit-label
 
 # Odds and ends
 bind  index @ display-address

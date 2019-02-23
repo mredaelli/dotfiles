@@ -9,7 +9,7 @@ nnoremap <S-Tab> :bprevious<CR>
 inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : deoplete#mappings#manual_complete()
 inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 " complete navigation
-inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> <Esc>      pumvisible() ? "\<C-e>\<Esc>" : "\<Esc>"
 inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
 inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
 inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
