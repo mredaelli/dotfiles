@@ -5,16 +5,23 @@ if pgrep mbsync > /dev/null; then
    exit 0
 fi
 
-mbsync -a
-mu index
+wget -q --spider http://google.com
 
-for i in fast mredaelli mredaelli2 international cesgraf perizie
-do
- N=$( mu find maildir:/$i/inbox flag:new 2> /dev/null | wc -l)
- if [ "$N" -gt "0" ];
- then
-     notify-send -t 0 "$N new emails in mailbox $i"
- fi
-done
+if [ $? -eq 0 ]; then
+  mbsync -a
+  mu index
 
-vdirsyncer sync calendar
+  for i in fast mredaelli mredaelli2 international cesgraf perizie
+  do
+   N=$( mu find maildir:/$i/inbox flag:new 2> /dev/null | wc -l)
+   if [ "$N" -gt "0" ];
+   then
+       notify-send -t 0 "$N new emails in mailbox $i"
+   fi
+  done
+
+  vdirsyncer sync calendar
+else
+  echo Offline
+fi
+

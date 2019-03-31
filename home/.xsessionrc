@@ -9,4 +9,4 @@ then
    xrandr --output HDMI-0 --right-of DP-2
 fi
 
-gnome-keyring-daemon
+# gnome-keyring-daemon

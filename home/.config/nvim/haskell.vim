@@ -9,7 +9,7 @@ if executable('ghc')
 
     nnoremap <C-B> :ALEGoToDefinition<cr>
     nnoremap <C-U> :ALEFindReferences<cr>
-    nnoremap <C-I> :ALEHover<cr>
+    nnoremap <C-?> :ALEHover<cr>
     nnoremap <leader>e :ALENextWrap<cr>
     nnoremap <leader>E :ALEPrevious<cr>
 

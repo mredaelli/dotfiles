@@ -1,7 +1,7 @@
 map <space> <leader>
 noremap ; :
 
-" Completion
+" Moving between buffers
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 
