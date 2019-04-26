@@ -2,8 +2,6 @@ rofi.run-command: fish -c '{cmd}'
 rofi.run-list-command: 'fish -c functions'
 rofi.terminal:                       kitty
 
-rofi.theme: /nix/store/kq7wdc4cgr679xhg2rn6xvcxkbnyf0xi-rofi-unwrapped-1.5.1/share/rofi/themes/sidebar.rasi
-
 ! "Enabled modi" Set from: Default
 rofi.modi:                           window,run,ssh
 

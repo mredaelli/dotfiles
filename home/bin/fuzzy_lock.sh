@@ -2,11 +2,8 @@
 
 TMP=/tmp/screenshot.png
 
-rm -f $TMP
-
 # Take a screenshot
-flameshot full -p /tmp
-sleep 2
+flameshot full -r > $TMP
 
 # Pixellate it 10x
 mogrify -scale 10% -scale 1000% $TMP

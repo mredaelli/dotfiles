@@ -21,6 +21,8 @@ set scrolloff=4
 
 let g:ctrlp_cmd = 'CtrlPMixed'
 
+let g:ledger_bin = 'hledger'
+
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
   let g:gitgutter_grep = 'ag'
