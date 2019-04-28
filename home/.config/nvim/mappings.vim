@@ -21,10 +21,6 @@ autocmd InsertLeave, CompletedDone * if pumvisible() == 0 | pclose | endif
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-" d and c don't mess with default register
-nnoremap d "_d
-nnoremap c "_c
-
 " redo 
 nnoremap U <C-r>
 

@@ -1,3 +1,9 @@
+if not functions -q fisher
+    set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
+    curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
+    fish -c fisher
+end
+
 alias cpvpn='pushd ~/.ssh; and sudo openvpn --config CP-FW-01-UDP4-1194-massimo.redaelli-config.ovpn; or  popd' 
 
 alias du="du -h"
@@ -69,11 +75,6 @@ set -g theme_color_scheme solarized-dark
 
 set PATH ~/bin $PATH
 
-if test -d ~/miniconda3
-  set PATH ~/miniconda3/bin $PATH
-  source (conda info --root)/etc/fish/conf.d/conda.fish
-end
-
 function mutt
     bash --login -c 'cd ~/downloads; neomutt' $argv;
 end
@@ -83,4 +84,5 @@ function mkcd
     cd $argv;
 end
 
-
+echo  Remember using tig yank jrnl haxor-news rtv thefuck howdoi buku fzf hub newsboat
+echo

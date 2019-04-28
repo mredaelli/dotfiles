@@ -51,7 +51,10 @@ call plug#begin('~/.local/share/nvim/plugged')
 
    Plug 'LnL7/vim-nix', { 'for': 'nix' }
    Plug 'dag/vim-fish', { 'for': 'fish' }
-   Plug 'ledger/vim-ledger', { 'for': 'journal' }
+   Plug 'nathangrigg/vim-beancount', { 'for': 'beancount' }
+
+   Plug 'vimwiki/vimwiki' ", { 'for': '' }
+
 
    Plug 'ctrlpvim/ctrlp.vim'
 
@@ -75,3 +78,5 @@ call plug#begin('~/.local/share/nvim/plugged')
    "Plug 'NLKNguyen/papercolor-theme'
 call plug#end()
 
+let g:vimwiki_list = [{'path': '~/carte/kb/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]

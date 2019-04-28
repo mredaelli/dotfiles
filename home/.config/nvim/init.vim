@@ -1,7 +1,7 @@
 
 set modeline
 set cursorline
-set mouse=a
+" set mouse=a
 set hidden
 set number
 
