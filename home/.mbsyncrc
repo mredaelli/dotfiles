@@ -1,6 +1,7 @@
 Create Both
 Expunge Both
 SyncState *
+MaxMessages 200
 
 ##### Fastmail
 
@@ -262,3 +263,51 @@ Channel international-spam
 Channel international-sent
 Channel international-draft
 Channel international-trash
+
+
+
+############# Lari
+
+IMAPAccount lari
+Host imap.gmail.com
+User mredaelli@lari.digital
+PassCmd  "secret-tool lookup user mredaelli domain lari.digital" 
+SSLType IMAPS
+SSLVersions TLSv1.2
+AuthMechs LOGIN
+
+IMAPStore lari-remote
+Account lari
+
+MaildirStore lari-local
+Path ~/Maildir/lari/
+Inbox ~/Maildir/lari/inbox
+Subfolders Verbatim
+
+Channel lari-inbox
+Master :lari-remote:
+Slave :lari-local:
+Pattern * ![Gmail]* !drafts !spam !sent !trash
+
+Channel lari-spam
+Master :lari-remote:"[Gmail]/Spam"
+Slave :lari-local:spam
+
+Channel lari-draft
+Master :lari-remote:"[Gmail]/Drafts"
+Slave :lari-local:drafts
+
+Channel lari-sent
+Master :lari-remote:"[Gmail]/Sent Mail"
+Slave :lari-local:sent
+
+Channel lari-trash
+Master :lari-remote:"[Gmail]/Trash"
+Slave :lari-local:trash
+
+Group lari
+Channel lari-inbox
+Channel lari-draft
+Channel lari-spam
+Channel lari-sent
+Channel lari-trash

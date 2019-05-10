@@ -18,3 +18,5 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[includeIf "gitdir:~/src/lari/"]
+	path = src/lari/lari.gitconfig
