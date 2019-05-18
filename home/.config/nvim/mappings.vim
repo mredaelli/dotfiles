@@ -51,34 +51,45 @@ vmap <A-Right> >gv
 vmap <A-Down> :m '>+1<CR>gv=gv
 vmap <A-Up> :m '<-2<CR>gv=gv
 
+set splitbelow
+set splitright
+noremap <C-w>+ :resize +5<CR>
+noremap <C-w>- :resize -5<CR>
+noremap <C-w>< :vertical:resize -10<CR>
+noremap <C-w>> :vertical:resize +10<CR>
+
+tnoremap <C-w>+ <C-\><C-n>:resize +5<CR>
+tnoremap <C-w>- <C-\><C-n>:resize -5<CR>
+tnoremap <C-w>< <C-\><C-n>:vertical:resize -10<CR>
+tnoremap <C-w>> <C-\><C-n>:vertical:resize +10<CR>
 
 """"""""""" terminal
 
 tnoremap <Esc><Esc> <C-\><C-n>
 " Maps ctrl-b + c to open a new tab window
 "
-nnoremap <C-b>c :tabnew +terminal<CR>
-tnoremap <C-b>c <C-\><C-n>:tabnew +terminal<CR>
+nnoremap <leader>tt :tabnew +terminal<CR>
+tnoremap <leader>tt <C-\><C-n>:tabnew +terminal<CR>
 
 " Maps ctrl-b + " to open a new horizontal split with a terminal
-nnoremap <C-b>" :new +terminal<CR>
-tnoremap <C-b>" <C-\><C-n>:new +terminal<CR>
+nnoremap <leader>t- :new +terminal<CR>
+tnoremap <leader>t- <C-\><C-n>:new +terminal<CR>
 
 " Maps ctrl-b + % to open a new vertical split with a terminal
-nnoremap <C-b>% :vnew +terminal<CR>
-tnoremap <C-b>% <C-\><C-n>:vnew +terminal<cr>
+nnoremap <leader>t\| :vnew +terminal<CR>
+tnoremap <leader>t\| <C-\><C-n>:vnew +terminal<cr>
 
 " Alt+[hjkl] to navigate through windows in insert mode
-tnoremap <buffer> <A-h> <C-\><C-n><C-w>h
-tnoremap <buffer> <A-j> <C-\><C-n><C-w>j
-tnoremap <buffer> <A-k> <C-\><C-n><C-w>k
-tnoremap <buffer> <A-l> <C-\><C-n><C-w>l
+tnoremap <A-h> <C-\><C-n><C-w>h
+tnoremap <A-j> <C-\><C-n><C-w>j
+tnoremap <A-k> <C-\><C-n><C-w>k
+tnoremap <A-l> <C-\><C-n><C-w>l
 
 " Alt+[hjkl] to navigate through windows in normal mode
-nnoremap <buffer> <A-h> <C-w>h
-nnoremap <buffer> <A-j> <C-w>j
-nnoremap <buffer> <A-k> <C-w>k
-nnoremap <buffer> <A-l> <C-w>l
+nnoremap <A-h> <C-w>h
+nnoremap <A-j> <C-w>j
+nnoremap <A-k> <C-w>k
+nnoremap <A-l> <C-w>l
 
 augroup neovim_terminal
   autocmd!
