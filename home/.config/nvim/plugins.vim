@@ -1,14 +1,12 @@
 call plug#begin('~/.local/share/nvim/plugged')
    Plug 'conradirwin/vim-bracketed-paste'
 
-   " newer versions require pynvim 0.3.x, but NixOS is lagging behind
-   " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins', 'tag': '4.0' }
-   "Plug 'neomake/neomake', { 'for': ['scala', 'cpp', 'python', 'haskell', 'rust'] }
-   Plug 'w0rp/ale', { 'for': ['scala', 'cpp', 'python', 'haskell', 'rust'] }
+   Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh',
+         \ 'for': ['scala', 'cpp', 'python', 'haskell', 'rust']}
 
    Plug 'airblade/vim-gitgutter'
    Plug 'tpope/vim-fugitive'
-   
+
    " Text
    Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'junegunn/limelight.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
@@ -32,7 +30,7 @@ call plug#begin('~/.local/share/nvim/plugged')
      " Plug 'alx741/vim-hindent', { 'for': ['haskell'] }
      " Plug 'bitc/vim-hdevtools', { 'for': ['haskell'] }
    endif
-   
+
    " Scala
    if executable('scalac')
      Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' , 'for': 'scala' }
@@ -53,8 +51,7 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'dag/vim-fish', { 'for': 'fish' }
    Plug 'nathangrigg/vim-beancount', { 'for': 'beancount' }
 
-   Plug 'vimwiki/vimwiki' ", { 'for': '' }
-
+   Plug 'vimwiki/vimwiki'
 
    Plug 'ctrlpvim/ctrlp.vim'
 
@@ -66,17 +63,9 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'easymotion/vim-easymotion'
 
    Plug 'vim-airline/vim-airline'
-   Plug 'vim-airline/vim-airline-themes'
+   " Plug 'vim-airline/vim-airline-themes'
 
    " themes
-   "Plug 'sjl/badwolf'
-   "Plug 'joshdick/onedark.vim'
-   "Plug 'jacoborus/tender.vim'
-   "Plug 'morhetz/gruvbox'
-   "Plug 'notpratheek/vim-luna'
-   Plug 'romainl/Apprentice'
-   "Plug 'NLKNguyen/papercolor-theme'
+   Plug 'nanotech/jellybeans.vim'
 call plug#end()
 
-let g:vimwiki_list = [{'path': '~/carte/kb/',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]

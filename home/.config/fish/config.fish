@@ -30,10 +30,10 @@ if type -q nvim
   alias nano='nvim'
   alias vim='nvim'
   alias vi='nvim'
+  alias vmux="abduco -e '^g' -A nvim-session nvim"
 end
 
 alias psg='ps au | grep'
-
 
 ## git
 abbr gs 'git status -s'
@@ -53,10 +53,9 @@ abbr gob 'git checkout -b'
 abbr go 'git checkout'
 
 abbr gP 'git push'
+abbr gPP 'git push --force'
 abbr gp 'git pull'
 
-
-alias Idea="idea-community . > /dev/null 2>&1 &";
 
 switch (uname)
    case Linux
@@ -84,5 +83,8 @@ function mkcd
     cd $argv;
 end
 
+echo
 echo  Remember using tig yank jrnl haxor-news rtv thefuck howdoi buku fzf hub newsboat
+echo
+task list
 echo

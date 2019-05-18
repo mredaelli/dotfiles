@@ -10,6 +10,7 @@ endfunction
 
 function! SetupDev()
   " call neomake#configure#automake('rw', 1000)
+  source ~/.config/nvim/coc.vim
 
   nnoremap <F8> :call BuildProgram()<CR>
   nnoremap <leader>c :call BuildProgram()<CR>
@@ -18,12 +19,7 @@ function! SetupDev()
   nnoremap <Leader>x :call RunProgram()<CR>
 
   " let g:neomake_open_list = 2
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
 endfunction
 
-source ~/.config/nvim/haskell.vim
-source ~/.config/nvim/mutt.vim
-source ~/.config/nvim/rust.vim
-source ~/.config/nvim/python.vim
-source ~/.config/nvim/markdown.vim
-source ~/.config/nvim/c.vim
-source ~/.config/nvim/scala.vim
