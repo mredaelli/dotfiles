@@ -1,4 +1,10 @@
 {
   "coc.preferences.formatOnSaveFiletypes": ["rust"],
   "rust-client.channel": "stable",
+  "python.formatting.provider": "black",
+  "python.linting.mypyEnabled": true,
+"python.autoComplete.showAdvancedMembers": false,
+"python.linting.mypyPath": "/nix/store/3a69skj333gl4spmphfldxkfdcvs2jw4-python3-3.7.3-env/bin/mypy",
+"python.linting.pylintEnabled": false,
+//"python.jediEnabled": true
 }

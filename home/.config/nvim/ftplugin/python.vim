@@ -1,6 +1,6 @@
 if executable('python')
-      let python_highlight_all=1
-      let b:ale_fixers = ['black']
 
       call SetupDev()
+else
+  echo "No python interpreter"
 endif

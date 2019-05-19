@@ -1,3 +1,5 @@
+let $NVIM_COC_LOG_LEVEL = 'debug'
+
 call plug#begin('~/.local/share/nvim/plugged')
    Plug 'conradirwin/vim-bracketed-paste'
 
@@ -16,7 +18,6 @@ call plug#begin('~/.local/share/nvim/plugged')
    " Rust
    if executable('rustc')
      Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
-     Plug 'racer-rust/vim-racer', { 'for': ['rust'] }
    endif
 
    " Pandoc
