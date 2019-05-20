@@ -20,7 +20,6 @@ autocmd InsertLeave, CompletedDone * if pumvisible() == 0 | pclose | endif
 " redo
 nnoremap U <C-r>
 
-
 " reload config on Ctrl-R
 nnoremap <C-r> :so $MYVIMRC<CR>
 
@@ -38,8 +37,7 @@ nnoremap <leader>cd :cd %:p:h<CR>
 imap jk <Esc>
 
 " clear last search
-nnoremap <silent> <ESC> :nohlsearch<CR><CR> 
-nnoremap <esc>[ <esc>[
+nnoremap <CR> :noh<CR><CR>
 
 " commenting with Ctrl-/
 nmap <C-_>  gcc
@@ -93,6 +91,5 @@ nnoremap <A-l> <C-w>l
 
 augroup neovim_terminal
   autocmd!
-  autocmd TermOpen * startinsert
   autocmd TermOpen * :set nonumber norelativenumber
 augroup END

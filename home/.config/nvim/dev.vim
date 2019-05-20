@@ -10,7 +10,6 @@ endfunction
 
 function! SetupDev()
   " call neomake#configure#automake('rw', 1000)
-  source ~/.config/nvim/coc.vim
 
   nnoremap <F8> :call BuildProgram()<CR>
   nnoremap <leader>c :call BuildProgram()<CR>

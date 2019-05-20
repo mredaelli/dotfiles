@@ -3,8 +3,7 @@ let $NVIM_COC_LOG_LEVEL = 'debug'
 call plug#begin('~/.local/share/nvim/plugged')
    Plug 'conradirwin/vim-bracketed-paste'
 
-   Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh',
-         \ 'for': ['scala', 'cpp', 'python', 'haskell', 'rust']}
+   Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh' }
 
    Plug 'airblade/vim-gitgutter'
    Plug 'tpope/vim-fugitive'
@@ -64,7 +63,6 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'easymotion/vim-easymotion'
 
    Plug 'vim-airline/vim-airline'
-   " Plug 'vim-airline/vim-airline-themes'
 
    " themes
    Plug 'nanotech/jellybeans.vim'

@@ -23,6 +23,8 @@ if executable('ag')
   let g:gitgutter_grep = 'ag'
 endif
 
+set shell=/bin/sh
+
 set undofile
 silent !mkdir ~/.local/share/nvim/undodir > /dev/null 2>&1
 set undodir=~/.local/share/nvim/undodir
@@ -56,6 +58,7 @@ let g:vimwiki_list = [ {
       \]
 
 source ~/.config/nvim/mappings.vim
+source ~/.config/nvim/coc.vim
 source ~/.config/nvim/dev.vim
 
 " Return to last edit position when opening files
