@@ -51,8 +51,8 @@ bindsym $mod+Shift+l move right
 bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
-bindsym $mod+1 workspace number 1: www
-bindsym $mod+2 workspace number 2: term
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
