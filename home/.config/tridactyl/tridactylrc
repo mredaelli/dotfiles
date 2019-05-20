@@ -1,0 +1,38 @@
+" vim: set filetype=vim:
+
+sanitise tridactyllocal tridactylsync
+
+bind ; fillcmdline
+bind J tabnext
+bind K tabprev
+
+guiset_quiet tabs autohide
+
+set hintchars hjklasdfgyuiopqwertnmzxcvb
+set hintuppercase false
+" set leavegithubalone true
+set searchengine startpage
+set theme dark
+set editorcmd kitty nvim
+
+" Comment toggler for Reddit and Hacker News
+" bind ;c hint -c [class*="expand"],[class="togg"]
+
+" Git{Hub,Lab} git clone via SSH yank
+bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
+
+" Allow Ctrl-a to select all in the commandline
+unbind --mode=ex <C-a>
+
+" Let Ctrl-c to copy in the commandline
+unbind --mode=ex <C-c>
+
+" Handy multiwindow/multitasking binds
+bind gd tabdetach
+bind gD composite tabduplicate | tabdetach
+
+" New reddit is bad
+autocmd DocStart ^http(s?)://www.reddit.com js tri.excmds.urlmodify("-t", "www", "old")
+" Mosquito nets won't make themselves
+autocmd DocStart ^http(s?)://www.amazon.co.uk js tri.excmds.urlmodify("-t", "www", "smile")
+
