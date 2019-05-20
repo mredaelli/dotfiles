@@ -2,18 +2,22 @@
 
 sanitise tridactyllocal tridactylsync
 
-bind ; fillcmdline
+bind ; fillcmdline_notrail
 bind J tabnext
 bind K tabprev
+bind <C-J> tabmove +1
+bind <C-K> tabmove -1
 
 guiset_quiet tabs autohide
 
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintuppercase false
 " set leavegithubalone true
-set searchengine startpage
 set theme dark
 set editorcmd kitty nvim
+
+set searchengine startpage
+set searchurls.rotten https://www.rottentomatoes.com/search/?search=
 
 " Comment toggler for Reddit and Hacker News
 " bind ;c hint -c [class*="expand"],[class="togg"]
