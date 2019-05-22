@@ -1,0 +1,9 @@
+# Files
+data.location=~/.task
+
+taskd.certificate=/home/turing/.task/massimo_redaelli.cert.pem
+taskd.key=/home/turing/.task/massimo_redaelli.key.pem
+taskd.ca=/home/turing/.task/ca.cert.pem
+taskd.server=typish.io:53580
+taskd.credentials=Myself/Massimo Redaelli/5bc8ca76-78ee-490e-9a13-79edf82d330f
+taskd.trust=ignore hostname
