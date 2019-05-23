@@ -35,8 +35,8 @@ bindsym Print exec flameshot gui -p $picpath/screenshots
 bindsym $mod+Print exec flameshot full -p $picpath/screenshots
 
 # Screen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -84,13 +84,13 @@ bindsym $mod+Control+Right resize grow width 10 px or 10 ppt
 for_window [urgent=latest] focus
 
 bindsym $mod+Escape mode "$mode_system"
-set $mode_system (l)ock, (e)xit, (r)eboot, (s)uspend, (p)oweroff
+set $mode_system (l)ock, (e)xit, (s)uspend, (r)eboot, (p)oweroff
 mode "$mode_system" {
     bindsym l exec --no-startup-id exec ~/bin/fuzzy_lock.sh, mode "default"
-    bindsym e exec --no-startup-id i3-msg exit, mode "default"
-    bindsym r exec --no-startup-id systemctl reboot
+    bindsym e exec --no-startup-id light -O, exec --no-startup-id i3-msg exit, mode "default"
+    bindsym r exec --no-startup-id light -O, exec --no-startup-id systemctl reboot
+    bindsym p exec --no-startup-id light -O, exec --no-startup-id systemctl poweroff
     bindsym s exec --no-startup-id exec ~/bin/fuzzy_lock.sh, exec --no-startup-id systemctl suspend, mode "default"
-    bindsym p exec --no-startup-id systemctl poweroff
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -109,7 +109,7 @@ bindsym Num_Lock mode "num"
 font pango:Hasklig 13
 
 bar {
-        status_command i3status #-rs ~/.config/i3/bar.toml
+    status_command i3status #-rs ~/.config/i3/bar.toml
 	mode dock
 	position top
 	tray_padding 2
@@ -123,7 +123,6 @@ exec --no-startup-id compton  -b
 exec_always --no-startup-id ~/bin/wallpaper
 exec --no-startup-id nextcloud 
 exec --no-startup-id flameshot
-exec --no-startup-id xbacklight -set 30
-#exec --no-startup-id gnome-keyring-daemon
+exec --no-startup-id light -I
 
 # exec --no-startup-id xautolock -detectsleep -time 5 -locker '~/bin/fuzzy_lock.sh' -notify 30 -notifier "notify-send -u critical -t 30000 -- 'LOCKING screen in 30 seconds'"

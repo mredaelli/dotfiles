@@ -4,6 +4,7 @@
   "rust-client.channel": "stable",
 
   "python.autoComplete.showAdvancedMembers": false,
+  "python.pythonPath": "./env/python",
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "./env/black",
   "python.linting.mypyEnabled": true,

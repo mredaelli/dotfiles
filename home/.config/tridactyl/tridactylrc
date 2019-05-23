@@ -9,6 +9,7 @@ bind <C-J> tabmove +1
 bind <C-K> tabmove -1
 
 guiset_quiet tabs autohide
+guiset_quiet navbar always
 
 set hintchars hjklasdfgyuiopqwertnmzxcvb
 set hintuppercase false

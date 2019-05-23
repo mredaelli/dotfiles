@@ -12,9 +12,24 @@ text/html;\
 	nametemplate=%s.html;\
 	copiousoutput
 
-application/vnd.ms-word; soffice '%s'
 
 application/pdf; zathura '%s'
 
 text/calendar; khal import -a personal '%s'
 application/ics; khal import -a personal '%s'
+
+audio/*;                        vlc %s
+video/*;                        vlc %s
+
+application/excel;                        libreoffice %s
+application/ms-word;                      libreoffice %s
+application/msword;                       libreoffice %s
+application/mspowerpoint;                 libreoffice %s
+application/powerpoint;                   libreoffice %s
+application/vnd.ms-powerpoint;            libreoffice %s
+application/vnd.ms-excel;                 libreoffice %s
+application/vnd.ms-word;                  libreoffice %s
+application/vnd.oasis.opendocument.text;  libreoffice %s
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice %s
+application/x-excel;                      libreoffice %s
+application/x-msexcel;                    libreoffice %s
