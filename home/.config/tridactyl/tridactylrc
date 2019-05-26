@@ -26,6 +26,8 @@ set searchurls.rotten https://www.rottentomatoes.com/search/?search=
 " Git{Hub,Lab} git clone via SSH yank
 bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
 
+" js tri.config.get("nmaps").filter(";").forEach.
+
 " Allow Ctrl-a to select all in the commandline
 unbind --mode=ex <C-a>
 
