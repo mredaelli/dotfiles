@@ -31,8 +31,8 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 nmap <leader>rn <Plug>(coc-rename)
 
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>p  <Plug>(coc-format-selected)
+nmap <leader>P  <Plug>(coc-format-selected)
 
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)

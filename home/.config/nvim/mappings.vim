@@ -5,18 +5,6 @@ noremap ; :
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 
-" complete on shift-tab
-inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : deoplete#mappings#manual_complete()
-inoremap <silent><expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-" complete navigation
-inoremap <expr> <Esc>      pumvisible() ? "\<C-e>\<Esc>" : "\<Esc>"
-inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
-autocmd InsertLeave, CompletedDone * if pumvisible() == 0 | pclose | endif
-
 " redo
 nnoremap U <C-r>
 
@@ -38,6 +26,15 @@ imap jk <Esc>
 
 " clear last search
 nnoremap <CR> :noh<CR><CR>
+
+" fzf
+nnoremap <Leader>f :GFiles<CR>
+nnoremap <Leader>F :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>h :History<CR>
+nnoremap <Leader>t :BTags<CR>
+nnoremap <Leader>a :Ag<Space>
+nnoremap <Leader>C :Commands<CR>
 
 " commenting with Ctrl-/
 nmap <C-_>  gcc
@@ -89,7 +86,7 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
-augroup neovim_terminal
-  autocmd!
-  autocmd TermOpen * :set nonumber norelativenumber
+augroup nmeovim_terminal
+autocmd!
+autocmd TermOpen * :setlocal nonumber norelativenumber
 augroup END

@@ -9,6 +9,8 @@
   "python.formatting.blackPath": "./env/black",
   "python.linting.mypyEnabled": true,
   "python.linting.mypyPath": "./env/mypy",
-  "python.linting.pylintEnabled": true,
-  "python.linting.pylintPath": "./env/pylint"
+  "python.linting.pylintEnabled": false,
+  "python.linting.pylamaEnabled": true,
+  "python.linting.pylamaPath": "./env/pylama",
+  "python.sortImports.path": "./env/isort"
 }

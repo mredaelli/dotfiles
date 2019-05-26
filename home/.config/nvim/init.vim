@@ -3,7 +3,7 @@ set cursorline
 set hidden
 set number
 
-set colorcolumn=80
+set colorcolumn=88
 
 set expandtab
 set shiftwidth=2

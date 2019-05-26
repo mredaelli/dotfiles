@@ -14,6 +14,12 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'reedes/vim-pencil', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'vim-scripts/UniCycle', { 'for': ['markdown', 'pandoc', 'mail' ] }
 
+
+   " Python
+   if executable("python")
+     Plug 'vim-python/python-syntax', { 'for': ['python'] }
+   endif
+
    " Rust
    if executable('rustc')
      Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
@@ -53,7 +59,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 
    Plug 'vimwiki/vimwiki'
 
-   Plug 'ctrlpvim/ctrlp.vim'
+   " Plug 'ctrlpvim/ctrlp.vim'
+   Plug 'junegunn/fzf'
+   Plug 'junegunn/fzf.vim'
 
    " Grepping
    Plug 'mileszs/ack.vim'
