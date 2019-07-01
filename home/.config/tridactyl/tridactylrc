@@ -29,6 +29,8 @@ bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//
 
 " js tri.config.get("nmaps").filter(";").forEach.
 
+seturl www.postfinance.ch noiframe true
+
 " Allow Ctrl-a to select all in the commandline
 unbind --mode=ex <C-a>
 
