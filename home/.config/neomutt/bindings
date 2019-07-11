@@ -42,12 +42,16 @@ bind editor \Cw forward-word
 bind editor \Cb backward-word
 
 
-bind generic,index t tag-entry
-bind pager t tag-message
+bind generic t tag-entry
+bind index,pager t tag-message
 bind generic,index \; tag-prefix
+macro pager \; "<exit><tag-prefix>"
 bind index Tt tag-thread
 bind index Tp tag-pattern
 bind index Ts tag-subthread
+macro pager Tt "<exit><tag-thread>"
+macro pager Tp "<exit><tag-pattern>"
+macro pager Ts "<exit><tag-subthread>"
 
 bind attach <return> view-mailcap
 bind attach <space> view-mailcap
@@ -98,9 +102,11 @@ bind generic,index,pager k previous-entry
 bind generic,index,pager j next-entry
 bind generic,index,pager K half-up
 bind generic,index,pager J half-down
+macro generic,index,pager \Cb "<half-up><half-up>"
+macro generic,index,pager \Cf "<half-down><half-down>"
 bind generic,index <Space> select-entry
 
-bind generic,pager,index ] next-unread 
+bind generic,pager,index ] next-unread
 bind generic,pager,index [ previous-unread
 
 bind generic,index,pager / search
@@ -128,7 +134,7 @@ macro index,pager <Return> "<sidebar-open><check-stats>" "open folder from sideb
 
 
 # Reply/forward/etc.
-bind index,pager c mail 
+bind index,pager c mail
 bind index,pager r reply
 bind index,pager R group-reply
 bind index,pager f forward-message
@@ -165,7 +171,7 @@ bind  index x toggle-read
 
 #bind  index P previous-new-then-unread
 #bind  index N next-new-then-unread
-bind  index,pager N jump
+bind  index,pager G jump
 #macro index r WN<up>n   "Mark as read, then go to next"
 #bind  index t read-thread
 #macro index T tn
