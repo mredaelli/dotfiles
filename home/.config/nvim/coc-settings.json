@@ -2,6 +2,8 @@
   "coc.preferences.formatOnSaveFiletypes": ["rust", "python"],
 
   "rust-client.channel": "stable",
+  "rust-client.disableRustup": true,
+  "rust-client.logToFile": true,
 
   "python.autoComplete.showAdvancedMembers": false,
   "python.pythonPath": "./env/python",

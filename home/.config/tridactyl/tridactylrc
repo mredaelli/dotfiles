@@ -9,7 +9,7 @@ bind <C-J> tabmove +1
 bind <C-K> tabmove -1
 bind \ tab #
 
-" guiset_quiet tabs autohide
+guiset_quiet tabs always
 guiset_quiet navbar always
 
 set hintchars hjklasdfgyuiopqwertnmzxcvb
