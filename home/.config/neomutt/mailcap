@@ -31,5 +31,6 @@ application/vnd.ms-excel;                 libreoffice %s
 application/vnd.ms-word;                  libreoffice %s
 application/vnd.oasis.opendocument.text;  libreoffice %s
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; libreoffice %s
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; libreoffice %s
 application/x-excel;                      libreoffice %s
 application/x-msexcel;                    libreoffice %s
