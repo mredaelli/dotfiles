@@ -1,0 +1,29 @@
+# https://github.com/linsong/w3m-config/blob/master/keymap
+
+keymap C-f NEXT_PAGE
+keymap C-b PREV_PAGE
+keymap l MOVE_RIGHT
+keymap h MOVE_LEFT
+keymap j MOVE_DOWN
+keymap k MOVE_UP
+keymap \^,C-a LINE_BEGIN
+keymap $,C-e LINE_END
+keymap Z CENTER_H
+keymap z CENTER_V
+keymap g BEGIN
+keymap G END
+keymap w NEXT_WORD
+keymap b PREV_WORD
+keymap TAB NEXT_LINK
+keymap ESC-TAB PREV_LINK
+keymap u UNDO
+keymap U REDO
+keymap SPC VIEW_IMAGE
+keymap / ISEARCH
+keymap ? ISEARCH_BACK
+keymap n SEARCH_NEXT
+keymap N SEARCH_PREV
+keymap \\ MENU
+keymap H HELP
+keymap < BACK
+keymap > NEXT

@@ -1,0 +1,16 @@
+system_charset UTF-8
+auto_detect 2
+document_charset UTF-8
+display_charset UTF-8
+
+image_map_list 1
+imgdisplay sxiv
+image_scale 100
+ext_image_viewer 1
+max_load_image 4
+auto_image 1
+display_image 1
+
+confirm_qq 0
+
+
