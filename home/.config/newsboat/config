@@ -22,7 +22,7 @@ pager internal
 player vlc
 download-full-page yes
 
-notify-always yes
+notify-always no
 notify-format "newsbeuter: %n unread articles within %f unread feeds"
 notify-program notify-send
 notify-xterm yes
