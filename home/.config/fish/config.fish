@@ -44,10 +44,13 @@ abbr ga 'git add'
 abbr glb "git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 
 abbr gc 'git commit --verbose'
-abbr gca 'git commit -a --verbose'
+abbr gca 'git commit --amend --verbose'
+abbr gcA 'git commit -a --verbose'
+abbr gcAa 'git commit -a --verbose --amend'
 abbr gcm 'git commit --verbose -m'
-abbr gcam 'git commit --verbose -am'
-abbr gamen 'git commit --verbose --amend'
+abbr gcAm 'git commit --verbose -am'
+
+abbr gf 'git fetch -p'
 
 abbr gob 'git checkout -b'
 abbr go 'git checkout'
@@ -55,6 +58,11 @@ abbr go 'git checkout'
 abbr gP 'git push'
 abbr gPP 'git push --force'
 abbr gp 'git pull'
+
+abbr grm 'git rebase master'
+abbr grh 'git rebase -i HEAD~'
+abbr gra 'git rebase --abort'
+abbr grc 'git rebase --continue'
 
 
 switch (uname)
