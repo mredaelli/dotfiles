@@ -3,7 +3,7 @@ let $NVIM_COC_LOG_LEVEL = 'debug'
 call plug#begin('~/.local/share/nvim/plugged')
    Plug 'conradirwin/vim-bracketed-paste'
 
-   Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh' }
+   Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} " 'do': './install.sh' }
 
    Plug 'airblade/vim-gitgutter'
    Plug 'tpope/vim-fugitive'
