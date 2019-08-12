@@ -1,0 +1,2 @@
+#!/bin/sh
+sed -r 's_(https?://)([^ ]{0,25})[^ ]*_<\1\2...>_g' | par rTbgq h1 "B=.,?_A_a" "Q=_s>|"  | awk -f $(dirname $(which aerc))/../share/aerc/filters/plaintext 
