@@ -268,9 +268,9 @@ Channel international-trash
 IMAPAccount lari
 Host imap.gmail.com
 User mredaelli@lari.digital
-PassCmd  "secret-tool lookup user mredaelli domain lari.digital" 
+PassCmd  "secret-tool lookup user mredaelli domain lari.digital"
 SSLType IMAPS
-SSLVersions TLSv1.2
+# SSLVersions TLSv1.2
 AuthMechs LOGIN
 
 IMAPStore lari-remote
@@ -308,3 +308,33 @@ Channel lari-draft
 Channel lari-spam
 Channel lari-sent
 Channel lari-trash
+
+
+############
+IMAPAccount pec
+Host imaps.pec.aruba.it
+User massimo.redaelli@pec.it
+PassCmd "secret-tool lookup user massimo.redaelli domain pec.it"
+SSLVersions TLSv1.2
+SSLType IMAPS
+AuthMechs LOGIN
+
+IMAPStore pec-remote
+Account pec
+
+MaildirStore pec-local
+Path ~/Maildir/pec
+Inbox ~/Maildir/pec/Inbox
+Subfolders Verbatim
+
+Channel pec-inbox
+Master :pec-remote:
+Slave :pec-local:
+Patterns *
+Create Both
+Expunge Both
+SyncState *
+Sync all
+
+Group pec
+Channel pec-inbox
