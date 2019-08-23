@@ -1,0 +1,5 @@
+#!/bin/sh
+tmp=$(mktemp)
+cat > $tmp
+xargs "$@" $tmp
+rm $tmp

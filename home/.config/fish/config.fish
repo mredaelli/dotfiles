@@ -54,6 +54,7 @@ abbr gf 'git fetch -p'
 
 abbr gob 'git checkout -b'
 abbr go 'git checkout'
+abbr gom 'git checkout master'
 
 abbr gP 'git push'
 abbr gPP 'git push --force'
