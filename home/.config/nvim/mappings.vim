@@ -17,12 +17,14 @@ nnoremap <leader>Q :wqa<cr>
 " prevent entering Ex mode by error
 nnoremap Q <nop>
 nnoremap <leader>s :w<cr>
+nnoremap <leader>d :bd<cr>
+nnoremap <leader>D :%bd<cr>
 
 " go to the folder of the current file
 nnoremap <leader>cd :cd %:p:h<CR>
 
 " normal mode with jk
-imap jk <Esc>
+" imap jk <Esc>
 
 " clear last search
 nnoremap <CR> :noh<CR><CR>
@@ -35,6 +37,8 @@ nnoremap <Leader>h :History<CR>
 nnoremap <Leader>t :BTags<CR>
 nnoremap <Leader>a :Ag<Space>
 nnoremap <Leader>C :Commands<CR>
+
+nnoremap <Leader>G :Gstatus<CR>
 
 " commenting with Ctrl-/
 nmap <C-_>  gcc

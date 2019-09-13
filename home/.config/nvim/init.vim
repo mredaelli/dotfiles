@@ -12,11 +12,11 @@ set tabstop=4
 
 set showmatch
 
+set clipboard+=unnamedplus
+
 syntax on
 
 set scrolloff=4
-
-let g:ctrlp_cmd = 'CtrlPMixed'
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'

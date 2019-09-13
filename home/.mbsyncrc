@@ -323,7 +323,7 @@ IMAPStore pec-remote
 Account pec
 
 MaildirStore pec-local
-Path ~/Maildir/pec
+Path ~/Maildir/pec/
 Inbox ~/Maildir/pec/Inbox
 Subfolders Verbatim
 
