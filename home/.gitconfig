@@ -20,3 +20,10 @@
 	whitespace = red reverse
 [includeIf "gitdir:~/src/lari/"]
 	path = src/lari/lari.gitconfig
+[sendemail]
+	smtpserver = smtp.fastmail.com
+	smtpuser = massimo@typish.io
+	smtpencryption = tls
+	smtpserverport = 587
+[credential]
+    helper = libsecret

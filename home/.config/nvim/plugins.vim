@@ -15,6 +15,11 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'vim-scripts/UniCycle', { 'for': ['markdown', 'pandoc', 'mail' ] }
 
 
+   " Go
+   if executable("go")
+     Plug 'fatih/vim-go', { 'for': ['go'] }
+   endif
+
    " Python
    if executable("python")
      Plug 'vim-python/python-syntax', { 'for': ['python'] }

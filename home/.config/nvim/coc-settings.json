@@ -3,7 +3,6 @@
 
   "rust-client.channel": "stable",
   "rust-client.disableRustup": true,
-  "rust-client.logToFile": true,
 
   "python.autoComplete.showAdvancedMembers": false,
   "python.pythonPath": "./env/python",
@@ -14,5 +13,14 @@
   "python.linting.pylintEnabled": false,
   "python.linting.pylamaEnabled": true,
   "python.linting.pylamaPath": "./env/pylama",
-  "python.sortImports.path": "./env/isort"
+  "python.sortImports.path": "./env/isort",
+
+      "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "args": ["serve", "-debug", "0.0.0.0:8484", "-rpc.trace"],
+      "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["go"]
+    }
+  }
 }

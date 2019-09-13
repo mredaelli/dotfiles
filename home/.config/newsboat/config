@@ -55,6 +55,7 @@ bind-key l show-urls articlelist
 
 
 bind-key \ reload-all
+bind-key R reload-all
 bind-key "RIGHT" select-tag
 bind-key "SPACE" open
 
