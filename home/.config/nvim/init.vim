@@ -14,16 +14,38 @@ set showmatch
 
 set clipboard+=unnamedplus
 
-syntax on
+set backspace=indent,eol,start
 
-set scrolloff=4
+set ttimeout
+set ttimeoutlen=100
+
+if &listchars ==# 'eol:$'
+  set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+endif
+
+" set autoread
+
+if !&scrolloff
+  set scrolloff=2
+endif
+if !&sidescrolloff
+  set sidescrolloff=5
+endif
+
+if v:version > 703 || v:version == 703 && has("patch541")
+  set formatoptions+=j " Delete comment character when joining commented lines
+endif
+
+syntax on
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
   let g:gitgutter_grep = 'ag'
 endif
 
-set shell=/bin/sh
+if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'))
+  set shell=/usr/bin/env\ bash
+endif
 
 set undofile
 silent !mkdir ~/.local/share/nvim/undodir > /dev/null 2>&1

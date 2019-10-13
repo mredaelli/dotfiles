@@ -7,10 +7,12 @@ nnoremap <S-Tab> :bprevious<CR>
 
 " redo
 nnoremap U <C-r>
+nnoremap Y y$
+nnoremap S hs
 
+nnoremap Q gQ
 " reload config on Ctrl-R
 nnoremap <C-r> :so $MYVIMRC<CR>
-
 
 nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :wqa<cr>
@@ -27,7 +29,8 @@ nnoremap <leader>cd :cd %:p:h<CR>
 " imap jk <Esc>
 
 " clear last search
-nnoremap <CR> :noh<CR><CR>
+nnoremap <silent> \\ :nohlsearch<CR><CR>
+"<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 
 " fzf
 nnoremap <Leader>f :GFiles<CR>
