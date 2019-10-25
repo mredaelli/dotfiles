@@ -38,12 +38,16 @@ endif
 
 syntax on
 
+let g:xml_syntax_folding=1
+au FileType xml setlocal foldmethod=syntax
+
+
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
   let g:gitgutter_grep = 'ag'
 endif
 
-if &shell =~# 'fish$' && (v:version < 704 || v:version == 704 && !has('patch276'))
+if &shell =~# 'fish$'
   set shell=/usr/bin/env\ bash
 endif
 
