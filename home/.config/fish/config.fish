@@ -4,7 +4,7 @@ if not functions -q fisher
     fish -c fisher
 end
 
-alias cpvpn='pushd ~/.ssh; and sudo openvpn --config CP-FW-01-UDP4-1194-massimo.redaelli-config.ovpn; or  popd' 
+alias cpvpn='pushd ~/.ssh; and sudo openvpn --config CP-FW-01-UDP4-1194-massimo.redaelli-config.ovpn; or  popd'
 
 alias du="du -h"
 alias df="df -h"
@@ -20,7 +20,7 @@ if type -q bat
 end
 
 if type -q exa
-  alias ls='exa' 
+  alias ls='exa'
   alias ll='exa -l --git'
 end
 
@@ -34,6 +34,9 @@ if type -q nvim
 end
 
 alias psg='ps au | grep'
+
+alias cdgr='cd (git rev-parse --show-toplevel)'
+abbr kdiff 'kitty +kitten diff'
 
 ## git
 abbr gs 'git status -s'
