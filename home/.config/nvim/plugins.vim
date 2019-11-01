@@ -16,6 +16,9 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'reedes/vim-pencil', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'vim-scripts/UniCycle', { 'for': ['markdown', 'pandoc', 'mail' ] }
 
+   Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+
+   Plug 'idanarye/vim-vebugger', {'for': ['python'] }
 
    " Go
    if executable("go")

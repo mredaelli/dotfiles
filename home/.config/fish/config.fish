@@ -78,11 +78,6 @@ switch (uname)
 end
 
 
-# bobthefish
-set -g theme_title_display_process yes
-# set -g theme_color_scheme terminal-dark
-set -g theme_color_scheme solarized-dark
-# set -g theme_color_scheme dark
 
 set PATH ~/bin $PATH
 
@@ -93,6 +88,15 @@ end
 function mkcd
     mkdir -pv $argv;
     cd $argv;
+end
+if type -q starship
+  starship init fish | source
+else
+  # bobthefish
+  set -g theme_title_display_process yes
+  # set -g theme_color_scheme terminal-dark
+  set -g theme_color_scheme solarized-dark
+  # set -g theme_color_scheme dark
 end
 
 echo
