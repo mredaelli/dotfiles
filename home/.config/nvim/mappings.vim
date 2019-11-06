@@ -18,7 +18,7 @@ nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :wqa<cr>
 " prevent entering Ex mode by error
 nnoremap Q <nop>
-nnoremap <leader>s :w<cr>
+nnoremap <leader>s :up<cr>
 nnoremap <leader>d :bd<cr>
 nnoremap <leader>D :%bd<cr>
 
@@ -38,10 +38,33 @@ nnoremap <Leader>F :Files<CR>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>h :History<CR>
 nnoremap <Leader>t :BTags<CR>
-nnoremap <Leader>a :Ag<Space>
+nnoremap <Leader>a :Rg<Space>
 nnoremap <Leader>C :Commands<CR>
 
-nnoremap <Leader>G :Gstatus<CR>
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gp :Gpull<CR>
+nnoremap <Leader>gP :Gpush<CR>
+nnoremap <Leader>gPP :call s:PushForceSafe()<CR>
+nnoremap <Leader>go :Gbranch<CR>
+nnoremap <Leader>gv :GV<CR>
+nnoremap <Leader>gV :GV!<CR>
+nnoremap <Leader>gb :Twiggy<CR>
+
+function! s:PushForceSafe()
+  if confirm('Are you sure you want to force-push?', "&Yes\n&No", 1)==1
+    execute('Gpush --force')
+  endif
+endfunction
+
+function! s:changebranch(branch)
+    execute 'Git checkout' . a:branch
+    " call feedkeys("i")
+endfunction
+
+command! -bang Gbranch call fzf#run({
+            \ 'source': 'git branch -a --no-color | grep -v "^\* " ',
+            \ 'sink': function('s:changebranch')
+            \ })
 
 " commenting with Ctrl-/
 nmap <C-_>  gcc

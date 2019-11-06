@@ -1,16 +1,51 @@
 [user]
     email=massimo@typish.io
 	name=Massimo Redaelli
+     
 [core]
     pager = delta --dark --plus-color="#012800" --minus-color="#340001"
+
+[merge]
+    tool = nfugitive
+[mergetool "nvimdiff4"]
+    cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+    trustExitCode = true
+[mergetool "nfugitive"]
+    cmd = nvim -f -c "Gdiff" "$MERGED"
+    trustExitCode = true
+
 [color]
 	ui = true
+[color "branch"]
+    current = yellow reverse
+    local = yello
+    remote = green
+[color "status"]
+    added = yellow
+    changed = green
+    untracked = red
+
+[status]
+    submoduleSummary = true
+
 [includeIf "gitdir:~/src/lari/"]
 	path = src/lari/lari.gitconfig
+
 [sendemail]
 	smtpserver = smtp.fastmail.com
 	smtpuser = massimo@typish.io
 	smtpencryption = tls
 	smtpserverport = 587
+
 [credential]
     helper = libsecret
+
+[commit]
+	verbose = true
+
+[url "https://github.com/"]
+    insteadOf = gh:
+[url "https://gist.github.com/"]
+    insteadOf = gist:
+[url "https://bitbucket.org/"]
+    insteadOf = bb:

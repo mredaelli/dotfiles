@@ -24,6 +24,7 @@ if &listchars ==# 'eol:$'
 endif
 
 " set autoread
+set autowrite
 
 if !&scrolloff
   set scrolloff=2
@@ -42,9 +43,9 @@ let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
 
 
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-  let g:gitgutter_grep = 'ag'
+if executable('rg')
+  let g:ackprg = 'rg --vimgrep'
+  let g:gitgutter_grep = 'rg'
 endif
 
 if &shell =~# 'fish$'

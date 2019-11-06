@@ -7,8 +7,13 @@ call plug#begin('~/.local/share/nvim/plugged')
      Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} " 'do': './install.sh' }
    endif
 
+   " Git
    Plug 'airblade/vim-gitgutter'
    Plug 'tpope/vim-fugitive'
+   Plug 'junegunn/gv.vim'
+   Plug 'tpope/vim-git'
+   Plug 'idanarye/vim-merginal'
+   Plug 'sodapopcan/vim-twiggy'
 
    " Text
    Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
