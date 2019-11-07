@@ -89,6 +89,9 @@ function mkcd
     mkdir -pv $argv;
     cd $argv;
 end
+
+fish_vi_key_bindings
+
 if type -q starship
   starship init fish | source
 else

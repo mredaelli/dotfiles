@@ -17,10 +17,10 @@ bindsym $mod+w exec rofi -show window
 # dmenu_run -fn 'Hasklig:regular:pixelsize=23'
 bindsym $mod+o exec transset -a 2 -x 2 -t
 
-#bindsym $mod+h split h;exec notify-send 'split horizontally'
-#bindsym $mod+v split v;exec notify-send 'split vertically'
-#bindsym $mod+a focus parent
-##bindsym $mod+d focus child
+bindsym $mod+r split h;exec notify-send 'split horizontally'
+bindsym $mod+b split v;exec notify-send 'split vertically'
+bindsym $mod+u focus parent;exec notify-send 'focused parent'
+#bindsym $mod+d focus child
 
 bindsym $mod+f fullscreen toggle
 

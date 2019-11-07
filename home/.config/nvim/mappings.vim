@@ -18,7 +18,7 @@ nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :wqa<cr>
 " prevent entering Ex mode by error
 nnoremap Q <nop>
-nnoremap <leader>s :up<cr>
+nnoremap <leader>u :up<cr>
 nnoremap <leader>d :bd<cr>
 nnoremap <leader>D :%bd<cr>
 
@@ -29,8 +29,7 @@ nnoremap <leader>cd :cd %:p:h<CR>
 " imap jk <Esc>
 
 " clear last search
-nnoremap <silent> \\ :nohlsearch<CR><CR>
-"<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
+nnoremap <silent> <CR> :nohls<CR><CR>
 
 " fzf
 nnoremap <Leader>f :GFiles<CR>
@@ -44,17 +43,19 @@ nnoremap <Leader>C :Commands<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gp :Gpull<CR>
 nnoremap <Leader>gP :Gpush<CR>
-nnoremap <Leader>gPP :call s:PushForceSafe()<CR>
+nnoremap <Leader>gPP :GPushForce<CR>
 nnoremap <Leader>go :Gbranch<CR>
-nnoremap <Leader>gv :GV<CR>
-nnoremap <Leader>gV :GV!<CR>
-nnoremap <Leader>gb :Twiggy<CR>
+nnoremap <Leader>gl :GV<CR>
+nnoremap <Leader>gL :GV!<CR>
+nnoremap <Leader>gb :call merginal#openMerginalBuffer()<CR>
 
 function! s:PushForceSafe()
   if confirm('Are you sure you want to force-push?', "&Yes\n&No", 1)==1
     execute('Gpush --force')
   endif
 endfunction
+
+command! -bang GPushForce call s:PushForceSafe()
 
 function! s:changebranch(branch)
     execute 'Git checkout' . a:branch
@@ -75,6 +76,15 @@ vmap <A-Left> <gv
 vmap <A-Right> >gv
 vmap <A-Down> :m '>+1<CR>gv=gv
 vmap <A-Up> :m '<-2<CR>gv=gv
+
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+let g:EasyMotion_smartcase = 1
+
+nmap <Leader>s <Plug>(easymotion-overwin-f2)
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 
 set splitbelow
 set splitright
@@ -116,7 +126,8 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
-augroup nmeovim_terminal
-autocmd!
-autocmd TermOpen * :setlocal nonumber norelativenumber
-augroup END
+nnoremap oo m`o<Esc>``
+nnoremap OO m`O<Esc>``
+
+" Do not include white space characters when using $ in visual mode
+xnoremap $ g_

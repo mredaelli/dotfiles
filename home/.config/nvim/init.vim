@@ -15,9 +15,16 @@ set showmatch
 set clipboard+=unnamedplus
 
 set backspace=indent,eol,start
+set ignorecase smartcase
+" Align indent to next multiple value of shiftwidth
+set shiftround
 
 set ttimeout
 set ttimeoutlen=100
+
+let g:loaded_netrwPlugin = 1
+let g:loaded_2html_plugin = 1
+
 
 if &listchars ==# 'eol:$'
   set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
@@ -102,6 +109,13 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+if exists("##TermOpen")
+    augroup term_settings
+        autocmd!
+        autocmd TermOpen * setlocal norelativenumber nonumber
+        autocmd TermOpen * startinsert
+    augroup END
+endif
 
 set background=dark
 let g:jellybeans_use_term_italics = 1
@@ -110,4 +124,3 @@ colorscheme jellybeans
 " whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd Syntax * syn match ExtraWhitespace /\s\+$/ containedin=ALL
-

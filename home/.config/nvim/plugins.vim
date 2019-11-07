@@ -2,6 +2,7 @@ let $NVIM_COC_LOG_LEVEL = 'debug'
 
 call plug#begin('~/.local/share/nvim/plugged')
    Plug 'conradirwin/vim-bracketed-paste'
+   Plug 'tmsvg/pear-tree'
 
    if executable('node')
      Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} " 'do': './install.sh' }
@@ -13,7 +14,7 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'junegunn/gv.vim'
    Plug 'tpope/vim-git'
    Plug 'idanarye/vim-merginal'
-   Plug 'sodapopcan/vim-twiggy'
+   " Plug 'sodapopcan/vim-twiggy'
 
    " Text
    Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
@@ -23,6 +24,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 
    Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
+  " Development
+   Plug 'metakirby5/codi.vim', {'for': ['python'] }
    Plug 'idanarye/vim-vebugger', {'for': ['python'] }
 
    " Go
@@ -32,7 +35,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
    " Python
    if executable("python")
-     Plug 'vim-python/python-syntax', { 'for': ['python'] }
+     Plug 'kh3phr3n/python-syntax', { 'for': ['python'] }
    endif
 
    " Rust
