@@ -1,0 +1,17 @@
+#!/bin/sh
+
+H=/home/turing
+
+wget -q --spider http://google.com
+
+if [ $? -eq 0 ]; then
+  export B2_ACCOUNT_ID=$(secret-tool lookup host blaze bucket gimli-backup key id)
+  export B2_ACCOUNT_KEY=$(secret-tool lookup host blaze bucket gimli-backup key pass)
+  export RESTIC_PASSWORD_COMMAND="secret-tool lookup host blaze bucket gimli-backup repo email"
+  restic -r b2:gimli-backup:email backup $H/Maildir/
+
+  export RESTIC_PASSWORD_COMMAND="secret-tool lookup host blaze bucket gimli-backup repo docs"
+  restic -r b2:gimli-backup:docs backup $H/* --exclude=$H/cloud --iexclude=$H/Desktop --iexclude=$H/downloads --exclude=$H/Maildir --exclude=$H/media --exclude=$H/out --exclude=$H/src --exclude=$H/vols
+else
+  echo Offline
+fi
