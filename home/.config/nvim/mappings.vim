@@ -40,6 +40,7 @@ nnoremap <Leader>t :BTags<CR>
 nnoremap <Leader>a :Rg<Space>
 nnoremap <Leader>C :Commands<CR>
 
+nnoremap <Leader>gf :Gfetch<CR>
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gp :Gpull<CR>
 nnoremap <Leader>gP :Gpush<CR>
@@ -58,8 +59,11 @@ endfunction
 command! -bang GPushForce call s:PushForceSafe()
 
 function! s:changebranch(branch)
+  if a:branch =~ 'remotes/'
+    execute 'Git checkout --track ' . a:branch
+  else
     execute 'Git checkout' . a:branch
-    " call feedkeys("i")
+  endif
 endfunction
 
 command! -bang Gbranch call fzf#run({

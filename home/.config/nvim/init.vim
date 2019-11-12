@@ -16,8 +16,6 @@ set clipboard+=unnamedplus
 
 set backspace=indent,eol,start
 set ignorecase smartcase
-" Align indent to next multiple value of shiftwidth
-set shiftround
 
 set ttimeout
 set ttimeoutlen=100
