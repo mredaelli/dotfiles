@@ -1,3 +1,5 @@
+# vim: filetype=muttrc
+
 bind generic,pager,editor,index <Esc>v noop
 bind generic,pager,editor,index <Esc>a noop
 bind generic,pager,editor,index <Esc>b noop

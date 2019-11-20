@@ -4,7 +4,8 @@ bind  generic,index,pager,index q exit
 macro generic,index,pager Q "qqq"
 
 # Reload configuration
-macro generic,index,pager,editor \Cr "<enter-command>source ~/.config/neomutt/muttrc<enter><check-stats>" "Reload mutt's configuration file"
+macro generic,index,pager,editor \Ck "<enter-command>source ~/.config/neomutt/muttrc<enter><check-stats>" "Reload mutt's configuration file"
+
 
 
 macro index,pager _mr "<tag-prefix><clear-flag>O<previous-entry><tag-prefix><clear-flag>N<previous-entry>" "Mark read"
@@ -128,7 +129,7 @@ macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>"
 
 ### Browser bindings ###
 ## Browser is used when viewing the list of mailboxes
-bind browser \Cr  check-new
+# bind browser \Cr  check-new
 bind browser N select-new
 
 # sidebar

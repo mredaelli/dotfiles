@@ -18,7 +18,9 @@ set from = "massimo@typish.io"
 set realname = "Massimo Redaelli"
 
 # Reload configuration
-macro generic,index,pager,editor \Cr "<enter-command>source ~/.config/neomutt/muttrc<enter><enter-command>source ~/.config/neomutt/fast<enter><check-stats>" "Reload mutt's configuration file"
+macro generic,index,pager,editor \Ck "<enter-command>source ~/.config/neomutt/muttrc<enter><enter-command>source ~/.config/neomutt/fast<enter><check-stats>" "Reload mutt's configuration file"
+
+macro generic,index,pager,editor \Cr "<shell-escape>mbsync fast<enter>" "Fetch new mail"
 
 macro index,pager oL  "<change-folder>=Lari<enter><buffy-list><check-stats>" "open Lari"
 macro index,pager oJ  "<change-folder>=jobhunting<enter><buffy-list><check-stats>" "open job"
