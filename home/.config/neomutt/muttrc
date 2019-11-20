@@ -1,7 +1,7 @@
 source ~/.config/neomutt/unbind
 source ~/.config/neomutt/bindings
 
-#source ~/.config/neomutt/dracula.muttrc
+source ~/.config/neomutt/dracula.muttrc
 source ~/.config/neomutt/solarized.muttrc
 source ~/.config/neomutt/fast
 

@@ -1,3 +1,5 @@
+# vim: filetype=muttrc
+
 set smtp_url = "smtp://cesgraf.nord@gmail.com@smtp.gmail.com:587"
 set smtp_pass = `secret-tool lookup user cesgraf.nord domain gmail.com` 
 
