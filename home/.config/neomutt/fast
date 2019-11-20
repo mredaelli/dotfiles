@@ -1,3 +1,4 @@
+# vim: filetype=muttrc
 
 set smtp_url = "smtps://massimo@typish.io@smtp.fastmail.com:465"
 set smtp_pass = `secret-tool lookup user massimo domain typish.io`
@@ -19,25 +20,29 @@ set realname = "Massimo Redaelli"
 # Reload configuration
 macro generic,index,pager,editor \Cr "<enter-command>source ~/.config/neomutt/muttrc<enter><enter-command>source ~/.config/neomutt/fast<enter><check-stats>" "Reload mutt's configuration file"
 
-macro index,pager gL  "<change-folder>=Lari<enter><buffy-list><check-stats>" "open Lari"
-macro index,pager gJ  "<change-folder>=jobhunting<enter><buffy-list><check-stats>" "open job"
-macro index,pager gP  "<change-folder>=papers<enter><buffy-list><check-stats>" "open papers"
-macro index,pager gD  "<change-folder>=dev<enter><buffy-list><check-stats>" "open dev"
-macro index,pager gA  "<change-folder>=amazon<enter><buffy-list><check-stats>" "open amazon"
+macro index,pager oL  "<change-folder>=Lari<enter><buffy-list><check-stats>" "open Lari"
+macro index,pager oJ  "<change-folder>=jobhunting<enter><buffy-list><check-stats>" "open job"
+macro index,pager oP  "<change-folder>=papers<enter><buffy-list><check-stats>" "open papers"
+macro index,pager oD  "<change-folder>=dev<enter><buffy-list><check-stats>" "open dev"
+macro index,pager oA  "<change-folder>=amazon<enter><buffy-list><check-stats>" "open amazon"
+macro index,pager oR  "<change-folder>=RivistaUAAR<enter><buffy-list><check-stats>" "open amazon"
+macro index,pager oU  "<change-folder>=uaar<enter><buffy-list><check-stats>" "open amazon"
 
-macro index mJ "_mr_cn<tag-prefix><save-message>=jobhunting<enter><sync-mailbox>_cy" "Archive to job" 
+macro index mJ "_mr_cn<tag-prefix><save-message>=jobhunting<enter><sync-mailbox>_cy" "Archive to job"
 macro pager mJ qmJ
-macro index mP "_mr_cn<tag-prefix><save-message>=papers<enter><sync-mailbox>_cy" "Archive to papers" 
+macro index mP "_mr_cn<tag-prefix><save-message>=papers<enter><sync-mailbox>_cy" "Archive to papers"
 macro pager mP qmP
-macro index mD "_mr_cn<tag-prefix><save-message>=dev<enter><sync-mailbox>_cy" "Archive to dev" 
+macro index mD "_mr_cn<tag-prefix><save-message>=dev<enter><sync-mailbox>_cy" "Archive to dev"
 macro pager mD qmD
-macro index mA "_mr_cn<tag-prefix><save-message>=amazon<enter><sync-mailbox>_cy" "Archive to amazon" 
+macro index mA "_mr_cn<tag-prefix><save-message>=amazon<enter><sync-mailbox>_cy" "Archive to amazon"
 macro pager mA qmA
-macro index mV "_mr<tag-prefix><save-message>=viaggi/2019-" "Archive to Viaggi" 
+macro index mV "_mr<tag-prefix><save-message>=viaggi/201" "Archive to Viaggi"
 macro pager mV qmL
-macro index mL "_mr_cn<tag-prefix><save-message>=Lari<enter><sync-mailbox>_cy" "Archive to Lari" 
+macro index mL "_mr_cn<tag-prefix><save-message>=Lari<enter><sync-mailbox>_cy" "Archive to Lari"
 macro pager mL qmL
+macro index mR "_mr_cn<tag-prefix><save-message>=RivistaUAAR<enter><sync-mailbox>_cy" "Archive to Rivista UAAR"
+macro pager mR qmR
+macro index mU "_mr_cn<tag-prefix><save-message>=uaar<enter><sync-mailbox>_cy" "Archive to Rivista UAAR"
+macro pager mU qmU
 
 set status_format = "-%r-Mutt: {fast} %f [Msgs:%?M?%M/?%m%?n? New:%n?%?o? Old:%o?%?d? Del:%d?%?F? Flag:%F?%?t? Tag:%t?%?p? Post:%p?%?b? Inc:%b?%?l? %l?]---(%s/%S)-%>-(%P)---"
-
-

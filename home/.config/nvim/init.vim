@@ -16,8 +16,6 @@ set clipboard+=unnamedplus
 
 set backspace=indent,eol,start
 set ignorecase smartcase
-" Align indent to next multiple value of shiftwidth
-set shiftround
 
 set ttimeout
 set ttimeoutlen=100
@@ -45,6 +43,10 @@ if v:version > 703 || v:version == 703 && has("patch541")
 endif
 
 syntax on
+" %% is the directory of the open buffer
+cabbr <expr> %% expand('%:p:h')
+
+let g:airline#extensions#branch#displayed_head_limit = 15
 
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
