@@ -1,3 +1,5 @@
+# vim: filetype=muttrc
+
 bind  generic,index,pager,index q exit
 macro generic,index,pager Q "qqq"
 
@@ -25,13 +27,15 @@ macro index <F8> "<shell-escape>mu find --clearlinks --format=links --linksdir=~
 macro index <F9> "<change-folder-readonly>~/Maildir/search" \
                                        "mu find results"
 
-macro index \\ "<shell-escape>mu4mutt<enter><change-folder-readonly>~/Maildir/search<enter>"  "mu find and show"                                       
+macro index \\ "<shell-escape>mu4mutt<enter><change-folder-readonly>~/Maildir/search<enter>"  "mu find and show"
 
 
 # Editor
 bind editor <Tab> complete-query
 bind editor <Up> history-up
 bind editor <Down> history-down
+bind editor \C^ bol
+bind editor \C$ eol
 bind editor <Home> bol
 bind editor <End> eol
 bind editor <Left> backward-char
@@ -42,8 +46,8 @@ bind editor \Cw forward-word
 bind editor \Cb backward-word
 
 
-bind generic t tag-entry
-bind index,pager t tag-message
+bind generic,index t tag-entry
+bind pager t tag-message
 bind generic,index \; tag-prefix
 macro pager \; "<exit><tag-prefix>"
 bind index Tt tag-thread
@@ -61,28 +65,28 @@ bind browser <space> select-entry
 # moving around
 #
 macro index,pager i  "<change-folder>!<enter><buffy-list><check-stats>" "open inbox"
-macro index,pager gi  "<change-folder>!<enter><buffy-list><check-stats>" "open inbox"
-macro index,pager gd  "<change-folder>+postponed<enter><buffy-list><check-stats>" "open drafts"
-macro index,pager ga  "<change-folder>+Archive<enter><buffy-list><check-stats>" "open archive"
-macro index,pager gs  "<change-folder><<enter><buffy-list><check-stats>" "open sent"
-macro index,pager g-  "<change-folder>-<enter><buffy-list><check-stats>" "open last"
-macro index,pager gj "<change-folder>+spam<enter><buffy-list><check-stats>"      "open junk mail (spam)"
-macro index,pager gr "<change-folder>^<enter><buffy-list><check-stats>"          "refresh folder"
+macro index,pager oi  "<change-folder>!<enter><buffy-list><check-stats>" "open inbox"
+macro index,pager od  "<change-folder>+postponed<enter><buffy-list><check-stats>" "open drafts"
+macro index,pager oa  "<change-folder>+Archive<enter><buffy-list><check-stats>" "open archive"
+macro index,pager os  "<change-folder><<enter><buffy-list><check-stats>" "open sent"
+macro index,pager o-  "<change-folder>-<enter><buffy-list><check-stats>" "open last"
+macro index,pager oj "<change-folder>+spam<enter><buffy-list><check-stats>"      "open junk mail (spam)"
+macro index,pager or "<change-folder>^<enter><buffy-list><check-stats>"          "refresh folder"
 
-bind index \Cm change-folder 
+bind index \Cm change-folder
 macro index M "<change-folder>?<Tab>" "Go back to the list of mailboxes"
 
-macro index a "_mr_cn<tag-prefix><save-message>=Archive<enter><sync-mailbox>_cy" "Archive" 
+macro index a "_mr_cn<tag-prefix><save-message>=Archive<enter><sync-mailbox>_cy" "Archive"
 macro pager a "qa" 
-macro index ma "_mr_cn<tag-prefix><save-message>=Archive<enter><sync-mailbox>_cy" "move to archive" 
+macro index ma "_mr_cn<tag-prefix><save-message>=Archive<enter><sync-mailbox>_cy" "move to archive"
 macro pager ma "qma" 
-macro index mi "_mr_cn<tag-prefix><save-message>!<enter><sync-mailbox>_cy" "move to inbox" 
+macro index mi "_mr_cn<tag-prefix><save-message>!<enter><sync-mailbox>_cy" "move to inbox"
 macro pager mi "qmi" 
-macro index md "_mr_cn<tag-prefix><save-message>+postponed<enter><sync-mailbox>_cy" "move to draft" 
+macro index md "_mr_cn<tag-prefix><save-message>+postponed<enter><sync-mailbox>_cy" "move to draft"
 macro pager md "qmd" 
-macro index ms "_mr_cn<tag-prefix><save-message><<enter><sync-mailbox>_cy" "move to sent" 
+macro index ms "_mr_cn<tag-prefix><save-message><<enter><sync-mailbox>_cy" "move to sent"
 macro pager ms "qms" 
-macro index mj "_mr_cn<tag-prefix><save-message>+spam<enter><sync-mailbox>_cy" "move to spam" 
+macro index mj "_mr_cn<tag-prefix><save-message>+spam<enter><sync-mailbox>_cy" "move to spam"
 macro pager mj "qmj" 
 
 
@@ -96,14 +100,20 @@ macro index \'u  "<limit>!~Q<enter>"      "limit to unreplied messages"
 macro index \'\' "<limit>~A<enter>"       "reset all limits"
 
 
-bind generic,index,pager <Up> previous-entry
-bind generic,index,pager <Down> next-entry
-bind generic,index,pager k previous-entry
-bind generic,index,pager j next-entry
-bind generic,index,pager K half-up
-bind generic,index,pager J half-down
-macro generic,index,pager \Cb "<half-up><half-up>"
-macro generic,index,pager \Cf "<half-down><half-down>"
+bind generic,index k previous-entry
+bind generic,index j next-entry
+bind pager K previous-entry
+bind pager J next-entry
+bind pager k previous-line
+bind pager j next-line
+macro generic,index,pager \Cb "<half-up><half-up><next-line>"
+macro generic,index,pager \Cf "<half-down><half-down><previous-line>"
+macro pager <Space>  "<half-down><half-down><previous-line>"
+bind index gg first-entry
+bind index G last-entry
+bind pager gg top
+bind pager G bottom
+
 bind generic,index <Space> select-entry
 
 bind generic,pager,index ] next-unread
@@ -123,8 +133,8 @@ bind browser N select-new
 
 # sidebar
 bind index,pager S sidebar-toggle-visible
-bind index,pager H sidebar-prev
-bind index,pager L sidebar-next
+bind index,pager <up> sidebar-prev
+bind index,pager <down> sidebar-next
 macro index,pager <Enter> "<sidebar-open><check-stats>" "open folder from sidebar"
 macro index,pager <Return> "<sidebar-open><check-stats>" "open folder from sidebar"
 
@@ -135,6 +145,7 @@ macro index,pager <Return> "<sidebar-open><check-stats>" "open folder from sideb
 
 # Reply/forward/etc.
 bind index,pager c mail
+bind index,pager C compose-to-sender
 bind index,pager r reply
 bind index,pager R group-reply
 bind index,pager f forward-message
@@ -154,24 +165,25 @@ bind index,pager \Cl edit-label
 
 # Odds and ends
 bind  index @ display-address
-bind  index o sort-mailbox
+# bind  index o sort-mailbox
 bind  index,pager s save-message
 bind  index,pager | pipe-message
-bind  index,pager u undelete-message
+bind  index,pager U undelete-message
 bind  index,pager n next-unread
 macro index N "<next-unread-mailbox><enter><next-new-then-unread><enter>" "Go to new mail anywhere"
 
 # Setting/clearing flags
 bind  index,pager W      clear-flag
 bind  index,pager w      set-flag
-#macro index,pager ! wN  "Mark email as unread"
-#bind index,pager ! toggle-new
+bind index u toggle-new
+macro pager u "<exit><toggle-new>"
+bind index,pager ! flag-message
 
 bind  index x toggle-read
 
 #bind  index P previous-new-then-unread
 #bind  index N next-new-then-unread
-bind  index,pager G jump
+# bind  index,pager G jump
 #macro index r WN<up>n   "Mark as read, then go to next"
 #bind  index t read-thread
 #macro index T tn
@@ -183,4 +195,8 @@ bind  index,pager G jump
 #bind pager <Down> next-line
 #bind pager k   previous-line
 #bind pager l next-line
-
+#
+bind index     h   "display-toggle-weed"
+bind pager     h   "display-toggle-weed"
+bind attach    h   "display-toggle-weed"
+bind compose   h   "display-toggle-weed"
