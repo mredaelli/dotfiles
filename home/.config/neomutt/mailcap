@@ -13,7 +13,7 @@ text/html;\
 	copiousoutput
 
 
-application/pdf; zathura '%s'
+application/pdf; t=$(mktemp /tmp/XXXXXXXXXX) \; cp %s "$t" \; /bin/sh -c "zathura '$t' \; rm $t \;" &; test=test -n "$DISPLAY"
 
 text/calendar; khal import -a personal '%s'
 application/ics; khal import -a personal '%s'

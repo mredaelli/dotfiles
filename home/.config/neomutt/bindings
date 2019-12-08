@@ -1,10 +1,10 @@
 # vim: filetype=muttrc
 
-bind  generic,index,pager,index q exit
+bind  generic,index,pager q exit
 macro generic,index,pager Q "qqq"
 
 # Reload configuration
-macro generic,index,pager,editor \Ck "<enter-command>source ~/.config/neomutt/muttrc<enter><check-stats>" "Reload mutt's configuration file"
+macro generic,index,pager \Ck "<enter-command>source ~/.config/neomutt/muttrc<enter><check-stats>" "Reload mutt's configuration file"
 
 
 
@@ -35,8 +35,8 @@ macro index \\ "<shell-escape>mu4mutt<enter><change-folder-readonly>~/Maildir/se
 bind editor <Tab> complete-query
 bind editor <Up> history-up
 bind editor <Down> history-down
-bind editor \C^ bol
-bind editor \C$ eol
+bind editor \Ca bol
+bind editor \Ce eol
 bind editor <Home> bol
 bind editor <End> eol
 bind editor <Left> backward-char
