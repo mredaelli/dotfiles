@@ -15,12 +15,17 @@
   "python.linting.pylamaPath": "./env/pylama",
   "python.sortImports.path": "./env/isort",
 
-      "languageserver": {
+  "languageserver": {
     "golang": {
       "command": "gopls",
       "args": ["serve", "-debug", "0.0.0.0:8484", "-rpc.trace"],
       "rootPatterns": ["go.mod", ".vim/", ".git/", ".hg/"],
       "filetypes": ["go"]
+    },
+    "metals": {
+      "command": "./env/metals-vim",
+      "rootPatterns": ["build.sc"],
+      "filetypes": ["scala"]
     }
   }
 }

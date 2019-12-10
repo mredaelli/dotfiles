@@ -3,7 +3,6 @@ set wm=0
 set comments+=nb:>
 set fo+=q
 set nonumber
-set digraph
 set nolist
 
 Goyo 80
@@ -15,5 +14,5 @@ let g:limelight_paragraph_span = 1
 let g:limelight_conceal_ctermfg = 'gray'
 
 Limelight
-SoftPencil
+" SoftPencil
 UniCycleOn

@@ -9,5 +9,5 @@ let g:limelight_paragraph_span = 1
 
 Goyo 80
 Limelight
-SoftPencil
+" SoftPencil
 UniCycleOn

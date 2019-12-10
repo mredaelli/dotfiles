@@ -5,7 +5,7 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'tmsvg/pear-tree'
 
    if executable('node')
-     Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'} " 'do': './install.sh' }
+     Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
    endif
 
    " Git
@@ -21,6 +21,15 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'junegunn/limelight.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'reedes/vim-pencil', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'vim-scripts/UniCycle', { 'for': ['markdown', 'pandoc', 'mail' ] }
+   Plug 'kana/vim-textobj-user', { 'for': ['markdown', 'pandoc', 'mail' ] }
+   Plug 'reedes/vim-textobj-quote', { 'for': ['markdown', 'pandoc', 'mail' ] }
+   Plug 'reedes/vim-textobj-sentence', { 'for': ['markdown', 'pandoc', 'mail' ] }
+   Plug 'dbmrq/vim-ditto', { 'for': ['markdown', 'pandoc', 'mail' ] }
+
+   " Pandoc
+   Plug 'vim-pandoc/vim-pandoc', { 'for': ['markdown', 'pandoc'] }
+   Plug 'vim-pandoc/vim-pandoc-after', { 'for': ['markdown', 'pandoc'] }
+   Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['markdown', 'pandoc'] }
 
    Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 
@@ -43,10 +52,6 @@ call plug#begin('~/.local/share/nvim/plugged')
      Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
    endif
 
-   " Pandoc
-   Plug 'vim-pandoc/vim-pandoc', { 'for': ['markdown', 'pandoc'] }
-   Plug 'vim-pandoc/vim-pandoc-after', { 'for': ['markdown', 'pandoc'] }
-   Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['markdown', 'pandoc'] }
 
    " Haskell
    if executable('ghc')
@@ -57,7 +62,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
    " Scala
    if executable('scalac')
-     Plug 'ensime/ensime-vim', { 'do': ':UpdateRemotePlugins' , 'for': 'scala' }
      Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
    endif
 
