@@ -40,9 +40,9 @@ mono  error         bold
 uncolor index *
 # color index    default        default     "~A"       # all messages
 color index    white   black     "~U"      # unread messages
-color index    blue    black     "~N"      # new messages
-color index    blue    default   "~N~p !~F" # new messages to me
-color index    cyan    default   "~Q"         # messages that have been replied to
+color index    brightcyan    black     "~N"      # new messages
+color index    cyan    default   "~N~p !~F" # new messages to me
+color index    blue    default   "~Q"         # messages that have been replied to
 color index    yellow  default   "~T"      # tagged messages
 color index    magenta default   "~F"      # flagged messages
 color index    red     default   "~D"         # deleted messages

@@ -3,6 +3,7 @@ let $NVIM_COC_LOG_LEVEL = 'debug'
 call plug#begin('~/.local/share/nvim/plugged')
    Plug 'conradirwin/vim-bracketed-paste'
    Plug 'tmsvg/pear-tree'
+   Plug 'kana/vim-textobj-user', { 'for': ['markdown', 'pandoc', 'mail', 'python' ] }
 
    if executable('node')
      Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
@@ -21,7 +22,6 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'junegunn/limelight.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'reedes/vim-pencil', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'vim-scripts/UniCycle', { 'for': ['markdown', 'pandoc', 'mail' ] }
-   Plug 'kana/vim-textobj-user', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'reedes/vim-textobj-quote', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'reedes/vim-textobj-sentence', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'dbmrq/vim-ditto', { 'for': ['markdown', 'pandoc', 'mail' ] }
@@ -45,6 +45,7 @@ call plug#begin('~/.local/share/nvim/plugged')
    " Python
    if executable("python")
      Plug 'kh3phr3n/python-syntax', { 'for': ['python'] }
+     Plug 'bps/vim-textobj-python', { 'for': ['python'] }
    endif
 
    " Rust
