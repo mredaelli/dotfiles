@@ -58,6 +58,9 @@ macro pager Tt "<exit><tag-thread>"
 macro pager Tp "<exit><tag-pattern>"
 macro pager Ts "<exit><tag-subthread>"
 
+bind index TT collapse-thread
+macro pager TT "<exit><collapse-thread>"
+
 bind attach <return> view-mailcap
 bind attach <space> view-mailcap
 bind browser <space> select-entry

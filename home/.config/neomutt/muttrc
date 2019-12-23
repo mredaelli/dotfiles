@@ -39,7 +39,7 @@ set mime_forward_rest=yes
 set status_on_top
 
 # Pager View Options ---------------------------------
-set pager_index_lines = 9 # number of index lines to show
+set pager_index_lines = 11 # number of index lines to show
 set pager_context = 3      # number of context lines to show
 set pager_stop             # don't go to next message automatically
 set menu_scroll            # scroll in menus
@@ -63,18 +63,23 @@ auto_view text/html application/text application/pdf
 
 # Index View Options ---------------------------------
 set date_format = "%y-%m-%d %H:%M"
-set index_format = "%S%T %D %-20.20F  %s %*  | %4c%?X?☢%X&  ?"
+set index_format = "%S%T%?M?%2M&   ? %D %-20.20F  %s %*  ┊ %4c%?X?📎%X&   ?"
 set sort = threads                         # like gmail
 set sort_aux = reverse-last-date-received  # like gmail
 set uncollapse_jump                        # don't collapse on an unread message
 set pager_format =  "%[%a %w %b %y], %.20n | %s %* ~ (%P)"
 
+set uncollapse_new     = yes  # open threads when new mail
+set uncollapse_jump    = yes  # jump to unread message when uncollapse
+set collapse_unread    = no   # don't collapse threads with unread mails
+folder-hook . push '<collapse-all>'   # Everything collapsed by default
+
 #set sort_re                                # thread based on reply regex from subject
 set strict_threads                          # thread based on headers
 set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
 
-set flag_chars="✓!✗❎↩ ✶on  "
-set to_chars=" +TCFLR"
+set flag_chars="✓!✗❎↩ ★on  "
+set to_chars="∄↔∃∈↤∀R"
 
 set mail_check_stats
 
