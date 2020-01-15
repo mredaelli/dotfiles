@@ -1,0 +1,10 @@
+#!/bin/sh
+
+file="${1}"
+shift
+cmd="${@}"
+
+t=$(mktemp /tmp/XXXXXXXXXX)
+cp "$file" "$t"
+cmd=${cmd/FILE/"${t}"}
+/bin/sh -c "${cmd} ; rm $t" &
