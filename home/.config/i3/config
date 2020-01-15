@@ -124,5 +124,6 @@ exec_always --no-startup-id ~/bin/wallpaper
 exec --no-startup-id nextcloud 
 exec --no-startup-id flameshot
 exec --no-startup-id light -I
+exec --no-startup-id dunst
 
 # exec --no-startup-id xautolock -detectsleep -time 5 -locker '~/bin/fuzzy_lock.sh' -notify 30 -notifier "notify-send -u critical -t 30000 -- 'LOCKING screen in 30 seconds'"
