@@ -31,8 +31,14 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 nmap <leader>rn <Plug>(coc-rename)
 
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
 xmap <leader>p  <Plug>(coc-format-selected)
-nmap <leader>P  <Plug>(coc-format-selected)
+nmap <leader>p  :Format<CR>
+
+command! -nargs=0 OR   :call CocAction('runCommand', 'editor.action.organizeImport')
+nmap <leader>i  :OR<CR>
 
 xmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -40,8 +46,6 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <leader>af  <Plug>(coc-fix-current)
 
-" Use `:Format` to format current buffer
-command! -nargs=0 Format :call CocAction('format')
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)

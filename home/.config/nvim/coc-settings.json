@@ -27,5 +27,17 @@
       "rootPatterns": ["build.sc"],
       "filetypes": ["scala"]
     }
-  }
+  },
+"diagnostic-languageserver.filetypes": {
+  "sh": "shellcheck"
+},
+//"diagnostic-languageserver.formatFiletypes": {
+ // "sh": "shfmt"
+//}
+//"diagnostic-languageserver.formatters": {
+  // `diagnostic-languageserver.formatFiletypes`
+ // "shfmt": {
+  //  "command": "shfmt",
+  //}
+//},
 }

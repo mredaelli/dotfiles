@@ -37,6 +37,13 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'metakirby5/codi.vim', {'for': ['python'] }
    Plug 'idanarye/vim-vebugger', {'for': ['python'] }
 
+   " Typescript
+   if executable("tsc")
+     Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
+     Plug 'Quramy/vim-js-pretty-template', {'for': ['typescript']}
+     Plug 'HerringtonDarkholme/yats.vim', {'for': ['typescript']}
+   endif
+
    " Go
    if executable("go")
      Plug 'fatih/vim-go', { 'for': ['go'] }
