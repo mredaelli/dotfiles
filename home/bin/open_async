@@ -1,10 +1,18 @@
 #!/bin/sh
 
 file="${1}"
+file_ext="${file##*.}"
+if [[ "$file" == "$file_ext" ]]; then
+  file_ext=
+else
+  file_ext=".${file_ext}"
+fi
+
 shift
 cmd="${@}"
 
-t=$(mktemp /tmp/XXXXXXXXXX)
+t=$(mktemp /tmp/XXXXXXXXXX --suffix="${file_ext}")
 cp "$file" "$t"
 cmd=${cmd/FILE/"${t}"}
+
 /bin/sh -c "${cmd} ; rm $t" &
