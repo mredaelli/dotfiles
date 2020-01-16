@@ -4,7 +4,7 @@ image/*;  open_async %s "sxiv FILE"; test=test -n "$DISPLAY"
 
 text/plain; sed -E "s^https?://[a-zA-Z0-9_-?&/.=]*^<link>^g" %s | sed -E "s/^\\s+$//g" | less -s;
 
-text/html; firefox %s; description=HTML Text; test=test -n "$DISPLAY";  nametemplate=%s.html
+text/html; open_async %s "firefox FILE" keep; description=HTML Text; test=test -n "$DISPLAY";  nametemplate=%s.html
 
 text/html;\
 	w3m -T text/html -I %{charset} -o display_link=no\
@@ -13,24 +13,24 @@ text/html;\
 	copiousoutput
 
 
-application/pdf; open_async %s zathura FILE; test=test -n "$DISPLAY"
+application/pdf; open_async %s "zathura FILE"; test=test -n "$DISPLAY"
 
 text/calendar; khal import -a personal '%s'
 application/ics; khal import -a personal '%s'
 
-audio/*;                        open_async %s vlc FILE
-video/*;                        open_async %s vlc FILE
+audio/*;                        open_async %s "vlc FILE"
+video/*;                        open_async %s "vlc FILE"
 
-application/excel;                        open_async %s libreoffice FILE
-application/ms-word;                      open_async %s libreoffice FILE
-application/msword;                       open_async %s libreoffice FILE
-application/mspowerpoint;                 open_async %s libreoffice FILE
-application/powerpoint;                   open_async %s libreoffice FILE
-application/vnd.ms-powerpoint;            open_async %s libreoffice FILE
-application/vnd.ms-excel;                 open_async %s libreoffice FILE
-application/vnd.ms-word;                  open_async %s libreoffice FILE
-application/vnd.oasis.opendocument.text;  open_async %s libreoffice FILE
-application/vnd.openxmlformats-officedocument.wordprocessingml.document; open_async %s libreoffice FILE
-application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; open_async %s libreoffice FILE
-application/x-excel;                      open_async %s libreoffice FILE
-application/x-msexcel;                    open_async %s libreoffice FILE
+application/excel;                        open_async %s "libreoffice FILE"
+application/ms-word;                      open_async %s "libreoffice FILE"
+application/msword;                       open_async %s "libreoffice FILE"
+application/mspowerpoint;                 open_async %s "libreoffice FILE"
+application/powerpoint;                   open_async %s "libreoffice FILE"
+application/vnd.ms-powerpoint;            open_async %s "libreoffice FILE"
+application/vnd.ms-excel;                 open_async %s "libreoffice FILE"
+application/vnd.ms-word;                  open_async %s "libreoffice FILE"
+application/vnd.oasis.opendocument.text;  open_async %s "libreoffice FILE"
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; open_async %s "libreoffice FILE"
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; open_async %s "libreoffice FILE"
+application/x-excel;                      open_async %s "libreoffice FILE"
+application/x-msexcel;                    open_async %s "libreoffice FILE"

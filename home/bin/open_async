@@ -1,6 +1,9 @@
 #!/bin/sh
 
 file="${1}"
+cmd="${2}"
+keep_file="${3}"
+
 file_ext="${file##*.}"
 if [[ "$file" == "$file_ext" ]]; then
   file_ext=
@@ -8,11 +11,13 @@ else
   file_ext=".${file_ext}"
 fi
 
-shift
-cmd="${@}"
-
 t=$(mktemp /tmp/XXXXXXXXXX --suffix="${file_ext}")
 cp "$file" "$t"
-cmd=${cmd/FILE/"${t}"}
 
-/bin/sh -c "${cmd} ; rm $t" &
+if [[ $cmd =~ "FILE" ]]; then
+  cmd=${cmd/FILE/"${t}"}
+else
+  cmd="${cmd} ${t}"
+fi
+
+/bin/sh -c "${cmd} ; [ ! -v $keep_file ] || rm $t" &
