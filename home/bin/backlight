@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+instruction=${1}
+
+base="/sys/class/backlight"
+device="$(ls "${base}" -1 | head)"
+
+if [ -z "$device" ]; then
+   exit 1
+fi
+
+device="${base}/${device}"
+max=$(cat "$device/max_brightness")
+step=$(( $max / 10 ))
+current=$(cat "$device/brightness")
+
+case $instruction in
+increase)
+   new=$(($current+$step))
+   new=$(( $new < $max ? $new : $max ))
+   ;;
+decrease)
+   new=$(($current-$step))
+   new=$(( $new > 0 ? $new : 0 ))
+   ;;
+*)
+  exit 1
+esac
+
+sudo sh -c "echo $new > $device/brightness"
+
+echo $(( $new*100/$max ))%
