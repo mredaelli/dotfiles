@@ -34,3 +34,4 @@ application/vnd.openxmlformats-officedocument.wordprocessingml.document; open_as
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; open_async %s "libreoffice FILE"
 application/x-excel;                      open_async %s "libreoffice FILE"
 application/x-msexcel;                    open_async %s "libreoffice FILE"
+application/vnd.openxmlformats-officedocument.wordprocessingml.template; open_async %s "libreoffice FILE"

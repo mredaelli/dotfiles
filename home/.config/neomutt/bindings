@@ -29,7 +29,7 @@ macro index <F9> "<change-folder-readonly>~/Maildir/search" \
                                        "mu find results"
 
 macro index \\ "<shell-escape>mu4mutt<enter><change-folder-readonly>~/Maildir/search<enter>"  "mu find and show"
-
+macro pager \\ "<exit>\\"
 
 # Editor
 bind editor <Tab> complete-query
