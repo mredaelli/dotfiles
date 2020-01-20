@@ -79,8 +79,8 @@
 [shortcuts]
     # available modifiers are 'ctrl', 'mod1' (the alt-key), 'mod2', 'mod3'
     # and 'mod4' (windows-key)
-    close = mod4+mod1+space
-    #close_all = mod4+mod1+space
+    #close = mod4+mod1+space
+    close_all = mod4+mod1+space
     history = mod4+mod1+n
     context = mod4+mod1+c
 
