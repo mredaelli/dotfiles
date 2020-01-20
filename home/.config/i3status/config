@@ -5,6 +5,7 @@ general {
 
 order += "disk /"
 order += "disk /home"
+order += "memory"
 order += "wireless _first_"
 order += "ethernet _first_"
 order += "path_exists VPN"
@@ -19,17 +20,24 @@ order += "tztime local"
 #order += "cpu_temperature 0"
 
 cpu_usage {
-  format = 'Cpu: %usage'
+  format = '⚙ %usage'
+  separator=false
+}
+
+memory {
+ format = "𐂇 %used"
+ threshold_degraded = "10%"
+ format_degraded = "𐂇 %free"
 }
 
 wireless _first_ {
-        format_up = "%quality at %essid, %bitrate"
-        format_down = "W: ✘"
+        format_up = "📶 %quality at %essid, %bitrate"
+        format_down = "📶 ✘"
 }
 
 ethernet _first_ {
-        format_up = "E: %ip (%speed)"
-        format_down = "E: ✘" 
+        format_up = "⛖ %ip"
+        format_down = "⛖ ✘" 
 }
 
 battery 0 {
@@ -62,7 +70,7 @@ tztime local {
 }
 
 load {
-	format = "L: %1min %5min"
+	format = "%1min %5min"
 }
 
 cpu_temperature 0 {
@@ -71,13 +79,14 @@ cpu_temperature 0 {
 }
 
 disk "/" {
-	format = "/ %avail"
+	format = "√ %avail"
 	low_threshold = 800
 	threshold_type = mbytes_avail
 	prefix_type = binary
+    separator=false
 }
 disk "/home" {
-	format = "/home %free"
+	format = "⌂ %free"
 	low_threshold = 1
 	threshold_type = gbytes_avail
 	prefix_type = binary

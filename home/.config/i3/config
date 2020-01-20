@@ -12,6 +12,7 @@ bindsym $mod+Shift+d exec kill $(pgrep dunst) && exec dunst
 
 bindsym $mod+Ctrl+l exec ~/bin/fuzzy_lock.sh
 bindsym $mod+Ctrl+r reload
+bindsym $mod+Shift+Ctrl+r restart
 bindsym $mod+Ctrl+n exec sh -c '[[ "$(nmcli network)" == "enabled" ]] && nmcli network off || nmcli network on'
 bindsym $mod+Ctrl+1 exec one_monitor.sh && notify-send 'Switched to one monitor'
 bindsym $mod+Ctrl+2 exec two_monitors.sh && notify-send 'Switched to one monitor'
