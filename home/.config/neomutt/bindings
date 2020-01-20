@@ -29,7 +29,7 @@ macro index <F9> "<change-folder-readonly>~/Maildir/search" \
                                        "mu find results"
 
 macro index \\ "<shell-escape>mu4mutt<enter><change-folder-readonly>~/Maildir/search<enter>"  "mu find and show"
-
+macro pager \\ "<exit>\\"
 
 # Editor
 bind editor <Tab> complete-query
@@ -77,7 +77,7 @@ macro index,pager o-  "<change-folder>-<enter><buffy-list><check-stats>" "open l
 macro index,pager oj "<change-folder>+spam<enter><buffy-list><check-stats>"      "open junk mail (spam)"
 macro index,pager or "<change-folder>^<enter><buffy-list><check-stats>"          "refresh folder"
 
-bind index \Cm change-folder
+macro index o<Space> "<change-folder>=" "open folder"
 macro index M "<change-folder>?<Tab>" "Go back to the list of mailboxes"
 
 macro index a "_mr_cn<tag-prefix><save-message>=Archive<enter><sync-mailbox>_cy" "Archive"
@@ -92,6 +92,8 @@ macro index ms "_mr_cn<tag-prefix><save-message><<enter><sync-mailbox>_cy" "move
 macro pager ms "qms" 
 macro index mj "_mr_cn<tag-prefix><save-message>+spam<enter><sync-mailbox>_cy" "move to spam"
 macro pager mj "qmj" 
+macro index m<Space> "_mr<tag-prefix><save-message>=" "move to a folder"
+macro pager m<Space> "qmm" 
 
 
 # Limit messages quickly using ' + key.
