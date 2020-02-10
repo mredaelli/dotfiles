@@ -18,9 +18,10 @@ call plug#begin('~/.local/share/nvim/plugged')
    " Plug 'sodapopcan/vim-twiggy'
 
    " Text
-   Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
-   Plug 'junegunn/limelight.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
-   Plug 'reedes/vim-pencil', { 'for': ['markdown', 'pandoc', 'mail' ] }
+   " Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
+   Plug 'bilalq/lite-dfm', { 'for': ['markdown', 'pandoc', 'mail' ] }
+   " Plug 'junegunn/limelight.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
+   " Plug 'reedes/vim-pencil', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'vim-scripts/UniCycle', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'reedes/vim-textobj-quote', { 'for': ['markdown', 'pandoc', 'mail' ] }
    Plug 'reedes/vim-textobj-sentence', { 'for': ['markdown', 'pandoc', 'mail' ] }
@@ -92,6 +93,10 @@ call plug#begin('~/.local/share/nvim/plugged')
    " Plug 'ctrlpvim/ctrlp.vim'
    Plug 'junegunn/fzf'
    Plug 'junegunn/fzf.vim'
+   "Plug 'ryanoasis/vim-devicons'
+   Plug 'yuki-ycino/fzf-preview.vim'
+
+   "Plug 'bogado/file-line'
 
    " Grepping
    Plug 'mileszs/ack.vim'

@@ -109,8 +109,10 @@ if type -q any-nix-shell
    any-nix-shell fish | source
 end
 
-echo
-echo  Remember using tig yank jrnl haxor-news rtv thefuck howdoi buku fzf hub newsboat
-echo
-task list
-echo
+if status --is-interactive
+  echo
+  echo  Remember using tig yank jrnl haxor-news rtv thefuck howdoi buku fzf hub newsboat
+  echo
+  task list
+  echo
+end

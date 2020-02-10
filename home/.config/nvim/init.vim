@@ -82,7 +82,7 @@ let g:pear_tree_ft_disabled = ['text', 'markdown', 'mail']
 
 " Use autocmds to check your text automatically and keep the highlighting
 " up to date (easier):
-au FileType markdown,text,tex,mail DittoOn  " Turn on Ditto's autocmds
+" au FileType markdown,text,tex,mail DittoOn  " Turn on Ditto's autocmds
 " nmap <leader>di <Plug>ToggleDitto      " Turn Ditto on and off
 
 " " If you don't want the autocmds, you can also use an operator to check
@@ -117,14 +117,14 @@ augroup LargeFile
                 \ endif
 augroup END
 
-augroup Prose
-  autocmd!
-  autocmd FileType markdown,mkd,mail call pencil#init()
-                            \ | call textobj#quote#init()
-                            \ | call textobj#sentence#init()
-                            " \ | call lexical#init()
-                            " \ | call litecorrect#init()
-augroup END
+" augroup Prose
+"   autocmd!
+"   autocmd FileType markdown,mkd,mail call pencil#init()
+"                             \ | call textobj#quote#init()
+"                             \ | call textobj#sentence#init()
+"                             " \ | call lexical#init()
+"                             " \ | call litecorrect#init()
+" augroup END
 
 " Airline
 let g:airline_powerline_fonts = 1

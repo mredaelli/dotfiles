@@ -32,9 +32,9 @@ nnoremap <leader>cd :cd %:p:h<CR>
 nnoremap <silent> <CR> :nohls<CR><CR>
 
 " fzf
-nnoremap <Leader>f :GFiles<CR>
-nnoremap <Leader>F :Files<CR>
-nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>f :FzfPreviewGitFiles<CR>
+nnoremap <Leader>F :FzfPreviewProjectFiles<CR>
+nnoremap <Leader>b :FzfPreviewBuffers<CR>
 nnoremap <Leader>h :History<CR>
 nnoremap <Leader>t :BTags<CR>
 nnoremap <Leader>a :Rg<Space>

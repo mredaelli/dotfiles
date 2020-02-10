@@ -31,7 +31,7 @@ memory {
 }
 
 wireless _first_ {
-        format_up = "📶 %quality at %essid, %bitrate"
+        format_up = "📶 %quality at %essid, %ip"
         format_down = "📶 ✘"
 }
 
