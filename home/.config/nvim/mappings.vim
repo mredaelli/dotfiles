@@ -37,7 +37,7 @@ nnoremap <Leader>F :FzfPreviewProjectFiles<CR>
 nnoremap <Leader>b :FzfPreviewBuffers<CR>
 nnoremap <Leader>h :History<CR>
 nnoremap <Leader>t :BTags<CR>
-nnoremap <Leader>a :Rg<Space>
+nnoremap <Leader>r :Rg<Space>
 nnoremap <Leader>C :Commands<CR>
 
 nnoremap <Leader>gf :Gfetch<CR>
