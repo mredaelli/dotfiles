@@ -17,10 +17,4 @@ pkill -u "$USER" -USR1 dunst
 #xset s off dpms 0 10 0
 
 # Lock screen displaying this image.
-i3lock -n -i $TMP 
-
-#xset s off -dpms
-
-pkill -u "$USER" -USR2 dunst
-
-rm $TMP
+i3lock -i $TMP
