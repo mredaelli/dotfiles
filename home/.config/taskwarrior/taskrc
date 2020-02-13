@@ -1,0 +1,33 @@
+data.location=~/.task
+
+include ~/.config/taskwarrior/holidays.de-CH.rc
+include ~/.config/taskwarrior/dark-yellow-green.theme
+
+active.indicator=*
+recurrence.indicator=🗘
+tag.indicator=🏷
+dependency.indicator=
+
+weekstart=Monday
+
+due=7
+
+# get rid of header (TASKRC override:)
+verbose=blank,footnote,label,new-id,affected,edit,special,project,sync,unwait
+
+calendar.details=full
+displayweeknumber=no
+
+# monthsperline=3
+
+report.next.description=Stuff to do, either important or soon
+report.next.sort=urgency+,due-,priority+,project+
+report.next.columns=id,urgency.integer,priority,depends,recur.indicator,due.relative,description.count,tags,project,start,end
+report.next.labels=Id,↯,!,,🗘,~@,Desc,⚑,Proj,|-,-|
+report.next.filter=status:pending limit:page (due.before:1m or urgency.above:5)
+
+report.todo.description=Stuff to do
+report.todo.sort=urgency+,due-,priority+,project+
+report.todo.columns=id,urgency.integer,priority,depends,recur.indicator,due.relative,description.count,tags,project,start,end
+report.todo.labels=Id,↯,!,,🗘,~@,Desc,⚑,Proj,|-,-|
+report.todo.filter=status:pending limit:page

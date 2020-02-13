@@ -109,10 +109,12 @@ if type -q any-nix-shell
    any-nix-shell fish | source
 end
 
+set -x TASKRC ~/.config/taskwarrior/taskrc
+
 if status --is-interactive
   echo
   echo  Remember using tig yank jrnl haxor-news rtv thefuck howdoi buku fzf hub newsboat
   echo
-  task list
+  task next
   echo
 end
