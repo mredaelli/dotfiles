@@ -1,0 +1,69 @@
+unbind-key t
+unbind-key R
+unbind-key r
+unbind-key l
+unbind-key h
+unbind-key j
+unbind-key k
+unbind-key l
+unbind-key V
+unbind-key d
+unbind-key ,
+unbind-key A
+unbind-key Q
+unbind-key C
+unbind-key J
+unbind-key K
+unbind-key ^K
+unbind-key ^T
+unbind-key ^R
+unbind-key ^D
+unbind-key ^V
+unbind-key ^G
+unbind-key v
+
+bind-key ; macro-prefix
+
+bind-key t select-tag
+bind-key T clear-tag
+bind-key ^F clear-filter
+bind-key u select-filter
+bind-key F set-filter
+bind-key SPACE open
+bind-key ENTER open
+bind-key q quit
+bind-key ESC quit
+bind-key ^S purge-deleted
+bind-key | pipe-to
+bind-key b bookmark
+bind-key a toggle-show-read-feeds
+bind-key r toggle-article-read
+bind-key R mark-feed-read
+bind-key U reload feedlist
+bind-key ^U reload-all feedlist
+
+bind-key D view-dialogs
+bind-key ESC close-dialog
+bind-key RIGHT next-dialog
+bind-key LEFT prev-dialog 
+
+bind-key s sort
+bind-key w save
+
+bind-key j down 
+bind-key k up 
+bind-key ^F pagedown 
+bind-key ^B pageup 
+bind-key g home 
+bind-key G end 
+
+bind-key J next-feed articlelist
+bind-key K prev-feed articlelist
+bind-key d delete-article articlelist
+bind-key l show-urls articlelist
+
+bind-key J next article
+bind-key K prev article
+bind-key d delete-article article
+bind-key l show-urls article
+bind-key h toggle-source-view

@@ -1,4 +1,5 @@
-#!/bin/sh -e
+#!/bin/sh
+set -e
 
 TMP=/tmp/screenshot.png
 
@@ -14,7 +15,6 @@ mogrify -scale 10% -scale 1000% $TMP
 # stop notifications while locked
 pkill -u "$USER" -USR1 dunst
 
-#xset s off dpms 0 10 0
-
 # Lock screen displaying this image.
-i3lock -i $TMP
+# Afterwards, resume dunst
+( i3lock -i $TMP -n; pkill -u "$USER" -USR2 dunst; rm $TMP) &

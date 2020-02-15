@@ -1,1 +1,7 @@
 "query:Unread Articles:unread = \"yes\""
+"query:Uaar:(tags # \"Humanism\") or (tags # \"News\" and (content =~ \"religion\" or content =~ \"humanism\" or content =~ \"humanist\"))"
+
+# Fields:
+# title link author content date guid unread enclosure_url enclosure_type flags age
+# articleindex feedtitle description feedlink feeddate rssurl unread_count
+# total_count tags feedindex

@@ -113,7 +113,7 @@ set -x TASKRC ~/.config/taskwarrior/taskrc
 
 if status --is-interactive
   echo
-  echo  Remember using tig yank jrnl haxor-news rtv thefuck howdoi buku fzf hub newsboat
+  echo  Remember using tig thefuck howdoi buku fzf newsboat broot
   echo
   task next
   echo

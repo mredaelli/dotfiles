@@ -18,3 +18,5 @@ setlocal textwidth=72
 " Limelight
 " HardPencil
 UniCycleOn
+
+execute ":startinsert"
