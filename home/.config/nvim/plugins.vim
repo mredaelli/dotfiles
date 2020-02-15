@@ -52,7 +52,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 
    " Python
    if executable("python")
-     Plug 'kh3phr3n/python-syntax', { 'for': ['python'] }
+     Plug 'numirias/semshi', { 'for': ['python'], 'do': ':UpdateRemotePlugins'}
+     " Plug 'kh3phr3n/python-syntax', { 'for': ['python'] }
      Plug 'bps/vim-textobj-python', { 'for': ['python'] }
    endif
 
