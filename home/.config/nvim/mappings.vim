@@ -75,6 +75,9 @@ command! -bang Gbranch call fzf#run({
 nmap <C-_>  gcc
 vmap <C-_>  gc
 
+nnoremap <C-k> <C-y>
+nnoremap <C-j> <C-e>
+
 " shifting text with arrows in visual mode
 vmap <A-Left> <gv
 vmap <A-Right> >gv

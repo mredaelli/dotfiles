@@ -1,7 +1,7 @@
 set modeline
 set cursorline
 set hidden
-set number
+set relativenumber
 
 set colorcolumn=88
 
@@ -162,8 +162,9 @@ endif
 if exists("##TermOpen")
     augroup term_settings
         autocmd!
-        autocmd TermOpen * setlocal norelativenumber nonumber
+        autocmd TermOpen * setlocal norelativenumber nonumber scrollback=100000
         autocmd TermOpen * startinsert
+        autocmd TermOpen * setlocal 
     augroup END
 endif
 
