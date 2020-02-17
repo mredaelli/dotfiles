@@ -84,6 +84,7 @@ bindsym $mod+Control+Up resize shrink height 10 px or 10 ppt
 bindsym $mod+Control+Right resize grow width 10 px or 10 ppt
 
 for_window [urgent=latest] focus
+for_window [window_role="GtkFileChooserDialog"] resize set 800 600, move position center
 
 bindsym $mod+Escape mode "$mode_system"
 set $mode_system (l)ock, (e)xit, (s)uspend, (r)eboot, (p)oweroff

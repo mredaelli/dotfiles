@@ -19,4 +19,5 @@ setlocal textwidth=72
 " HardPencil
 UniCycleOn
 
+execute ":s/^/\r/"
 execute ":startinsert"

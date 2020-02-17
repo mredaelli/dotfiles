@@ -36,20 +36,22 @@ articlelist-format "%f %t %> %?T?|%6T| ?%D %4i"
 define-filter "!uaar" "tags !# \"Humanism\" and tags !# \"News\""
 
 notify-always no
-notify-format "newsbeuter: %d new unread articles in %D feeds"
+notify-format "newsboat: %d new unread articles in %D feeds"
 notify-program notify-send
 notify-xterm yes
 notify-screen yes
 
 include bindings
 
-external-url-viewer "/usr/bin/urlview"
+external-url-viewer "urlscan"
 pager internal
 # html-renderer "/usr/bin/elinks -dump" 
 player vlc
 browser w3m
-macro V set browser "firefox" ; open-in-browser ; set browser "w3m"
-macro P set browser vlc; open-in-browser ; set browser w3m
+macro v set browser "firefox" ; open-in-browser ; set browser "w3m"
+macro p set browser vlc; open-in-browser ; set browser w3m
+macro f set browser "firefox"
+macro F set browser "w3m"
 
 color background          color236   default
 color listnormal          color248   default
