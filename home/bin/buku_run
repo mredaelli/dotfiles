@@ -252,7 +252,7 @@ addTags () {
 }
 
 parseBuku () {
-  echo "$(buku --nc -p | gawk -v max="$max_str_width" -v type="$display_type" '
+  echo "$(buku --nc -p |grep -v 'waiting for input' | gawk -v max="$max_str_width" -v type="$display_type" '
 BEGIN {
   RS=""
   FS="\n"
