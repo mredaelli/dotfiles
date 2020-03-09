@@ -1,5 +1,5 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["rust", "python"],
+  "coc.preferences.formatOnSaveFiletypes": ["rust", "python", "scala"],
 
   "rust-client.channel": "stable",
   "rust-client.disableRustup": true,
@@ -8,7 +8,7 @@
   "python.pythonPath": "./env/python",
   "python.formatting.provider": "black",
   "python.formatting.blackPath": "./env/black",
-  "python.linting.mypyEnabled": true,
+  "python.linting.mypyEnabled": false,
   "python.linting.mypyPath": "./env/mypy",
   "python.linting.pylintEnabled": false,
   "python.linting.pylamaEnabled": true,

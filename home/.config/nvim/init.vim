@@ -1,6 +1,7 @@
 set modeline
 set cursorline
 set hidden
+set number
 set relativenumber
 
 set colorcolumn=88
@@ -116,6 +117,13 @@ augroup LargeFile
                         \ set eventignore-=FileType |
                 \ endif
 augroup END
+
+augroup vimrc_todo
+    au!
+    au Syntax * syn match MyTodo /\v<(FIXME|NOTE|TODO|OPTIMIZE):/
+          \ containedin=.*Comment,vimCommentTitle
+augroup END
+hi def link MyTodo Todo
 
 " augroup Prose
 "   autocmd!

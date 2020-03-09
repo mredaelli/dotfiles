@@ -37,7 +37,7 @@ call plug#begin('~/.local/share/nvim/plugged')
  " Development
   Plug 'metakirby5/codi.vim', {'for': ['python'] }
   Plug 'idanarye/vim-vebugger', {'for': ['python'] }
-  Plug 'wellle/context.vim'
+  " Plug 'wellle/context.vim'
 
   " Typescript
   if executable("tsc")
@@ -85,7 +85,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   if executable('R')
     Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
   endif
-  Plug 'wellle/context.vim'
   Plug 'LnL7/vim-nix', { 'for': 'nix' }
   Plug 'dag/vim-fish', { 'for': 'fish' }
   Plug 'nathangrigg/vim-beancount', { 'for': 'beancount' }
@@ -97,8 +96,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'junegunn/fzf.vim'
   "Plug 'ryanoasis/vim-devicons'
   Plug 'yuki-ycino/fzf-preview.vim'
-
-  "Plug 'bogado/file-line'
 
   " Grepping
   Plug 'mileszs/ack.vim'

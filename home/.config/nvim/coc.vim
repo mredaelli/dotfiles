@@ -25,6 +25,9 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
 nmap <C-c> :CocCommand<CR>
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>

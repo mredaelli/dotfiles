@@ -15,6 +15,8 @@ am = "📬"
 am_or_rebase = "📬~>"
 
 [git_status]
+prefix = ""
+suffix = " "
 conflicted = "⚔️ "
 staged="✔️" 
 renamed = "🆎"
