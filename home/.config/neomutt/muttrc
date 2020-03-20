@@ -1,12 +1,13 @@
 source ~/.config/neomutt/unbind
 source ~/.config/neomutt/bindings
 
-source ~/.config/neomutt/dracula.muttrc
-source ~/.config/neomutt/solarized.muttrc
+source ~/.config/neomutt/colors.muttrc
 source ~/.config/neomutt/fast
 
 set signature = ~/.config/neomutt/signature
 set mailcap_path= ~/.config/neomutt/mailcap
+
+alternates "^.*@typish.io"
 
 
 set quit=ask-yes                    
@@ -46,6 +47,7 @@ set menu_scroll            # scroll in menus
 set wrap=80
 set tilde                  # show tildes like in vim
 unset markers              # no ugly plus signs
+set help=no
 
 set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 set forward_format="Fw: %s"
@@ -63,7 +65,7 @@ auto_view text/html application/text application/pdf
 
 # Index View Options ---------------------------------
 set date_format = "%y-%m-%d %H:%M"
-set index_format = "%S%T%?M?%2M&   ? %D %-20.20F  %s %*  ┊ %4c%?X?📎%X&   ?"
+set index_format = "%S%?M?%2M&   ? %D %-20.20F  %s %*  %T %4c%?X?📎%X&   ?"
 set sort = threads                         # like gmail
 set sort_aux = reverse-last-date-received  # like gmail
 set uncollapse_jump                        # don't collapse on an unread message
