@@ -56,7 +56,7 @@ set sidebar_short_path
 set sidebar_delim_chars="/"
 set sidebar_folder_indent
 set sidebar_indent_string=" "
-set sidebar_visible
+unset sidebar_visible
 set sidebar_format="%B%* %N" 
 set sidebar_width = 20
 
