@@ -218,48 +218,48 @@ Channel uaar-trash
 
 
 
-IMAPAccount international
-Host imap.gmail.com
-User international@uaar.it
-PassCmd "secret-tool lookup user international domain uaar.it"
-SSLType IMAPS
-AuthMechs LOGIN
+# IMAPAccount international
+# Host imap.gmail.com
+# User international@uaar.it
+# PassCmd "secret-tool lookup user international domain uaar.it"
+# SSLType IMAPS
+# AuthMechs LOGIN
 
-IMAPStore international-remote
-Account international
+# IMAPStore international-remote
+# Account international
 
-MaildirStore international-local
-Path ~/Maildir/international/
-Inbox ~/Maildir/international/inbox
-Subfolders Verbatim
+# MaildirStore international-local
+# Path ~/Maildir/international/
+# Inbox ~/Maildir/international/inbox
+# Subfolders Verbatim
 
-Channel international-inbox
-Master :international-remote:
-Slave :international-local:
-Pattern * ![Gmail]* !drafts !spam !sent !trash
+# Channel international-inbox
+# Master :international-remote:
+# Slave :international-local:
+# Pattern * ![Gmail]* !drafts !spam !sent !trash
 
-Channel international-spam
-Master :international-remote:"[Gmail]/Spam"
-Slave :international-local:spam
+# Channel international-spam
+# Master :international-remote:"[Gmail]/Spam"
+# Slave :international-local:spam
 
-Channel international-draft
-Master :international-remote:"[Gmail]/Drafts"
-Slave :international-local:draft
+# Channel international-draft
+# Master :international-remote:"[Gmail]/Drafts"
+# Slave :international-local:draft
 
-Channel international-sent
-Master :international-remote:"[Gmail]/Sent Mail"
-Slave :international-local:sent
+# Channel international-sent
+# Master :international-remote:"[Gmail]/Sent Mail"
+# Slave :international-local:sent
 
-Channel international-trash
-Master :international-remote:"[Gmail]/Trash"
-Slave :international-local:trash
+# Channel international-trash
+# Master :international-remote:"[Gmail]/Trash"
+# Slave :international-local:trash
 
-Group international
-Channel international-inbox
-Channel international-spam
-Channel international-sent
-Channel international-draft
-Channel international-trash
+# Group international
+# Channel international-inbox
+# Channel international-spam
+# Channel international-sent
+# Channel international-draft
+# Channel international-trash
 
 
 
