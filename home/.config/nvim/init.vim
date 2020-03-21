@@ -1,6 +1,7 @@
 set modeline
 set cursorline
 set hidden
+set number
 set relativenumber
 set number
 
@@ -118,6 +119,13 @@ augroup LargeFile
                 \ endif
 augroup END
 
+augroup vimrc_todo
+    au!
+    au Syntax * syn match MyTodo /\v<(FIXME|NOTE|TODO|OPTIMIZE):/
+          \ containedin=.*Comment,vimCommentTitle
+augroup END
+hi def link MyTodo Todo
+
 " augroup Prose
 "   autocmd!
 "   autocmd FileType markdown,mkd,mail call pencil#init()
@@ -174,5 +182,5 @@ let g:jellybeans_use_term_italics = 1
 colorscheme jellybeans
 
 " whitespace
-highlight ExtraWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=red guibg=ivory4
 autocmd Syntax * syn match ExtraWhitespace /\s\+$/ containedin=ALL
