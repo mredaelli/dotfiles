@@ -181,5 +181,5 @@ let g:jellybeans_use_term_italics = 1
 colorscheme jellybeans
 
 " whitespace
-highlight ExtraWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=red guibg=ivory4
 autocmd Syntax * syn match ExtraWhitespace /\s\+$/ containedin=ALL
