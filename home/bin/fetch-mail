@@ -5,7 +5,7 @@ if pgrep mbsync > /dev/null; then
    exit 0
 fi
 
-wget -q --spider http://google.com
+curl http://google.com > /dev/null 2>&1
 
 if [ $? -eq 0 ]; then
   mbsync -a
