@@ -2,6 +2,7 @@ set modeline
 set cursorline
 set hidden
 set relativenumber
+set number
 
 set colorcolumn=88
 
