@@ -26,8 +26,14 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 highlight CocHighlightText   guibg=ivory4 ctermbg=white
+
 " Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
+function! HighlightIfDefined()
+  if exists("CocActionAsync")
+    CocActionAsync("highlight")
+  endif
+endfunction
+autocmd CursorHold * silent call HighlightIfDefined()
 
 
 nmap <C-c> :CocCommand<CR>

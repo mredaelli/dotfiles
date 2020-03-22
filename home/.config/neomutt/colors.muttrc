@@ -1,15 +1,22 @@
 # vim: filetype=neomuttrc
 # curl -s https://gist.githubusercontent.com/HaleTom/89ffe32783f89f403bba96bd7bcd1263/raw/ | bash
 
+uncolor index *
+uncolor body *
+uncolor header *
+
 color normal        color252        black
-color error         color88         color235
-color tilde         color81         color233
-color message       color82         color235
-color markers       brightcolor232  color222
-color attachment    brightcolor165  color235
+color error         color88         black
+color tilde         color81         black
+color message       color82         black
+color markers       brightcolor232  black
+color attachment    brightcolor165  black
 color search        color232        color154
 color indicator     brightcolor232  color154
-color tree          brightcolor165  color233
+color tree          default  default
+color bold          red black
+color underline     green black
+color prompt        white black
 
 # Status
 color status        brightcolor113  color18
@@ -22,13 +29,13 @@ color status        brightblack  color185    "^> .+"
 color index         color195        default      "~A"
 color index_subject color222        default      "~A"
 color index_author  color153        default      "~A"
+color index_flags   color124        default      "~z>500K"
 color index_flags   black           color226     "~N|~U"
+color index_flags   black           white     "~Q"
+# color index_tag
 # color index_date    color184        default
 # color index_collapsed
-# color index_label
 # color index_number
-# color index_size
-# color index_tag
 # color index_tags
 
 color index         brightcolor195        color88      "~D"
@@ -39,6 +46,8 @@ color index_subject brightblack        color228      "~T"
 color index_author  brightblack        color228      "~T"
 # color prompt
 
+# Sidebar
+
 # color sidebar_divider
 # color sidebar_flagged
 # color sidebar_highlight
@@ -47,31 +56,35 @@ color index_author  brightblack        color228      "~T"
 # color sidebar_ordinary
 # color sidebar_spoolfile
 
+# Pager
+
+color hdrdefault    white         black
+color header        color100      default    "Subject:"
+color header        color75       default    "Cc:"
+color header        color81       default    "To:"
 
 # Body
 
-color quoted        color39         color235
-color quoted1       color250        color235
-color quoted2       color246         color235
-color quoted3       color242        color235
-color quoted4       color238        color235
+color quoted        color247        color234
+color quoted1       color244        color234
+color quoted2       color241        color234
+color quoted3       color239        color234
+color quoted4       color239        color234
 
-color signature     color81         color235
+color signature       color81         color235
 
-color header        color100      default    "Subject"
-color header        color81       default    "Cc"
-color header        color75       default    "To"
-
-color body          color39   color233        "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
-# and a heavy handed email regex
-color body          color39   color233        "((@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\]),)*@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\]):)?[0-9a-z_.+%$-]+@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\])"
+# urls and emails
+color body     color39   default        "([a-z][a-z0-9+-]*://(((([a-z0-9_.!~*'();:&=+$,-]|%[0-9a-f][0-9a-f])*@)?((([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?|[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+)(:[0-9]+)?)|([a-z0-9_.!~*'()$,;:@&=+-]|%[0-9a-f][0-9a-f])+)(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*(/([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*(;([a-z0-9_.!~*'():@&=+$,-]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?(#([a-z0-9_.!~*'();/?:@&=+$,-]|%[0-9a-f][0-9a-f])*)?|(www|ftp)\\.(([a-z0-9]([a-z0-9-]*[a-z0-9])?)\\.)*([a-z]([a-z0-9-]*[a-z0-9])?)\\.?(:[0-9]+)?(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*(/([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*(;([-a-z0-9_.!~*'():@&=+$,]|%[0-9a-f][0-9a-f])*)*)*)?(\\?([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?(#([-a-z0-9_.!~*'();/?:@&=+$,]|%[0-9a-f][0-9a-f])*)?)[^].,:;!)? \t\r\n<>\"]"
+color body          color39   default        "((@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\]),)*@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\.[0-9]?[0-9]?[0-9]\\]):)?[0-9a-z_.+%$-]+@(([0-9a-z-]+\\.)*[0-9a-z-]+\\.?|#[0-9]+|\\[[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\.[0-2]?[0-9]?[0-9]\\])"
 
 # markdown
 color body          brightdefault            default         "(^|[[:space:][:punct:]])_[^_]+_([[:space:][:punct:]]|$)"
 color body          brightdefault            default         "(^|[[:space:][:punct:]])/[^/]+/([[:space:][:punct:]]|$)"
 
 color body          default     color236    "^---.*"
-color body          default     color236    "^[a-zA-Z]+: .*"
+color body          default     color236    "^[A-Z][a-zA-Z]+: .*"
+
+# Compose
 
 color   attach_headers     brightgreen     default        "Autoview"
 color   attach_headers     brightyellow    default        "^\\[--"
