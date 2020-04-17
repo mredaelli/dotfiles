@@ -6,6 +6,7 @@ set relativenumber
 set number
 
 set colorcolumn=88
+set virtualedit=all
 
 set expandtab
 set shiftwidth=2

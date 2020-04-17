@@ -1,0 +1,5 @@
+set main-view-date = custom
+set main-view-date-format = "%Y-%m-%d"
+set main-view-author = abbreviated
+set main-view-author-width = 2
+set main-view-commit-title-refs = false
