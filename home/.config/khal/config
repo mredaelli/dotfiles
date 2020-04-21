@@ -10,9 +10,9 @@ color = light blue
 
 [locale]
 timeformat = %H:%M
-dateformat = %Y-%m-%d
+dateformat = %m-%d
 longdateformat = %Y-%m-%d
-datetimeformat = %Y-%m-%d %H:%M
+datetimeformat = %m-%d %H:%M
 longdatetimeformat = %Y-%m-%d %H:%M
 default_timezone = Europe/Zurich
 local_timezone = Europe/Zurich
@@ -20,15 +20,18 @@ local_timezone = Europe/Zurich
 [default]
 default_calendar = personal
 highlight_event_days = True
-show_all_days = False
-timedelta = 5d
+# show_all_days = False
+timedelta = 14d
 
 [view]
-frame = width
+frame = color
+scheme = dark
 agenda_event_format = {calendar-color}{cancelled}{start-end-time-style} {title}{repeat-symbol}{description-separator}{white}{description}{reset} 
+dynamic_days=False
 
 [keybindings]
 external_edit = e
 export = s
 view = enter, space
+left = shift tab, ctrl tab, h
 
