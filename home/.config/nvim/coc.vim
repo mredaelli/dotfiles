@@ -23,8 +23,8 @@ endif
 
 nmap <silent> [c <Plug>(coc-diagnostic-prev)
 nmap <silent> ]c <Plug>(coc-diagnostic-next)
-nmap <silent> [e <Plug>(coc-diagnostic-prev-error)
-nmap <silent> ]e <Plug>(coc-diagnostic-next-error)
+nmap <silent> [C <Plug>(coc-diagnostic-prev-error)
+nmap <silent> ]C <Plug>(coc-diagnostic-next-error)
 
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -84,7 +84,7 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 let g:airline#extensions#coc#enabled = 1
 
 let airline#extensions#coc#error_symbol = '✘'
-let airline#extensions#coc#warning_symbol = '!'
+let airline#extensions#coc#warning_symbol = '⚠'
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
 let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
