@@ -93,7 +93,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'junegunn/fzf.vim'
   Plug 'yuki-ycino/fzf-preview.vim'
 
-  Plug 'ryanoasis/vim-devicons'
+  Plug 'qpkorr/vim-bufkill'
 
   Plug 'tpope/vim-commentary'
 

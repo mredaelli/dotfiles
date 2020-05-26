@@ -1,8 +1,9 @@
 map <space> <leader>
 
 " Moving between buffers
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
+nnoremap <Tab> :BF<CR>
+nnoremap <S-Tab> :BB<CR>
+nnoremap <C-\> :BA<CR>
 
 " redo
 nnoremap U <C-r>
@@ -19,7 +20,7 @@ nnoremap <leader>Q :wqa<cr>
 nnoremap Q <nop>
 nnoremap <leader>u :up<cr>
 command Bd bp\|bd \#
-nnoremap <leader>d :Bd<cr>
+nnoremap <leader>d :BD<cr>
 nnoremap <leader>D :%bd<cr>
 
 " go to the folder of the current file
