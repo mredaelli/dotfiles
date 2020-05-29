@@ -1,9 +1,8 @@
-let $NVIM_COC_LOG_LEVEL = 'debug'
-
 call plug#begin('~/.local/share/nvim/plugged')
   Plug 'conradirwin/vim-bracketed-paste'
   Plug 'tmsvg/pear-tree'
   Plug 'kana/vim-textobj-user', { 'for': ['markdown', 'pandoc', 'mail', 'python' ] }
+  Plug 'tpope/vim-unimpaired'
 
   if executable('node')
     Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
@@ -14,8 +13,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-fugitive'
   Plug 'junegunn/gv.vim'
   Plug 'tpope/vim-git'
-  Plug 'idanarye/vim-merginal'
-  " Plug 'sodapopcan/vim-twiggy'
+  Plug 'rhysd/git-messenger.vim'
+  Plug 'sodapopcan/vim-twiggy'
 
   " Text
   " Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
@@ -32,10 +31,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'vim-pandoc/vim-pandoc-after', { 'for': ['markdown', 'pandoc'] }
   Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['markdown', 'pandoc'] }
 
-  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-
  " Development
-  Plug 'metakirby5/codi.vim', {'for': ['python'] }
   Plug 'idanarye/vim-vebugger', {'for': ['python'] }
   " Plug 'wellle/context.vim'
 
@@ -56,6 +52,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'numirias/semshi', { 'for': ['python'], 'do': ':UpdateRemotePlugins'}
     " Plug 'kh3phr3n/python-syntax', { 'for': ['python'] }
     Plug 'bps/vim-textobj-python', { 'for': ['python'] }
+    Plug 'tmhedberg/SimpylFold', { 'for': ['python'] }
   endif
 
   " Rust
@@ -85,6 +82,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   if executable('R')
     Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
   endif
+
   Plug 'LnL7/vim-nix', { 'for': 'nix' }
   Plug 'dag/vim-fish', { 'for': 'fish' }
   Plug 'nathangrigg/vim-beancount', { 'for': 'beancount' }
@@ -93,14 +91,11 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   Plug 'vimwiki/vimwiki'
 
-  " Plug 'ctrlpvim/ctrlp.vim'
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
-  "Plug 'ryanoasis/vim-devicons'
   Plug 'yuki-ycino/fzf-preview.vim'
 
-  " Grepping
-  Plug 'mileszs/ack.vim'
+  Plug 'qpkorr/vim-bufkill'
 
   Plug 'tpope/vim-commentary'
 
@@ -108,7 +103,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   Plug 'vim-airline/vim-airline'
 
+  Plug 'AndrewRadev/inline_edit.vim'
+
   " themes
   Plug 'nanotech/jellybeans.vim'
 call plug#end()
-

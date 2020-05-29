@@ -1,9 +1,9 @@
 map <space> <leader>
-noremap ; :
 
 " Moving between buffers
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
+nnoremap <Tab> :BF<CR>
+nnoremap <S-Tab> :BB<CR>
+nnoremap <C-\> :BA<CR>
 
 " redo
 nnoremap U <C-r>
@@ -19,7 +19,7 @@ nnoremap <leader>Q :wqa<cr>
 " prevent entering Ex mode by error
 nnoremap Q <nop>
 nnoremap <leader>u :up<cr>
-nnoremap <leader>d :bd<cr>
+nnoremap <leader>d :BD<cr>
 nnoremap <leader>D :%bd<cr>
 
 " go to the folder of the current file
@@ -48,7 +48,7 @@ nnoremap <Leader>gPP :GPushForce<CR>
 nnoremap <Leader>go :Gbranch<CR>
 nnoremap <Leader>gl :GV<CR>
 nnoremap <Leader>gL :GV!<CR>
-nnoremap <Leader>gb :call merginal#openMerginalBuffer()<CR>
+nnoremap <Leader>gb :Twiggy<CR>
 
 function! s:PushForceSafe()
   if confirm('Are you sure you want to force-push?', "&Yes\n&No", 1)==1
@@ -108,16 +108,13 @@ tnoremap <C-w>> <C-\><C-n>:vertical:resize +10<CR>
 """"""""""" terminal
 
 tnoremap <Esc><Esc> <C-\><C-n>
-" Maps ctrl-b + c to open a new tab window
-"
+
 nnoremap <leader>tt :tabnew +terminal<CR>
 tnoremap <leader>tt <C-\><C-n>:tabnew +terminal<CR>
 
-" Maps ctrl-b + " to open a new horizontal split with a terminal
 nnoremap <leader>t- :new +terminal<CR>
 tnoremap <leader>t- <C-\><C-n>:new +terminal<CR>
 
-" Maps ctrl-b + % to open a new vertical split with a terminal
 nnoremap <leader>t\| :vnew +terminal<CR>
 tnoremap <leader>t\| <C-\><C-n>:vnew +terminal<cr>
 
@@ -133,8 +130,8 @@ nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
 
-nnoremap oo m`o<Esc>``
-nnoremap OO m`O<Esc>``
+nnoremap <leader>o m`o<Esc>``
+nnoremap <leader>O m`O<Esc>``
 
 " Do not include white space characters when using $ in visual mode
 xnoremap $ g_
