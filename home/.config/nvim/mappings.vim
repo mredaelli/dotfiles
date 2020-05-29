@@ -19,7 +19,6 @@ nnoremap <leader>Q :wqa<cr>
 " prevent entering Ex mode by error
 nnoremap Q <nop>
 nnoremap <leader>u :up<cr>
-command Bd bp\|bd \#
 nnoremap <leader>d :BD<cr>
 nnoremap <leader>D :%bd<cr>
 
@@ -49,7 +48,7 @@ nnoremap <Leader>gPP :GPushForce<CR>
 nnoremap <Leader>go :Gbranch<CR>
 nnoremap <Leader>gl :GV<CR>
 nnoremap <Leader>gL :GV!<CR>
-nnoremap <Leader>gb :call merginal#openMerginalBuffer()<CR>
+nnoremap <Leader>gb :Twiggy<CR>
 
 function! s:PushForceSafe()
   if confirm('Are you sure you want to force-push?', "&Yes\n&No", 1)==1

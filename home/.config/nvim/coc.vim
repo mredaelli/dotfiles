@@ -46,7 +46,6 @@ nmap <C-c> :CocCommand<CR>
 
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-nmap <leader>rn <Plug>(coc-rename)
 
 " Use `:Format` to format current buffer
 command! -nargs=0 Format :call CocAction('format')
@@ -64,6 +63,7 @@ nmap <leader>ac  <Plug>(coc-codeaction)
 nmap <leader>af  <Plug>(coc-fix-current)
 
 nmap <leader>ar <Plug>(coc-refactor)
+nmap <leader>an <Plug>(coc-rename)
  
 " Use <TAB> for selections ranges.
 " NOTE: Requires 'textDocument/selectionRange' support from the language server.

@@ -13,7 +13,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-fugitive'
   Plug 'junegunn/gv.vim'
   Plug 'tpope/vim-git'
-  Plug 'idanarye/vim-merginal'
   Plug 'rhysd/git-messenger.vim'
   Plug 'sodapopcan/vim-twiggy'
 
@@ -53,6 +52,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'numirias/semshi', { 'for': ['python'], 'do': ':UpdateRemotePlugins'}
     " Plug 'kh3phr3n/python-syntax', { 'for': ['python'] }
     Plug 'bps/vim-textobj-python', { 'for': ['python'] }
+    Plug 'tmhedberg/SimpylFold', { 'for': ['python'] }
   endif
 
   " Rust
@@ -101,7 +101,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   Plug 'vim-airline/vim-airline'
 
-  Plug 'mhinz/vim-startify'
+  Plug 'AndrewRadev/inline_edit.vim'
 
   " themes
   Plug 'nanotech/jellybeans.vim'

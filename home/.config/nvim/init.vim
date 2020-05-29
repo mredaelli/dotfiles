@@ -181,6 +181,8 @@ let g:vimwiki_list = [ {
       \ 'ext': '.md'
       \}
       \]
+let g:vimwiki_auto_chdir = 1
+let g:BufKillCreateMappings = 0
 
 source ~/.config/nvim/mappings.vim
 source ~/.config/nvim/coc.vim
