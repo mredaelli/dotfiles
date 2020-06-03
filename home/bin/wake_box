@@ -1,0 +1,3 @@
+#! /usr/bin/env nix-shell
+#! nix-shell -p wol -i sh
+wol 10:62:e5:90:63:72
