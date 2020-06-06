@@ -6,6 +6,7 @@ symbol = "🌱 "
 truncation_length = 12
 
 [git_state]
+disabled = false #git_state
 progress_divider = " of "
 cherry_pick = "🍒PICK"
 revert = "<!--"
@@ -15,6 +16,7 @@ am = "📬"
 am_or_rebase = "📬~>"
 
 [git_status]
+disabled = false #git_status
 prefix = ""
 suffix = " "
 conflicted = "⚔️ "

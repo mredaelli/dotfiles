@@ -87,6 +87,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'dag/vim-fish', { 'for': 'fish' }
   Plug 'nathangrigg/vim-beancount', { 'for': 'beancount' }
 
+  Plug 'satabin/hocon-vim'
+
   Plug 'vimwiki/vimwiki'
 
   Plug 'junegunn/fzf'
