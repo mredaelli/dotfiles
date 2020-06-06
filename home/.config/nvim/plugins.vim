@@ -4,6 +4,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'kana/vim-textobj-user', { 'for': ['markdown', 'pandoc', 'mail', 'python' ] }
   Plug 'tpope/vim-unimpaired'
 
+  Plug 'sheerun/vim-polyglot'
+
   if executable('node')
     Plug 'neoclide/coc.nvim', {'tag': '*', 'branch': 'release'}
   endif
@@ -27,51 +29,46 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'dbmrq/vim-ditto', { 'for': ['markdown', 'pandoc', 'mail' ] }
 
   " Pandoc
-  Plug 'vim-pandoc/vim-pandoc', { 'for': ['markdown', 'pandoc'] }
-  Plug 'vim-pandoc/vim-pandoc-after', { 'for': ['markdown', 'pandoc'] }
-  Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['markdown', 'pandoc'] }
+  " Plug 'vim-pandoc/vim-pandoc', { 'for': ['markdown', 'pandoc'] }
+  " Plug 'vim-pandoc/vim-pandoc-after', { 'for': ['markdown', 'pandoc'] }
+  " Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['markdown', 'pandoc'] }
 
  " Development
   Plug 'idanarye/vim-vebugger', {'for': ['python'] }
   " Plug 'wellle/context.vim'
 
-  " Typescript
-  if executable("tsc")
-    Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
-    Plug 'Quramy/vim-js-pretty-template', {'for': ['typescript']}
-    Plug 'HerringtonDarkholme/yats.vim', {'for': ['typescript']}
-  endif
-
-  " Go
-  if executable("go")
-    Plug 'fatih/vim-go', { 'for': ['go'] }
-  endif
+  " " Typescript
+  " if executable("tsc")
+  "   Plug 'leafgarland/typescript-vim', {'for': ['typescript']}
+  "   Plug 'Quramy/vim-js-pretty-template', {'for': ['typescript']}
+  "   Plug 'HerringtonDarkholme/yats.vim', {'for': ['typescript']}
+  " endif
 
   " Python
   if executable("python")
-    Plug 'numirias/semshi', { 'for': ['python'], 'do': ':UpdateRemotePlugins'}
+    " Plug 'numirias/semshi', { 'for': ['python'], 'do': ':UpdateRemotePlugins'}
     " Plug 'kh3phr3n/python-syntax', { 'for': ['python'] }
     Plug 'bps/vim-textobj-python', { 'for': ['python'] }
     Plug 'tmhedberg/SimpylFold', { 'for': ['python'] }
   endif
 
   " Rust
-  if executable('rustc')
-    Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
-  endif
+  " if executable('rustc')
+  "   Plug 'rust-lang/rust.vim', { 'for': ['rust'] }
+  " endif
 
 
-  " Haskell
-  if executable('ghc')
-    Plug 'neovimhaskell/haskell-vim', { 'for': ['haskell', 'cabal'] }
-    " Plug 'alx741/vim-hindent', { 'for': ['haskell'] }
-    " Plug 'bitc/vim-hdevtools', { 'for': ['haskell'] }
-  endif
+  " " Haskell
+  " if executable('ghc')
+  "   Plug 'neovimhaskell/haskell-vim', { 'for': ['haskell', 'cabal'] }
+  "   " Plug 'alx741/vim-hindent', { 'for': ['haskell'] }
+  "   " Plug 'bitc/vim-hdevtools', { 'for': ['haskell'] }
+  " endif
 
-  " Scala
-  if executable('scalac')
-    Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
-  endif
+  " " Scala
+  " if executable('scalac')
+  "   Plug 'derekwyatt/vim-scala', { 'for': 'scala' }
+  " endif
 
   " C/C++
   Plug 'https://github.com/Rip-Rip/clang_complete.git', { 'for': ['c', 'c++'] }
@@ -79,12 +76,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'rhysd/vim-clang-format' , { 'for': ['c', 'c++'] }
 
   " R
-  if executable('R')
-    Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
-  endif
+  " if executable('R')
+  "   Plug 'jalvesaq/Nvim-R', { 'for': 'r' }
+  " endif
 
-  Plug 'LnL7/vim-nix', { 'for': 'nix' }
-  Plug 'dag/vim-fish', { 'for': 'fish' }
+  " Plug 'LnL7/vim-nix', { 'for': 'nix' }
+  " Plug 'dag/vim-fish', { 'for': 'fish' }
   Plug 'nathangrigg/vim-beancount', { 'for': 'beancount' }
 
   Plug 'satabin/hocon-vim'
