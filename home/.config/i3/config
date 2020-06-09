@@ -12,8 +12,8 @@ bindsym $mod+Shift+m exec ~/bin/fetch-mail
 bindsym $mod+Ctrl+r reload
 bindsym $mod+Shift+Ctrl+r restart
 bindsym $mod+Ctrl+n exec sh -c '[[ "$(nmcli network)" == "enabled" ]] && nmcli network off || nmcli network on'
-bindsym $mod+Ctrl+1 exec one_monitor.sh && notify-send 'Switched to one monitor'
-bindsym $mod+Ctrl+2 exec two_monitors.sh && notify-send 'Switched to two monitors'
+bindsym $mod+Ctrl+1 exec ~/bin/one_monitor.sh && notify-send 'Switched to one monitor'
+bindsym $mod+Ctrl+2 exec ~/bin/two_monitors.sh && notify-send 'Switched to two monitors'
 bindsym $mod+Ctrl+0 exec new=$(backlight decrease) && notify-send "Brightness decreased to $new"
 bindsym $mod+Ctrl+9 exec new=$(backlight increase) && notify-send "Brightness increased to $new"
 
@@ -67,16 +67,16 @@ bindsym $mod+Prior workspace prev
 bindsym $mod+Next workspace next
 bindsym $mod+backslash workspace back_and_forth
 
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace 1,   workspace 1
+bindsym $mod+Shift+2 move container to workspace 2,   workspace 2
+bindsym $mod+Shift+3 move container to workspace 3,   workspace 3
+bindsym $mod+Shift+4 move container to workspace 4,   workspace 4
+bindsym $mod+Shift+5 move container to workspace 5,   workspace 5
+bindsym $mod+Shift+6 move container to workspace 6,   workspace 6
+bindsym $mod+Shift+7 move container to workspace 7,   workspace 7
+bindsym $mod+Shift+8 move container to workspace 8,   workspace 8
+bindsym $mod+Shift+9 move container to workspace 9,   workspace 9
+bindsym $mod+Shift+0 move container to workspace 10,  workspace 10
 
 bindsym $mod+Control+Left resize shrink width 10 px or 10 ppt
 bindsym $mod+Control+Down resize grow height 10 px or 10 ppt
