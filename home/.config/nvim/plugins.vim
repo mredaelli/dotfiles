@@ -101,7 +101,8 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   Plug 'easymotion/vim-easymotion'
 
-  Plug 'vim-airline/vim-airline'
+  " Plug 'vim-airline/vim-airline'
+  Plug 'itchyny/lightline.vim'
 
   Plug 'AndrewRadev/inline_edit.vim'
 

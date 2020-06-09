@@ -1,9 +1,9 @@
 map <space> <leader>
 
 " Moving between buffers
-nnoremap <Tab> :BF<CR>
-nnoremap <S-Tab> :BB<CR>
 nnoremap <C-\> :BA<CR>
+nnoremap <leader>d :BD<cr>
+nnoremap <leader>D :%bd<cr>
 
 " redo
 nnoremap U <C-r>
@@ -19,14 +19,9 @@ nnoremap <leader>Q :wqa<cr>
 " prevent entering Ex mode by error
 nnoremap Q <nop>
 nnoremap <leader>u :up<cr>
-nnoremap <leader>d :BD<cr>
-nnoremap <leader>D :%bd<cr>
 
 " go to the folder of the current file
 nnoremap <leader>cd :cd %:p:h<CR>
-
-" normal mode with jk
-" imap jk <Esc>
 
 " clear last search
 nnoremap <silent> <CR> :nohls<CR><CR>
@@ -129,9 +124,6 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
-
-nnoremap <leader>o m`o<Esc>``
-nnoremap <leader>O m`O<Esc>``
 
 " Do not include white space characters when using $ in visual mode
 xnoremap $ g_
