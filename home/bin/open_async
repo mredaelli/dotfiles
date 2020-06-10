@@ -11,7 +11,9 @@ else
   file_ext=".${file_ext}"
 fi
 
-t=$(mktemp /tmp/XXXXXXXXXX --suffix="${file_ext}")
+tmp=${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}
+t=$(mktemp -p "$tmp/mutt" --suffix="${file_ext}")
+
 cp "$file" "$t"
 
 if [[ $cmd =~ "FILE" ]]; then

@@ -1,5 +1,7 @@
 #!/bin/sh
-tmp=$(mktemp)
+dir="$TMPDIR/mutt"
+mkdir -p "$dir"
+tmp=$(mktemp -p "$dir")
 cat > $tmp
 xargs "$@" $tmp
 rm $tmp
