@@ -32,3 +32,4 @@ stashed = "📦"
 
 [nix_shell]
 impure_msg = "💩"
+symbol = "⊢"

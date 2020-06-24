@@ -11,8 +11,8 @@ nnoremap Y y$
 nnoremap S hs
 
 nnoremap Q gQ
-" reload config on Ctrl-R
-nnoremap <C-r> :so $MYVIMRC<CR>
+" reload config on <leader>R
+nnoremap <leader>R :so $MYVIMRC<CR>
 
 nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :wqa<cr>
@@ -45,6 +45,20 @@ nnoremap <Leader>gl :GV<CR>
 nnoremap <Leader>gL :GV!<CR>
 nnoremap <Leader>gb :Twiggy<CR>
 nnoremap <Leader>grm :Git rebase master<CR>
+
+nmap ]h <Plug>(GitGutterNextHunk)
+nmap [h <Plug>(GitGutterPrevHunk)
+nmap <Leader>ga <Plug>(GitGutterStageHunk)
+nmap <Leader>gu <Plug>(GitGutterUndoHunk)
+nmap <Leader>gd <Plug>(GitGutterPreviewHunk)
+
+
+omap ih <Plug>(GitGutterTextObjectInnerPending)
+omap ah <Plug>(GitGutterTextObjectOuterPending)
+xmap ih <Plug>(GitGutterTextObjectInnerVisual)
+xmap ah <Plug>(GitGutterTextObjectOuterVisual)
+
+"GitGutterLineNrHighlightsEnable
 
 function! s:PushForceSafe()
   if confirm('Are you sure you want to force-push?', "&Yes\n&No", 1)==1
