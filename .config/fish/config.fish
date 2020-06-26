@@ -69,16 +69,6 @@ abbr gra 'git rebase --abort'
 abbr grc 'git rebase --continue'
 
 
-switch (uname)
-   case Linux
-      . "$HOME/.homesick/repos/homeshick/homeshick.fish"
-      source "$HOME/.homesick/repos/homeshick/completions/homeshick.fish"
-   case Darwin
-      export HOMESHICK_DIR=/usr/local/opt/homeshick
-end
-
-
-
 set PATH ~/bin $PATH
 
 function mutt
