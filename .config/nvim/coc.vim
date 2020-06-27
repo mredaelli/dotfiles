@@ -1,5 +1,4 @@
 set cmdheight=2
-set signcolumn=yes
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
@@ -32,6 +31,9 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 highlight CocHighlightText   guibg=ivory4 ctermbg=white
+highlight CocErrorLine guibg=#520023
+highlight CocWarningLine guibg=#3c2a00
+highlight CocInfoLine guibg=#5a5900
 
 " Highlight symbol under cursor on CursorHold
 function! HighlightIfDefined()
@@ -80,13 +82,6 @@ omap af <Plug>(coc-funcobj-a)
 
 " Use `:Fold` to fold current buffer
 command! -nargs=? Fold :call CocAction('fold', <f-args>)
-
-let g:airline#extensions#coc#enabled = 1
-
-let airline#extensions#coc#error_symbol = '✘'
-let airline#extensions#coc#warning_symbol = '⚠'
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 function! s:check_back_space() abort
   let col = col('.') - 1

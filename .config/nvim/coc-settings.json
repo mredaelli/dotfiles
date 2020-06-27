@@ -1,5 +1,11 @@
 {
   "coc.preferences.formatOnSaveFiletypes": ["rust", "python", "scala"],
+  "diagnostic.errorSign": "✘",
+  "diagnostic.warningSign":"⚠",
+  "diagnostic.infoSign": "🛈",
+  "diagnostic.hintSign": "i",
+  "diagnostic.enableSign": true,
+  //"coc.preferences.diagnostic.signOffset": 9999999,
 
 //  "rust-client.channel": "stable",
 //  "rust-client.disableRustup": true,

@@ -19,26 +19,26 @@ let g:lightline = {
 \   'fileencoding': 'LightlineFileencoding',
 \   'coc_status': 'LightlineCocStatus',
 \ },
-  \ 'component_expand': {
-  \   'coc_error'        : 'LightlineCocErrors',
-  \   'coc_warning'      : 'LightlineCocWarnings',
-  \   'coc_info'         : 'LightlineCocInfos',
-  \   'coc_hint'         : 'LightlineCocHints',
-  \   'coc_fix'          : 'LightlineCocFixes',
-  \ },
+\ 'component_expand': {
+\   'coc_error'        : 'LightlineCocErrors',
+\   'coc_warning'      : 'LightlineCocWarnings',
+\   'coc_info'         : 'LightlineCocInfos',
+\   'coc_hint'         : 'LightlineCocHints',
+\   'coc_fix'          : 'LightlineCocFixes',
+\ },
 \ 'colorscheme': 'material',
 \ 'mode_map': {
-\ 'n' : 'N',
-\ 'i' : 'I',
-\ 'R' : 'R',
-\ 'v' : 'V',
-\ 'V' : 'VL',
-\ "\<C-v>": 'VB',
-\ 'c' : 'C',
-\ 's' : 'S',
-\ 'S' : 'SL',
-\ "\<C-s>": 'SB',
-\ 't': 'T',
+\    'n' : 'N',
+\    'i' : 'I',
+\    'R' : 'R',
+\    'v' : 'V',
+\    'V' : 'VL',
+\    "\<C-v>": 'VB',
+\    'c' : 'C',
+\    's' : 'S',
+\    'S' : 'SL',
+\    "\<C-s>": 'SB',
+\    't': 'T',
 \ },
 \ 'separator': { 'left': "\ue0b0", 'right': "\ue0b2" },
 \ 'subseparator': { 'left': "\ue0b1", 'right': "\ue0b3" },
@@ -91,6 +91,23 @@ function! LightlineReadonly()
 endfunction
 
 function! LightlineGit()
-  let branch = fugitive#head()
-  return branch ==# '' ? '' : (' ' . branch[:10] )
+  let branch = fugitive#head()[:10]
+  if branch ==# ''
+      return ''
+  endif
+  let [a,m,r] = GitGutterGetHunkSummary()
+  let s = ' '
+  if a != 0
+    let s = s . printf('+%d', a)
+  endif
+  if m != 0
+    let s = s . printf('~%d', m)
+  endif
+  if r != 0
+    let s = s . printf('-%d', r)
+  endif
+  if s ==# ' '
+      return branch
+  endif
+  return (' ' . branch[:10] . s)
 endfunction

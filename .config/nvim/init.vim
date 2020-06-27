@@ -71,10 +71,32 @@ let s:undos = split(globpath(&undodir, '*'), "\n")
 call filter(s:undos, 'getftime(v:val) < localtime() - (60 * 60 * 24 * 90)')
 call map(s:undos, 'delete(v:val)')
 
+" Theme
+if (has("termguicolors"))
+  set termguicolors
+endif
+set background=dark
+
+set cmdheight=2
+set signcolumn=auto:2
+
 let g:gitgutter_map_keys = 0
-set updatetime=300
+set updatetime=200
+let g:gitgutter_sign_added = '┃'
+let g:gitgutter_sign_modified = '┃'
+let g:gitgutter_sign_removed = '┃ '
+let g:gitgutter_sign_removed_first_line = '┃'
+let g:gitgutter_sign_modified_removed = '┃'
+let g:gitgutter_highlight_linenrs = 1 
 
 source ~/.config/nvim/plugins.vim
+
+let g:jellybeans_use_term_italics = 1
+colorscheme jellybeans
+
+highlight GitGutterAdd    guifg=#009900
+highlight GitGutterChange guifg=#bbbb00
+highlight GitGutterDelete guifg=#ff2222
 
 augroup CloseLoclistWindowGroup
   autocmd!
@@ -159,10 +181,6 @@ augroup last_edit
         \ endif
 augroup END
 
-" Theme
-if (has("termguicolors"))
-  set termguicolors
-endif
 
 if exists("##TermOpen")
     augroup term_settings
@@ -173,10 +191,8 @@ if exists("##TermOpen")
     augroup END
 endif
 
-set background=dark
-let g:jellybeans_use_term_italics = 1
-colorscheme jellybeans
 
 " whitespace
 highlight ExtraWhitespace ctermbg=red guibg=ivory4
 autocmd Syntax * syn match ExtraWhitespace /\s\+$/ containedin=ALL
+

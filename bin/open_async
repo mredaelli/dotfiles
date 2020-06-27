@@ -12,6 +12,7 @@ else
 fi
 
 tmp=${XDG_RUNTIME_DIR:-${TMPDIR:-/tmp}}
+mkdir -p "$tmp/mutt"
 t=$(mktemp -p "$tmp/mutt" --suffix="${file_ext}")
 
 cp "$file" "$t"

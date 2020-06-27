@@ -70,7 +70,6 @@ abbr gm 'git merge'
 abbr gma 'git merge --abort'
 abbr gmc 'git merge --continue'
 
-
 set PATH ~/bin $PATH
 
 function mutt
