@@ -4,8 +4,6 @@ if not functions -q fisher
     fish -c fisher
 end
 
-alias cpvpn='pushd ~/.ssh; and sudo openvpn --config CP-FW-01-UDP4-1194-massimo.redaelli-config.ovpn; or  popd'
-
 alias du="du -h"
 alias df="df -h"
 alias free="free -m"
@@ -68,15 +66,9 @@ abbr grh 'git rebase -i HEAD~'
 abbr gra 'git rebase --abort'
 abbr grc 'git rebase --continue'
 
-
-switch (uname)
-   case Linux
-      . "$HOME/.homesick/repos/homeshick/homeshick.fish"
-      source "$HOME/.homesick/repos/homeshick/completions/homeshick.fish"
-   case Darwin
-      export HOMESHICK_DIR=/usr/local/opt/homeshick
-end
-
+abbr gm 'git merge'
+abbr gma 'git merge --abort'
+abbr gmc 'git merge --continue'
 
 
 set PATH ~/bin $PATH
@@ -98,11 +90,8 @@ fish_vi_key_bindings
 if type -q starship
   starship init fish | source
 else
-  # bobthefish
   set -g theme_title_display_process yes
-  # set -g theme_color_scheme terminal-dark
   set -g theme_color_scheme solarized-dark
-  # set -g theme_color_scheme dark
 end
 
 if type -q any-nix-shell
@@ -111,9 +100,11 @@ end
 
 set -x TASKRC ~/.config/taskwarrior/taskrc
 
+alias yadmr="sudo yadm -Y /etc/yadm"
+
 if status --is-interactive
   echo
-  echo  Remember using tig thefuck howdoi buku fzf newsboat broot
+  echo  Remember using tig thefuck buku fzf newsboat broot
   echo
   task next
   echo
