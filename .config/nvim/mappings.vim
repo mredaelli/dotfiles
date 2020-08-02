@@ -27,9 +27,9 @@ nnoremap <leader>cd :cd %:p:h<CR>
 nnoremap <silent> <CR> :nohls<CR><CR>
 
 " fzf
-nnoremap <Leader>f :FzfPreviewGitFiles<CR>
-nnoremap <Leader>F :FzfPreviewProjectFiles<CR>
-nnoremap <Leader>b :FzfPreviewBuffers<CR>
+nnoremap <Leader>f :GitFiles --recurse-submodules<CR>
+nnoremap <Leader>F :ProjectFiles<CR>
+nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>h :History<CR>
 nnoremap <Leader>t :BTags<CR>
 nnoremap <Leader>r :Rg<Space>

@@ -8,6 +8,7 @@ bindsym $mod+Shift+s exec ~/bin/web-search.sh
 bindsym $mod+Shift+w exec ~/bin/wallpaper
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+m exec ~/bin/fetch-mail 
+bindsym $mod+Shift+p exec kitty --session ~/lari_session
 
 bindsym $mod+Ctrl+r reload
 bindsym $mod+Shift+Ctrl+r restart
@@ -99,10 +100,6 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-mode "caps" {
-        bindsym Caps_Lock mode "default"
-}
-bindsym Caps_Lock mode "caps"
 
 mode "num" {
         bindsym Num_Lock mode "default"

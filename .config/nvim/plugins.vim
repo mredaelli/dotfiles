@@ -90,7 +90,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   Plug 'junegunn/fzf'
   Plug 'junegunn/fzf.vim'
-  Plug 'yuki-ycino/fzf-preview.vim'
+  " Plug 'yuki-ycino/fzf-preview.vim'
 
   Plug 'qpkorr/vim-bufkill'
 

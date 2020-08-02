@@ -26,7 +26,7 @@
     untracked = red
 
 [status]
-    submoduleSummary = true
+	submodulesummary = 1
 
 [includeIf "gitdir:~/src/lari/"]
 	path = src/lari/lari.gitconfig
@@ -49,3 +49,9 @@
     insteadOf = gist:
 [url "https://bitbucket.org/"]
     insteadOf = bb:
+[diff]
+	submodule = log
+[submodule]
+	recurse = 1
+[push]
+	recurseSubmodules = on-demand
