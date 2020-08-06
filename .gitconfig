@@ -55,3 +55,7 @@
 	recurse = 1
 [push]
 	recurseSubmodules = on-demand
+[pull]
+	rebase = true
+[rebase]
+	autoStash = true
