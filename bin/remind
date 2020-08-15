@@ -1,4 +1,8 @@
 #!/bin/sh
+if [ "$#" -lt 2 ]; then
+    echo "Usage:   remind  <duration> message"
+    exit 2
+fi
 time="${1}"
 shift
 (sleep "${time}"; notify-send -t 1000000  $* ) &
