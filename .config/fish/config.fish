@@ -103,7 +103,7 @@ alias yadmr="sudo yadm -Y /etc/yadm"
 
 if status --is-interactive
   echo
-  echo  Remember using tig thefuck buku fzf newsboat broot
+  echo  Remember ytop du-dust sd procs gitui using tig thefuck buku fzf newsboat broot
   echo
   task next
   echo
