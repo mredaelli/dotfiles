@@ -131,7 +131,8 @@ bind generic,index,pager : enter-command
 
 ## Make quick html view macro
 bind index,pager v  view-attachments
-macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit><clear-flag>N<enter>"
+macro index V "<view-attachments><search>html<enter><view-mailcap><exit><clear-flag>N<enter><previous-entry>"
+macro pager V "<view-attachments><search>html<enter><view-mailcap><exit><clear-flag>N<enter><exit>"
 
 ### Browser bindings ###
 ## Browser is used when viewing the list of mailboxes

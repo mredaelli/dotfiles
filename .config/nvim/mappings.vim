@@ -5,6 +5,10 @@ nnoremap <C-\> :BA<CR>
 nnoremap <leader>d :BD<cr>
 nnoremap <leader>D :%bd<cr>
 
+" Moving between tags
+nnoremap ]t :tabnext<CR>
+nnoremap [t :tabprev<CR>
+
 " redo
 nnoremap U <C-r>
 nnoremap Y y$
@@ -119,8 +123,8 @@ tnoremap <C-w>> <C-\><C-n>:vertical:resize +10<CR>
 
 tnoremap <Esc><Esc> <C-\><C-n>
 
-nnoremap <leader>tt :tabnew +terminal<CR>
-tnoremap <leader>tt <C-\><C-n>:tabnew +terminal<CR>
+nnoremap <leader>tt :tabnew term://fish<CR>
+tnoremap <leader>tt <C-\><C-n>:tabnew term://fish<CR>
 
 nnoremap <leader>t- :new +terminal<CR>
 tnoremap <leader>t- <C-\><C-n>:new +terminal<CR>

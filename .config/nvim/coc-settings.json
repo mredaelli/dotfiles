@@ -17,9 +17,10 @@
   "python.linting.mypyEnabled": true,
   "python.linting.mypyPath": "./env/mypy",
   "python.linting.pylintEnabled": false,
-  "python.linting.pylamaEnabled": true,
+  "python.linting.pylamaEnabled": false,
   "python.linting.pylamaPath": "./env/pylama",
   "python.sortImports.path": "./env/isort",
+//  "python.jediEnabled": false,
 
   "languageserver": {
     "golang": {

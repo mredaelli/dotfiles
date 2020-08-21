@@ -91,6 +91,8 @@ let g:gitgutter_highlight_linenrs = 1
 
 source ~/.config/nvim/plugins.vim
 
+let g:dirvish_mode = ':sort ,^.*[\/],'
+
 let g:jellybeans_use_term_italics = 1
 colorscheme jellybeans
 
