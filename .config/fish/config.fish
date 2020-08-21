@@ -105,6 +105,8 @@ if status --is-interactive
   echo
   echo  Remember ytop du-dust sd procs gitui using tig thefuck buku fzf newsboat broot
   echo
-  task next
+  if type -q task
+    task next
+  end
   echo
 end
