@@ -1,4 +1,5 @@
 set cmdheight=2
+autocmd User CocDiagnosticChange call lightline#update()
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c

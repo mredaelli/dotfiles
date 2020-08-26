@@ -19,6 +19,6 @@ function! SetupDev()
 
   " let g:neomake_open_list = 2
   " Highlight symbol under cursor on CursorHold
-  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " autocmd CursorHold * silent call CocActionAsync('highlight')
 endfunction
 

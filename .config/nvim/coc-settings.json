@@ -1,14 +1,14 @@
 {
   "coc.preferences.formatOnSaveFiletypes": ["rust", "python", "scala"],
+  "rust-analyzer.serverPath":"/nix/store/wsz6aq8ps93pkh7vv6349lq8h98lr15g-rust-1.47.0-nightly-2020-08-24-f44c6e4e2/bin/rust-analyzer",
+  "rust-analyzer.updates.channel":"nightly",
+
+  "diagnostic.displayByAle": true,
   "diagnostic.errorSign": "✘",
   "diagnostic.warningSign":"⚠",
   "diagnostic.infoSign": "🛈",
   "diagnostic.hintSign": "i",
   "diagnostic.enableSign": true,
-  //"coc.preferences.diagnostic.signOffset": 9999999,
-
-//  "rust-client.channel": "stable",
-//  "rust-client.disableRustup": true,
 
   "python.autoComplete.showAdvancedMembers": false,
   "python.pythonPath": "./env/python",
@@ -22,6 +22,8 @@
   "python.sortImports.path": "./env/isort",
 //  "python.jediEnabled": false,
 
+  "rust-analyzer.checkOnSave.command": "clippy",
+
   "languageserver": {
     "golang": {
       "command": "gopls",
@@ -33,11 +35,11 @@
       "command": "./env/metals-vim",
       "rootPatterns": ["build.sc"],
       "filetypes": ["scala"]
-    },
+    }
   },
-"diagnostic-languageserver.filetypes": {
-  "sh": "shellcheck"
-},
+  "diagnostic-languageserver.filetypes": {
+    "sh": "shellcheck"
+  },
 //"diagnostic-languageserver.formatFiletypes": {
  // "sh": "shfmt"
 //}

@@ -4,7 +4,9 @@ let g:lightline = {
 \ 'active': {
 \   'left': [ [ 'mode', 'paste' ],
 \             [ 'git', 'readonly', 'filename', 'modified',
-\               'coc_error', 'coc_warning', 'coc_hint', 'coc_info'],
+\               'coc_error', 'coc_warning', 'coc_hint', 'coc_info',
+\               'langclient_error', 'langclient_warning', 'langclient_hint', 'langclient_info',
+\               'linter_warnings', 'linter_errors' ],
 \             ['coc_status'] ],
 \ 'right': [ [ 'lineinfo' ],
 \            [ 'fileformat', 'fileencoding', 'filetype' ] ]
@@ -18,8 +20,16 @@ let g:lightline = {
 \   'fileformat': 'LightlineFileformat',
 \   'fileencoding': 'LightlineFileencoding',
 \   'coc_status': 'LightlineCocStatus',
+\   'linter_warnings': 'LightlineLinterWarnings',
+\   'linter_errors': 'LightlineLinterErrors',
 \ },
 \ 'component_expand': {
+\   'linter_warnings': 'LightlineLinterWarnings',
+\   'linter_errors': 'LightlineLinterErrors',
+\   'langclient_error'        : 'Lightlinelang_clientErrors',
+\   'langclient_warning'      : 'Lightlinelang_clientWarnings',
+\   'langclient_info'         : 'Lightlinelang_clientInfos',
+\   'langclient_hint'         : 'Lightlinelang_clientHints',
 \   'coc_error'        : 'LightlineCocErrors',
 \   'coc_warning'      : 'LightlineCocWarnings',
 \   'coc_info'         : 'LightlineCocInfos',
@@ -45,6 +55,8 @@ let g:lightline = {
 \}
 
 let g:lightline.component_type = {
+\   'linter_errors'        : 'error',
+\   'linter_warnings'      : 'warning',
 \   'coc_error'        : 'error',
 \   'coc_warning'      : 'warning',
 \   'coc_info'         : 'tabsel',
@@ -52,7 +64,6 @@ let g:lightline.component_type = {
 \   'coc_fix'          : 'middle',
 \ }
 
-autocmd User CocDiagnosticChange call lightline#update()
 
 function! s:lightline_coc_diagnostic(kind, sign) abort
   let info = get(b:, 'coc_diagnostic_info', 0)
@@ -110,4 +121,47 @@ function! LightlineGit()
       return branch
   endif
   return (' ' . branch[:10] . s)
+endfunction
+
+function! LightlineLinterWarnings() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ▲', all_non_errors)
+endfunction
+
+function! LightlineLinterErrors() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '' : printf('%d ✗', all_errors)
+endfunction
+
+function! LightlineLinterOK() abort
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+  return l:counts.total == 0 ? '✓' : ''
+endfunction
+
+
+function! s:lightline_langclient_diagnostic(kind, sign) abort
+  let info = LanguageClient#statusLineDiagnosticsCounts()
+  if empty(info) || get(info, a:kind, 0) == 0
+    return ''
+  endif
+  return printf('%s%d', a:sign, info[a:kind])
+endfunction
+
+function! Lightlinelang_clientErrors() abort
+  return s:lightline_langclient_diagnostic('E', '✘')
+endfunction
+function! Lightlinelang_clientWarnings() abort
+  return s:lightline_langclient_diagnostic('W', '⚠')
+endfunction
+function! Lightlinelang_clientInfos() abort
+  return s:lightline_langclient_diagnostic('I', '🛈')
+endfunction
+function! Lightlinelang_clientHints() abort
+  return s:lightline_langclient_diagnostic('H', '💡')
 endfunction
