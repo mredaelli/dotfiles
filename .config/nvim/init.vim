@@ -49,8 +49,6 @@ syntax on
 " %% is the directory of the open buffer
 cabbr <expr> %% expand('%:p:h')
 
-let g:airline#extensions#branch#displayed_head_limit = 15
-
 let g:xml_syntax_folding=1
 au FileType xml setlocal foldmethod=syntax
 
@@ -75,7 +73,6 @@ call map(s:undos, 'delete(v:val)')
 if (has("termguicolors"))
   set termguicolors
 endif
-set background=dark
 
 set cmdheight=2
 set signcolumn=auto:2
@@ -89,16 +86,30 @@ let g:gitgutter_sign_removed_first_line = '┃'
 let g:gitgutter_sign_modified_removed = '┃'
 let g:gitgutter_highlight_linenrs = 1 
 
-source ~/.config/nvim/plugins.vim
-
 let g:dirvish_mode = ':sort ,^.*[\/],'
 
-let g:jellybeans_use_term_italics = 1
-colorscheme jellybeans
 
-highlight GitGutterAdd    guifg=#009900
-highlight GitGutterChange guifg=#bbbb00
-highlight GitGutterDelete guifg=#ff2222
+source ~/.config/nvim/plugins.vim
+
+" let g:jellybeans_use_term_italics = 1
+let g:onedark_terminal_italics = 1
+let g:lightline = {
+  \ 'colorscheme': 'onedark',
+  \ }
+" let g:deepspace_italics=1
+" let g:lightline = {
+"       \ 'colorscheme': 'deepspace',
+"       \ }
+
+colorscheme onedark
+set background=dark
+" hi Normal ctermbg=255  guibg=#000000
+call onedark#set_highlight("Normal", { "gg": '000000' })
+
+
+" highlight GitGutterAdd    guifg=#009900
+" highlight GitGutterChange guifg=#bbbb00
+" highlight GitGutterDelete guifg=#ff2222
 
 augroup CloseLoclistWindowGroup
   autocmd!

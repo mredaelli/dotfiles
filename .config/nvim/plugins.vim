@@ -108,5 +108,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'AndrewRadev/inline_edit.vim'
 
   " themes
-  Plug 'nanotech/jellybeans.vim'
+  " Plug 'nanotech/jellybeans.vim'
+   Plug 'joshdick/onedark.vim'
+  " Plug 'tyrannicaltoucan/vim-deep-space'
 call plug#end()
