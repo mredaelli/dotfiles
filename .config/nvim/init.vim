@@ -15,7 +15,7 @@ set tabstop=4
 
 set showmatch
 
-set clipboard+=unnamedplus
+" set clipboard+=unnamedplus
 
 set backspace=indent,eol,start
 set ignorecase smartcase
