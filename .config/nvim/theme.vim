@@ -14,8 +14,11 @@ let g:lightline['colorscheme'] = 'onedark'
 
 colorscheme onedark
 set background=dark
+" If the background is too washed-out
 " hi Normal ctermbg=255  guibg=#000000
+
 call onedark#set_highlight("Normal", { "gg": '000000' })
+call onedark#set_highlight("Identifier", { "gui": 'italic' })
 
 " highlight GitGutterAdd    guifg=#009900
 " highlight GitGutterChange guifg=#bbbb00
