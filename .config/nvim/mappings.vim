@@ -12,7 +12,6 @@ nnoremap [t :tabprev<CR>
 " redo
 nnoremap U <C-r>
 nnoremap Y y$
-nnoremap S hs
 
 nnoremap Q gQ
 " reload config on <leader>R
@@ -50,17 +49,24 @@ nnoremap <Leader>gL :GV!<CR>
 nnoremap <Leader>gb :Twiggy<CR>
 nnoremap <Leader>grm :Git rebase master<CR>
 
-nmap ]h <Plug>(GitGutterNextHunk)
-nmap [h <Plug>(GitGutterPrevHunk)
-nmap <Leader>ga <Plug>(GitGutterStageHunk)
-nmap <Leader>gu <Plug>(GitGutterUndoHunk)
-nmap <Leader>gd <Plug>(GitGutterPreviewHunk)
+nnoremap <Leader>gA :Git add %:p<cr><cr>
+
+nmap ]h <plug>(gitgutternexthunk)
+nmap [h <plug>(gitgutterprevhunk)
+nmap <leader>ga <plug>(gitgutterstagehunk)
+nmap <leader>gu <plug>(gitgutterundohunk)
+nmap <leader>gd <plug>(gitgutterpreviewhunk)
 
 
-omap ih <Plug>(GitGutterTextObjectInnerPending)
-omap ah <Plug>(GitGutterTextObjectOuterPending)
-xmap ih <Plug>(GitGutterTextObjectInnerVisual)
+omap ih <plug>(gitguttertextobjectinnerpending)
+omap ah <plug>(gitguttertextobjectouterpending)
+xmap ih <plug>(gitguttertextobjectinnervisual)
 xmap ah <Plug>(GitGutterTextObjectOuterVisual)
+
+nmap <silent> [c :Cfprev<CR>
+nmap <silent> ]c :Cfnext<CR>
+nmap <silent> [C <Plug>(coc-diagnostic-prev-error)
+nmap <silent> ]C <Plug>(coc-diagnostic-next-error)
 
 "GitGutterLineNrHighlightsEnable
 
