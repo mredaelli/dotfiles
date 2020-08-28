@@ -23,6 +23,7 @@ Subfolders Verbatim
 Channel fast-inbox
 Master :fast-remote:
 Slave :fast-local:
+Patterns INBOX Drafts Sent
 
 Channel fast-all
 Master :fast-remote:
