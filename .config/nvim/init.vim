@@ -15,6 +15,10 @@ set tabstop=4
 
 set showmatch
 
+
+set wildmenu
+set wildmode=longest:full,full
+
 " set clipboard+=unnamedplus
 
 set backspace=indent,eol,start
@@ -74,6 +78,11 @@ runtime plugins.vim
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect
 
+" Use <TAB> to select the popup menu:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+runtime macros/matchit.vim
 
 runtime mappings.vim
 " runtime coc.vim

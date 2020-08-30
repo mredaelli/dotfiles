@@ -2,9 +2,9 @@ let g:LanguageClient_settingsPath = 'ls-settings.json'
 let g:LanguageClient_rootMarkers = ['env']
 
 let g:LanguageClient_serverCommands = {
-  \ 'rust': ['rust-analyzer'],
+ \ 'rust': ['rust-analyzer'],
  \ 'python': ['pyls', '-vv', '--log-file', '~/pyls.log'],
-\ }
+\}
 "  \ 'python': ['pyls'],
 
 " note that if you are using Plug mapping you should not use `noremap` mappings.
