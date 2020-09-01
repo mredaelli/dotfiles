@@ -1,4 +1,4 @@
-map <space> <leader>
+nmap <space> <leader>
 
 " Moving between buffers
 nnoremap <C-\> :BA<CR>
@@ -51,22 +51,22 @@ nnoremap <Leader>grm :Git rebase master<CR>
 
 nnoremap <Leader>gA :Git add %:p<cr><cr>
 
-nmap ]h <plug>(gitgutternexthunk)
-nmap [h <plug>(gitgutterprevhunk)
-nmap <leader>ga <plug>(gitgutterstagehunk)
-nmap <leader>gu <plug>(gitgutterundohunk)
-nmap <leader>gd <plug>(gitgutterpreviewhunk)
+nnoremap ]h <plug>(gitgutternexthunk)
+nnoremap [h <plug>(gitgutterprevhunk)
+nnoremap <leader>ga <plug>(gitgutterstagehunk)
+nnoremap <leader>gu <plug>(gitgutterundohunk)
+nnoremap <leader>gd <plug>(gitgutterpreviewhunk)
 
 
-omap ih <plug>(gitguttertextobjectinnerpending)
-omap ah <plug>(gitguttertextobjectouterpending)
-xmap ih <plug>(gitguttertextobjectinnervisual)
-xmap ah <Plug>(GitGutterTextObjectOuterVisual)
+onoremap ih <plug>(gitguttertextobjectinnerpending)
+onoremap ah <plug>(gitguttertextobjectouterpending)
+xnoremap ih <plug>(gitguttertextobjectinnervisual)
+xnoremap ah <Plug>(GitGutterTextObjectOuterVisual)
 
-nmap <silent> [c :Cfprev<CR>
-nmap <silent> ]c :Cfnext<CR>
-nmap <silent> [C <Plug>(coc-diagnostic-prev-error)
-nmap <silent> ]C <Plug>(coc-diagnostic-next-error)
+nnoremap <silent> [c :Cfprev<CR>
+nnoremap <silent> ]c :Cfnext<CR>
+nnoremap <silent> [C <Plug>(coc-diagnostic-prev-error)
+nnoremap <silent> ]C <Plug>(coc-diagnostic-next-error)
 
 "GitGutterLineNrHighlightsEnable
 

@@ -15,11 +15,10 @@ set tabstop=4
 
 set showmatch
 
-
 set wildmenu
 set wildmode=longest:full,full
 
-" set clipboard+=unnamedplus
+" met clipboard+=unnamedplus
 
 set backspace=indent,eol,start
 set ignorecase smartcase
@@ -108,3 +107,11 @@ if exists("##TermOpen")
         " autocmd TermOpen * setlocal
     augroup END
 endif
+
+" Removes the delay in closing fzf window with ESC
+if has('nvim')
+  aug fzf_setup
+    au!
+    au TermOpen term://*FZF tnoremap <silent> <buffer><nowait> <esc> <c-c>
+  aug END
+end
