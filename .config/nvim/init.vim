@@ -71,6 +71,11 @@ let g:dirvish_mode = ':sort ,^.*[\/],'
 let g:BufKillCreateMappings = 0
 
 " let g:deoplete#enable_at_startup = 1
+let g:textobj_python_no_default_key_mappings = 1
+
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
+endif
 
 runtime plugins.vim
 

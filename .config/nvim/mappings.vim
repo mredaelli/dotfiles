@@ -29,6 +29,8 @@ nnoremap <leader>cd :cd %:p:h<CR>
 " clear last search
 nnoremap <silent> <CR> :nohls<CR><CR>
 
+nnoremap <Leader>R :silent lgrep<Space>
+
 " fzf
 nnoremap <Leader>f :GitFiles --recurse-submodules<CR>
 nnoremap <Leader>F :ProjectFiles<CR>
