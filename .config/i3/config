@@ -10,6 +10,14 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+m exec ~/bin/fetch-mail 
 bindsym $mod+Shift+p exec kitty --session ~/lari_session
 
+# ikhal
+bindsym $mod+Shift+c exec kitty --title ikhal --class ikhal ikhal
+for_window [class="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
+
+# quick terminal
+bindsym $mod+Shift+t exec kitty --title taskwarrior --class taskwarrior fish
+for_window [class="taskwarrior"] floating enable, resize set 1000 600, move position center, border pixel 5
+
 bindsym $mod+Ctrl+r reload
 bindsym $mod+Shift+Ctrl+r restart
 bindsym $mod+Ctrl+n exec sh -c '[[ "$(nmcli network)" == "enabled" ]] && nmcli network off || nmcli network on'
