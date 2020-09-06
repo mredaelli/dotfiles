@@ -1,6 +1,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'tmsvg/pear-tree'
   Plug 'kana/vim-textobj-user', { 'for': ['markdown', 'pandoc', 'mail', 'python' ] }
+  Plug 'wellle/targets.vim'
   Plug 'tpope/vim-unimpaired'
 
   Plug 'sheerun/vim-polyglot'

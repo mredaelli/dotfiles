@@ -7,9 +7,28 @@ bind K tabprev
 bind <C-J> tabmove +1
 bind <C-K> tabmove -1
 bind \ tab #
+followpage next
 
-guiset_quiet tabs always
+set incsearch true
+bind / fillcmdline find
+bind ? fillcmdline find -?
+bind n findnext 1
+bind N findnext -1
+bind ,<Space> nohlsearch
+
+guiset_quiet tabs autohide
 guiset_quiet navbar always
+guiset_quiet hoverlink top-left
+
+quickmark m https://mail.google.com/mail/u/0/#inbox
+
+" rssexec
+" alias save_rss jsb -p tri.native.run("cat >> ~/.config.newsboat/urls", JS_ARG) set rsscmd save_rss %u
+
+setpref general.warnOnAboutConfig false
+" seturl .*\\.fr followpagepatterns.next suivant
+
+set bmarkweight 0
 
 set hintchars hjklasdfgyuopqwertnmzxcvb
 set hintuppercase false
@@ -17,18 +36,25 @@ set hintuppercase false
 set theme dark
 set editorcmd kitty nvim
 
-set searchengine startpage
+set searchengine roo
 set searchurls.rotten https://www.rottentomatoes.com/search/?search=
-set searchurls.torrent http://192.168.0.10:9117/UI/Dashboard#tracker=&category=&search=
+set searchurls.jackett http://192.168.0.10:9117/UI/Dashboard#tracker=&category=&search=
+set searchurls.subreddit https://old.reddit.com/r/%s1/search?q=%s2&restrict_sr=on
+set searchurls.reddit https://old.reddit.com/search?q=%s
+set searchurls.roo https://www.runnaroo.com/search?term=
 set searchurls.magnet https://www.magnetdl.com/search/?x=46&y=23&m=1&q=
+set searchurls.libgen http://libgen.rs/search.php?req=
+set searchurls.libgenn http://libgen.rs/fiction/?q=
+set searchurls.libgenn http://libgen.rs/fiction/?q=
+set searchurls.so https://stackoverflow.com/search?q=
+
+bind m composite js "https://marks.typish.io/?post="+document.location.href | tabopen
 
 " Comment toggler for Reddit and Hacker News
 " bind ;c hint -c [class*="expand"],[class="togg"]
 
 " Git{Hub,Lab} git clone via SSH yank
-bind yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
-
-" js tri.config.get("nmaps").filter(";").forEach.
+bindurl github yg composite js "git clone " + document.location.href.replace(/https?:\/\//,"git@").replace("/",":").replace(/$/,".git") | clipboard yank
 
 seturl www.postfinance.ch noiframe true
 
@@ -44,6 +70,6 @@ bind gD composite tabduplicate | tabdetach
 
 " New reddit is bad
 autocmd DocStart ^http(s?)://www.reddit.com js tri.excmds.urlmodify("-t", "www", "old")
-" Mosquito nets won't make themselves
-autocmd DocStart ^http(s?)://www.amazon.co.uk js tri.excmds.urlmodify("-t", "www", "smile")
+autocmd DocStart ^http(s?)://www.magnetdl.com/./[^/]+/$ js tri.excmds.urlmodify("-g", "-1", "se/desc/")
 
+bindurl magnetdl ;m composite hint -pipe td.m>a href | js -p tri.native.run("add_movie '"+JS_ARG+"'")
