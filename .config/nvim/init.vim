@@ -70,7 +70,8 @@ let g:dirvish_mode = ':sort ,^.*[\/],'
 
 let g:BufKillCreateMappings = 0
 
-" let g:deoplete#enable_at_startup = 1
+let g:lexical#spelllang = ['en_us', 'it']
+
 let g:textobj_python_no_default_key_mappings = 1
 
 if executable("rg")
@@ -78,6 +79,7 @@ if executable("rg")
 endif
 
 runtime plugins.vim
+
 
 autocmd BufEnter * call ncm2#enable_for_buffer()
 set completeopt=noinsert,menuone,noselect

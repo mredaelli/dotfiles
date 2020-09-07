@@ -1,5 +1,5 @@
 call plug#begin('~/.local/share/nvim/plugged')
-  " Plug 'tmsvg/pear-tree'
+
   Plug 'kana/vim-textobj-user', { 'for': ['markdown', 'pandoc', 'mail', 'python' ] }
   Plug 'wellle/targets.vim'
   Plug 'tpope/vim-unimpaired'
@@ -13,7 +13,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   Plug 'ncm2/ncm2'
   Plug 'roxma/nvim-yarp'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
   " Git
   Plug 'airblade/vim-gitgutter'
@@ -24,14 +23,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'sodapopcan/vim-twiggy'
 
   " Text
-  " Plug 'junegunn/goyo.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
-  Plug 'bilalq/lite-dfm', { 'for': ['markdown', 'pandoc', 'mail' ] }
-  " Plug 'junegunn/limelight.vim', { 'for': ['markdown', 'pandoc', 'mail' ] }
-  " Plug 'reedes/vim-pencil', { 'for': ['markdown', 'pandoc', 'mail' ] }
+  Plug 'reedes/vim-pencil', { 'for': ['markdown', 'pandoc', 'mail' ] }
   Plug 'vim-scripts/UniCycle', { 'for': ['markdown', 'pandoc', 'mail' ] }
   Plug 'reedes/vim-textobj-quote', { 'for': ['markdown', 'pandoc', 'mail' ] }
   Plug 'reedes/vim-textobj-sentence', { 'for': ['markdown', 'pandoc', 'mail' ] }
   Plug 'dbmrq/vim-ditto', { 'for': ['markdown', 'pandoc', 'mail' ] }
+  Plug 'reedes/vim-lexical', { 'for': ['markdown', 'pandoc', 'mail' ] }
 
   " Pandoc
   " Plug 'vim-pandoc/vim-pandoc', { 'for': ['markdown', 'pandoc'] }

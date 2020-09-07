@@ -1,23 +1,27 @@
-set noautoindent
-set wm=0
-set comments+=nb:>
-set fo=qaw2tn
-set nonumber
-set nolist
-
-" Goyo 80
-LiteDFM
-" let g:pencil#wrapModeDefault = 'hard'
-" let g:pencil#conceallevel = 0
-" let g:pencil#textwidth = 74
-
-" let g:limelight_default_coefficient = 0.7
-" let g:limelight_paragraph_span = 1
-" let g:limelight_conceal_ctermfg = 'gray'
+setlocal noautoindent
+setlocal wm=0
+setlocal comments+=nb:>
+setlocal fo=qaw2tn
+setlocal nonumber
+setlocal nolist
 setlocal textwidth=72
+
+let g:pencil#textwidth = 74
+let g:pencil#wrapModeDefault = 'soft'
+" let g:pencil#conceallevel = 0
+
+" LiteDFM
+
 " Limelight
-" HardPencil
+
 UniCycleOn
 
-execute ":s/^/\r/"
+call pencil#init()
+    \ | call lexical#init()
+    \ | call textobj#quote#init()
+    \ | call textobj#sentence#init()
+
+execute ":s/^/\r\r/"
+execute ":normal gg"
 execute ":startinsert"
+
