@@ -121,7 +121,7 @@ bar {
 	mode dock
 	position top
 	tray_padding 2
-	font pango:Hasklig, FontAwesome 14
+	font pango:JetBrains Mono Medium 13
 	separator_symbol "|"
 }
 
@@ -131,6 +131,4 @@ exec_always --no-startup-id ~/bin/wallpaper
 exec --no-startup-id nextcloud 
 exec --no-startup-id flameshot
 exec --no-startup-id dunst
-
-# exec --no-startup-id compton  -b
-# exec --no-startup-id xautolock -detectsleep -time 5 -locker '~/bin/fuzzy_lock.sh' -notify 30 -notifier "notify-send -u critical -t 30000 -- 'LOCKING screen in 30 seconds'"
+exec --no-startup-id spotifyd
