@@ -9,6 +9,16 @@ bind <C-K> tabmove -1
 bind \ tab #
 followpage next
 
+" I don't really use bookmarks...
+unbind a
+unbind A
+
+" Don't interfere with custom gmail shortcuts
+unbindurl mail.google.com j
+unbindurl mail.google.com k
+unbindurl mail.google.com o
+unbindurl mail.google.com s
+
 set incsearch true
 bind / fillcmdline find
 bind ? fillcmdline find -?
@@ -16,7 +26,7 @@ bind n findnext 1
 bind N findnext -1
 bind ,<Space> nohlsearch
 
-guiset_quiet tabs autohide
+guiset_quiet tabs none
 guiset_quiet navbar always
 guiset_quiet hoverlink top-left
 
@@ -73,3 +83,9 @@ autocmd DocStart ^http(s?)://www.reddit.com js tri.excmds.urlmodify("-t", "www",
 autocmd DocStart ^http(s?)://www.magnetdl.com/./[^/]+/$ js tri.excmds.urlmodify("-g", "-1", "se/desc/")
 
 bindurl magnetdl ;m composite hint -pipe td.m>a href | js -p tri.native.run("add_movie '"+JS_ARG+"'")
+
+bind 'w fillcmdline_notrail tab whatsapp
+bind 'm fillcmdline_notrail tab mm.lari.systems
+bind 'u fillcmdline_notrail tab upwork messages
+bind 'g fillcmdline_notrail tab gmail
+bind 'd fillcmdline_notrail tab discord.com
