@@ -1,5 +1,6 @@
 set $mod Mod4
 floating_modifier $mod
+focus_on_window_activation urgent
 
 bindsym $mod+Shift+Return exec kitty
 bindsym $mod+Shift+f exec firefox
@@ -7,12 +8,15 @@ bindsym $mod+Shift+b exec buku_run
 bindsym $mod+Shift+s exec ~/bin/web-search.sh 
 bindsym $mod+Shift+w exec ~/bin/wallpaper
 bindsym $mod+Shift+q kill
-bindsym $mod+Shift+m exec ~/bin/fetch-mail 
 bindsym $mod+Shift+p exec kitty --session ~/lari_session
 
 # ikhal
 bindsym $mod+Shift+c exec kitty --title ikhal --class ikhal ikhal
 for_window [class="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
+
+bindsym $mod+Shift+m exec kitty --title spt --class spt spt
+for_window [class="spt"] floating enable, resize set 1000 800, move position center, border pixel 5, move scratchpad, scratchpad show
+bindsym $mod+space scratchpad show
 
 # quick terminal
 bindsym $mod+Shift+t exec kitty --title taskwarrior --class taskwarrior fish
@@ -59,8 +63,8 @@ bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
 
-bindsym $mod+Shift+space floating toggle
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+Shift+space floating toggle
+# bindsym $mod+space focus mode_toggle
 
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
