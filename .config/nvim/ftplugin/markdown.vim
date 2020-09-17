@@ -1,13 +1,11 @@
-
 setlocal fo+=t
 setlocal fo-=l
-setlocal tw=79
+setlocal textwidth=72
+
+setlocal noautoindent
+let g:pencil#textwidth = 72
 let g:pencil#wrapModeDefault = 'soft'
 let g:pencil#conceallevel = 0
-let g:limelight_default_coefficient = 0.7
-let g:limelight_paragraph_span = 1
 
-Goyo 80
-Limelight
-" SoftPencil
+SoftPencil
 UniCycleOn

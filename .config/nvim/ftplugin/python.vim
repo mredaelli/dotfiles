@@ -14,8 +14,8 @@ call textobj#user#map('python', {
       \   }
       \ })
 
-" setlocal foldmethod=indent
-" setlocal foldnestmax=2
+setlocal foldmethod=indent  foldnestmax=2
+" setlocal foldmethod=indent foldlevel=1 foldnestmax=2
 
 set tabstop=8
 set expandtab

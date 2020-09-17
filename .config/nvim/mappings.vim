@@ -21,7 +21,7 @@ nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :wqa<cr>
 " prevent entering Ex mode by error
 nnoremap Q <nop>
-nnoremap <leader>u :up<cr>
+nnoremap <leader><space> :up<cr>
 
 " go to the folder of the current file
 nnoremap <leader>cd :cd %:p:h<CR>
@@ -29,7 +29,7 @@ nnoremap <leader>cd :cd %:p:h<CR>
 " clear last search
 nnoremap <silent> <CR> :nohls<CR><CR>
 
-nnoremap <Leader>R :silent lgrep<Space>
+nnoremap <Leader>g :silent lgrep<Space>
 
 " fzf
 nnoremap <Leader>f :GitFiles --recurse-submodules<CR>
