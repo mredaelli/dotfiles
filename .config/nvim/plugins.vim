@@ -1,18 +1,28 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
-  Plug 'kana/vim-textobj-user', { 'for': ['markdown', 'pandoc', 'mail', 'python' ] }
+  Plug 'kana/vim-textobj-user', { 'for': ['markdown', 'pandoc', 'mail' ] } ", 'python' ] }
   Plug 'wellle/targets.vim'
   Plug 'tpope/vim-unimpaired'
 
   Plug 'sheerun/vim-polyglot'
 
-  Plug 'autozimu/LanguageClient-neovim', {
-      \ 'branch': 'next',
-      \ 'do': 'bash install.sh',
-      \ }
+  if new_nvim
+    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+    " Plug 'nvim-treesitter/nvim-treesitter-refactor'
+    Plug 'neovim/nvim-lspconfig'
+    Plug 'nvim-lua/completion-nvim'
+    Plug 'nvim-lua/diagnostic-nvim'
+    Plug 'nvim-lua/lsp-status.nvim'
+  else
+    Plug 'autozimu/LanguageClient-neovim', {
+        \ 'branch': 'next',
+        \ 'do': 'bash install.sh',
+        \ }
 
-  Plug 'ncm2/ncm2'
-  Plug 'roxma/nvim-yarp'
+    Plug 'ncm2/ncm2'
+    Plug 'roxma/nvim-yarp'
+  endif
 
   " Git
   Plug 'airblade/vim-gitgutter'
@@ -41,7 +51,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 
   " Python
-  if executable("python")
+  if executable("python") && !new_nvim
     Plug 'numirias/semshi', { 'for': ['python'], 'do': ':UpdateRemotePlugins'}
     Plug 'kh3phr3n/python-syntax', { 'for': ['python'] }
     Plug 'bps/vim-textobj-python', { 'for': ['python'] }
@@ -73,3 +83,4 @@ call plug#begin('~/.local/share/nvim/plugged')
    Plug 'joshdick/onedark.vim'
   " Plug 'tyrannicaltoucan/vim-deep-space'
 call plug#end()
+

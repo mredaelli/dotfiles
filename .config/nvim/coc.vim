@@ -1,14 +1,12 @@
+if !exists("*coc#refresh")
+  finish
+endif
+
 set cmdheight=2
 autocmd User CocDiagnosticChange call lightline#update()
 
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()

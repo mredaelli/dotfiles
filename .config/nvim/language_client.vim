@@ -1,6 +1,6 @@
 let g:LanguageClient_settingsPath = 'ls-settings.json'
 let g:LanguageClient_rootMarkers = ['env']
-
+let g:LanguageClient_diagnosticsList = 'Location'
 let g:LanguageClient_serverCommands = {
  \ 'rust': ['rust-analyzer'],
  \ 'python': ['pyls', '-vv', '--log-file', '~/pyls.log'],
@@ -8,19 +8,6 @@ let g:LanguageClient_serverCommands = {
 "  \ 'python': ['pyls'],
 
 " note that if you are using Plug mapping you should not use `noremap` mappings.
-nmap <silent>K <Plug>(lcn-hover)
-nmap <silent> gd <Plug>(lcn-definition)
-nmap <silent> cn <Plug>(lcn-rename)
-nmap <silent> gt <Plug>(lcn-type-definition)
-nmap <silent> gr <Plug>(lcn-references)
-nmap <silent> gi <Plug>(lcn-implementation)
-nmap <silent> <Leader>* <Plug>(lcn-highlight)
-nmap <silent> <Leader>s <Plug>(lcn-symbols)
-nmap <F1> <Plug>(lcn-menu)
-nmap <silent> <Leader>a <Plug>(lcn-code-action)
-nmap <silent> <F8> <Plug>(lcn-code-lens-action)
-nmap <silent> <Leader>e <Plug>(lcn-explain-error)
-nmap <silent> <F2> <Plug>(lcn-format)
 
 
   " augroup LanguageClient_config
@@ -29,7 +16,9 @@ nmap <silent> <F2> <Plug>(lcn-format)
   "   autocmd User LanguageClientStopped setlocal signcolumn=auto
   " augroup END
 
-autocmd User LanguageClientDiagnosticsChanged call lightline#update()
+if exists("*lightline#update")
+  autocmd User LanguageClientDiagnosticsChanged call lightline#update()
+endif
 
 " function LC_maps()
   " if has_key(g:LanguageClient_serverCommands, &filetype)

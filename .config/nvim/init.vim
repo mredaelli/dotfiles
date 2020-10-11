@@ -1,3 +1,5 @@
+let new_nvim = has("nvim") && v:version > 799
+
 set modeline
 set cursorline
 set hidden
@@ -78,11 +80,17 @@ if executable("rg")
     set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
 endif
 
+if new_nvim
+  let g:polyglot_disabled = [ 'bash.plugin', 'c.plugin', 'c_sharp.plugin', 'cpp.plugin', 'css.plugin', 'dart.plugin', 'fennel.plugin', 'go.plugin',  'html.plugin', 'java.plugin', 'javascript.plugin', 'jsdoc.plugin', 'json.plugin', 'lua.plugin', 'ocaml.plugin', 'ocaml_interface.plugin', 'ocamllex.plugin', 'php.plugin', 'python.plugin', 'ql.plugin', 'regex.plugin', 'rst.plugin', 'ruby.plugin', 'rust.plugin','teal.plugin', 'toml.plugin', 'typescript.plugin']
+endif
+
 runtime plugins.vim
 
 
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
+if exists("*ncm2#enable_for_buffer")
+  autocmd BufEnter * call ncm2#enable_for_buffer()
+  set completeopt=noinsert,menuone,noselect
+endif
 
 " Use <TAB> to select the popup menu:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
@@ -122,3 +130,89 @@ if has('nvim')
     au TermOpen term://*FZF tnoremap <silent> <buffer><nowait> <esc> <c-c>
   aug END
 end
+
+if new_nvim
+lua <<EOF
+
+local nvim_lsp = require("nvim_lsp")
+local nvim_completion = require("completion")
+local nvim_diagnostic = require("diagnostic")
+
+
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",
+  highlight = {
+    enable = true,
+  },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+  textobjects = {
+    select = {
+      enable = true,
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      },
+    },
+    swap = {
+      enable = true,
+      -- swap_next = {
+      --  ["<leader>a"] = "@parameter.inner",
+      -- },
+    },
+    move = {
+      enable = true,
+     -- goto_next_start = {
+     --   ["]m"] = "@function.outer",
+     --   ["]]"] = "@class.outer",
+     -- },
+    },
+  },
+}
+
+local lsp_status = require('lsp-status')
+
+local custom_attach = function(client, bufnr)
+   nvim_completion.on_attach(client, bufnr)
+   nvim_diagnostic.on_attach(client, bufnr)
+   lsp_status.on_attach(client, bufnr)
+   print("LSP Attached.")
+end
+
+nvim_lsp.rust_analyzer.setup{ on_attach = custom_attach, capabilities = lsp_status.capabilities }
+--nvim_lsp.jdtls.setup{ on_attach = custom_attach }
+--nvim_lsp.vimls.setup{ on_attach = custom_attach }
+EOF
+
+  autocmd BufEnter * lua require'completion'.on_attach()
+      " @block.inner @block.outer
+      " @call.inner @call.outer
+      " @class.inner @class.outer
+      " @comment.outer @conditional.inner
+      " @conditional.outer @function.inner
+      " @function.outer @loop.inner
+      " @loop.outer @parameter.inner
+      " @statement.outer
+  set omnifunc=lsp#omnifunc
+
+  set foldmethod=expr
+  set foldexpr=nvim_treesitter#foldexpr()
+
+  let g:polyglot_disabled = [ 'bash.plugin', 'c.plugin', 'c_sharp.plugin', 'cpp.plugin', 'css.plugin', 'dart.plugin', 'fennel.plugin', 'go.plugin',  'html.plugin', 'java.plugin', 'javascript.plugin', 'jsdoc.plugin', 'json.plugin', 'lua.plugin', 'ocaml.plugin', 'ocaml_interface.plugin', 'ocamllex.plugin', 'php.plugin', 'python.plugin', 'ql.plugin', 'regex.plugin', 'rst.plugin', 'ruby.plugin', 'rust.plugin','teal.plugin', 'toml.plugin', 'typescript.plugin']
+
+
+  set completeopt=menuone,noinsert,noselect
+  " Avoid showing message extra message when using completion
+  set shortmess+=c
+
+endif

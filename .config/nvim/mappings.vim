@@ -32,7 +32,7 @@ nnoremap <leader>cd :cd %:p:h<CR>
 " clear last search
 nnoremap <silent> <CR> :nohls<CR><CR>
 
-nnoremap <Leader>g :silent lgrep<Space>
+nnoremap <Leader>g :silent grep<Space>
 
 " fzf
 nnoremap <Leader>f :GitFiles --recurse-submodules<CR>
@@ -68,10 +68,9 @@ onoremap ah <Plug>(GitGutterTextObjectOuterPending)
 xnoremap ih <Plug>(GitGutterTextObjectInnerVisual)
 xnoremap ah <Plug>(GitGutterTextObjectOuterVisual)
 
-nnoremap <silent> [c :Cfprev<CR>
-nnoremap <silent> ]c :Cfnext<CR>
-nnoremap <silent> [C <Plug>(coc-diagnostic-prev-error)
-nnoremap <silent> ]C <Plug>(coc-diagnostic-next-error)
+nnoremap <silent> [c :Lfprev<CR>
+nnoremap <silent> ]c :Lfnext<CR>
+
 
 "GitGutterLineNrHighlightsEnable
 
