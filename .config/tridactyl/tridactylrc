@@ -27,8 +27,8 @@ bind N findnext -1
 bind ,<Space> nohlsearch
 
 guiset_quiet tabs none
-guiset_quiet navbar always
 guiset_quiet hoverlink top-left
+guiset_quiet navbar always
 
 quickmark m https://mail.google.com/mail/u/0/#inbox
 
