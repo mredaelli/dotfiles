@@ -23,6 +23,9 @@ nnoremap <leader>Q :wqa<cr>
 nnoremap Q <nop>
 nnoremap <leader><space> :up<cr>
 
+" select pasted text
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+
 " go to the folder of the current file
 nnoremap <leader>cd :cd %:p:h<CR>
 
@@ -53,16 +56,16 @@ nnoremap <Leader>grm :Git rebase master<CR>
 
 nnoremap <Leader>gA :Git add %:p<cr><cr>
 
-nnoremap ]h <plug>(gitgutternexthunk)
-nnoremap [h <plug>(gitgutterprevhunk)
-nnoremap <leader>ga <plug>(gitgutterstagehunk)
-nnoremap <leader>gu <plug>(gitgutterundohunk)
-nnoremap <leader>gd <plug>(gitgutterpreviewhunk)
+nnoremap ]h :GitGutterNextHunk<CR>
+nnoremap [h :GitGutterPrevHunk<CR>
+nnoremap <leader>ga :GitGutterStageHunk<CR>
+nnoremap <leader>gu :GitGutterUndoHunk<CR>
+nnoremap <leader>gd :GitGutterPreviewHunk<CR>
 
 
-onoremap ih <plug>(gitguttertextobjectinnerpending)
-onoremap ah <plug>(gitguttertextobjectouterpending)
-xnoremap ih <plug>(gitguttertextobjectinnervisual)
+onoremap ih <Plug>(GitGutterTextObjectInnerPending)
+onoremap ah <Plug>(GitGutterTextObjectOuterPending)
+xnoremap ih <Plug>(GitGutterTextObjectInnerVisual)
 xnoremap ah <Plug>(GitGutterTextObjectOuterVisual)
 
 nnoremap <silent> [c :Cfprev<CR>
@@ -105,15 +108,6 @@ vmap <A-Left> <gv
 vmap <A-Right> >gv
 vmap <A-Down> :m '>+1<CR>gv=gv
 vmap <A-Up> :m '<-2<CR>gv=gv
-
-let g:EasyMotion_do_mapping = 0 " Disable default mappings
-let g:EasyMotion_smartcase = 1
-
-nmap <Leader>s <Plug>(easymotion-overwin-f2)
-
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
 
 set splitbelow
 set splitright
