@@ -190,8 +190,25 @@ local custom_attach = function(client, bufnr)
 end
 
 nvim_lsp.rust_analyzer.setup{ on_attach = custom_attach, capabilities = lsp_status.capabilities }
---nvim_lsp.jdtls.setup{ on_attach = custom_attach }
---nvim_lsp.vimls.setup{ on_attach = custom_attach }
+nvim_lsp.pyls.setup{ 
+  settings = {
+    pyls = { plugins = {
+      pyflakes = {enabled= true},
+      pycodestyle = { enabled= true},
+      mccabe = { enabled= true},
+      pylint = { enabled= true},
+      rope = { enabled= true},
+      black = { enabled= true},
+      isort = { enabled= true},
+      pyls_mypy = { enabled= true},
+      pyls_mypy = { live_mode= false},
+      pydocstyle = { enabled= false},
+      autopep8 = { enabled= false},
+      yapf = { enabled= false }
+    }}
+  },
+  on_attach = custom_attach, capabilities = lsp_status.capabilities
+}
 EOF
 
   autocmd BufEnter * lua require'completion'.on_attach()
