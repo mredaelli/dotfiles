@@ -1,0 +1,13 @@
+#! /usr/bin/env nix-shell
+#! nix-shell -p go-mtpfs -i sh
+
+set -euf -o pipefail
+
+dir=~/vols/phone
+
+mkdir -p $dir
+
+go-mtpfs $dir &
+fish -C "export GOING_ONS=phone; cd $dir"
+fusermount -u $dir || echo "Error unmounting $dir"
+pkill go-mtpfs || echo "Error killing go-mtpfs"
