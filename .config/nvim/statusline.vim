@@ -1,9 +1,9 @@
 set noshowmode
 
-let s:symbolE = '✘'
-let s:symbolW = '⚠'
-let s:symbolI = '🛈'
-let s:symbolH = '💡'
+let g:symbolE = '😡'
+let g:symbolW = '😱'
+let g:symbolI = '🙏'
+let g:symbolH = '💡'
 
 let g:lightline = {
 \ 'active': {
@@ -81,16 +81,16 @@ function! s:lightline_coc_diagnostic(kind, sign) abort
 endfunction
 
 function! LightlineCocErrors() abort
-  return s:lightline_coc_diagnostic('error', s:symbolE)
+  return s:lightline_coc_diagnostic('error', g:symbolE)
 endfunction
 function! LightlineCocWarnings() abort
-  return s:lightline_coc_diagnostic('warning', s:symbolW)
+  return s:lightline_coc_diagnostic('warning', g:symbolW)
 endfunction
 function! LightlineCocInfos() abort
-  return s:lightline_coc_diagnostic('information', s:symbolI)
+  return s:lightline_coc_diagnostic('information', g:symbolI)
 endfunction
 function! LightlineCocHints() abort
-  return s:lightline_coc_diagnostic('hint',s:symbolH)
+  return s:lightline_coc_diagnostic('hint',g:symbolH)
 endfunction
 function! LightlineCocStatus() abort
   return get(g:, 'coc_status', '')
@@ -134,14 +134,14 @@ function! LightlineLinterWarnings() abort
   let l:counts = ale#statusline#Count(bufnr(''))
   let l:all_errors = l:counts.error + l:counts.style_error
   let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d '.s:symbolW, all_non_errors)
+  return l:counts.total == 0 ? '' : printf('%d '.g:symbolW, all_non_errors)
 endfunction
 
 function! LightlineLinterErrors() abort
   let l:counts = ale#statusline#Count(bufnr(''))
   let l:all_errors = l:counts.error + l:counts.style_error
   let l:all_non_errors = l:counts.total - l:all_errors
-  return l:counts.total == 0 ? '' : printf('%d '.s:symbolE, all_errors)
+  return l:counts.total == 0 ? '' : printf('%d '.g:symbolE, all_errors)
 endfunction
 
 function! LightlineLinterOK() abort
@@ -161,16 +161,16 @@ function! s:lightline_langclient_diagnostic(kind, sign) abort
 endfunction
 
 function! Lightlinelang_clientErrors() abort
-  return s:lightline_langclient_diagnostic('E', s:symbolE)
+  return s:lightline_langclient_diagnostic('E', g:symbolE)
 endfunction
 function! Lightlinelang_clientWarnings() abort
-  return s:lightline_langclient_diagnostic('W', s:symbolW)
+  return s:lightline_langclient_diagnostic('W', g:symbolW)
 endfunction
 function! Lightlinelang_clientInfos() abort
-  return s:lightline_langclient_diagnostic('I', s:symbolI)
+  return s:lightline_langclient_diagnostic('I', g:symbolI)
 endfunction
 function! Lightlinelang_clientHints() abort
-  return s:lightline_langclient_diagnostic('H',s:symbolH)
+  return s:lightline_langclient_diagnostic('H',g:symbolH)
 endfunction
 
 " Statusline
@@ -187,24 +187,34 @@ endfunction
 
 " echo nvim_treesitter#statusline(90)
 
-let g:diagnostic_enable_virtual_text = 1
-call sign_define("LspDiagnosticsErrorSign", {"text" : "E", "texthl" : "LspDiagnosticsError"})
-call sign_define("LspDiagnosticsWarningSign", {"text" : "W", "texthl" : "LspDiagnosticsWarning"})
-call sign_define("LspDiagnosticsInformationSign", {"text" : "I", "texthl" : "LspDiagnosticsInformation"})
-call sign_define("LspDiagnosticsHintSign", {"text" : "H", "texthl" : "LspDiagnosticsHint"})
-let g:diagnostic_virtual_text_prefix = '✘ '
+call sign_define("LspDiagnosticsSignError", {"text" : g:symbolE, "texthl" : "LspDiagnosticsVirtualTextError"}) 
+call sign_define("LspDiagnosticsSignWarning", {"text" : g:symbolW, "linehl" : "LspDiagnosticsUnderlineWarning"})
+call sign_define("LspDiagnosticsSignInformation", {"text" : g:symbolI, "texthl" : "LspDiagnosticsVirtualTextInformation"})
+call sign_define("LspDiagnosticsSignHint", {"text" : g:symbolH, "texthl" : "LspDiagnosticsVirtualTextHint"})
 
 if new_nvim
 lua <<EOF
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  vim.lsp.diagnostic.on_publish_diagnostics, {
+    underline = true,
+    virtual_text = {
+      spacing = 2,
+      prefix = '😾',
+    },
+    signs = true,
+  }
+)
+
 local lsp_status = require('lsp-status')
 lsp_status.config {
-  indicator_errors = '✘',
-  indicator_warnings = "!",
-  indicator_info = "i",
-  indicator_hint = "›",
+  indicator_errors = vim.g.symbolE,
+  indicator_warnings = vim.g.symbolW,
+  indicator_info = vim.g.symbolI,
+  indicator_hint = vim.g.symbolH,
   status_symbol = "",
 }
 lsp_status.register_progress()
 EOF
 autocmd User LspDiagnosticsChanged call lightline#update()
+autocmd User LspDiagnosticsChanged call vim.lsp.diagnostic.set_loclist()
 endif
