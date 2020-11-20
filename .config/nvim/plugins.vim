@@ -3,6 +3,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'kana/vim-textobj-user', { 'for': ['markdown', 'pandoc', 'mail' ] } ", 'python' ] }
   Plug 'wellle/targets.vim'
   Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-eunuch'
 
   Plug 'sheerun/vim-polyglot'
 
