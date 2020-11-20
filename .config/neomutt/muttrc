@@ -9,6 +9,8 @@ set mailcap_path= ~/.config/neomutt/mailcap
 
 alternates "^.*@typish.io"
 
+alias redazioneND Raffaele Carcano <raffaele.carcano@gmail.com>, Leila Vismara <leilavis@gmail.com>,Micaela Grosso <micaela.grosso@gmail.com>, Mosè Viero <moseviero@gmail.com>, Paolo Ferrarini <pauros@hotmail.com>, Valentino Salvatore <valentino.salvatore83@gmail.com>
+
 
 set quit=ask-yes                    
 set beep=no
