@@ -1,11 +1,12 @@
-nmap <space> <leader>
+let maplocalleader = "\\"
+let mapleader = ' '
 
 " Moving between buffers
 nnoremap <C-\> :BA<CR>
 nnoremap <leader>d :BD<cr>
 nnoremap <leader>D :%bd<cr>
 
-" Moving between tags
+" Moving between tabs
 nnoremap ]t :tabnext<CR>
 nnoremap [t :tabprev<CR>
 

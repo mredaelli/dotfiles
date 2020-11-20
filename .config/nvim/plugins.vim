@@ -12,7 +12,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-lua/completion-nvim'
-    Plug 'nvim-lua/diagnostic-nvim'
     Plug 'nvim-lua/lsp-status.nvim'
   else
     Plug 'autozimu/LanguageClient-neovim', {

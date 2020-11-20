@@ -3,8 +3,10 @@ set expandtab
 set shiftwidth=4
 set softtabstop=4
 
-if exists(':LspInstallInfo')
+if !has("nvim-0.5")
   autocmd BufWritePre <buffer> :call LanguageClient#textDocument_formatting_sync()
+else
+  autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()
 endif
 
 call SetupDev()

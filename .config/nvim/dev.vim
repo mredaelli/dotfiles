@@ -13,11 +13,14 @@ function! SetupDev()
     " or <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
     nnoremap <silent> <buffer> <Leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
     " nnoremap <silent> <buffer> <F8>  code-lens-action>
-    nnoremap <silent> <buffer> <Leader>e  <cmd>lua vim.lsp.util.show_line_diagnostics()<CR>
+    nnoremap <silent> <buffer> <Leader>e  <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
     nnoremap <silent> <buffer> <F2> <cmd>lua vim.lsp.buf.formatting()<CR>
     inoremap <silent> <buffer> <C-s> <cmd>lua vim.lsp.buf.signature_help()<CR>
-    nnoremap ]C <cmd>NextDiagnostic<CR>
-    nnoremap [C <cmd>PrevDiagnostic<CR>
+    nnoremap <buffer> ]c <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
+    nnoremap <buffer> [c <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
+    nnoremap <buffer> ]C <cmd>lua vim.lsp.diagnostic.goto_next({severity_limit='Error'})<CR>
+    nnoremap <buffer> [C <cmd>lua vim.lsp.diagnostic.goto_prev({severity_limit='Error'})<CR>
+
 
   elseif exists('g:LanguageClient_serverCommands')
 

@@ -1,4 +1,4 @@
-let new_nvim = has("nvim") && v:version > 799
+let new_nvim = has("nvim-0.5")
 
 set modeline
 set cursorline
@@ -134,10 +134,8 @@ end
 if new_nvim
 lua <<EOF
 
-local nvim_lsp = require("nvim_lsp")
+local nvim_lsp = require("lspconfig")
 local nvim_completion = require("completion")
-local nvim_diagnostic = require("diagnostic")
-
 
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "all",
@@ -180,32 +178,43 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
+require "nvim-treesitter.parsers".get_parser_configs().markdown = nil
+
 local lsp_status = require('lsp-status')
 
 local custom_attach = function(client, bufnr)
    nvim_completion.on_attach(client, bufnr)
-   nvim_diagnostic.on_attach(client, bufnr)
+
+   -- bug in lsp=status, and I don't want it anyway
+   local old = client.resolved_capabilities.document_symbol
+   client.resolved_capabilities.document_symbol = false
    lsp_status.on_attach(client, bufnr)
+   client.resolved_capabilities.document_symbol = old
    print("LSP Attached.")
 end
 
 nvim_lsp.rust_analyzer.setup{ on_attach = custom_attach, capabilities = lsp_status.capabilities }
-nvim_lsp.pyls.setup{ 
+nvim_lsp.pyls.setup{
   settings = {
-    pyls = { plugins = {
-      pyflakes = {enabled= true},
-      pycodestyle = { enabled= true},
-      mccabe = { enabled= true},
-      pylint = { enabled= true},
-      rope = { enabled= true},
-      black = { enabled= true},
-      isort = { enabled= true},
-      pyls_mypy = { enabled= true},
-      pyls_mypy = { live_mode= false},
-      pydocstyle = { enabled= false},
-      autopep8 = { enabled= false},
-      yapf = { enabled= false }
-    }}
+    pyls = {
+      configurationSources = { "pycodestyle", "pyflakes" },
+      plugins = {
+        pyflakes = {enabled= true},
+        pycodestyle = { enabled= true},
+        mccabe = { enabled= true},
+        pylint = { enabled= true},
+        rope = { enabled= true},
+        black = { enabled= true},
+        isort = { enabled= true},
+        pyls_mypy = {
+          enabled= true,
+          live_mode= true,
+        },
+        pydocstyle = { enabled= false},
+        autopep8 = { enabled= false},
+        yapf = { enabled= false }
+      }
+    }
   },
   on_attach = custom_attach, capabilities = lsp_status.capabilities
 }
