@@ -58,7 +58,7 @@ abbr go 'git checkout'
 abbr gom 'git checkout master'
 
 abbr gP 'git push'
-abbr gPP 'git push --force'
+abbr gPP 'git push --force-with-lease'
 abbr gp 'git pull'
 
 abbr grm 'git rebase master'
