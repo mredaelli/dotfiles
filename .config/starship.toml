@@ -17,8 +17,6 @@ am_or_rebase = "📬~>"
 
 [git_status]
 disabled = false #git_status
-prefix = ""
-suffix = " "
 conflicted = "⚔️ "
 staged="✔️" 
 renamed = "🆎"
@@ -29,7 +27,11 @@ behind = "⬇️"
 diverged = "🔀"
 untracked = "🤷"
 stashed = "📦"
+format = '([$all_status$ahead_behind]($style) )'
 
 [nix_shell]
 impure_msg = "💩"
 symbol = "⊢"
+
+[python]
+format = '[${symbol}${pyenv_prefix}${version}]($style) '
