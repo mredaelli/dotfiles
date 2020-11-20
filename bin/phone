@@ -8,6 +8,6 @@ dir=~/vols/phone
 mkdir -p $dir
 
 go-mtpfs $dir &
-fish -C "export GOING_ONS=phone; cd $dir"
+fish -C "set GOING_ONS phone; cd $dir"
 fusermount -u $dir || echo "Error unmounting $dir"
 pkill go-mtpfs || echo "Error killing go-mtpfs"
