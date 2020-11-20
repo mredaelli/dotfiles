@@ -34,16 +34,16 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   " Text
   Plug 'reedes/vim-pencil', { 'for': ['markdown', 'pandoc', 'mail' ] }
-  Plug 'vim-scripts/UniCycle', { 'for': ['markdown', 'pandoc', 'mail' ] }
+  " Plug 'vim-scripts/UniCycle', { 'for': ['markdown', 'pandoc', 'mail' ] }
   Plug 'reedes/vim-textobj-quote', { 'for': ['markdown', 'pandoc', 'mail' ] }
   Plug 'reedes/vim-textobj-sentence', { 'for': ['markdown', 'pandoc', 'mail' ] }
   Plug 'dbmrq/vim-ditto', { 'for': ['markdown', 'pandoc', 'mail' ] }
   Plug 'reedes/vim-lexical', { 'for': ['markdown', 'pandoc', 'mail' ] }
 
   " Pandoc
-  " Plug 'vim-pandoc/vim-pandoc', { 'for': ['markdown', 'pandoc'] }
+  Plug 'vim-pandoc/vim-pandoc', { 'for': ['markdown', 'pandoc'] }
   " Plug 'vim-pandoc/vim-pandoc-after', { 'for': ['markdown', 'pandoc'] }
-  " Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['markdown', 'pandoc'] }
+  Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['markdown', 'pandoc'] }
 
  " Development
   Plug 'idanarye/vim-vebugger', {'for': ['python'] }
@@ -61,10 +61,10 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   Plug 'satabin/hocon-vim'
 
-  Plug 'vimwiki/vimwiki'
+  Plug 'lervag/wiki.vim'
 
   Plug 'junegunn/fzf'
-  Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf.vim', {'commit': '0fe8e198a3a501b54dbc4f9587526c097599f95a'}
 
   Plug 'qpkorr/vim-bufkill'
 
