@@ -6,7 +6,7 @@ set softtabstop=4
 if !has("nvim-0.5")
   autocmd BufWritePre <buffer> :call LanguageClient#textDocument_formatting_sync()
 else
-  autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting()
+  autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 1000)
 endif
 
 call SetupDev()

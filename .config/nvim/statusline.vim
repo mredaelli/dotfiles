@@ -216,5 +216,5 @@ lsp_status.config {
 lsp_status.register_progress()
 EOF
 autocmd User LspDiagnosticsChanged call lightline#update()
-autocmd User LspDiagnosticsChanged call vim.lsp.diagnostic.set_loclist()
+" autocmd User LspDiagnosticsChanged lua vim.lsp.diagnostic.set_loclist()
 endif
