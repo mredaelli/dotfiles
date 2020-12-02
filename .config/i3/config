@@ -4,6 +4,7 @@ focus_on_window_activation urgent
 
 bindsym $mod+Shift+Return exec kitty
 bindsym $mod+Shift+f exec firefox
+bindsym $mod+Shift+r exec kitty --title ranger ranger
 bindsym $mod+Shift+b exec buku_run
 bindsym $mod+Shift+s exec ~/bin/web-search.sh 
 bindsym $mod+Shift+w exec ~/bin/wallpaper
