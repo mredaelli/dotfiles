@@ -49,6 +49,9 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'mfussenegger/nvim-dap'
+    Plug 'theHamsta/nvim-dap-virtual-text'
+    Plug 'nvim-telescope/telescope-dap.nvim'
   else
     Plug 'junegunn/fzf'
     Plug 'junegunn/fzf.vim', {'commit': '0eb385065bf614abb6f38db85f0a09eddec728fc'}
@@ -66,9 +69,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'satabin/hocon-vim'
 
   Plug 'lervag/wiki.vim'
-
-  Plug 'junegunn/fzf'
-  Plug 'junegunn/fzf.vim', {'commit': '0fe8e198a3a501b54dbc4f9587526c097599f95a'}
 
   Plug 'qpkorr/vim-bufkill'
 

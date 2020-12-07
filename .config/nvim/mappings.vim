@@ -55,6 +55,11 @@ if new_nvim
   nnoremap <Leader>tgC :Telescope git_bcommits<CR>
   nnoremap <Leader>tgb :Telescope git_branches<CR>
   nnoremap <Leader>tgs :Telescope git_status<CR>
+  nnoremap <Leader>tdv <cmd>lua require('telescope').extensions.dap.variables()<cr>
+  " require'telescope'.extensions.dap.commands{}
+" require'telescope'.extensions.dap.configurations{}
+" require'telescope'.extensions.dap.list_breakpoints{}
+" require'telescope'.extensions.dap.variables{}
 else
   nnoremap <Leader>f :GitFiles --recurse-submodules<CR>
   nnoremap <Leader>F :ProjectFiles<CR>
