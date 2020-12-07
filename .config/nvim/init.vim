@@ -218,6 +218,19 @@ nvim_lsp.pyls.setup{
   },
   on_attach = custom_attach, capabilities = lsp_status.capabilities
 }
+require('telescope').setup{
+  defaults = {
+    prompt_prefix = ">",
+    layout_strategy = "vertical",
+    --width = 0.75,
+    --preview_cutoff = 120,
+    results_height = 12,
+    --results_width = 0.8,
+    --color_devicons = true,
+    --use_less = true,
+    set_env = { ['COLORTERM'] = 'truecolor' },
+  }
+}
 EOF
 
   autocmd BufEnter * lua require'completion'.on_attach()

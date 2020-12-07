@@ -35,14 +35,35 @@ nnoremap <silent> <CR> :nohls<CR><CR>
 
 nnoremap <Leader>g :silent grep<Space>
 
-" fzf
-nnoremap <Leader>f :GitFiles --recurse-submodules<CR>
-nnoremap <Leader>F :ProjectFiles<CR>
-nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>h :History<CR>
-nnoremap <Leader>t :BTags<CR>
-nnoremap <Leader>r :Rg<Space>
-nnoremap <Leader>C :Commands<CR>
+if new_nvim
+  nnoremap <Leader>f :Telescope git_files<CR>
+  nnoremap <Leader>F :Telescope find_files<CR>
+  nnoremap <Leader>b :Telescope buffer<CR>
+  nnoremap <Leader>th :Telescope command_history<CR>
+  nnoremap <Leader>tt :Telescope tags<CR>
+  nnoremap <Leader>r :Telescope live_grep<CR>
+  nnoremap <Leader>tc :Telescope commands<CR>
+  nnoremap <Leader>tm :Telescope marks<CR>
+  nnoremap <Leader>ts :Telescope treesitter<CR>
+  nnoremap <Leader>t/ :Telescope current_buffer_fuzzy_find<CR>
+  nnoremap <Leader>tT :Telescope current_buffer_tags<CR>
+  nnoremap <Leader>tr :Telescope lsp_references<CR>
+  nnoremap <Leader>tS :Telescope lsp_workspace_symbols<CR>
+  nnoremap <Leader>tq :Telescope quickfix<CR>
+  nnoremap <Leader>tl :Telescope loclist<CR>
+  nnoremap <Leader>tgc :Telescope git_commits<CR>
+  nnoremap <Leader>tgC :Telescope git_bcommits<CR>
+  nnoremap <Leader>tgb :Telescope git_branches<CR>
+  nnoremap <Leader>tgs :Telescope git_status<CR>
+else
+  nnoremap <Leader>f :GitFiles --recurse-submodules<CR>
+  nnoremap <Leader>F :ProjectFiles<CR>
+  nnoremap <Leader>b :Buffers<CR>
+  nnoremap <Leader>h :History<CR>
+  nnoremap <Leader>tt :BTags<CR>
+  nnoremap <Leader>r :Rg<Space>
+  nnoremap <Leader>tc :Commands<CR>
+endif
 
 nnoremap <Leader>gf :Gfetch<CR>
 nnoremap <Leader>gs :Gstatus<CR>
@@ -90,11 +111,6 @@ function! s:changebranch(branch)
     execute 'Git checkout' . a:branch
   endif
 endfunction
-
-command! -bang Gbranch call fzf#run({
-            \ 'source': 'git branch -a --no-color | grep -v "^\* " ',
-            \ 'sink': function('s:changebranch')
-            \ })
 
 " commenting with Ctrl-/
 nmap <C-_>  gcc

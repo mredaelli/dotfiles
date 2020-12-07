@@ -45,10 +45,14 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'vim-pandoc/vim-pandoc-after', { 'for': ['markdown', 'pandoc'] }
   Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['markdown', 'pandoc'] }
 
- " Development
-  Plug 'idanarye/vim-vebugger', {'for': ['python'] }
-  " Plug 'wellle/context.vim'
-
+  if new_nvim
+    Plug 'nvim-lua/plenary.nvim'
+    Plug 'nvim-lua/popup.nvim'
+    Plug 'nvim-telescope/telescope.nvim'
+  else
+    Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf.vim', {'commit': '0eb385065bf614abb6f38db85f0a09eddec728fc'}
+  endif
 
   " Python
   if executable("python") && !new_nvim
