@@ -38,7 +38,7 @@ nnoremap <Leader>g :silent grep<Space>
 if new_nvim
   nnoremap <Leader>f :Telescope git_files<CR>
   nnoremap <Leader>F :Telescope find_files<CR>
-  nnoremap <Leader>b :Telescope buffer<CR>
+  nnoremap <Leader>b :Telescope buffers<CR>
   nnoremap <Leader>th :Telescope command_history<CR>
   nnoremap <Leader>tt :Telescope tags<CR>
   nnoremap <Leader>r :Telescope live_grep<CR>
