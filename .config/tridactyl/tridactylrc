@@ -9,6 +9,9 @@ bind <C-K> tabmove -1
 bind \ tab #
 followpage next
 
+" open gitlab tags
+bind ,t composite js document.getElementsByClassName("js-labels-block")[0].children[0].click() | sleep 500 | hint -Jc [class~="gl-search-box-by-type-input"]
+
 " I don't really use bookmarks...
 unbind a
 unbind A
