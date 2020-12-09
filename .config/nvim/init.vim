@@ -249,6 +249,7 @@ require('telescope').setup{
   }
 }
 require('telescope').load_extension('dap')
+require'nvim-web-devicons'.setup { default = true; }
 
 EOF
 command! -complete=file -nargs=* DebugRust lua require "my_debug".start_c_debugger({<f-args>}, "gdb", "rust-gdb")

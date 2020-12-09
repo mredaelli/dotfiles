@@ -126,7 +126,7 @@ bar {
 	mode dock
 	position top
 	tray_padding 2
-	font pango:JetBrains Mono Medium 13
+	font pango:JetBrains Mono Medium Nerd Font 13
 	separator_symbol "|"
 }
 

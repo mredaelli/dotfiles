@@ -18,8 +18,8 @@ if type -q bat
 end
 
 if type -q exa
-  alias ls='exa'
-  alias ll='exa -l --git'
+  alias ls='exa --icons'
+  alias ll='exa -l --git --icons --color-scale'
 end
 
 alias less='less -r'

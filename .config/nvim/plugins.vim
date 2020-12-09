@@ -4,6 +4,8 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'wellle/targets.vim'
   Plug 'tpope/vim-unimpaired'
   Plug 'tpope/vim-eunuch'
+  Plug 'kyazdani42/nvim-web-devicons'
+  "Plug 'ryanoasis/vim-devicons'
 
   Plug 'sheerun/vim-polyglot'
 
