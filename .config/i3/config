@@ -6,10 +6,10 @@ bindsym $mod+Shift+Return exec kitty
 bindsym $mod+Shift+f exec firefox
 bindsym $mod+Shift+r exec kitty --title ranger ranger
 bindsym $mod+Shift+b exec buku_run
-bindsym $mod+Shift+s exec ~/bin/web-search.sh 
+bindsym $mod+Shift+s exec ~/bin/web-search.sh
 bindsym $mod+Shift+w exec ~/bin/wallpaper
 bindsym $mod+Shift+q kill
-bindsym $mod+Shift+p exec kitty --session ~/lari_session
+bindsym $mod+Shift+l exec kitty --session ~/lari_session
 
 # ikhal
 bindsym $mod+Shift+c exec kitty --title ikhal --class ikhal ikhal
@@ -37,6 +37,8 @@ bindsym $mod+o exec transset -a 2 -x 2 -t
 
 bindsym $mod+r split toggle
 bindsym $mod+u focus parent
+# move up one level
+bindsym $mod+p mark i3ha, focus parent, focus parent, mark i3hb, [con_mark="i3ha"] focus, move window to mark i3hb, unmark i3ha, unmark i3hb
 
 bindsym $mod+f fullscreen toggle
 
