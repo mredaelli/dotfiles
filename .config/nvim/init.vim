@@ -151,6 +151,9 @@ require'nvim-treesitter.configs'.setup {
       node_decremental = "grm",
     },
   },
+  indent = {
+    enable = true
+  },
   textobjects = {
     select = {
       enable = true,
@@ -177,8 +180,6 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 }
-
-require "nvim-treesitter.parsers".get_parser_configs().markdown = nil
 
 local lsp_status = require('lsp-status')
 
