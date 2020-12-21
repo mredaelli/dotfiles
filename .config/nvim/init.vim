@@ -95,6 +95,8 @@ endif
 " Use <TAB> to select the popup menu:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+imap <Tab> <Plug>(completion_smart_tab)
+imap <S-Tab> <Plug>(completion_smart_s_tab)
 
 runtime macros/matchit.vim
 
@@ -182,6 +184,10 @@ require'nvim-treesitter.configs'.setup {
 }
 
 local lsp_status = require('lsp-status')
+
+lsp_status.register_progress()
+
+
 
 local custom_attach = function(client, bufnr)
    nvim_completion.on_attach(client, bufnr)
@@ -279,7 +285,18 @@ nnoremap <silent> <leader>xb :lua require'dap'.toggle_breakpoint()<CR>
   let g:polyglot_disabled = [ 'bash.plugin', 'c.plugin', 'c_sharp.plugin', 'cpp.plugin', 'css.plugin', 'dart.plugin', 'fennel.plugin', 'go.plugin',  'html.plugin', 'java.plugin', 'javascript.plugin', 'jsdoc.plugin', 'json.plugin', 'lua.plugin', 'ocaml.plugin', 'ocaml_interface.plugin', 'ocamllex.plugin', 'php.plugin', 'python.plugin', 'ql.plugin', 'regex.plugin', 'rst.plugin', 'ruby.plugin', 'rust.plugin','teal.plugin', 'toml.plugin', 'typescript.plugin']
 
 
-  set completeopt=menuone,noinsert,noselect
+set completeopt=menuone,noinsert,noselect
+inoremap <c-j> <c-o><Plug>(completion_next_source)<cr>
+inoremap <c-k> <c-o><Plug>(completion_prev_source)<cr>
+let g:completion_matching_smart_case = 1
+let g:completion_auto_change_source = 1
+let g:completion_chain_complete_list = [
+    \{'complete_items': ['lsp', 'snippet']},
+    \{'complete_items': ['keyword', 'files', 'omni']},
+    \{'mode': '<c-p>'},
+    \{'mode': '<c-n>'}
+\]
+
   " Avoid showing message extra message when using completion
   set shortmess+=c
 
