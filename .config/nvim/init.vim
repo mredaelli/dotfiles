@@ -286,10 +286,11 @@ nnoremap <silent> <leader>xb :lua require'dap'.toggle_breakpoint()<CR>
 
 
 set completeopt=menuone,noinsert,noselect
+set complete=.,w,b,u,i
 inoremap <c-j> <c-o><Plug>(completion_next_source)<cr>
 inoremap <c-k> <c-o><Plug>(completion_prev_source)<cr>
 let g:completion_matching_smart_case = 1
-let g:completion_auto_change_source = 1
+let g:completion_auto_change_source = 0
 let g:completion_chain_complete_list = [
     \{'complete_items': ['lsp', 'snippet']},
     \{'complete_items': ['keyword', 'files', 'omni']},
