@@ -39,3 +39,21 @@ metadata = ["color"]
 type = "filesystem"
 path = "~/.calendars/personal/"
 fileext = ".ics"
+
+[pair lari]
+a = "google_lari"
+b = "google_lari_local"
+collections = ["from a", "from b"]
+conflict_resolution = "a wins"
+metadata = ["color"]
+
+[storage google_lari]
+type = "google_calendar"
+token_file = "~/.vdirsyncer/google_calendar_token"
+client_id = "1069670343373-hq0p01cj4gv238sp0du6p1frslvjpj1b.apps.googleusercontent.com"
+client_secret.fetch = ["command", "secret-tool", "lookup", "client_id", "1069670343373-hq0p01cj4gv238sp0du6p1frslvjpj1b"]
+
+[storage google_lari_local]
+type = "filesystem"
+path = "~/.calendars/lari"
+fileext = ".ics"

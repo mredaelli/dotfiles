@@ -1,5 +1,9 @@
 [calendars]
 
+[[lari]]
+path = ~/.calendars/lari/mredaelli@lari.digital
+color = light red
+
 [[personal]]
 path = ~/.calendars/personal/personal
 color = dark blue
