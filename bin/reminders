@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-delta=30d
+delta=30m
 now=$(date +"%R")
 
 events=$(khal list --notstarted -df "" -f "{start-time} {title}" today $now $delta | grep -v "No events")
