@@ -1,5 +1,5 @@
 [global]
-    font = Noto Sans 14
+    font = JetBrains Mono Medium Nerd Font
 
     markup = yes
 
@@ -7,18 +7,19 @@
     #   %a  appname
     #   %s  summary
     #   %b  body
-    #   %i  iconname (including its path)
-    #   %I  iconname (without its path)
     #   %p  progress value if set ([  0%] to [100%]) or nothing
     # Markup is allowed
     format = <span letter_spacing="500"><b>%a:</b> %s\n<small><i>%b</i></small></span>
     max_icon_size=32
 
+    icon_path = /run/current-system/sw/share/icons/Tango/32x32/devices:/run/current-system/sw/share/icons/Tango/32x32/status:/run/current-system/sw/share/icons/Tango/32x32/actions
+    icon_position = left
+
     sort = yes
     indicate_hidden = yes
 
     # Possible values are "left", "center" and "right"
-    alignment = right
+    alignment = left
 
     # The frequency with wich text that is longer than the notification
     # window allows bounces back and forth.
@@ -36,7 +37,8 @@
     # ignore newlines '\n' in notifications
     ignore_newline = no
 
-    geometry = "300x5-30+20"
+    geometry = "500x5-30+20"
+    shrink = true
     transparency = 0
 
     # Don't remove messages, if the user is idle (no mouse or keyboard input)
@@ -68,7 +70,7 @@
     #  * frame: use the same color as the frame.
     #  * anything else will be interpreted as a X color
     separator_color = frame
-    startup_notification = true
+    startup_notification = false
 
     dmenu = /run/current-system/sw/bin/dmenu -p dunst:
     browser = firefox -new-tab
@@ -92,11 +94,9 @@
     timeout = 5
 
 [urgency_normal]
-    #background = "#285577"
-    #foreground = "#CECFD1"
     background = "#26282B"
     foreground = "#CECFD1"
-    timeout = 5
+    timeout = 10
 
 [urgency_critical]
     background = "#26282B"

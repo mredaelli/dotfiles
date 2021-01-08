@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+delta=30d
+now=$(date +"%R")
+
+events=$(khal list --notstarted -df "" -f "{start-time} {title}" today $now $delta | grep -v "No events")
+
+[ -z "$events" ] && exit
+
+notify-send -i stock_new-appointment -u critical -a Reminders "Hey! remember?" "$events"
