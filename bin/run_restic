@@ -2,7 +2,7 @@
 
 H=/home/turing
 
-wget -q --spider http://google.com
+curl -sSf http://google.com > /dev/null
 
 if [ $? -eq 0 ]; then
   export B2_ACCOUNT_ID=$(secret-tool lookup host blaze bucket gimli-backup key id)

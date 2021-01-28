@@ -71,6 +71,7 @@ endif
 let g:dirvish_mode = ':sort ,^.*[\/],'
 
 let g:BufKillCreateMappings = 0
+let g:sneak#label = 1
 
 let g:lexical#spelllang = ['en_us', 'it']
 
@@ -187,9 +188,16 @@ local lsp_status = require('lsp-status')
 
 lsp_status.register_progress()
 
-
+--require'lsp_extensions'.inlay_hints{
+	--highlight = "Comment",
+	--prefix = " > ",
+	--aligned = false,
+	--only_current_line = false
+	--enabled = { "TypeHint", "ChainingHint", "ParameterHint" }
+--}
 
 local custom_attach = function(client, bufnr)
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
    nvim_completion.on_attach(client, bufnr)
 
    -- bug in lsp=status, and I don't want it anyway

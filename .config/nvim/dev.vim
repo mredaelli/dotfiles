@@ -20,7 +20,13 @@ function! SetupDev()
     nnoremap <buffer> [c <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
     nnoremap <buffer> ]C <cmd>lua vim.lsp.diagnostic.goto_next({severity_limit='Error'})<CR>
     nnoremap <buffer> [C <cmd>lua vim.lsp.diagnostic.goto_prev({severity_limit='Error'})<CR>
+     " 300ms of no cursor movement to trigger CursorHold
+    set updatetime=300
+    " Show diagnostic popup on cursor hold
+    autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
+    autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
+    \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment" }
 
   elseif exists('g:LanguageClient_serverCommands')
 

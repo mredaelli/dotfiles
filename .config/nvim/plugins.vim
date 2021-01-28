@@ -15,6 +15,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
     " Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'neovim/nvim-lspconfig'
+    Plug 'nvim-lua/lsp_extensions.nvim'
+
     Plug 'nvim-lua/completion-nvim'
     Plug 'nvim-lua/lsp-status.nvim'
   else
