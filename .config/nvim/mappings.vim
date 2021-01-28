@@ -6,6 +6,11 @@ nnoremap <C-\> :BA<CR>
 nnoremap <leader>d :BD<cr>
 nnoremap <leader>D :%bd<cr>
 
+" nmap J <Plug>(interactiveJoin)
+" xmap J <Plug>(interactiveJoin)
+nmap <leader>J <Plug>(interactiveGJoin)
+xmap <leader>J <Plug>(interactiveGJoin)
+
 " Moving between tabs
 nnoremap ]t :tabnext<CR>
 nnoremap [t :tabprev<CR>
@@ -36,7 +41,7 @@ nnoremap <silent> <CR> :nohls<CR><CR>
 nnoremap <Leader>g :silent grep<Space>
 
 if new_nvim
-  nnoremap <Leader>f :Telescope git_files<CR>
+  nnoremap <Leader>f :Telescope git_files show_untracked=false recurse_submodules=true<CR>
   nnoremap <Leader>F :Telescope find_files<CR>
   nnoremap <Leader>b :Telescope buffers<CR>
   nnoremap <Leader>th :Telescope command_history<CR>
