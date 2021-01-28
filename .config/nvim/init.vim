@@ -135,176 +135,50 @@ if has('nvim')
 end
 
 if new_nvim
-lua <<EOF
+  lua require('init')
 
-local nvim_lsp = require("lspconfig")
-local nvim_completion = require("completion")
+  lua <<EOF
 
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",
-  highlight = {
-    enable = true,
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  },
-  indent = {
-    enable = true
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
-        ["ac"] = "@class.outer",
-        ["ic"] = "@class.inner",
-      },
-    },
-    swap = {
-      enable = true,
-      -- swap_next = {
-      --  ["<leader>a"] = "@parameter.inner",
-      -- },
-    },
-    move = {
-      enable = true,
-     -- goto_next_start = {
-     --   ["]m"] = "@function.outer",
-     --   ["]]"] = "@class.outer",
-     -- },
-    },
-  },
-}
+  local nvim_lsp = require("lspconfig")
+  local nvim_completion = require("completion")
 
-local lsp_status = require('lsp-status')
+  local lsp_status = require('lsp-status')
+  lsp_status.register_progress()
 
-lsp_status.register_progress()
 
---require'lsp_extensions'.inlay_hints{
-	--highlight = "Comment",
-	--prefix = " > ",
-	--aligned = false,
-	--only_current_line = false
-	--enabled = { "TypeHint", "ChainingHint", "ParameterHint" }
---}
-
-local custom_attach = function(client, bufnr)
-    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-   nvim_completion.on_attach(client, bufnr)
-
-   -- bug in lsp=status, and I don't want it anyway
-   local old = client.resolved_capabilities.document_symbol
-   client.resolved_capabilities.document_symbol = false
-   lsp_status.on_attach(client, bufnr)
-   client.resolved_capabilities.document_symbol = old
-   print("LSP Attached.")
-end
-
-nvim_lsp.rust_analyzer.setup{ on_attach = custom_attach, capabilities = lsp_status.capabilities }
-nvim_lsp.pyls.setup{
-  settings = {
-    pyls = {
-      configurationSources = { "pycodestyle", "pyflakes" },
-      plugins = {
-        pyflakes = {enabled= true},
-        pycodestyle = { enabled= true},
-        mccabe = { enabled= true},
-        pylint = { enabled= true},
-        rope = { enabled= true},
-        black = { enabled= true},
-        isort = { enabled= true},
-        pyls_mypy = {
-          enabled= true,
-          live_mode= true,
-        },
-        pydocstyle = { enabled= false},
-        autopep8 = { enabled= false},
-        yapf = { enabled= false }
-      }
+  require('telescope').setup{
+    defaults = {
+      prompt_prefix = ">",
+      layout_strategy = "vertical",
+      results_height = 12,
+      set_env = { ['COLORTERM'] = 'truecolor' },
     }
-  },
-  on_attach = custom_attach, capabilities = lsp_status.capabilities
-}
-
-local dap = require('dap')
-dap.adapters.cpp = {
-  type = 'executable',
-  attach = {
-    pidProperty = "pid",
-    pidSelect = "ask"
-  },
-  command = 'lldb-vscode',
-  sourceLanguages = {"rust"},
-  env = {
-    LLDB_LAUNCH_FLAG_LAUNCH_IN_TTY = "YES"
-  },
-  name = "lldb"
-}
-vim.g.dap_virtual_text = true
-
-require('telescope').setup{
-  defaults = {
-    prompt_prefix = ">",
-    layout_strategy = "vertical",
-    --width = 0.75,
-    --preview_cutoff = 120,
-    results_height = 12,
-    --results_width = 0.8,
-    --color_devicons = true,
-    --use_less = true,
-    set_env = { ['COLORTERM'] = 'truecolor' },
   }
-}
-require('telescope').load_extension('dap')
-require'nvim-web-devicons'.setup { default = true; }
+  require('telescope').load_extension('dap')
 
-EOF
-command! -complete=file -nargs=* DebugRust lua require "my_debug".start_c_debugger({<f-args>}, "gdb", "rust-gdb")
+  require'nvim-web-devicons'.setup { default = true; }
 
-nnoremap <silent> <leader>xx :lua require'dap'.repl.toggle()<CR>
-nnoremap <silent> <leader>x<Space> :lua require'dap'.continue()<CR>
-nnoremap <silent> <leader>xs :lua require'dap'.step_over()<CR>
-nnoremap <silent> <leader>xi :lua require'dap'.step_into()<CR>
-nnoremap <silent> <leader>xo :lua require'dap'.step_out()<CR>
-nnoremap <silent> <leader>xb :lua require'dap'.toggle_breakpoint()<CR>
+  EOF
 
-  autocmd BufEnter * lua require'completion'.on_attach()
-      " @block.inner @block.outer
-      " @call.inner @call.outer
-      " @class.inner @class.outer
-      " @comment.outer @conditional.inner
-      " @conditional.outer @function.inner
-      " @function.outer @loop.inner
-      " @loop.outer @parameter.inner
-      " @statement.outer
-  set omnifunc=lsp#omnifunc
+  command! -complete=file -nargs=* DebugRust lua require "my_debug".start_c_debugger({<f-args>}, "gdb", "rust-gdb")
+
+
+    " autocmd BufEnter * lua require'completion'.on_attach()
+        " @block.inner @block.outer
+        " @call.inner @call.outer
+        " @class.inner @class.outer
+        " @comment.outer @conditional.inner
+        " @conditional.outer @function.inner
+        " @function.outer @loop.inner
+        " @loop.outer @parameter.inner
+        " @statement.outer
+    " set omnifunc=lsp#omnifunc
 
   set foldmethod=expr
   set foldexpr=nvim_treesitter#foldexpr()
 
   let g:polyglot_disabled = [ 'bash.plugin', 'c.plugin', 'c_sharp.plugin', 'cpp.plugin', 'css.plugin', 'dart.plugin', 'fennel.plugin', 'go.plugin',  'html.plugin', 'java.plugin', 'javascript.plugin', 'jsdoc.plugin', 'json.plugin', 'lua.plugin', 'ocaml.plugin', 'ocaml_interface.plugin', 'ocamllex.plugin', 'php.plugin', 'python.plugin', 'ql.plugin', 'regex.plugin', 'rst.plugin', 'ruby.plugin', 'rust.plugin','teal.plugin', 'toml.plugin', 'typescript.plugin']
 
-
-set completeopt=menuone,noinsert,noselect
-set complete=.,w,b,u,i
-inoremap <c-j> <c-o><Plug>(completion_next_source)<cr>
-inoremap <c-k> <c-o><Plug>(completion_prev_source)<cr>
-let g:completion_matching_smart_case = 1
-let g:completion_auto_change_source = 0
-let g:completion_chain_complete_list = [
-    \{'complete_items': ['lsp', 'snippet']},
-    \{'complete_items': ['keyword', 'files', 'omni']},
-    \{'mode': '<c-p>'},
-    \{'mode': '<c-n>'}
-\]
 
   " Avoid showing message extra message when using completion
   set shortmess+=c
