@@ -139,8 +139,8 @@ if new_nvim
 
   lua <<EOF
 
-  local nvim_lsp = require("lspconfig")
-  local nvim_completion = require("completion")
+  -- local nvim_lsp = require("lspconfig")
+  -- local nvim_completion = require("completion")
 
   local lsp_status = require('lsp-status')
   lsp_status.register_progress()
@@ -154,33 +154,33 @@ if new_nvim
       set_env = { ['COLORTERM'] = 'truecolor' },
     }
   }
-  require('telescope').load_extension('dap')
+  -- require('telescope').load_extension('dap')
 
   require'nvim-web-devicons'.setup { default = true; }
 
-  EOF
+EOF
 
-  command! -complete=file -nargs=* DebugRust lua require "my_debug".start_c_debugger({<f-args>}, "gdb", "rust-gdb")
-
-
-    " autocmd BufEnter * lua require'completion'.on_attach()
-        " @block.inner @block.outer
-        " @call.inner @call.outer
-        " @class.inner @class.outer
-        " @comment.outer @conditional.inner
-        " @conditional.outer @function.inner
-        " @function.outer @loop.inner
-        " @loop.outer @parameter.inner
-        " @statement.outer
-    " set omnifunc=lsp#omnifunc
-
-  set foldmethod=expr
-  set foldexpr=nvim_treesitter#foldexpr()
-
-  let g:polyglot_disabled = [ 'bash.plugin', 'c.plugin', 'c_sharp.plugin', 'cpp.plugin', 'css.plugin', 'dart.plugin', 'fennel.plugin', 'go.plugin',  'html.plugin', 'java.plugin', 'javascript.plugin', 'jsdoc.plugin', 'json.plugin', 'lua.plugin', 'ocaml.plugin', 'ocaml_interface.plugin', 'ocamllex.plugin', 'php.plugin', 'python.plugin', 'ql.plugin', 'regex.plugin', 'rst.plugin', 'ruby.plugin', 'rust.plugin','teal.plugin', 'toml.plugin', 'typescript.plugin']
+" command! -complete=file -nargs=* DebugRust lua require "my_debug".start_c_debugger({<f-args>}, "gdb", "rust-gdb")
 
 
-  " Avoid showing message extra message when using completion
-  set shortmess+=c
+" autocmd BufEnter * lua require'completion'.on_attach()
+    " @block.inner @block.outer
+    " @call.inner @call.outer
+    " @class.inner @class.outer
+    " @comment.outer @conditional.inner
+    " @conditional.outer @function.inner
+    " @function.outer @loop.inner
+    " @loop.outer @parameter.inner
+    " @statement.outer
+" set omnifunc=lsp#omnifunc
+
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+
+let g:polyglot_disabled = [ 'bash.plugin', 'c.plugin', 'c_sharp.plugin', 'cpp.plugin', 'css.plugin', 'dart.plugin', 'fennel.plugin', 'go.plugin',  'html.plugin', 'java.plugin', 'javascript.plugin', 'jsdoc.plugin', 'json.plugin', 'lua.plugin', 'ocaml.plugin', 'ocaml_interface.plugin', 'ocamllex.plugin', 'php.plugin', 'python.plugin', 'ql.plugin', 'regex.plugin', 'rst.plugin', 'ruby.plugin', 'rust.plugin','teal.plugin', 'toml.plugin', 'typescript.plugin']
+
+
+" Avoid showing message extra message when using completion
+set shortmess+=c
 
 endif

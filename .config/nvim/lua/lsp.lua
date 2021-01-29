@@ -8,7 +8,7 @@ local map = function(mode, key, result, noremap)
     vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap = noremap, silent = true})
 end
 
-vim.g.completion_enable_auto_popup = false
+vim.g.completion_enable_auto_popup = true
 -- vim.g.completion_enable_snippet = "UltiSnips"
 vim.g.completion_matching_strategy_list = {"exact", "substring", "fuzzy", "all"}
 vim.g.completion_auto_change_source = 1
@@ -65,7 +65,12 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
         vim.lsp.diagnostic.on_publish_diagnostics,
         {
             underline = true,
-            update_in_insert = false
+            update_in_insert = false,
+            signs = true,
+            virtual_text = {
+              spacing = 4,
+              prefix = '~',
+            },
         }
     )(...)
     pcall(vim.lsp.diagnostic.set_loclist, {open_loclist = false})
@@ -96,55 +101,78 @@ vim.cmd [[command! FormatEndable lua FormatToggle(false)]]
 
 _G.formatting = function()
     if not vim.g[string.format("format_disabled_%s", vim.bo.filetype)] then
-        vim.lsp.buf.formatting(vim.g[string.format("format_options_%s", vim.bo.filetype)] or {})
+        vim.lsp.buf.formatting_sync(vim.g[string.format("format_options_%s", vim.bo.filetype)] or {}, 1000)
     end
 end
 
 local on_attach = function(client)
+    local msg = "LSP " .. client.name
     if client.resolved_capabilities.document_formatting then
         vim.cmd [[augroup Format]]
         vim.cmd [[autocmd! * <buffer>]]
         vim.cmd [[autocmd BufWritePost <buffer> lua formatting()]]
         vim.cmd [[augroup END]]
     end
-    -- nnoremap <silent> <buffer> gD <cmd>lua vim.lsp.buf.declaration()<CR>
-    -- nnoremap <silent> <buffer> gt <cmd>lua vim.lsp.buf.type_definition()<CR>
-    -- nnoremap <silent> <buffer> gi <cmd>lua vim.lsp.buf.implementation()<CR>
-    -- nnoremap <silent> <buffer> <Leader>s <cmd>lua vim.lsp.buf.document_symbol()<CR>
-    -- nnoremap <silent> <buffer> <Leader>a <cmd>lua vim.lsp.buf.code_action()<CR>
-    -- " nnoremap <silent> <buffer> <F8>  code-lens-action>
-    -- nnoremap <silent> <buffer> <Leader>e  <cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
-    -- nnoremap <silent> <buffer> <F2> <cmd>lua vim.lsp.buf.formatting()<CR>
-    -- inoremap <silent> <buffer> <C-s> <cmd>lua vim.lsp.buf.signature_help()<CR>
-    -- nnoremap <buffer> ]c <cmd>lua vim.lsp.diagnostic.goto_next()<CR>
-    -- nnoremap <buffer> [c <cmd>lua vim.lsp.diagnostic.goto_prev()<CR>
-    -- nnoremap <buffer> ]C <cmd>lua vim.lsp.diagnostic.goto_next({severity_limit='Error'})<CR>
-    -- nnoremap <buffer> [C <cmd>lua vim.lsp.diagnostic.goto_prev({severity_limit='Error'})<CR>
-    --  " 300ms of no cursor movement to trigger CursorHold
+
     -- set updatetime=300
-    -- " Show diagnostic popup on cursor hold
     -- autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
-    -- autocmd CursorMoved,InsertLeave,BufEnter,BufWinEnter,TabEnter,BufWritePost *
-    -- \ lua require'lsp_extensions'.inlay_hints{ prefix = '', highlight = "Comment" }
+        -- other capabilities
+        -- call_hierarchy = false,
+        -- declaration = false,
+        -- execute_command = true,
+        -- implementation = false,
+        -- signature_help = true,
+        -- signature_help_trigger_characters = <3>{ "(", ",", "=" },
+        -- type_definition = false,
+        -- workspace_folder_properties = {
+        --   changeNotifications = true,
+        --   supported = true
+        -- },
+        -- workspace_symbol = false
+    map("n", "<Leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
+    if client.resolved_capabilities.document_highlight then
+        map("n", "<Leader>h", "<cmd>lua vim.lsp.buf.document_highlight()<CR>")
+        msg = msg .. " high"
+    end
+    if client.resolved_capabilities.document_range_formatting then
+        map("v", "<Leader>=", "<cmd>lua vim.lsp.buf.document_range_formatting()<CR>")
+        map("x", "<Leader>=", "<cmd>lua vim.lsp.buf.document_range_formatting()<CR>")
+        msg = msg .. " form"
+    end
+    if client.resolved_capabilities.document_symbol then
+        map("n", "<Leader>s", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
+        msg = msg .. " symb"
+    end
+    if client.resolved_capabilities.code_action then
+        map("n", "<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+        msg = msg .. " action"
+    end
     if client.resolved_capabilities.goto_definition then
         map("n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<CR>")
+        msg = msg .. " def"
     end
     if client.resolved_capabilities.completion then
         require "completion".on_attach(client)
         map("i", "<c-n>", "<Plug>(completion_trigger)", false)
         map("i", "<c-j>", "<Plug>(completion_next_source)", false)
         map("i", "<c-k>", "<Plug>(completion_prev_source)", false)
+        msg = msg .. " compl"
     end
     if client.resolved_capabilities.hover then
         map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
+        msg = msg .. " hover"
     end
     if client.resolved_capabilities.find_references then
-        map("n", "<Leader>*", ":call lists#ChangeActiveList('Quickfix')<CR>:lua vim.lsp.buf.references()<CR>")
+        map("n", "<Leader>*", ":lua vim.lsp.buf.references()<CR>")
+        msg = msg .. " refs"
     end
     if client.resolved_capabilities.rename then
         map("n", "<leader>cn", "<cmd>lua vim.lsp.buf.rename()<CR>")
+        msg = msg .. " ren"
     end
+
+    print(msg)
 end
 
 function _G.activeLSP()
@@ -171,23 +199,11 @@ end
 -- }
 
 -- https://github.com/palantir/python-language-server
-lspconfig.pyls.setup {
-    on_attach = on_attach,
-    settings = {
-        pyls = {
-            plugins = {
-                pycodestyle = {
-                    enabled = false,
-                    ignore = {
-                        "E501"
-                    }
-                }
-            }
-        }
-    }
-}
+-- lspconfig.pyls.setup {
+--     on_attach = on_attach,
+-- }
 
--- lspconfig.pyright.setup {on_attach = on_attach}
+lspconfig.pyright.setup {on_attach = on_attach}
 
 -- https://github.com/theia-ide/typescript-language-server
 -- lspconfig.tsserver.setup {
@@ -254,7 +270,7 @@ lspconfig.pyls.setup {
 -- }
 
 -- https://github.com/iamcco/vim-language-server
--- lspconfig.vimls.setup {on_attach = on_attach}
+lspconfig.vimls.setup {on_attach = on_attach}
 
 -- https://github.com/vscode-langservers/vscode-json-languageserver
 -- lspconfig.jsonls.setup {
@@ -277,7 +293,7 @@ lspconfig.rust_analyzer.setup{ on_attach = on_attach }
 -- lspconfig.html.setup {on_attach = on_attach}
 
 -- https://github.com/bash-lsp/bash-language-server
--- lspconfig.bashls.setup {on_attach = on_attach}
+lspconfig.bashls.setup {on_attach = on_attach}
 
 -- https://github.com/rcjsuen/dockerfile-language-server-nodejs
 -- lspconfig.dockerls.setup {on_attach = on_attach}
@@ -289,50 +305,18 @@ lspconfig.rust_analyzer.setup{ on_attach = on_attach }
 --     filetypes = {"tf"}
 -- }
 
--- local vint = require "efm/vint"
--- local luafmt = require "efm/luafmt"
--- local golint = require "efm/golint"
--- local goimports = require "efm/goimports"
-local black = require "efm/black"
-local isort = require "efm/isort"
-local flake8 = require "efm/flake8"
-local mypy = require "efm/mypy"
--- local prettier = require "efm/prettier"
--- local eslint = require "efm/eslint"
--- local shellcheck = require "efm/shellcheck"
--- local terraform = require "efm/terraform"
--- local misspell = require "efm/misspell"
--- https://github.com/mattn/efm-langserver
+
 lspconfig.efm.setup {
     on_attach = on_attach,
     init_options = {documentFormatting = true},
     settings = {
         rootMarkers = {".git/"},
-        languages = {
-            -- ["="] = {misspell},
-            -- vim = {vint},
-            -- lua = {luafmt},
-            -- go = {golint, goimports},
-            python = {black, isort, flake8, mypy},
-            -- typescript = {prettier, eslint},
-            -- javascript = {prettier, eslint},
-            -- typescriptreact = {prettier, eslint},
-            -- javascriptreact = {prettier, eslint},
-            -- yaml = {prettier},
-            -- json = {prettier},
-            -- html = {prettier},
-            -- scss = {prettier},
-            -- css = {prettier},
-            -- markdown = {prettier},
-            -- sh = {shellcheck},
-            -- tf = {terraform}
-        }
     }
 }
 
 -- lspconfig.clangd.setup {on_attach = on_attach}
 
- require'lsp_extensions'.inlay_hints{
+require'lsp_extensions'.inlay_hints{
       highlight = "Comment",
       prefix = " > ",
       aligned = false,

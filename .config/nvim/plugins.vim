@@ -43,9 +43,9 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-telescope/telescope.nvim'
-    Plug 'mfussenegger/nvim-dap'
-    Plug 'theHamsta/nvim-dap-virtual-text'
-    Plug 'nvim-telescope/telescope-dap.nvim'
+    " Plug 'mfussenegger/nvim-dap'
+    " Plug 'theHamsta/nvim-dap-virtual-text'
+    " Plug 'nvim-telescope/telescope-dap.nvim'
 
   Plug 'nathangrigg/vim-beancount', { 'for': 'beancount' }
 
