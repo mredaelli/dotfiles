@@ -9,7 +9,7 @@ bindsym $mod+Shift+b exec buku_run
 bindsym $mod+Shift+s exec ~/bin/web-search.sh
 bindsym $mod+Shift+w exec ~/bin/wallpaper
 bindsym $mod+Shift+q kill
-bindsym $mod+Shift+l exec kitty --session ~/lari_session
+bindsym $mod+Ctrl+l exec kitty --session ~/lari_session
 
 # ikhal
 bindsym $mod+Shift+c exec kitty --title ikhal --class ikhal ikhal
@@ -124,12 +124,12 @@ bindsym Num_Lock mode "num"
 font pango:Hasklig 13
 
 bar {
-    status_command i3status
-	mode dock
+  status_command i3status-rs
+	# mode dock
 	position top
-	tray_padding 2
+	# tray_padding 2
 	font pango:JetBrains Mono Medium Nerd Font 13
-	separator_symbol "|"
+	# separator_symbol "|"
 }
 
 exec --no-startup-id volumeicon
