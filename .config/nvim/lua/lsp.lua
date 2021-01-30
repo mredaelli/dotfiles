@@ -1,5 +1,5 @@
 -- mostly copied from https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp.lua
-local lspconfig = require "lspconfig"
+ local lspconfig = require "lspconfig"
 
 local map = function(mode, key, result, noremap)
     if noremap == nil then
@@ -8,20 +8,41 @@ local map = function(mode, key, result, noremap)
     vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap = noremap, silent = true})
 end
 
-vim.g.completion_enable_auto_popup = true
+vim.g.completion_enable_auto_signature = 0
 -- vim.g.completion_enable_snippet = "UltiSnips"
 vim.g.completion_matching_strategy_list = {"exact", "substring", "fuzzy", "all"}
 vim.g.completion_auto_change_source = 1
 vim.g.completion_matching_smart_case = 1
+vim.g.completion_trigger_keyword_length = 3
+-- {complete_items = {"snippet"}},
+local text_compl =     {
+                default = {
+                        {complete_items = {"kspell"} },
+                        {complete_items = {"buffers"} },
+                        {mode = "<c-n>"},
+                },
+            }
 vim.g.completion_chain_complete_list = {
-    default = {
-        {complete_items = {"lsp"}},
-        {complete_items = {"snippet"}},
-        {complete_items = {"path"}},
-        {mode = "<c-n>"},
-        {mode = "dict"}
-    }
+        default = {
+                default = {
+                        {complete_items = {"lsp"} },
+                        {complete_items = {"buffers"} },
+                        {mode = "<c-n>"},
+                },
+                string = {
+                        {complete_items = {"buffers"} },
+                        {complete_items = {"path"} },
+                        {mode = "<c-n>"},
+                },
+                comment = {
+                        {complete_items = {"path"} },
+                        {mode = "<c-n>"},
+                },
+        },
+        markdown = text_compl,
+        mail = text_compl,
 }
+
 vim.g.completion_enable_auto_paren = 1
 vim.g.completion_customize_lsp_label = {
     Function = " [function]",
@@ -37,7 +58,8 @@ vim.g.completion_customize_lsp_label = {
     Module = " [module]",
     Text = "ﮜ[text]",
     Class = " [class]",
-    Interface = " [interface]"
+    Interface = " [interface]",
+    Constant = "v [constant]"
 }
 
 -- vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
@@ -108,6 +130,7 @@ end
 local on_attach = function(client)
     local msg = "LSP " .. client.name
     if client.resolved_capabilities.document_formatting then
+        msg = msg .. " fmt"
         vim.cmd [[augroup Format]]
         vim.cmd [[autocmd! * <buffer>]]
         vim.cmd [[autocmd BufWritePost <buffer> lua formatting()]]
@@ -138,7 +161,7 @@ local on_attach = function(client)
     if client.resolved_capabilities.document_range_formatting then
         map("v", "<Leader>=", "<cmd>lua vim.lsp.buf.document_range_formatting()<CR>")
         map("x", "<Leader>=", "<cmd>lua vim.lsp.buf.document_range_formatting()<CR>")
-        msg = msg .. " form"
+        msg = msg .. " rfmt"
     end
     if client.resolved_capabilities.document_symbol then
         map("n", "<Leader>s", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
@@ -175,20 +198,20 @@ local on_attach = function(client)
     print(msg)
 end
 
-function _G.activeLSP()
-    local servers = {}
-    for _, lsp in pairs(vim.lsp.get_active_clients()) do
-        table.insert(servers, {name = lsp.name, id = lsp.id})
-    end
-    _G.dump(servers)
-end
-function _G.bufferActiveLSP()
-    local servers = {}
-    for _, lsp in pairs(vim.lsp.buf_get_clients()) do
-        table.insert(servers, {name = lsp.name, id = lsp.id})
-    end
-    _G.dump(servers)
-end
+-- function _G.activeLSP()
+--     local servers = {}
+--     for _, lsp in pairs(vim.lsp.get_active_clients()) do
+--         table.insert(servers, {name = lsp.name, id = lsp.id})
+--     end
+--     _G.dump(servers)
+-- end
+-- function _G.bufferActiveLSP()
+--     local servers = {}
+--     for _, lsp in pairs(vim.lsp.buf_get_clients()) do
+--         table.insert(servers, {name = lsp.name, id = lsp.id})
+--     end
+--     _G.dump(servers)
+-- end
 
 -- https://github.com/golang/tools/tree/master/gopls
 -- lspconfig.gopls.setup {
@@ -196,11 +219,6 @@ end
 --         client.resolved_capabilities.document_formatting = false
 --         on_attach(client)
 --     end
--- }
-
--- https://github.com/palantir/python-language-server
--- lspconfig.pyls.setup {
---     on_attach = on_attach,
 -- }
 
 lspconfig.pyright.setup {on_attach = on_attach}
@@ -213,61 +231,52 @@ lspconfig.pyright.setup {on_attach = on_attach}
 --     end
 -- }
 
--- https://github.com/sumneko/lua-language-server
--- require("nlua.lsp.nvim").setup(
---     lspconfig,
---     {
---         on_attach = on_attach,
---         cmd = {"lua-language-server"}
---     }
--- )
+local function get_lua_runtime()
+    local result = {}
+    for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
+        local lua_path = path .. "/lua/"
+        if vim.fn.isdirectory(lua_path) then
+            result[lua_path] = true
+        end
+    end
+    result[vim.fn.expand("$VIMRUNTIME/lua")] = true
+    result[vim.fn.expand("~/build/neovim/src/nvim/lua")] = true
 
--- local function get_lua_runtime()
---     local result = {}
---     for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
---         local lua_path = path .. "/lua/"
---         if vim.fn.isdirectory(lua_path) then
---             result[lua_path] = true
---         end
---     end
---     result[vim.fn.expand("$VIMRUNTIME/lua")] = true
---     result[vim.fn.expand("~/build/neovim/src/nvim/lua")] = true
-
---     return result
--- end
--- lspconfig.sumneko_lua.setup {
---     on_attach = on_attach,
---     cmd = {"lua-language-server"},
---     settings = {
---         Lua = {
---             runtime = {
---                 version = "LuaJIT"
---             },
---             completion = {
---                 keywordSnippet = "Disable"
---             },
---             diagnostics = {
---                 enable = true,
---                 globals = {
---                     -- Neovim
---                     "vim",
---                     -- Busted
---                     "describe",
---                     "it",
---                     "before_each",
---                     "after_each",
---                     "teardown",
---                     "pending"
---                 },
---                 workspace = {
---                     library = get_lua_runtime(),
---                     maxPreload = 1000,
---                     preloadFileSize = 1000
---                 }
---             }
---         }
---     }
--- }
+    return result
+end
+lspconfig.sumneko_lua.setup {
+    on_attach = on_attach,
+    cmd = {"lua-language-server"},
+    settings = {
+        Lua = {
+            runtime = {
+                version = "LuaJIT"
+            },
+            completion = {
+                keywordSnippet = "Disable"
+            },
+            diagnostics = {
+                enable = true,
+                globals = {
+                    -- Neovim
+                    "vim",
+                    -- Busted
+                    "describe",
+                    "it",
+                    "before_each",
+                    "after_each",
+                    "teardown",
+                    "pending"
+                },
+                workspace = {
+                    library = get_lua_runtime(),
+                    maxPreload = 1000,
+                    preloadFileSize = 1000
+                }
+            }
+        }
+    }
+}
 
 -- https://github.com/iamcco/vim-language-server
 lspconfig.vimls.setup {on_attach = on_attach}

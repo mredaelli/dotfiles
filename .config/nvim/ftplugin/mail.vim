@@ -16,12 +16,13 @@ let g:pencil#wrapModeDefault = 'soft'
 
 UniCycleOn
 
+setlocal spell spelllang=en_us,it
+
 call pencil#init()
     \ | call lexical#init()
     \ | call textobj#quote#init()
     \ | call textobj#sentence#init()
 
-execute ":s/^/\r\r/"
+execute ":s/^/\r\rM./"
 execute ":normal gg"
 execute ":startinsert"
-

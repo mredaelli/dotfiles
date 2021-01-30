@@ -1,6 +1,6 @@
 let new_nvim = has("nvim-0.5")
 
-set modeline
+    set modeline
 set cursorline
 set hidden
 set number
@@ -13,7 +13,7 @@ set virtualedit=all
 set expandtab
 set shiftwidth=2
 set softtabstop=2
-set tabstop=4
+set tabstop=2
 
 set showmatch
 
@@ -88,11 +88,6 @@ endif
 runtime plugins.vim
 
 
-if exists("*ncm2#enable_for_buffer")
-  autocmd BufEnter * call ncm2#enable_for_buffer()
-  set completeopt=noinsert,menuone,noselect
-endif
-
 " Use <TAB> to select the popup menu:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -139,9 +134,6 @@ if new_nvim
 
   lua <<EOF
 
-  -- local nvim_lsp = require("lspconfig")
-  -- local nvim_completion = require("completion")
-
   local lsp_status = require('lsp-status')
   lsp_status.register_progress()
 
@@ -182,5 +174,9 @@ let g:polyglot_disabled = [ 'bash.plugin', 'c.plugin', 'c_sharp.plugin', 'cpp.pl
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
+set complete=kspell
+set completeopt=menuone,noinsert,noselect
+
+autocmd BufEnter * lua require'completion'.on_attach()
 
 endif
