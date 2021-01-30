@@ -61,6 +61,14 @@ vim.g.completion_customize_lsp_label = {
     Interface = " [interface]",
     Constant = "v [constant]"
 }
+vim.cmd[[highlight LspReference guifg=NONE guibg=#665c54 guisp=NONE gui=NONE cterm=NONE ctermfg=NONE ctermbg=59]]
+vim.cmd[[highlight! link LspReferenceText LspReference]]
+vim.cmd[[highlight! link LspReferenceRead LspReference]]
+vim.cmd[[highlight! link LspReferenceWrite LspReference]]
+vim.cmd[[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
+vim.cmd[[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
+vim.cmd[[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
+
 
 -- vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
 -- vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", numhl = "LspDiagnosticsDefaultWarning"})
@@ -198,21 +206,6 @@ local on_attach = function(client)
     print(msg)
 end
 
--- function _G.activeLSP()
---     local servers = {}
---     for _, lsp in pairs(vim.lsp.get_active_clients()) do
---         table.insert(servers, {name = lsp.name, id = lsp.id})
---     end
---     _G.dump(servers)
--- end
--- function _G.bufferActiveLSP()
---     local servers = {}
---     for _, lsp in pairs(vim.lsp.buf_get_clients()) do
---         table.insert(servers, {name = lsp.name, id = lsp.id})
---     end
---     _G.dump(servers)
--- end
-
 -- https://github.com/golang/tools/tree/master/gopls
 -- lspconfig.gopls.setup {
 --     on_attach = function(client)
@@ -318,9 +311,6 @@ lspconfig.bashls.setup {on_attach = on_attach}
 lspconfig.efm.setup {
     on_attach = on_attach,
     init_options = {documentFormatting = true},
-    settings = {
-        rootMarkers = {".git/"},
-    }
 }
 
 -- lspconfig.clangd.setup {on_attach = on_attach}

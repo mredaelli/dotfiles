@@ -1,5 +1,8 @@
 version: 2
 
+# log-file: /tmp/efm.log
+# log-level: 1
+
 root-markers:
   - .git/
 
@@ -124,8 +127,8 @@ tools:
   csv-csvlint: &csv-csvlint
     lint-command: 'csvlint'
 
-  lua-lua-format: &lua-lua-format
-    format-command: 'lua-format -i'
+  stylua: &stylua
+    format-command: 'stylua -'
     format-stdin: true
 
   blade-blade-formatter: &blade-blade-formatter
@@ -142,8 +145,8 @@ tools:
       - mix.lock
       - mix.exs
 
-  nixpkgs-fmt:
-    format-command: 'nixpkgs-fmt -'
+  nixpkgs-fmt: &nixpkgs-fmt
+    format-command: 'nixpkgs-fmt'
     format-stdin: true
 
   any-excitetranslate: &any-excitetranslate
@@ -178,6 +181,11 @@ languages:
     # - <<: *python-yapf
     - <<: *python-black
     - <<: *python-isort
+      root-markers:
+        - .git
+        - setup.cfg
+        - pyproject.toml
+        - requirements.txt
 
   dockerfile:
     - <<: *dockerfile-hadolint
@@ -208,7 +216,7 @@ languages:
     - <<: *csv-csvlint
 
   lua:
-    - <<: *lua-lua-format
+    - <<: *stylua
 
   blade:
     - <<: *blade-blade-formatter
