@@ -2,19 +2,21 @@ theme = "space-villain"
 icons = "awesome"
 
 [[block]]
-block = "sound"
-name = "bluez_sink.00_1D_DF_B4_C6_78.a2dp_sink"
-format = "{volume}%🔈"
-
-[[block]]
-block = "sound"
-name = "alsa_output.pci-0000_00_1f.3.analog-stereo"
-format = "{volume}%🎧"
-
-[[block]]
 block = "music"
-player = "spotify"
-buttons = ["play", "next"]
+buttons = ["prev", "play", "next"]
+smart_trim = true
+# dynamic_width=true
+# on_click = "spd"
+on_collapsed_click = "kitty spt"
+
+[[block]]
+block = "sound"
+
+[[block]]
+block = "bluetooth"
+mac = "04:52:C7:C7:DA:C4"
+label = " Beats"
+# hide_disconnected = true
 
 [[block]]
 block = "disk_space"
@@ -39,37 +41,41 @@ alert = 10.0
 [[block]]
 block = "memory"
 display_type = "memory"
-format_swap = "{SUp}%"
-format_mem = "{Mup}%"
+format_swap = "{SFpi}%"
+format_mem = "{MFpi}%"
+clickable = false
 
 [[block]]
 block = "memory"
 display_type = "swap"
-format_mem = "{Mup}%"
-format_swap = "{SUp}%"
+format_mem = "{MFpi}%"
+format_swap = "{SFpi}%"
+clickable = false
 
 [[block]]
 block = "cpu"
 format = "{barchart} {utilization}%"
 interval = 1
-# on_click = "htop"
+# on_click = "kitty htop"
 
 [[block]]
 block = "load"
 interval = 1
-format = "{1m}"
+format = "{1m} {5m}"
 
 
 [[block]]
 block = "backlight"
 
 [[block]]
-block = "networkmanager"
-
-
+block = "battery"
 
 [[block]]
-block = "battery"
+block = "networkmanager"
+max_ssid_width = 8
+# allow_missing = true
+# hide_missing = true
+
 
 [[block]]
 block = "time"

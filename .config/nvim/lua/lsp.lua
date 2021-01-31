@@ -65,9 +65,6 @@ vim.cmd[[highlight LspReference guifg=NONE guibg=#665c54 guisp=NONE gui=NONE cte
 vim.cmd[[highlight! link LspReferenceText LspReference]]
 vim.cmd[[highlight! link LspReferenceRead LspReference]]
 vim.cmd[[highlight! link LspReferenceWrite LspReference]]
-vim.cmd[[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
-vim.cmd[[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
-vim.cmd[[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
 
 
 -- vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
@@ -164,6 +161,11 @@ local on_attach = function(client)
     map("n", "<Leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
     if client.resolved_capabilities.document_highlight then
         map("n", "<Leader>h", "<cmd>lua vim.lsp.buf.document_highlight()<CR>")
+        vim.cmd [[augroup LspHighlight]]
+        vim.cmd [[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]]
+        vim.cmd [[autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()]]
+        vim.cmd [[autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()]]
+        vim.cmd [[augroup END]]
         msg = msg .. " high"
     end
     if client.resolved_capabilities.document_range_formatting then
