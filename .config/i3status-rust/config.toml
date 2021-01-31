@@ -1,10 +1,18 @@
 theme = "space-villain"
-icons = "awesome"
+
+[icons]
+name = "awesome"
+[icons.overrides]
+music_next=">"
+# music_pause="|"
+# music_play="~"
+# music_prev="<"
 
 [[block]]
 block = "music"
 buttons = ["prev", "play", "next"]
-smart_trim = true
+# player = "spotifyd"
+# smart_trim = true
 # dynamic_width=true
 # on_click = "spd"
 on_collapsed_click = "kitty spt"
@@ -23,7 +31,7 @@ block = "disk_space"
 path = "/home"
 alias = ""
 info_type = "available"
-unit = "GB"
+unit = "Percent"
 interval = 20
 warning = 20.0
 alert = 10.0
@@ -33,7 +41,7 @@ block = "disk_space"
 path = "/"
 alias = ""
 info_type = "available"
-unit = "GB"
+unit = "Percent"
 interval = 20
 warning = 20.0
 alert = 10.0
