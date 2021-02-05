@@ -1,0 +1,13 @@
+font=JetBrainsMonoMedium Nerd Font 13
+icon-path=/run/current-system/sw/share/icons/Tango/32x32/devices:/run/current-system/sw/share/icons/Tango/32x32/status:/run/current-system/sw/share/icons/Tango/32x32/actions
+
+format=<span letter_spacing="500"><b>%a:</b> %s\n<small><i>%b</i></small></span>
+max-icon-size=32
+
+width=500
+height=200
+
+default-timeout=15000
+
+[urgency=high]
+default-timeout=0

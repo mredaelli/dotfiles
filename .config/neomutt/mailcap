@@ -1,10 +1,10 @@
 #text/html; w3m -dump -s -o display_link=yes -o display_link_number=yes -o decode_url=yes -T text/html -I %{charset}; copiousoutput; description=HTML Text
 
-image/*;  open_async %s "sxiv FILE"; test=test -n "$DISPLAY"
+image/*;  open_async %s "sxiv FILE"
 
 text/plain; sed -E "s^https?://[a-zA-Z0-9_-?&/.=]*^<link>^g" %s | sed -E "s/^\\s+$//g" | less -s;
 
-text/html; open_async %s "firefox FILE" keep; description=HTML Text; test=test -n "$DISPLAY";  nametemplate=%s.html
+text/html; open_async %s "firefox FILE" keep; description=HTML Text;  nametemplate=%s.html
 
 text/html;\
 	w3m -T text/html -I %{charset} -o display_link=no\
@@ -13,7 +13,7 @@ text/html;\
 	copiousoutput
 
 
-application/pdf; open_async %s "zathura FILE"; test=test -n "$DISPLAY"
+application/pdf; open_async %s "zathura FILE"
 
 text/calendar; khal import -a personal '%s'
 application/ics; khal import -a personal '%s'

@@ -1,4 +1,11 @@
 set $mod Mod4
+
+set $notifier dunst
+set $screenshotter flameshot
+set $screenshotter_cmd "flameshot gui -p $picpath/screenshots"
+set $menu rofi
+set $msg i3-msg
+
 floating_modifier $mod
 focus_on_window_activation urgent
 
@@ -31,9 +38,8 @@ bindsym $mod+Ctrl+2 exec ~/bin/two_monitors.sh && notify-send 'Switched to two m
 bindsym $mod+Ctrl+0 exec new=$(backlight decrease) && notify-send "Brightness decreased to $new"
 bindsym $mod+Ctrl+9 exec new=$(backlight increase) && notify-send "Brightness increased to $new"
 
-bindsym $mod+d exec rofi -show run
-bindsym $mod+w exec rofi -show window
-bindsym $mod+o exec transset -a 2 -x 2 -t
+bindsym $mod+d exec $$menu -show run || $$menu --show run
+bindsym $mod+w exec $$menu -show window
 
 bindsym $mod+r split toggle
 bindsym $mod+u focus parent
@@ -49,8 +55,7 @@ bindsym $mod+e layout toggle split
 
 set $picpath ~/media/pictures
 
-bindsym Print exec flameshot gui -p $picpath/screenshots
-bindsym $mod+Print exec flameshot full -p $picpath/screenshots
+bindsym Print exec $screenshotter_cmd
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec light -A 10
@@ -102,19 +107,18 @@ bindsym $mod+Control+Right resize grow width 10 px or 10 ppt
 for_window [urgent=latest] focus
 for_window [window_role="GtkFileChooserDialog"] resize set 800 600, move position center
 
-bindsym $mod+Escape mode "$mode_system"
 set $mode_system (l)ock, (e)xit, (s)uspend, (r)eboot, (p)oweroff
+bindsym $mod+x mode "$mode_system"
 mode "$mode_system" {
-    bindsym l exec --no-startup-id exec ~/bin/fuzzy_lock.sh, mode "default"
-    bindsym e exec --no-startup-id light -O, exec --no-startup-id i3-msg exit, mode "default"
+    bindsym l exec --no-startup-id exec $$locker, mode "default"
+    bindsym e exec --no-startup-id light -O, exec --no-startup-id $$msg exit, mode "default"
     bindsym r exec --no-startup-id light -O, exec --no-startup-id systemctl reboot
     bindsym p exec --no-startup-id light -O, exec --no-startup-id systemctl poweroff
-    bindsym s exec --no-startup-id exec sh -c "~/bin/fuzzy_lock.sh && systemctl suspend", mode "default"
+    bindsym s exec --no-startup-id exec sh -c "$$locker && systemctl suspend", mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-
 
 mode "num" {
         bindsym Num_Lock mode "default"
@@ -125,17 +129,12 @@ font pango:Hasklig 13
 
 bar {
   status_command i3status-rs
-	# mode dock
 	position top
-	# tray_padding 2
 	font pango:JetBrains Mono Medium Nerd Font 13
-	# separator_symbol "|"
 }
 
-exec --no-startup-id volumeicon
-exec --no-startup-id pnmixer
 exec_always --no-startup-id ~/bin/wallpaper
-exec --no-startup-id nextcloud 
-exec --no-startup-id flameshot
-exec --no-startup-id dunst
-exec --no-startup-id spotifyd
+exec --no-startup-id nextcloud
+exec --no-startup-id $$screenshotter
+exec --no-startup-id $$notifier
+exec --no-startup-id killall spotifyd || spotifyd
