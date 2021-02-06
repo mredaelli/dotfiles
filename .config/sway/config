@@ -1,0 +1,29 @@
+# output HDMI-A-1 bg ~/wallpaper.png stretch
+
+include ../i3/config
+
+set $notifier mako
+set $screenshotter_cmd 'grimshot copy area'
+set $menu wofi
+set $msg swaymsg
+set $locker swaylock-fancy
+
+bindsym Ctrl+Print exec 'grimshot save area'
+bindsym $mod+Alt+Space mako dismiss
+
+for_window [title="Firefox — Sharing Indicator"] floating enable, resize set 10 10
+
+exec swayidle -w \
+    timeout 300 'swaylock-fancy' \
+    timeout 600 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock-fancy'
+
+xwayland disable
+
+input * {
+    xkb_layout "us"
+    xkb_options "eurosign:e,compose:ralt,terminate:ctrl_alt_bksp,caps:swapescape"
+
+    tap enabled
+}
