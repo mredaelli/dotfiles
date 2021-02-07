@@ -179,6 +179,7 @@ local on_attach = function(client)
     end
     if client.resolved_capabilities.code_action then
         map("n", "<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+        vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
         msg = msg .. " action"
     end
     if client.resolved_capabilities.goto_definition then
