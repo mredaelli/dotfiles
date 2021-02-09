@@ -55,7 +55,7 @@ bindsym $mod+e layout toggle split
 
 set $picpath ~/media/pictures
 
-bindsym Print exec $screenshotter_cmd
+bindsym Print exec $$screenshotter_cmd
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec light -A 10

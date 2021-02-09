@@ -26,6 +26,11 @@ block = "bluetooth"
 mac = "04:52:C7:C7:DA:C4"
 label = " Beats"
 # hide_disconnected = true
+[[block]]
+block = "bluetooth"
+mac = "00:1D:DF:B4:C6:78"
+label = " SS"
+# hide_disconnected = true
 
 [[block]]
 block = "disk_space"
