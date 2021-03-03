@@ -1,0 +1,15 @@
+[binds]
+j = zoom 10
+k = zoom -10
+h = prev
+l = next
+
+<Ctrl+h> = pan 20 0
+<Ctrl+l> = pan -20 0
+<Ctrl+j> = pan 0 -20
+<Ctrl+k> = pan 0 20
+
+0 = reset
+c = center
+
+<Ctrl+d>d = exec rm $imv_current_file

@@ -18,6 +18,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     Plug 'nvim-lua/completion-nvim'
     Plug 'steelsojka/completion-buffers'
+    Plug 'norcalli/snippets.nvim'
 
     Plug 'nvim-lua/lsp-status.nvim'
 
