@@ -14,6 +14,7 @@ vim.g.completion_matching_strategy_list = {"exact", "substring", "fuzzy", "all"}
 vim.g.completion_auto_change_source = 1
 vim.g.completion_matching_smart_case = 1
 vim.g.completion_trigger_keyword_length = 3
+vim.g.completion_enable_snippet = 'snippets.nvim'
 -- {complete_items = {"snippet"}},
 local text_compl =     {
                 default = {
@@ -26,6 +27,7 @@ vim.g.completion_chain_complete_list = {
         default = {
                 default = {
                         {complete_items = {"lsp"} },
+                        {complete_items = {"snippet"} },
                         {complete_items = {"buffers"} },
                         {mode = "<c-n>"},
                 },
