@@ -20,6 +20,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'steelsojka/completion-buffers'
     Plug 'norcalli/snippets.nvim'
 
+    Plug 'hkupty/iron.nvim'
+
     Plug 'nvim-lua/lsp-status.nvim'
 
     " Git
