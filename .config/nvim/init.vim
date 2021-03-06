@@ -1,6 +1,6 @@
 let new_nvim = has("nvim-0.5")
 
-    set modeline
+set modeline
 set cursorline
 set hidden
 set number

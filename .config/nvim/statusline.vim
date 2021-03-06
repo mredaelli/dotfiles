@@ -3,7 +3,7 @@ set noshowmode
 let g:symbolE = '😡'
 let g:symbolW = '😱'
 let g:symbolI = '🙏'
-let g:symbolH = '💡'
+let g:symbolH = '🙈'
 
 let g:lightline = {
 \ 'active': {

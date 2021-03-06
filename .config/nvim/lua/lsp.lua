@@ -9,13 +9,11 @@ local map = function(mode, key, result, noremap)
 end
 
 vim.g.completion_enable_auto_signature = 0
--- vim.g.completion_enable_snippet = "UltiSnips"
 vim.g.completion_matching_strategy_list = {"exact", "substring", "fuzzy", "all"}
 vim.g.completion_auto_change_source = 1
 vim.g.completion_matching_smart_case = 1
 vim.g.completion_trigger_keyword_length = 3
 vim.g.completion_enable_snippet = 'snippets.nvim'
--- {complete_items = {"snippet"}},
 local text_compl =     {
                 default = {
                         {complete_items = {"kspell"} },
@@ -68,7 +66,6 @@ vim.cmd[[highlight! link LspReferenceText LspReference]]
 vim.cmd[[highlight! link LspReferenceRead LspReference]]
 vim.cmd[[highlight! link LspReferenceWrite LspReference]]
 
-
 -- vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
 -- vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", numhl = "LspDiagnosticsDefaultWarning"})
 -- vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "", numhl = "LspDiagnosticsDefaultInformation"})
@@ -98,7 +95,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
             signs = true,
             virtual_text = {
               spacing = 4,
-              prefix = '~',
+              prefix = '💔',
             },
         }
     )(...)
@@ -113,8 +110,6 @@ end
 -- }
 -- vim.g.format_options_typescript = format_options_prettier
 -- vim.g.format_options_javascript = format_options_prettier
--- vim.g.format_options_typescriptreact = format_options_prettier
--- vim.g.format_options_javascriptreact = format_options_prettier
 -- vim.g.format_options_json = format_options_prettier
 -- vim.g.format_options_css = format_options_prettier
 -- vim.g.format_options_scss = format_options_prettier
@@ -126,7 +121,7 @@ FormatToggle = function(value)
     vim.g[string.format("format_disabled_%s", vim.bo.filetype)] = value
 end
 vim.cmd [[command! FormatDisable lua FormatToggle(true)]]
-vim.cmd [[command! FormatEndable lua FormatToggle(false)]]
+vim.cmd [[command! FormatEnable lua FormatToggle(false)]]
 
 _G.formatting = function()
     if not vim.g[string.format("format_disabled_%s", vim.bo.filetype)] then
@@ -143,9 +138,6 @@ local on_attach = function(client)
         vim.cmd [[autocmd BufWritePost <buffer> lua formatting()]]
         vim.cmd [[augroup END]]
     end
-
-    -- set updatetime=300
-    -- autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()
 
         -- other capabilities
         -- call_hierarchy = false,
@@ -221,13 +213,15 @@ end
 
 lspconfig.pyright.setup {on_attach = on_attach}
 
+lspconfig.angularls.setup {on_attach = on_attach}
+
 -- https://github.com/theia-ide/typescript-language-server
--- lspconfig.tsserver.setup {
---     on_attach = function(client)
---         client.resolved_capabilities.document_formatting = false
---         on_attach(client)
---     end
--- }
+lspconfig.tsserver.setup {
+    on_attach = function(client)
+        client.resolved_capabilities.document_formatting = false
+        on_attach(client)
+    end
+}
 
 local function get_lua_runtime()
     local result = {}
