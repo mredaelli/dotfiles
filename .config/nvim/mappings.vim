@@ -100,8 +100,8 @@ onoremap ah <Plug>(GitGutterTextObjectOuterPending)
 xnoremap ih <Plug>(GitGutterTextObjectInnerVisual)
 xnoremap ah <Plug>(GitGutterTextObjectOuterVisual)
 
-nnoremap <silent> [c :Lfprev<CR>
-nnoremap <silent> ]c :Lfnext<CR>
+nnoremap <silent> [d :Lfprev<CR>
+nnoremap <silent> ]d :Lfnext<CR>
 
 
 "GitGutterLineNrHighlightsEnable

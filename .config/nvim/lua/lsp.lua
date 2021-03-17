@@ -94,7 +94,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
             update_in_insert = false,
             signs = true,
             virtual_text = {
-              spacing = 4,
+              spacing = 2,
               prefix = '💔',
             },
         }
