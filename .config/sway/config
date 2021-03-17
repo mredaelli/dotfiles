@@ -19,6 +19,19 @@ exec swayidle -w \
          resume 'swaymsg "output * dpms on"' \
     before-sleep 'swaylock-fancy'
 
+set $mode_screenshot (w)indow, (a)rea, (s)creen | Shift to save to file
+bindsym $mod+Print mode "$mode_screenshot"
+mode "$mode_screenshot" {
+    bindsym w exec --no-startup-id grimshot --notify copy window, mode "default"
+    bindsym a exec --no-startup-id grimshot --notify copy area, mode "default"
+    bindsym s exec --no-startup-id grimshot --notify copy screen, mode "default"
+    bindsym Shift+w exec --no-startup-id grimshot --notify save window, mode "default"
+    bindsym Shift+a exec --no-startup-id grimshot --notify save area, mode "default"
+    bindsym Shift+s exec --no-startup-id grimshot --notify save screen, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 xwayland disable
 
 input * {

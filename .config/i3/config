@@ -20,10 +20,10 @@ bindsym $mod+Ctrl+l exec kitty --session ~/lari_session
 
 # ikhal
 bindsym $mod+Shift+c exec kitty --title ikhal --class ikhal ikhal
-for_window [class="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
+for_window [title="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
 
 bindsym $mod+Shift+m exec kitty --title spt --class spt spt
-for_window [class="spt"] floating enable, resize set 1000 800, move position center, border pixel 5, move scratchpad, scratchpad show
+for_window [title="spt"] floating enable, resize set 1000 800, move position center, border pixel 5, move scratchpad, scratchpad show
 bindsym $mod+space scratchpad show
 
 # quick terminal
@@ -120,10 +120,6 @@ mode "$mode_system" {
     bindsym Escape mode "default"
 }
 
-mode "num" {
-        bindsym Num_Lock mode "default"
-}
-bindsym Num_Lock mode "num"
 
 font pango:Hasklig 13
 
