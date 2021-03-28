@@ -179,4 +179,20 @@ set completeopt=menuone,noinsert,noselect
 
 autocmd BufEnter * lua require'completion'.on_attach()
 
+highlight IndentNegative ctermfg=145 ctermbg=240
+let g:indent_blankline_buftype_exclude = ['terminal']
+let g:indent_blankline_filetype_exclude = ['help']
+let g:indent_blankline_char = '▏'
+" let g:indent_blankline_char_blankline_highlight_list = ['Error', 'Function']
+let g:indent_blankline_space_char = ' '
+let g:indent_blankline_space_char_blankline_highlight_list = ['IndentNegative', 'StatusLine']
+" let g:indent_blankline_show_trailing_blankline_indent = false
+let g:indent_blankline_use_treesitter = 1
+" let g:indent_blankline_show_current_context = 1
+" let g:indent_blankline_context_patterns = [
+"     'class', 'return', 'function', 'method', '^if', '^while', 'jsx_element', '^for', '^object', '^table', 'block',
+"     'arguments', 'if_statement', 'else_clause', 'jsx_element', 'jsx_self_closing_element', 'try_statement',
+"     'catch_clause', 'import_statement', 'operation_type'
+" ]
+
 endif

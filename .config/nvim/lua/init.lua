@@ -11,4 +11,3 @@ iron.core.set_config {
     python = "ipython",
   }
 }
-

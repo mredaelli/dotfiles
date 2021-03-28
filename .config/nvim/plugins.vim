@@ -51,6 +51,10 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Plug 'mfussenegger/nvim-dap'
     " Plug 'theHamsta/nvim-dap-virtual-text'
     " Plug 'nvim-telescope/telescope-dap.nvim'
+    "
+    Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
+    Plug 'p00f/nvim-ts-rainbow'
+    Plug 'JoosepAlviste/nvim-ts-context-commentstring'
 
     Plug 'nathangrigg/vim-beancount', { 'for': 'beancount' }
 
