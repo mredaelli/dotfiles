@@ -185,8 +185,6 @@ function! LightLineNeovimLspStatus() abort
   return ''
 endfunction
 
-" echo nvim_treesitter#statusline(90)
-
 call sign_define("LspDiagnosticsSignError", {"text" : g:symbolE, "texthl" : "LspDiagnosticsVirtualTextError"}) 
 call sign_define("LspDiagnosticsSignWarning", {"text" : g:symbolW, "linehl" : "LspDiagnosticsUnderlineWarning"})
 call sign_define("LspDiagnosticsSignInformation", {"text" : g:symbolI, "texthl" : "LspDiagnosticsVirtualTextInformation"})

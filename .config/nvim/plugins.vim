@@ -12,12 +12,15 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'nvim-treesitter/nvim-treesitter'
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
     " Plug 'nvim-treesitter/nvim-treesitter-refactor'
+    Plug 'windwp/nvim-ts-autotag'
+
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-lua/lsp_extensions.nvim'
     Plug 'kosayoda/nvim-lightbulb'
 
-    Plug 'nvim-lua/completion-nvim'
-    Plug 'steelsojka/completion-buffers'
+    Plug 'hrsh7th/nvim-compe'
+    " Plug 'nvim-lua/completion-nvim'
+    " Plug 'steelsojka/completion-buffers'
     Plug 'norcalli/snippets.nvim'
 
     Plug 'hkupty/iron.nvim'
@@ -31,6 +34,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'tpope/vim-git'
     Plug 'rhysd/git-messenger.vim'
     Plug 'sodapopcan/vim-twiggy'
+
+    Plug 'kyazdani42/nvim-tree.lua'
 
     " Text
     Plug 'reedes/vim-pencil', { 'for': ['markdown', 'pandoc', 'mail' ] }
@@ -71,6 +76,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'justinmk/vim-dirvish'
 
     Plug 'itchyny/lightline.vim'
+    " Plug 'hoob3rt/lualine.nvim'
 
     Plug 'AndrewRadev/inline_edit.vim'
 

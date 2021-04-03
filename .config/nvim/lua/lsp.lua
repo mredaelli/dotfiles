@@ -181,10 +181,10 @@ local on_attach = function(client)
         msg = msg .. " def"
     end
     if client.resolved_capabilities.completion then
-        require "completion".on_attach(client)
-        map("i", "<c-n>", "<Plug>(completion_trigger)", false)
-        map("i", "<c-j>", "<Plug>(completion_next_source)", false)
-        map("i", "<c-k>", "<Plug>(completion_prev_source)", false)
+        -- require "completion".on_attach(client)
+        -- map("i", "<c-n>", "<Plug>(completion_trigger)", false)
+        -- map("i", "<c-j>", "<Plug>(completion_next_source)", false)
+        -- map("i", "<c-k>", "<Plug>(completion_prev_source)", false)
         msg = msg .. " compl"
     end
     if client.resolved_capabilities.hover then
