@@ -99,6 +99,11 @@ if type -q any-nix-shell
    any-nix-shell fish | source
 end
 
+if type -q fd
+  export FZF_DEFAULT_COMMAND='fd --type f'
+  export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+end
+
 set -x TASKRC ~/.config/taskwarrior/taskrc
 
 alias yadmr="sudo yadm -Y /etc/yadm"
