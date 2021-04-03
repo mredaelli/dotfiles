@@ -53,6 +53,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'vijaymarupudi/nvim-fzf'
+    Plug 'vijaymarupudi/nvim-fzf-commands'
     " Plug 'mfussenegger/nvim-dap'
     " Plug 'theHamsta/nvim-dap-virtual-text'
     " Plug 'nvim-telescope/telescope-dap.nvim'

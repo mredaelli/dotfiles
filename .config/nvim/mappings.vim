@@ -23,8 +23,6 @@ nnoremap Q gQ
 " reload config on <leader>R
 nnoremap <leader>R :so $MYVIMRC<CR>
 
-nnoremap <leader>q :q<cr>
-nnoremap <leader>Q :wqa<cr>
 " prevent entering Ex mode by error
 nnoremap Q <nop>
 nnoremap <leader><space> :up<cr>
@@ -41,33 +39,40 @@ nnoremap <silent> <CR> :nohls<CR><CR>
 nnoremap <Leader>g :silent grep<Space>
 
 if new_nvim
+  command! -nargs=1 Rg call luaeval('require("fzf-commands").rg(_A)', <f-args>)
+  nnoremap <Leader>r :<c-u>Rg<space>
+
   nnoremap <Leader>f :Telescope git_files show_untracked=false recurse_submodules=true<CR>
   nnoremap <Leader>F :Telescope find_files<CR>
   nnoremap <Leader>b :Telescope buffers<CR>
   nnoremap <Leader>th :Telescope command_history<CR>
   nnoremap <Leader>tt :Telescope tags<CR>
-  nnoremap <Leader>r :Telescope live_grep<CR>
+  nnoremap <Leader>tr :Telescope live_grep<CR>
   nnoremap <Leader>tc :Telescope commands<CR>
   nnoremap <Leader>tm :Telescope marks<CR>
   nnoremap <Leader>ts :Telescope treesitter<CR>
-  nnoremap <Leader>t/ :Telescope current_buffer_fuzzy_find<CR>
+  nnoremap <Leader>/ :Telescope current_buffer_fuzzy_find<CR>
   nnoremap <Leader>tT :Telescope current_buffer_tags<CR>
+  nnoremap <Leader>q :Telescope quickfix<CR>
+  nnoremap <Leader>l :Telescope loclist<CR>
+  nnoremap <Leader>tH :Telescope help_tags<CR>
   nnoremap <Leader>tr :Telescope lsp_references<CR>
   nnoremap <Leader>tS :Telescope lsp_workspace_symbols<CR>
-  nnoremap <Leader>tq :Telescope quickfix<CR>
-  nnoremap <Leader>tl :Telescope loclist<CR>
-  nnoremap <Leader>tgc :Telescope git_commits<CR>
-  nnoremap <Leader>tgC :Telescope git_bcommits<CR>
-  nnoremap <Leader>tgb :Telescope git_branches<CR>
-  nnoremap <Leader>tgs :Telescope git_status<CR>
-  nnoremap <Leader>tdv <cmd>lua require('telescope').extensions.dap.variables()<cr>
+  nnoremap <Leader>ta :Telescope lsp_code_actions<CR>
+  nnoremap <Leader>t] :Telescope lsp_code_definitions<CR>
+  nnoremap <Leader>td :Telescope lsp_code_document_diagnostics<CR>
+  nnoremap <Leader>tD :Telescope lsp_code_workspace_diagnostics<CR>
+  nnoremap <Leader>gh :Telescope git_commits<CR>
+  nnoremap <Leader>gH :Telescope git_bcommits<CR>
+  nnoremap <Leader>gB :Telescope git_branches<CR>
+  " nnoremap <Leader>tdv <cmd>lua require('telescope').extensions.dap.variables()<cr>
   " require'telescope'.extensions.dap.commands{}
 " require'telescope'.extensions.dap.configurations{}
 " require'telescope'.extensions.dap.list_breakpoints{}
 " require'telescope'.extensions.dap.variables{}
 else
   nnoremap <Leader>f :GitFiles --recurse-submodules<CR>
-  nnoremap <Leader>F :ProjectFiles<CR>
+  nnoremap <Leader>F t:ProjectFiles<CR>
   nnoremap <Leader>b :Buffers<CR>
   nnoremap <Leader>h :History<CR>
   nnoremap <Leader>tt :BTags<CR>
@@ -75,12 +80,11 @@ else
   nnoremap <Leader>tc :Commands<CR>
 endif
 
-nnoremap <Leader>gf :Gfetch<CR>
-nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gp :Gpull<CR>
-nnoremap <Leader>gP :Gpush<CR>
+nnoremap <Leader>gf :Git fetch<CR>
+nnoremap <Leader>gs :Git<CR>
+nnoremap <Leader>gp :Git pull<CR>
+nnoremap <Leader>gP :Git push<CR>
 nnoremap <Leader>gPP :GPushForce<CR>
-nnoremap <Leader>go :Gbranch<CR>
 nnoremap <Leader>gl :GV<CR>
 nnoremap <Leader>gL :GV!<CR>
 nnoremap <Leader>gb :Twiggy<CR>
