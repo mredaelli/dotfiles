@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+function open_merge_request() {
+
+  local format_str url
+
+  format_str='"\(.references.full)\t'\
+'\(.title)\t\(.web_url)\t'\
+'Author: \(.author.name)\nUpdated: \(.updated_at)\nTags \(.tags)\n\n'\
+'\(.description)"'
+
+  url=$(
+    curl --header "Authorization: Bearer $GITLAB_TOKEN" \
+      'https://git.lari.systems/api/v4/merge_requests?scope=assigned_to_me&state=opened' |
+    jq  ".[] | $format_str" | \
+    sed -e 's/"\(.*\)"/\1/' -e 's/\\t/\t/g' | \
+    fzf --with-nth=1,2  --delimiter='\t' \
+    --preview='echo -e {4}' --preview-window=top:wrap | \
+    cut -f 3
+  )
+  
+    if [ -n "$url" ]; then
+      firefox "$url"
+    fi
+}
+
+open_merge_request
