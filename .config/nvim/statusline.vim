@@ -212,7 +212,18 @@ lsp_status.config {
   status_symbol = "",
 }
 lsp_status.register_progress()
+require('lualine').setup{
+  options = { theme = 'material' },
+  sections = {
+    lualine_a = { {'mode', upper = true, format = function(mode_name) return mode_name:sub(1,1) end} },
+    lualine_b = { {'branch', icon = '', format = function(name) return name:sub(1,10) end} },
+    lualine_c = { {'filename', file_status = true}, 'diff', {'diagnostics', sources = {'nvim_lsp'} } },
+    lualine_x = { {'fileformat', full_path=true, shorten=true}, 'filetype' },
+    lualine_y = { 'progress' },
+    lualine_z = { 'location'  },
+  },
+}
 EOF
-autocmd User LspDiagnosticsChanged call lightline#update()
+" autocmd User LspDiagnosticsChanged call lightline#update()
 " autocmd User LspDiagnosticsChanged lua vim.lsp.diagnostic.set_loclist()
 endif

@@ -3,22 +3,22 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
-" let g:jellybeans_use_term_italics = 1
 let g:onedark_terminal_italics = 1
 let g:lightline['colorscheme'] = 'onedark'
 
-" let g:deepspace_italics=1
-" let g:lightline = {
-"       \ 'colorscheme': 'deepspace',
-"       \ }
+let g:material_style = 'darker'
+let g:material_italic_comments=1
 
-colorscheme onedark
+
+" call onedark#set_highlight("Normal", { "gg": '000000' })
+" call onedark#set_highlight("Identifier", { "gui": 'italic' })
 set background=dark
-" If the background is too washed-out
-" hi Normal ctermbg=255  guibg=#000000
+colorscheme onedark_nvim
 
-call onedark#set_highlight("Normal", { "gg": '000000' })
-call onedark#set_highlight("Identifier", { "gui": 'italic' })
+" colorscheme onedark
+" " If the background is too washed-out
+" " hi Normal ctermbg=255  guibg=#000000
+
 
 " highlight GitGutterAdd    guifg=#009900
 " highlight GitGutterChange guifg=#bbbb00

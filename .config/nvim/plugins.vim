@@ -77,14 +77,20 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'danilamihailov/beacon.nvim'
     Plug 'justinmk/vim-dirvish'
 
-    Plug 'itchyny/lightline.vim'
-    " Plug 'hoob3rt/lualine.nvim'
+    " Plug 'itchyny/lightline.vim'
+    Plug 'hoob3rt/lualine.nvim'
 
     Plug 'AndrewRadev/inline_edit.vim'
 
     " themes
-    " Plug 'nanotech/jellybeans.vim'
     Plug 'joshdick/onedark.vim'
-    " Plug 'tyrannicaltoucan/vim-deep-space'
+
+    Plug 'rktjmp/lush.nvim'
+    Plug 'olimorris/onedark.nvim'
+
+    Plug 'tjdevries/colorbuddy.nvim'
+    Plug 'marko-cerovac/material.nvim'
+
+    Plug 'bluz71/vim-moonfly-colors'
 call plug#end()
 
