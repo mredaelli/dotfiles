@@ -178,3 +178,6 @@ nnoremap <A-l> <C-w>l
 
 " Do not include white space characters when using $ in visual mode
 xnoremap $ g_
+
+nnoremap <C-s> :NvimTreeToggle<CR>
+" nnoremap <C-s> :NvimTreeFindFile<CR>

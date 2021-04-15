@@ -1,5 +1,5 @@
 -- mostly copied from https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp.lua
- local lspconfig = require "lspconfig"
+local lspconfig = require "lspconfig"
 
 local map = function(mode, key, result, noremap)
     if noremap == nil then
@@ -8,68 +8,10 @@ local map = function(mode, key, result, noremap)
     vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap = noremap, silent = true})
 end
 
-vim.g.completion_enable_auto_signature = 0
-vim.g.completion_matching_strategy_list = {"exact", "substring", "fuzzy", "all"}
-vim.g.completion_auto_change_source = 1
-vim.g.completion_matching_smart_case = 1
-vim.g.completion_trigger_keyword_length = 3
-vim.g.completion_enable_snippet = 'snippets.nvim'
-local text_compl =     {
-                default = {
-                        {complete_items = {"kspell"} },
-                        {complete_items = {"buffers"} },
-                        {mode = "<c-n>"},
-                },
-            }
-vim.g.completion_chain_complete_list = {
-        default = {
-                default = {
-                        {complete_items = {"lsp"} },
-                        {complete_items = {"snippet"} },
-                        {complete_items = {"buffers"} },
-                        {mode = "<c-n>"},
-                },
-                string = {
-                        {complete_items = {"buffers"} },
-                        {complete_items = {"path"} },
-                        {mode = "<c-n>"},
-                },
-                comment = {
-                        {complete_items = {"path"} },
-                        {mode = "<c-n>"},
-                },
-        },
-        markdown = text_compl,
-        mail = text_compl,
-}
-
-vim.g.completion_enable_auto_paren = 1
-vim.g.completion_customize_lsp_label = {
-    Function = " [function]",
-    Method = " [method]",
-    Reference = " [reference]",
-    Enum = " [enum]",
-    Field = "ﰠ [field]",
-    Keyword = " [key]",
-    Variable = " [variable]",
-    Folder = " [folder]",
-    Snippet = " [snippet]",
-    Operator = " [operator]",
-    Module = " [module]",
-    Text = "ﮜ[text]",
-    Class = " [class]",
-    Interface = " [interface]",
-    Constant = "v [constant]"
-}
-vim.cmd[[highlight LspReference guifg=NONE guibg=#665c54 guisp=NONE gui=NONE cterm=NONE ctermfg=NONE ctermbg=59]]
-vim.cmd[[highlight! link LspReferenceText LspReference]]
-vim.cmd[[highlight! link LspReferenceRead LspReference]]
-vim.cmd[[highlight! link LspReferenceWrite LspReference]]
-
--- vim.fn.sign_define("LspDiagnosticsSignError", {text = "", numhl = "LspDiagnosticsDefaultError"})
--- vim.fn.sign_define("LspDiagnosticsSignWarning", {text = "", numhl = "LspDiagnosticsDefaultWarning"})
--- vim.fn.sign_define("LspDiagnosticsSignInformation", {text = "", numhl = "LspDiagnosticsDefaultInformation"})
--- vim.fn.sign_define("LspDiagnosticsSignHint", {text = "", numhl = "LspDiagnosticsDefaultHint"})
+-- vim.cmd[[highlight LspReference guifg=NONE guibg=#665c54 guisp=NONE gui=NONE cterm=NONE ctermfg=NONE ctermbg=59]]
+-- vim.cmd[[highlight! link LspReferenceText LspReference]]
+-- vim.cmd[[highlight! link LspReferenceRead LspReference]]
+-- vim.cmd[[highlight! link LspReferenceWrite LspReference]]
 
 vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
     if err ~= nil or result == nil then
@@ -94,19 +36,19 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
             update_in_insert = false,
             signs = true,
             virtual_text = {
-              spacing = 2,
-              prefix = '💔',
+                spacing = 2,
+                prefix = '💔',
             },
         }
-    )(...)
+        )(...)
     pcall(vim.lsp.diagnostic.set_loclist, {open_loclist = false})
 end
 
 -- local format_options_prettier = {
---     tabWidth = 4,
---     singleQuote = true,
---     trailingComma = "all",
---     configPrecedence = "prefer-file"
+    --     tabWidth = 4,
+    --     singleQuote = true,
+    --     trailingComma = "all",
+    --     configPrecedence = "prefer-file"
 -- }
 -- vim.g.format_options_typescript = format_options_prettier
 -- vim.g.format_options_javascript = format_options_prettier
@@ -139,19 +81,19 @@ local on_attach = function(client)
         vim.cmd [[augroup END]]
     end
 
-        -- other capabilities
-        -- call_hierarchy = false,
-        -- declaration = false,
-        -- execute_command = true,
-        -- implementation = false,
-        -- signature_help = true,
-        -- signature_help_trigger_characters = <3>{ "(", ",", "=" },
-        -- type_definition = false,
-        -- workspace_folder_properties = {
+    -- other capabilities
+    -- call_hierarchy = false,
+    -- declaration = false,
+    -- execute_command = true,
+    -- implementation = false,
+    -- signature_help = true,
+    -- signature_help_trigger_characters = <3>{ "(", ",", "=" },
+    -- type_definition = false,
+    -- workspace_folder_properties = {
         --   changeNotifications = true,
         --   supported = true
-        -- },
-        -- workspace_symbol = false
+    -- },
+    -- workspace_symbol = false
     map("n", "<Leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
     if client.resolved_capabilities.document_highlight then
         map("n", "<Leader>h", "<cmd>lua vim.lsp.buf.document_highlight()<CR>")
@@ -203,19 +145,8 @@ local on_attach = function(client)
     print(msg)
 end
 
--- https://github.com/golang/tools/tree/master/gopls
--- lspconfig.gopls.setup {
---     on_attach = function(client)
---         client.resolved_capabilities.document_formatting = false
---         on_attach(client)
---     end
--- }
-
 lspconfig.pyright.setup {on_attach = on_attach}
-
 lspconfig.angularls.setup {on_attach = on_attach}
-
--- https://github.com/theia-ide/typescript-language-server
 lspconfig.tsserver.setup {
     on_attach = function(client)
         client.resolved_capabilities.document_formatting = false
@@ -270,54 +201,34 @@ lspconfig.sumneko_lua.setup {
     }
 }
 
--- https://github.com/iamcco/vim-language-server
 lspconfig.vimls.setup {on_attach = on_attach}
-
--- https://github.com/vscode-langservers/vscode-json-languageserver
--- lspconfig.jsonls.setup {
---     on_attach = on_attach,
---     cmd = {"json-languageserver", "--stdio"}
--- }
-
--- https://github.com/redhat-developer/yaml-language-server
--- lspconfig.yamlls.setup {on_attach = on_attach}
-
 lspconfig.rust_analyzer.setup{ on_attach = on_attach }
-
--- https://github.com/joe-re/sql-language-server
--- lspconfig.sqlls.setup {on_attach = on_attach}
-
--- https://github.com/vscode-langservers/vscode-css-languageserver-bin
--- lspconfig.cssls.setup {on_attach = on_attach}
-
--- https://github.com/vscode-langservers/vscode-html-languageserver-bin
--- lspconfig.html.setup {on_attach = on_attach}
-
--- https://github.com/bash-lsp/bash-language-server
 lspconfig.bashls.setup {on_attach = on_attach}
-
--- https://github.com/rcjsuen/dockerfile-language-server-nodejs
--- lspconfig.dockerls.setup {on_attach = on_attach}
-
--- https://github.com/hashicorp/terraform-ls
--- lspconfig.terraformls.setup {
---     on_attach = on_attach,
---     cmd = {"terraform-ls", "serve"},
---     filetypes = {"tf"}
--- }
-
-
 lspconfig.efm.setup {
     on_attach = on_attach,
     init_options = {documentFormatting = true},
 }
 
+-- lspconfig.jsonls.setup {
+    --     on_attach = on_attach,
+    --     cmd = {"json-languageserver", "--stdio"}
+-- }
+-- lspconfig.yamlls.setup {on_attach = on_attach}
+-- lspconfig.sqlls.setup {on_attach = on_attach}
+-- lspconfig.cssls.setup {on_attach = on_attach}
+-- lspconfig.html.setup {on_attach = on_attach}
+-- lspconfig.dockerls.setup {on_attach = on_attach}
+-- lspconfig.terraformls.setup {
+    --     on_attach = on_attach,
+    --     cmd = {"terraform-ls", "serve"},
+    --     filetypes = {"tf"}
+-- }
 -- lspconfig.clangd.setup {on_attach = on_attach}
 
 require'lsp_extensions'.inlay_hints{
-      highlight = "Comment",
-      prefix = " > ",
-      aligned = false,
-      only_current_line = false,
-      enabled = { "TypeHint", "ChainingHint", "ParameterHint" }
+    highlight = "Comment",
+    prefix = " > ",
+    aligned = false,
+    only_current_line = false,
+    enabled = { "TypeHint", "ChainingHint", "ParameterHint" }
 }

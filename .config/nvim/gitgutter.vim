@@ -11,3 +11,10 @@ let g:gitgutter_highlight_linenrs = 1
 if executable('rg')
   let g:gitgutter_grep = 'rg'
 endif
+
+" refresh gitgutter quickly
+set updatetime=200
+
+" highlight GitGutterAdd    guifg=#009900
+" highlight GitGutterChange guifg=#bbbb00
+" highlight GitGutterDelete guifg=#ff2222

@@ -11,3 +11,16 @@ iron.core.set_config {
     python = "ipython",
   }
 }
+
+require('telescope').setup{
+  defaults = {
+    prompt_prefix = ">",
+   --" layout_strategy = "vertical",
+    --results_height = 12,
+    set_env = { ['COLORTERM'] = 'truecolor' },
+  }
+}
+-- require('telescope').load_extension('dap')
+
+require'nvim-web-devicons'.setup { default = true; }
+

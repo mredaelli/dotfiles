@@ -19,8 +19,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'kosayoda/nvim-lightbulb'
 
     Plug 'hrsh7th/nvim-compe'
-    " Plug 'nvim-lua/completion-nvim'
-    " Plug 'steelsojka/completion-buffers'
     Plug 'norcalli/snippets.nvim'
 
     Plug 'hkupty/iron.nvim'
@@ -77,7 +75,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'danilamihailov/beacon.nvim'
     Plug 'justinmk/vim-dirvish'
 
-    " Plug 'itchyny/lightline.vim'
     Plug 'hoob3rt/lualine.nvim'
 
     Plug 'AndrewRadev/inline_edit.vim'
