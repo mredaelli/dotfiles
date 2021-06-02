@@ -84,6 +84,10 @@ endif
 
 runtime plugins.vim
 
+if executable("handlr")
+  let g:netrw_browsex_viewer= "handlr open"
+endif
+
 runtime macros/matchit.vim
 
 runtime mappings.vim

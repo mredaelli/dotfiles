@@ -30,7 +30,10 @@ lsp_status.config {
 lsp_status.register_progress()
 
 require('lualine').setup{
-  options = { theme = 'material' },
+  options = { 
+  -- theme = 'material' 
+  theme = 'tokyonight'
+  },
   sections = {
     lualine_a = { {'mode', upper = true, format = function(mode_name) return mode_name:sub(1,1) end} },
     lualine_b = { {'branch', icon = '', format = function(name) return name:sub(1,10) end} },

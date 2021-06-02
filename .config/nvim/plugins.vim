@@ -88,8 +88,10 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'olimorris/onedark.nvim'
 
     Plug 'tjdevries/colorbuddy.nvim'
-    Plug 'marko-cerovac/material.nvim'
+    Plug 'marko-cerovac/material.nvim', {'branch': 'pure-lua'}
 
     Plug 'bluz71/vim-moonfly-colors'
+
+    Plug 'folke/tokyonight.nvim'
 call plug#end()
 

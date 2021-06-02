@@ -155,6 +155,17 @@ lspconfig.tsserver.setup {
     end
 }
 
+local project_library_path = "."
+local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
+
+require'lspconfig'.angularls.setup{
+  cmd = cmd,
+  on_new_config = function(new_config,new_root_dir)
+    new_config.cmd = cmd
+  end,
+}
+
+
 local function get_lua_runtime()
     local result = {}
     for _, path in pairs(vim.api.nvim_list_runtime_paths()) do
@@ -209,6 +220,7 @@ lspconfig.efm.setup {
     on_attach = on_attach,
     init_options = {documentFormatting = true},
 }
+lspconfig.metals.setup{}
 
 -- lspconfig.jsonls.setup {
     --     on_attach = on_attach,
