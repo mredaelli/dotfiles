@@ -10,6 +10,7 @@ floating_modifier $mod
 focus_on_window_activation urgent
 
 bindsym $mod+Shift+Return exec kitty
+bindsym $mod+bar exec wezterm
 bindsym $mod+Shift+f exec firefox
 bindsym $mod+Shift+r exec kitty --title ranger ranger
 bindsym $mod+Shift+b exec buku_run

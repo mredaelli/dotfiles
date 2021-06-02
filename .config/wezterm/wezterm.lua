@@ -15,8 +15,8 @@ end
 local keys = {
 	-- key("UpArrow", { ScrollToPrompt = -1 }),
 	-- key("DownArrow", { ScrollToPrompt = -1 }),
-	key("UpArrow", { ScrollByLine = -1 }),
-	key("DownArrow", { ScrollByLine = 10 }),
+	key("UpArrow", { ScrollByLine = -5}),
+	key("DownArrow", { ScrollByLine = 5 }),
 	key("PageUp", { ScrollByPage = -1 }),
 	key("PageDown", { ScrollByPage = 1 }),
 	-- key("", "SpawnWindow"),
@@ -26,6 +26,7 @@ local keys = {
 	key("l", { ActivatePaneDirection = "Right" }),
 	key("w", { CloseCurrentPane = { confirm = true } }),
 	key("Enter", { SplitHorizontal = { domain = "CurrentPaneDomain" } }),
+	key("|", { SplitVertical = { domain = "CurrentPaneDomain" } }),
 	key("z", "TogglePaneZoomState"),
 	-- map ctrl+shift+b        move_window_backward
 	key("t", { SpawnTab = "CurrentPaneDomain" }),
@@ -34,16 +35,17 @@ local keys = {
 	key("+", "IncreaseFontSize"),
 	key("_", "DecreaseFontSize"),
 -- map ctrl+shift+backspace restore_font_size
+	key("y", "QuickSelect"),
+	key("v", "ActivateCopyMode"),
+	key("r", "ReloadConfiguration"),
 }
 
--- shift+number doesn't seem to work
--- for i = 1, 8 do
--- 	table.insert(keys, key(tostring(i), { ActivateTab = i - 1 }))
--- end
+-- resizing
+for _, i in pairs({"Left", "Right", "Up", "Down"}) do
+	table.insert(keys, key(i.."Arrow", {AdjustPaneSize={i, 1}}))
+end
 
--- enabled_layouts tall:bias=70,grid,fat,horizontal,vertical,stack
 -- map ctrl+shift+l>t goto_layout tall:bias=70
--- # stack, or only 1, or zoom
 -- map ctrl+shift+l>s goto_layout stack
 -- map ctrl+shift+l>1 goto_layout stack
 -- # and back
@@ -55,10 +57,6 @@ local keys = {
 -- map ctrl+shift+l>v goto_layout vertical
 -- map ctrl+shift+l>] next_layout
 
--- # map ctrl+alt+a send_text normal Word\x1b[H
-
--- # also hash, regex
--- # - = paste, @= copy to clipboard
 -- map ctrl+shift+y>u kitten hints --type url --program firefox
 -- map ctrl+shift+y>shift+u kitten hints --type url --program @
 -- map ctrl+shift+y>p kitten hints --type path --program -
@@ -74,6 +72,7 @@ local keys = {
 -- map ctrl+shift+s>l pipe @ansi overlay less +G -R
 -- map ctrl+shift+s>v pipe @text window nvim -
 -- map ctrl+shift+s>shift+v pipe @text tab nvim -
+
 
 return {
 	enable_wayland = true,
