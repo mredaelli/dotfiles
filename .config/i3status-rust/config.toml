@@ -2,8 +2,8 @@ theme = "space-villain"
 
 [icons]
 name = "awesome"
-[icons.overrides]
-music_next=">"
+# [icons.overrides]
+# music_next=">"
 # music_pause="|"
 # music_play="~"
 # music_prev="<"
@@ -12,9 +12,9 @@ music_next=">"
 block = "music"
 buttons = ["prev", "play", "next"]
 # player = "spotifyd"
-# smart_trim = true
-# dynamic_width=true
-# on_click = "spd"
+smart_trim = true
+dynamic_width=true
+on_click = "kitty spd"
 on_collapsed_click = "kitty spt"
 
 [[block]]
@@ -25,19 +25,15 @@ on_click = "pavucontrol"
 block = "bluetooth"
 mac = "04:52:C7:C7:DA:C4"
 label = " Beats"
-# hide_disconnected = true
-[[block]]
-block = "bluetooth"
-mac = "00:1D:DF:B4:C6:78"
-label = " SS"
-# hide_disconnected = true
+on_click = "kitty blueman-manager"
+hide_disconnected = true
 
 [[block]]
 block = "disk_space"
 path = "/home"
+on_click = "kitty dua i /home"
 alias = ""
 info_type = "available"
-unit = "Percent"
 interval = 20
 warning = 20.0
 alert = 10.0
@@ -45,9 +41,9 @@ alert = 10.0
 [[block]]
 block = "disk_space"
 path = "/"
+on_click = "kitty dua i /"
 alias = ""
 info_type = "available"
-unit = "Percent"
 interval = 20
 warning = 20.0
 alert = 10.0
@@ -55,27 +51,29 @@ alert = 10.0
 [[block]]
 block = "memory"
 display_type = "memory"
-format_swap = "{SFpi}%"
-format_mem = "{MFpi}%"
+format_mem = "{mem_free_percents:1}"
+format_swap = "{swap_free_percents:1}"
+on_click = "kitty htop"
 clickable = false
 
 [[block]]
 block = "memory"
 display_type = "swap"
-format_mem = "{MFpi}%"
-format_swap = "{SFpi}%"
+format_mem = "{mem_free_percents:1}"
+format_swap = "{swap_free_percents:1}"
 clickable = false
 
 [[block]]
 block = "cpu"
 format = "{barchart} {utilization}%"
 interval = 1
-# on_click = "kitty htop"
+on_click = "kitty htop"
 
 [[block]]
 block = "load"
 interval = 1
 format = "{1m} {5m}"
+on_click = "kitty htop"
 
 
 [[block]]
@@ -83,16 +81,21 @@ block = "backlight"
 
 [[block]]
 block = "battery"
+allow_missing = true
 
 [[block]]
 block = "networkmanager"
-max_ssid_width = 8
 on_click = "kitty nmtui"
-# allow_missing = true
-# hide_missing = true
+interface_name_exclude = ["br\\-[0-9a-f]{12}", "docker\\d+"]
+interface_name_include = []
+ap_format = "{ssid^8}"
 
 
 [[block]]
 block = "time"
 interval = 60
 format = "%a %d/%m %R"
+on_click = "kitty ikhal"
+
+# [[block]]
+# block = "notify"
