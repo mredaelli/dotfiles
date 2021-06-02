@@ -26,7 +26,7 @@ collections = ["from a", "from b"]
 
 [storage my_contacts_local]
 type = "filesystem"
-path = "~/.contacts/personal/"
+path = "~/.local/share/contacts/personal/"
 fileext = ".vcf"
 
 [pair calendar]
@@ -37,7 +37,7 @@ metadata = ["color"]
 
 [storage local_calendar]
 type = "filesystem"
-path = "~/.calendars/personal/"
+path = "~/.local/share/calendars/personal/"
 fileext = ".ics"
 
 [pair lari]
@@ -55,5 +55,5 @@ client_secret.fetch = ["command", "secret-tool", "lookup", "client_id", "1069670
 
 [storage google_lari_local]
 type = "filesystem"
-path = "~/.calendars/lari"
+path = "~/.local/share/calendars/lari"
 fileext = ".ics"

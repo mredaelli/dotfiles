@@ -1,15 +1,15 @@
 [calendars]
 
 [[lari]]
-path = ~/.calendars/lari/mredaelli@lari.digital
+path = ~/.local/share/calendars/lari/mredaelli@lari.digital
 color = light red
 
 [[personal]]
-path = ~/.calendars/personal/personal
+path = ~/.local/share/calendars/personal/personal
 color = dark blue
 
 [[privato]]
-path = ~/.calendars/personal/privato
+path = ~/.local/share/calendars/personal/privato
 color = light blue
 
 [locale]
