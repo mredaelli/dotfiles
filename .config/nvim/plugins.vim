@@ -17,6 +17,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-lua/lsp_extensions.nvim'
     Plug 'kosayoda/nvim-lightbulb'
+    Plug 'folke/trouble.nvim'
 
     Plug 'hrsh7th/nvim-compe'
     Plug 'norcalli/snippets.nvim'
@@ -32,6 +33,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'tpope/vim-git'
     Plug 'rhysd/git-messenger.vim'
     Plug 'sodapopcan/vim-twiggy'
+    Plug 'sindrets/diffview.nvim'
 
     Plug 'kyazdani42/nvim-tree.lua'
 

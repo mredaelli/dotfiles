@@ -24,3 +24,11 @@ require('telescope').setup{
 
 require'nvim-web-devicons'.setup { default = true; }
 
+require'diffview'.setup {
+  diff_binaries = false,    -- Show diffs for binaries
+  file_panel = {
+    width = 35,
+    use_icons = true        -- Requires nvim-web-devicons
+  }
+}
+ require("trouble").setup {}
