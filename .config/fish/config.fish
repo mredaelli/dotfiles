@@ -31,6 +31,13 @@ if type -q nvim
   alias vmux="abduco -e '^g' -A nvim-session nvim"
 end
 
+if type -q ultralist
+  abbr ul "ultralist"
+  alias u="ultralist l"
+  alias uc="ultralist l group:context"
+  alias up="ultralist l group:project"
+end
+
 alias psg='ps au | grep'
 
 alias cdgr='cd (git rev-parse --show-toplevel)'
