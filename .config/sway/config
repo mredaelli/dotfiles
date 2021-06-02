@@ -8,8 +8,12 @@ set $menu wofi
 set $msg swaymsg
 set $locker swaylock-fancy
 
-bindsym Ctrl+Print exec 'grimshot save area'
-bindsym $mod+Alt+Space mako dismiss
+# Workaround for this commit:
+# <https://github.com/swaywm/sway/commit/65a751a21f61b30808b7e703257c6ca3b71f50eb>
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_SESSION_TYPE XDG_SESSION_DESKTOP QT_QPA_PLATFORM
+
+bindsym Ctrl+Print exec grimshot save area
+bindsym $mod+Alt+Space exec makoctl dismiss
 
 for_window [title="Firefox — Sharing Indicator"] floating enable, resize set 10 10
 
@@ -40,3 +44,6 @@ input * {
 
     tap enabled
 }
+
+for_window [app_id="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
+for_window [app_id="spt"] floating enable, resize set 1000 800, move position center, border pixel 5, move scratchpad, scratchpad show

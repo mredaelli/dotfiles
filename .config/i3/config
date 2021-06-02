@@ -19,11 +19,11 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Ctrl+l exec kitty --session ~/lari_session
 
 # ikhal
-bindsym $mod+Shift+c exec kitty --title ikhal --class ikhal ikhal
-for_window [title="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
+bindsym $mod+Shift+c exec kitty --class ikhal ikhal
+for_window [class="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
 
-bindsym $mod+Shift+m exec kitty --title spt --class spt spt
-for_window [title="spt"] floating enable, resize set 1000 800, move position center, border pixel 5, move scratchpad, scratchpad show
+bindsym $mod+Shift+m exec kitty --class spt spt
+for_window [class="spt"] floating enable, resize set 1000 800, move position center, border pixel 5, move scratchpad, scratchpad show
 bindsym $mod+space scratchpad show
 
 # quick terminal
@@ -111,10 +111,10 @@ set $mode_system (l)ock, (e)xit, (s)uspend, (r)eboot, (p)oweroff
 bindsym $mod+x mode "$mode_system"
 mode "$mode_system" {
     bindsym l exec --no-startup-id exec $$locker, mode "default"
-    bindsym e exec --no-startup-id light -O, exec --no-startup-id $$msg exit, mode "default"
-    bindsym r exec --no-startup-id light -O, exec --no-startup-id systemctl reboot
-    bindsym p exec --no-startup-id light -O, exec --no-startup-id systemctl poweroff
-    bindsym s exec --no-startup-id exec sh -c "$$locker && systemctl suspend", mode "default"
+    bindsym e exec --no-startup-id $$msg exit, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot
+    bindsym p exec --no-startup-id systemctl poweroff
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
