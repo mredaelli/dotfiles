@@ -49,12 +49,12 @@ set hintuppercase false
 set theme dark
 set editorcmd kitty nvim
 
-set searchengine roo
+set searchengine duck
+set searchurls.duck hhttps://duckduckgo.com/?q=
 set searchurls.rotten https://www.rottentomatoes.com/search/?search=
 set searchurls.jackett http://192.168.0.10:9117/UI/Dashboard#tracker=&category=&search=
 set searchurls.subreddit https://old.reddit.com/r/%s1/search?q=%s2&restrict_sr=on
 set searchurls.reddit https://old.reddit.com/search?q=%s
-set searchurls.roo https://www.runnaroo.com/search?term=
 set searchurls.magnet https://www.magnetdl.com/search/?x=46&y=23&m=1&q=
 set searchurls.libgen http://libgen.rs/search.php?req=
 set searchurls.libgenn http://libgen.rs/fiction/?q=
