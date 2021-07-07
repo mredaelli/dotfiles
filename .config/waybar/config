@@ -1,0 +1,98 @@
+{
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["custom/media"],
+    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "disk", "temperature", "backlight", "battery", "clock", "tray"],
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "tray": {
+        "spacing": 10
+    },
+    "clock": {
+       "format":"{:%m-%dT%H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}",
+        "on-click":"kitty --class ikhal ikhal"
+    },
+    "disk": {
+        "format": "{percentage_free}% ",
+        "tooltip-format": "{percentage_free}% ({free}) remaining on {path}",
+        "on-click": "kitty dua ~ i",
+        "path": "/home",
+    },
+    "cpu": {
+        "interval":5,
+        "format": "{usage}% {load} ",
+        "on-click": "kitty htop",
+        "tooltip": false
+    },
+    "memory": {
+        "interval":5,
+        "format": "{}% ",
+        "on-click": "kitty htop",
+    },
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+    "backlight": {
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""],
+        "on-scroll-up":"backlight increase",
+        "on-scroll-down":"backlight decrease",
+    },
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "on-click-middle": "kitty nmtui"
+    },
+    "pulseaudio": {
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+  "custom/media": {
+        "format": "{icon}{}",
+        "return-type": "json",
+        "format-icons": {
+          "Playing": " ",
+          "Paused": " ",
+        },
+        "max-length":70,
+        "exec": "playerctl metadata --format '{\"text\": \"{{markup_escape(title)}}\", \"tooltip\": \"{{markup_escape(playerName)}} : {{markup_escape(title)}}\", \"alt\": \"{{markup_escape(status)}}\", \"class\": \"{{markup_escape(status)}}\"}' -F",
+        "on-click": "playerctl play-pause",
+      }
+}
+                 playerctl
