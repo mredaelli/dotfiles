@@ -2,6 +2,7 @@ require "lsp"
 require "treesitter"
 -- require "my-debug"
 require "dap"
+require "completion"
 require "mysnippets"
 
 local iron = require('iron')

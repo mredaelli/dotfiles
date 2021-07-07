@@ -20,6 +20,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'folke/trouble.nvim'
 
     Plug 'hrsh7th/nvim-compe'
+    Plug 'ray-x/lsp_signature.nvim'
     Plug 'norcalli/snippets.nvim'
 
     Plug 'hkupty/iron.nvim'

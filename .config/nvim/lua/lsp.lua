@@ -67,7 +67,7 @@ vim.cmd [[command! FormatEnable lua FormatToggle(false)]]
 
 _G.formatting = function()
     if not vim.g[string.format("format_disabled_%s", vim.bo.filetype)] then
-        vim.lsp.buf.formatting_sync(vim.g[string.format("format_options_%s", vim.bo.filetype)] or {}, 1000)
+        vim.lsp.buf.formatting_seq_sync(vim.g[string.format("format_options_%s", vim.bo.filetype)] or {}, 1000)
     end
 end
 
@@ -86,8 +86,10 @@ local on_attach = function(client)
     -- declaration = false,
     -- execute_command = true,
     -- implementation = false,
-    -- signature_help = true,
-    -- signature_help_trigger_characters = <3>{ "(", ",", "=" },
+    if client.resolved_capabilities.signature_help then
+            require "lsp_signature".on_attach() 
+        client.signature_help_trigger_characters = { "(", ",", "=" }
+    end
     -- type_definition = false,
     -- workspace_folder_properties = {
         --   changeNotifications = true,
