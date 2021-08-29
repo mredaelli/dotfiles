@@ -112,7 +112,7 @@ nnoremap <silent> ]d :Lfnext<CR>
 
 function! s:PushForceSafe()
   if confirm('Are you sure you want to force-push?', "&Yes\n&No", 1)==1
-    execute('Gpush --force-with-lease')
+    execute('Git push --force-with-lease')
   endif
 endfunction
 

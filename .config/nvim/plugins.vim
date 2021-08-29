@@ -60,11 +60,9 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Plug 'theHamsta/nvim-dap-virtual-text'
     " Plug 'nvim-telescope/telescope-dap.nvim'
     "
-    Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
+    Plug 'lukas-reineke/indent-blankline.nvim'
     Plug 'p00f/nvim-ts-rainbow'
     Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-
-    Plug 'nathangrigg/vim-beancount', { 'for': 'beancount' }
 
     Plug 'satabin/hocon-vim'
 
@@ -74,13 +72,14 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     Plug 'tpope/vim-commentary'
 
-    Plug 'justinmk/vim-sneak'
+    Plug 'ggandor/lightspeed.nvim'
     Plug 'danilamihailov/beacon.nvim'
     Plug 'justinmk/vim-dirvish'
 
     Plug 'hoob3rt/lualine.nvim'
 
     Plug 'AndrewRadev/inline_edit.vim'
+    Plug 'bogado/file-line'
 
     " themes
     Plug 'joshdick/onedark.vim'

@@ -4,8 +4,6 @@ set modeline
 set cursorline
 set hidden
 set number
-set relativenumber
-set number
 
 set colorcolumn=88,100
 set virtualedit=all
@@ -19,8 +17,9 @@ set showmatch
 
 set wildmenu
 set wildmode=longest:full,full
+set wildignorecase
 
-" set clipboard+=unnamedplus
+set clipboard+=unnamedplus
 
 set backspace=indent,eol,start
 set ignorecase smartcase
