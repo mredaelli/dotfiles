@@ -1,4 +1,5 @@
 call plug#begin('~/.local/share/nvim/plugged')
+    Plug 'nvim-lua/plenary.nvim' " for gitsigns and telescope
 
     Plug 'kana/vim-textobj-user', { 'for': ['markdown', 'pandoc', 'mail' ] }
     Plug 'wellle/targets.vim'
@@ -28,13 +29,13 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'nvim-lua/lsp-status.nvim'
 
     " Git
-    Plug 'airblade/vim-gitgutter'
     Plug 'tpope/vim-fugitive'
     Plug 'junegunn/gv.vim'
     Plug 'tpope/vim-git'
     Plug 'rhysd/git-messenger.vim'
     Plug 'sodapopcan/vim-twiggy'
     Plug 'sindrets/diffview.nvim'
+    Plug 'lewis6991/gitsigns.nvim'
 
     Plug 'kyazdani42/nvim-tree.lua'
 
@@ -51,7 +52,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Plug 'vim-pandoc/vim-pandoc-after', { 'for': ['markdown', 'pandoc'] }
     Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['markdown', 'pandoc'] }
 
-    Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-telescope/telescope.nvim'
     Plug 'vijaymarupudi/nvim-fzf'
@@ -82,16 +82,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'bogado/file-line'
 
     " themes
-    Plug 'joshdick/onedark.vim'
-
-    Plug 'rktjmp/lush.nvim'
-    Plug 'olimorris/onedark.nvim'
-
-    Plug 'tjdevries/colorbuddy.nvim'
-    Plug 'marko-cerovac/material.nvim', {'branch': 'pure-lua'}
-
-    Plug 'bluz71/vim-moonfly-colors'
-
-    Plug 'folke/tokyonight.nvim'
+    Plug 'Pocco81/Catppuccino.nvim'
 call plug#end()
 

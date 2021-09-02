@@ -3,6 +3,12 @@ set noshowmode
 if new_nvim
 
 lua <<EOF
+
+local err = '😡'
+local warn = '😱'
+local info = '🙏'
+local hint = '🙈'
+
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
@@ -14,10 +20,9 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   }
 )
 
-local err = '😡'
-local warn = '😱'
-local info = '🙏'
-local hint = '🙈'
+vim.fn.sign_define('LspDiagnosticsSignErrpr', { text = err })
+vim.fn.sign_define('LspDiagnosticsSignWarning', { text = warn })
+
 
 local lsp_status = require('lsp-status')
 lsp_status.config {
@@ -31,8 +36,7 @@ lsp_status.register_progress()
 
 require('lualine').setup{
   options = { 
-  -- theme = 'material' 
-  theme = 'tokyonight'
+  theme = 'material' 
   },
   sections = {
     lualine_a = { {'mode', upper = true, format = function(mode_name) return mode_name:sub(1,1) end} },

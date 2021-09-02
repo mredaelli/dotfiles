@@ -8,11 +8,6 @@ local map = function(mode, key, result, noremap)
     vim.api.nvim_buf_set_keymap(0, mode, key, result, {noremap = noremap, silent = true})
 end
 
--- vim.cmd[[highlight LspReference guifg=NONE guibg=#665c54 guisp=NONE gui=NONE cterm=NONE ctermfg=NONE ctermbg=59]]
--- vim.cmd[[highlight! link LspReferenceText LspReference]]
--- vim.cmd[[highlight! link LspReferenceRead LspReference]]
--- vim.cmd[[highlight! link LspReferenceWrite LspReference]]
-
 vim.lsp.handlers["textDocument/formatting"] = function(err, _, result, _, bufnr)
     if err ~= nil or result == nil then
         return
