@@ -143,9 +143,13 @@ local on_attach = function(client)
     print(msg)
 end
 
-lspconfig.pyright.setup {on_attach = on_attach}
-lspconfig.angularls.setup {on_attach = on_attach}
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+lspconfig.pyright.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.angularls.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.tsserver.setup {
+ capabilities = capabilities,
     on_attach = function(client)
         client.resolved_capabilities.document_formatting = false
         on_attach(client)
@@ -156,6 +160,7 @@ local project_library_path = "."
 local cmd = {"ngserver", "--stdio", "--tsProbeLocations", project_library_path , "--ngProbeLocations", project_library_path}
 
 require'lspconfig'.angularls.setup{
+ capabilities = capabilities,
   cmd = cmd,
   on_new_config = function(new_config,new_root_dir)
     new_config.cmd = cmd
@@ -177,6 +182,7 @@ local function get_lua_runtime()
     return result
 end
 lspconfig.sumneko_lua.setup {
+ capabilities = capabilities,
     on_attach = on_attach,
     cmd = {"lua-language-server"},
     settings = {
@@ -210,14 +216,15 @@ lspconfig.sumneko_lua.setup {
     }
 }
 
-lspconfig.vimls.setup {on_attach = on_attach}
-lspconfig.rust_analyzer.setup{ on_attach = on_attach }
-lspconfig.bashls.setup {on_attach = on_attach}
+lspconfig.vimls.setup {on_attach = on_attach, capabilities = capabilities}
+lspconfig.rust_analyzer.setup{ on_attach = on_attach, capabilities = capabilities }
+lspconfig.bashls.setup {on_attach = on_attach, capabilities = capabilities}
 lspconfig.efm.setup {
+ capabilities = capabilities,
     on_attach = on_attach,
     init_options = {documentFormatting = true},
 }
-lspconfig.metals.setup{}
+lspconfig.metals.setup{ capabilities = capabilities}
 
 -- lspconfig.jsonls.setup {
     --     on_attach = on_attach,

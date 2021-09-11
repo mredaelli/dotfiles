@@ -20,9 +20,14 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'kosayoda/nvim-lightbulb'
     Plug 'folke/trouble.nvim'
 
-    Plug 'hrsh7th/nvim-compe'
+    Plug 'hrsh7th/nvim-cmp'
+    " Plug 'hrsh7th/vim-vsnip'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-path'
+    Plug 'onsails/lspkind-nvim'
+
     Plug 'ray-x/lsp_signature.nvim'
-    Plug 'norcalli/snippets.nvim'
 
     Plug 'hkupty/iron.nvim'
 
