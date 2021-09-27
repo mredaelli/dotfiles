@@ -39,8 +39,8 @@ require('lualine').setup{
   theme = 'material' 
   },
   sections = {
-    lualine_a = { {'mode', upper = true, format = function(mode_name) return mode_name:sub(1,1) end} },
-    lualine_b = { {'branch', icon = '', format = function(name) return name:sub(1,10) end} },
+    lualine_a = { {'mode', fmt = function(mode_name) return mode_name:sub(1,1).upper end} },
+    lualine_b = { {'branch', icon = '', fmt = function(name) return name:sub(1,10) end} },
     lualine_c = { {'filename', file_status = true}, 'diff', {'diagnostics', sources = {'nvim_lsp'}, symbols = {error = err, warn = warn, info = info} } },
     lualine_x = { {'fileformat', full_path=true, shorten=true}, 'filetype' },
     lualine_y = { 'progress' },

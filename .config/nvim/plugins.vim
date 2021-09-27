@@ -59,6 +59,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plug 'vijaymarupudi/nvim-fzf'
     Plug 'vijaymarupudi/nvim-fzf-commands'
     " Plug 'mfussenegger/nvim-dap'
@@ -81,7 +82,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'danilamihailov/beacon.nvim'
     Plug 'justinmk/vim-dirvish'
 
-    Plug 'hoob3rt/lualine.nvim'
+    Plug 'shadmansaleh/lualine.nvim'
 
     Plug 'AndrewRadev/inline_edit.vim'
     Plug 'bogado/file-line'

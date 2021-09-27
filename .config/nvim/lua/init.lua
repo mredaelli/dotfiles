@@ -11,23 +11,27 @@ iron.core.set_config({
 	},
 })
 
+local actions = require("telescope.actions")
 require("telescope").setup({
 	defaults = {
+		mappings = {
+			i = {
+				["<esc>"] = actions.close,
+			},
+		},
 		prompt_prefix = ">",
-		--" layout_strategy = "vertical",
-		--results_height = 12,
-		set_env = { ["COLORTERM"] = "truecolor" },
 	},
 })
+require('telescope').load_extension('fzf')
 -- require('telescope').load_extension('dap')
 
 require("nvim-web-devicons").setup({ default = true })
 
 require("diffview").setup({
-	diff_binaries = false, -- Show diffs for binaries
+	diff_binaries = false,
+	use_icons = true,
 	file_panel = {
 		width = 35,
-		use_icons = true, -- Requires nvim-web-devicons
 	},
 })
 require("trouble").setup({})
