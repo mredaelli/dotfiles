@@ -1,6 +1,6 @@
 #text/html; w3m -dump -s -o display_link=yes -o display_link_number=yes -o decode_url=yes -T text/html -I %{charset}; copiousoutput; description=HTML Text
 
-image/*;  open_async %s "sxiv FILE"
+image/*;  open_async %s "imv FILE"
 
 text/plain; sed -E "s^https?://[a-zA-Z0-9_-?&/.=]*^<link>^g" %s | sed -E "s/^\\s+$//g" | less -s;
 
