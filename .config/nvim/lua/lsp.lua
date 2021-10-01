@@ -224,7 +224,18 @@ lspconfig.efm.setup {
     on_attach = on_attach,
     init_options = {documentFormatting = true},
 }
-lspconfig.metals.setup{ capabilities = capabilities}
+
+vim.cmd([[augroup lsp]])
+vim.cmd([[autocmd!]])
+vim.cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
+vim.cmd([[autocmd FileType scala,sbt lua require("metals").initialize_or_attach(metals_config)]])
+vim.cmd([[augroup end]])
+MetalsConfig = require("metals").bare_config
+MetalsConfig.settings = {
+  showImplicitArguments = true,
+}
+MetalsConfig.capabilities = capabilities
+MetalsConfig.on_attach=on_attach
 
 -- lspconfig.jsonls.setup {
     --     on_attach = on_attach,

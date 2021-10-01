@@ -26,6 +26,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-path'
     Plug 'onsails/lspkind-nvim'
+    Plug 'scalameta/nvim-metals'
 
     Plug 'ray-x/lsp_signature.nvim'
 
