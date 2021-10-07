@@ -52,13 +52,14 @@ abbr ga 'git add'
 abbr glb "git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
 
 abbr gc 'git commit --verbose'
-abbr gca 'git commit --amend --verbose'
-abbr gcA 'git commit -a --verbose'
-abbr gcAa 'git commit -a --verbose --amend'
+abbr gcf 'git commit --amend --verbose'
+abbr gca 'git commit -a --verbose'
+abbr gcaf 'git commit -a --verbose --amend'
 abbr gcm 'git commit --verbose -m'
-abbr gcAm 'git commit --verbose -am'
+abbr gcam 'git commit --verbose -am'
 
 abbr gf 'git fetch -p'
+abbr gt 'git trim'
 
 abbr gob 'git checkout -b'
 abbr go 'git checkout'
@@ -69,13 +70,23 @@ abbr gPP 'git push --force-with-lease'
 abbr gp 'git pull'
 
 abbr grm 'git rebase master'
+abbr grom 'git rebase origin/master'
 abbr grh 'git rebase -i HEAD~'
 abbr gra 'git rebase --abort'
 abbr grc 'git rebase --continue'
 
-abbr gm 'git merge'
+abbr gmm 'git merge'
+abbr gm 'git merge --ff'
 abbr gma 'git merge --abort'
 abbr gmc 'git merge --continue'
+
+abbr gRo 'git pull; and git reset --hard @{u}'
+abbr gRm 'git pull; and git reset --hard origin/master'
+abbr gro 'git pull; and git reset --soft @{u}'
+
+abbr gC 'git cherry-pick'
+abbr gCa 'git cherry-pick --abort'
+abbr gCc 'git cherry-pick --continue'
 
 abbr :e 'vi'
 
