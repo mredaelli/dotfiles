@@ -26,7 +26,10 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-path'
     Plug 'onsails/lspkind-nvim'
-    Plug 'scalameta/nvim-metals'
+    Plug 'scalameta/nvim-metals'   
+
+    Plug 'hrsh7th/cmp-vsnip'
+    Plug 'hrsh7th/vim-vsnip'
 
     Plug 'ray-x/lsp_signature.nvim'
 
@@ -83,12 +86,12 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'danilamihailov/beacon.nvim'
     Plug 'justinmk/vim-dirvish'
 
-    Plug 'shadmansaleh/lualine.nvim'
+    Plug 'nvim-lualine/lualine.nvim'
 
     Plug 'AndrewRadev/inline_edit.vim'
     Plug 'bogado/file-line'
 
     " themes
-    Plug 'Pocco81/Catppuccino.nvim'
+    Plug 'catppuccin/nvim'
 call plug#end()
 

@@ -36,7 +36,7 @@ lsp_status.register_progress()
 
 require('lualine').setup{
   options = { 
-  theme = 'material' 
+      theme = 'catppuccin' 
   },
   sections = {
     lualine_a = { {'mode', fmt = function(mode_name) return mode_name:sub(1,1).upper end} },

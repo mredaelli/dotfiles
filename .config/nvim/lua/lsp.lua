@@ -230,7 +230,7 @@ vim.cmd([[autocmd!]])
 vim.cmd([[autocmd FileType scala setlocal omnifunc=v:lua.vim.lsp.omnifunc]])
 vim.cmd([[autocmd FileType scala,sbt lua require("metals").initialize_or_attach(MetalsConfig)]])
 vim.cmd([[augroup end]])
-MetalsConfig = require("metals").bare_config
+MetalsConfig = require("metals").bare_config()
 MetalsConfig.settings = {
   showImplicitArguments = true,
 }
