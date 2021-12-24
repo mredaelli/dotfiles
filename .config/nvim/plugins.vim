@@ -18,7 +18,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-lua/lsp_extensions.nvim'
     Plug 'kosayoda/nvim-lightbulb'
-    Plug 'folke/trouble.nvim'
+    " Plug 'folke/trouble.nvim'
 
     Plug 'hrsh7th/nvim-cmp'
     " Plug 'hrsh7th/vim-vsnip'

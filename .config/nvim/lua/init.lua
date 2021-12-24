@@ -1,6 +1,5 @@
 require("lsp")
 require("treesitter")
--- require "my-debug"
 require("dap")
 require("completion")
 
@@ -35,7 +34,7 @@ require("diffview").setup({
 		width = 35,
 	},
 })
-require("trouble").setup({})
+-- require("trouble").setup({})
 
 require("gitsigns").setup({
 	keymaps = {

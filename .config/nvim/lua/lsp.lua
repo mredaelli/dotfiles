@@ -36,7 +36,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
             },
         }
         )(...)
-    pcall(vim.lsp.diagnostic.set_loclist, {open_loclist = false})
+    -- pcall(vim.lsp.diagnostic.set_loclist, {open_loclist = false})
 end
 
 -- local format_options_prettier = {
