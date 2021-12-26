@@ -1,0 +1,1 @@
+<html><body>You are being <a href="https://raw.githubusercontent.com/catppuccin/fish/main/conf.d/catppuccin.fish">redirected</a>.</body></html>
