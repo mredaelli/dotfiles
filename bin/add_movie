@@ -1,2 +1,8 @@
 #!/bin/sh
-transmission-remote 192.168.0.10:9091 -a "$1" -c /storage/Downloads/Incomplete -s -w /storage/Videos/Movies/ -n gatto:gatto
+if ping -w 1 192.168.0.10 &> /dev/null
+then
+  HOST=192.168.0.10
+else
+  HOST=10.0.25.10
+fi
+transmission-remote $HOST:9091 -a "$1" -c /storage/Downloads/Incomplete -s -w /storage/Videos/Movies/ -n gatto:gatto

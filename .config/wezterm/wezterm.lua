@@ -1,9 +1,16 @@
 local wezterm = require("wezterm")
 
-function key(k, a)
-	local d = {}
-	d["mods"] = "CTRL|SHIFT"
-	d["key"] = k
+local KEYMOD = "CTRL|SHIFT"
+
+function set_title(title)
+	return "printf '\\x1b]0;" .. title .. "\\x1b\\\\'"
+end
+
+function key(k, a, mod)
+	local d = {
+		mods = mod or KEYMOD,
+		key = k
+	}
 	if type(a) == "string" then
 		d["action"] = a
 	else
@@ -13,72 +20,135 @@ function key(k, a)
 end
 
 local keys = {
-	-- key("UpArrow", { ScrollToPrompt = -1 }),
-	-- key("DownArrow", { ScrollToPrompt = -1 }),
-	key("UpArrow", { ScrollByLine = -5}),
-	key("DownArrow", { ScrollByLine = 5 }),
-	key("PageUp", { ScrollByPage = -1 }),
-	key("PageDown", { ScrollByPage = 1 }),
-	-- key("", "SpawnWindow"),
-	key("j", { ActivatePaneDirection = "Down" }),
-	key("k", { ActivatePaneDirection = "Up" }),
-	key("h", { ActivatePaneDirection = "Left" }),
-	key("l", { ActivatePaneDirection = "Right" }),
-	key("w", { CloseCurrentPane = { confirm = true } }),
-	key("Enter", { SplitHorizontal = { domain = "CurrentPaneDomain" } }),
-	key("|", { SplitVertical = { domain = "CurrentPaneDomain" } }),
+	key("k", { ScrollByLine = -3 }),
+	key("j", { ScrollByLine = 3 }),
+	key("h", { ScrollToPrompt = -1 }),
+	key("l", { ScrollToPrompt = 1 }),
+	key("b", { ScrollByPage = -1 }),
+	key("f", { ScrollByPage = 1 }),
+
+	-- these are actually CTRL|SHIFT + ] and [
+	key("}", { ActivatePaneDirection = "Next" }, "CTRL"),
+	key("{", { ActivatePaneDirection = "Prev" }, "CTRL"),
 	key("z", "TogglePaneZoomState"),
-	-- map ctrl+shift+b        move_window_backward
+	key("Enter", { SplitHorizontal = { domain = "CurrentPaneDomain" } }),
+	key("|", { SplitHorizontal = { domain = "CurrentPaneDomain" } }, "CTRL"),
+	key("_", { SplitVertical = { domain = "CurrentPaneDomain" } }, "CTRL"),
+	key("w", { CloseCurrentPane = { confirm = true } }),
+
 	key("t", { SpawnTab = "CurrentPaneDomain" }),
-	key("{", { ActivateTabRelative = -1 }),
-	key("}", { ActivateTabRelative = 1 }),
-	key("+", "IncreaseFontSize"),
-	key("_", "DecreaseFontSize"),
--- map ctrl+shift+backspace restore_font_size
-	key("y", "QuickSelect"),
-	key("v", "ActivateCopyMode"),
+	key("Tab", { ActivateTabRelative = -1 }),
+	key("Tab", { ActivateTabRelative = 1 }, "CTRL"),
+	key("q", { CloseCurrentTab = { confirm = true } }),
+	key("PageDown", { MoveTabRelative = 1 }),
+	key("PageUp", { MoveTabRelative = -1 }),
+	key("n", "ShowTabNavigator"),
+	key("*", "ShowLauncher", "CTRL"),
+
+	key("+", "IncreaseFontSize", "LEADER"),
+	key("_", "DecreaseFontSize", "LEADER"),
+
 	key("r", "ReloadConfiguration"),
+
+	key("v", "ActivateCopyMode"),
+	key("s", { Search={CaseSensitiveString=""} }),
+	key("y", { CopyTo = "Clipboard" }),
+	key("p", { PasteFrom = "Clipboard" }),
+
+	key("x", { Multiple = {
+		{SendString="ciaoi\n"},
+		{SpawnCommandInNewTab={args={"fish", "-C", set_title("src") .. "; cd ~/src"}}},
+		{SpawnCommandInNewTab={args={"fish", "-C", set_title("media") .. "; cd ~/media"}}},
+	}})
 }
 
--- resizing
-for _, i in pairs({"Left", "Right", "Up", "Down"}) do
-	table.insert(keys, key(i.."Arrow", {AdjustPaneSize={i, 1}}))
+for i=1,9 do
+	table.insert(keys, key(tostring(i), { ActivateTab = i }, "CTRL"))
+end
+for _, i in pairs({ "Left", "Right", "Up", "Down" }) do
+	table.insert(keys, key(i .. "Arrow", { AdjustPaneSize = { i, 1 } }))
 end
 
--- map ctrl+shift+l>t goto_layout tall:bias=70
--- map ctrl+shift+l>s goto_layout stack
--- map ctrl+shift+l>1 goto_layout stack
--- # and back
--- map ctrl+shift+l>\ last_used_layout
--- map ctrl+shift+\ last_used_layout
--- map ctrl+shift+l>f goto_layout fat
--- map ctrl+shift+l>g goto_layout grid
--- map ctrl+shift+l>h goto_layout horizontal
--- map ctrl+shift+l>v goto_layout vertical
--- map ctrl+shift+l>] next_layout
+function hint(pattern, k, action)
+	local act;
+	if action then
+		act = wezterm.action_callback(action)
+	else
+		act = nil
+	end
+	table.insert(keys, { key=k, mods="LEADER", action=wezterm.action { QuickSelectArgs={
+		patterns={ pattern },
+		action = act
+	}}})
+	table.insert(keys, { key=k, mods="LEADER|SHIFT", action=wezterm.action{ Search={Regex=pattern} } })
+end
 
--- map ctrl+shift+y>u kitten hints --type url --program firefox
--- map ctrl+shift+y>shift+u kitten hints --type url --program @
--- map ctrl+shift+y>p kitten hints --type path --program -
--- map ctrl+shift+y>shift+p kitten hints --type path --program @
--- map ctrl+shift+y>l kitten hints --type line --program -
--- map ctrl+shift+y>shift+l kitten hints --type line --program @
--- map ctrl+shift+y>w kitten hints --type word --program -
--- map ctrl+shift+y>shift+w kitten hints --type word --program @
--- map ctrl+shift+y>h kitten hints --type hash --program -
--- map ctrl+shift+y>shift+h kitten hints --type hash --program @
+hint("(?:\\S.+\\S)", "l")
+hint("(?:\\S*?/[\r\\S]+)|(?:\\S[\r\\S]*\\.[a-zA-Z0-9\r]{2,7})", "p")
+local url_regex = "(?:https?://(www[.])?[-a-zA-Z0-9@:%._+~#=]{1,256}[.][a-zA-Z0-9()]{1,6}\\b[-a-zA-Z0-9()@:%_+.~#?&/=]*)"
+hint(url_regex, "u")
+hint(url_regex, "f", function(window, pane)
+		local url = window:get_selection_text_for_pane(pane)
+		wezterm.open_with(url)
+	end
+)
 
--- # scrollback
--- map ctrl+shift+s>l pipe @ansi overlay less +G -R
--- map ctrl+shift+s>v pipe @text window nvim -
--- map ctrl+shift+s>shift+v pipe @text tab nvim -
-
+local catppuccin = {
+	foreground = "#dadae8",
+	background = "#1e1e29",
+	cursor_bg = "#b1e3ad",
+	cursor_border = "#b1e3ad",
+	cursor_fg = "#1E1E28",
+	selection_bg = "#332e41",
+	selection_fg = "#e5b4e2",
+	split = "#e5b4e2",
+	ansi = { "#6e6c7e", "#e38c8f", "#b1e3ad", "#ebddaa", "#a4b9ef", "#c6aae8", "#e5b4e2", "#dadae8" },
+	brights = { "#6e6c7e", "#e38c8f", "#b1e3ad", "#ebddaa", "#a4b9ef", "#c6aae8", "#e5b4e2", "#dadae8" },
+	tab_bar = {
+		background = "#15121c",
+		active_tab = {
+			bg_color = "#1e1e29",
+			fg_color = "#dadae8",
+			intensity = "Normal", -- "Half", "Normal" or "Bold" intensity for the
+			underline = "None", -- "None", "Single" or "Double" underline for
+			italic = false,
+			strikethrough = false,
+		},
+		inactive_tab = {
+			bg_color = "#1b1923",
+			fg_color = "#a4b9ef",
+		},
+	},
+}
 
 return {
 	enable_wayland = true,
-	font = wezterm.font("JetBrains Mono", { weight = "Medium" }),
+	font = wezterm.font({
+		family = "JetBrains Mono",
+		harfbuzz_features = { "calt=1", "clig=1", "liga=1" },
+		weight = "Medium",
+	}),
 	line_height = 1.15,
 	check_for_updates = false,
+	leader = { key = " ", mods = "CTRL|SHIFT", timeout_milliseconds = 1000 },
 	keys = keys,
 	disable_default_key_bindings = true,
+	enable_kitty_graphics = true,
+	tab_bar_at_bottom = true,
+	hide_tab_bar_if_only_one_tab = true,
+	inactive_pane_hsb = {
+		saturation = 0.9,
+		brightness = 0.7,
+	},
+	color_schemes = { ["Catppuccin"] = catppuccin },
+	color_scheme = "Catppuccin",
+	set_environment_variables = {
+		VTE_VERSION = "6003", -- https://github.com/wez/wezterm/issues/115
+	},
+	window_padding = {
+		left = "0",
+		right = "0",
+		top = "0",
+		bottom = "0",
+	},
 }
