@@ -10,7 +10,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     Plug 'sheerun/vim-polyglot'
 
-    Plug 'nvim-treesitter/nvim-treesitter'
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
     " Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'windwp/nvim-ts-autotag'

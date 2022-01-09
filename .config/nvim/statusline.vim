@@ -35,13 +35,10 @@ lsp_status.config {
 lsp_status.register_progress()
 
 require('lualine').setup{
-  options = { 
-      theme = 'catppuccin' 
-  },
   sections = {
     lualine_a = { {'mode', fmt = function(mode_name) return mode_name:sub(1,1).upper end} },
     lualine_b = { {'branch', icon = '', fmt = function(name) return name:sub(1,10) end} },
-    lualine_c = { {'filename', file_status = true}, 'diff', {'diagnostics', sources = {'nvim_lsp'}, symbols = {error = err, warn = warn, info = info} } },
+    lualine_c = { {'filename', file_status = true}, 'diff', {'diagnostics', sources = {'nvim_diagnostic'}, symbols = {error = err, warn = warn, info = info} } },
     lualine_x = { {'fileformat', full_path=true, shorten=true}, 'filetype' },
     lualine_y = { 'progress' },
     lualine_z = { 'location'  },
