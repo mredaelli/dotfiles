@@ -2,8 +2,8 @@ let maplocalleader = "\\"
 let mapleader = ' '
 
 " Moving between buffers
-nnoremap <C-\> :BA<CR>
-nnoremap <leader>d :BD<cr>
+nnoremap <C-\> :b#<CR>
+nnoremap <leader>d :Sayonara!<CR>
 nnoremap <leader>D :%bd<cr>
 
 " nmap J <Plug>(interactiveJoin)

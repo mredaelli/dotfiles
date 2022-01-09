@@ -56,6 +56,11 @@ require("gitsigns").setup({
 })
 
 
+require('pretty-fold').setup{}
+require('pretty-fold.preview').setup_keybinding('h')
+
+require('specs').setup{}
+require('spellsitter').setup()
 
 local catppuccin = require("catppuccin")
 

@@ -30,10 +30,8 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(...)
             underline = true,
             update_in_insert = false,
             signs = true,
-            virtual_text = {
-                spacing = 2,
-                prefix = '💔',
-            },
+            virtual_text = false,
+            float = { border = "single" },
         }
         )(...)
     -- pcall(vim.lsp.diagnostic.set_loclist, {open_loclist = false})
