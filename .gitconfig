@@ -3,24 +3,40 @@
 	name=Massimo Redaelli
      
 [core]
-    pager = delta --dark --plus-color="#012800" --minus-color="#340001"
-	excludesfile = ~/.gitignore_global
+    pager = delta
+    excludesfile = ~/.gitignore_global
+
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    plus-style="syntax #012800" 
+    minus-style="normal #340001"
+
+[diff]
+  colorMoved = default
 
 [merge]
     tool = nfugitive
+    conflictstyle = diff3
+
 [mergetool "nvimdiff4"]
     cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
     trustExitCode = true
+
 [mergetool "nfugitive"]
     cmd = nvim -f -c "Gvdiffsplit" "$MERGED"
     trustExitCode = true
 
 [color]
 	ui = true
+
 [color "branch"]
     current = yellow reverse
     local = yellow
     remote = green
+
 [color "status"]
     added = yellow
     changed = green
