@@ -22,6 +22,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Plug 'folke/trouble.nvim'
 
     Plug 'anuvyklack/pretty-fold.nvim'
+    
+    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-buffer'
