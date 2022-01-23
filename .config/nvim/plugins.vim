@@ -16,6 +16,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'windwp/nvim-ts-autotag'
     Plug 'lewis6991/spellsitter.nvim'
 
+    Plug 'dmix/elvish.vim', { 'on_ft': ['elvish']}
+
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-lua/lsp_extensions.nvim'
     Plug 'kosayoda/nvim-lightbulb'
