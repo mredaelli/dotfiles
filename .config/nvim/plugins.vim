@@ -88,7 +88,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     Plug 'ggandor/lightspeed.nvim'
     Plug 'edluffy/specs.nvim'
-    Plug 'justinmk/vim-dirvish'
+    Plug 'elihunter173/dirbuf.nvim'
 
     Plug 'nvim-lualine/lualine.nvim'
 

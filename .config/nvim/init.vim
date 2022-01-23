@@ -151,3 +151,18 @@ function! s:setup_git_messenger_popup() abort
     nmap <buffer>] O
 endfunction
 autocmd FileType gitmessengerpopup call <SID>setup_git_messenger_popup()
+
+let g:firenvim_config = { 'globalSettings': { 'alt': 'all'  }, 'localSettings': { }}
+let fc = g:firenvim_config['localSettings']
+let fc['.*'] = { 'takeover': 'never' }
+
+function! SetLinesForFirefox(timer)
+  set lines=10 columns=90 laststatus=0
+endfunction
+function! OnUIEnter(event) abort
+  if 'Firenvim' ==# get(get(nvim_get_chan_info(a:event.chan), 'client', {}), 'name', '')
+    call timer_start(300, function("SetLinesForFirefox"))
+    set guifont=JetBrains_Mono_Medium:h10
+  endif
+endfunction
+autocmd UIEnter * call OnUIEnter(deepcopy(v:event))
