@@ -31,6 +31,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-path'
+    Plug 'hrsh7th/cmp-cmdline'
     Plug 'onsails/lspkind-nvim'
     Plug 'scalameta/nvim-metals'   
 
