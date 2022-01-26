@@ -5,30 +5,32 @@ set $screenshotter flameshot
 set $screenshotter_cmd "flameshot gui -p $picpath/screenshots"
 set $menu rofi
 set $msg i3-msg
+set $term wezterm start
+set $shell elvish
 
 floating_modifier $mod
 focus_on_window_activation urgent
 
-bindsym $mod+Shift+Return exec kitty
-bindsym $mod+bar exec wezterm
+bindsym $mod+Shift+Return exec $term
+bindsym $mod+bar exec $term
 bindsym $mod+Shift+f exec firefox
-bindsym $mod+Shift+r exec kitty --title ranger ranger
+bindsym $mod+Shift+r exec $term --class ranger ranger
 bindsym $mod+Shift+b exec buku_run
 bindsym $mod+Shift+s exec ~/bin/web-search.sh
 bindsym $mod+Shift+w exec ~/bin/wallpaper
 bindsym $mod+Shift+q kill
-bindsym $mod+Ctrl+l exec kitty --session ~/lari_session
+bindsym $mod+Ctrl+l exec $term --session ~/lari_session
 
 # ikhal
-bindsym $mod+Shift+c exec kitty --class ikhal ikhal
+bindsym $mod+Shift+c exec $term --class ikhal ikhal
 for_window [class="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
 
-bindsym $mod+Shift+m exec kitty --class spt spt
+bindsym $mod+Shift+m exec $term --class spt spt
 for_window [class="spt"] floating enable, resize set 1000 800, move position center, border pixel 5, move scratchpad, scratchpad show
 bindsym $mod+space scratchpad show
 
 # quick terminal
-bindsym $mod+Shift+t exec kitty --title taskwarrior --class taskwarrior fish
+bindsym $mod+Shift+t exec $term --class taskwarrior elvish
 for_window [class="taskwarrior"] floating enable, resize set 1000 600, move position center, border pixel 5
 
 bindsym $mod+Ctrl+r reload

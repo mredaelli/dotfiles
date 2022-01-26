@@ -22,8 +22,13 @@ fn only-when-external { |prog lambda|
   if (has-external $prog) { $lambda }
 }
 
-fn items { |d f| 
-  keys $d | each { |k| $f $k $d[$k] }
+fn iff {|cond a b|
+  if $cond { put ($a) } else { put ($b) }
+}
+
+fn items {|f @d| 
+  var x = (iff (eq $d []) { all } { $d[0] }) 
+  keys $x | each { |k| $f $k $x[$k] }
 }
 
 alias:new du du -h
@@ -108,5 +113,13 @@ fn please {
   sudo (edit:command-history &cmd-only &newest-first | take 2 | drop 1)
 }
 alias:new whatsmyip curl -s ipinfo.io/ip
-# Cin="xclip -selection clipboard -in"
-# Cout="xclip -selection clipboard -out"
+
+set edit:small-word-abbr['|cl'] = "| wl-copy"
+set edit:small-word-abbr['<cl'] = "< wl-copy"
+set edit:small-word-abbr['cl>'] = "wl-paste >"
+set edit:small-word-abbr['cl|'] = "wl-paste |"
+
+fn nix-shell {|@a|
+    (which .any-nix-shell-wrapper) elvish $@a
+}
+set edit:rprompt = (constantly (styled (echo $E:ANY_NIX_SHELL_PKGS) green))

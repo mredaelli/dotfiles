@@ -4,7 +4,7 @@ include ../i3/config
 
 set $notifier mako
 set $screenshotter_cmd 'grimshot copy area'
-set $menu wofi
+# set $menu wofi
 set $msg swaymsg
 set $locker swaylock-fancy
 
@@ -17,11 +17,13 @@ bindsym $mod+Alt+Space exec makoctl dismiss
 
 for_window [title="Firefox — Sharing Indicator"] floating enable, resize set 10 10
 
-exec swayidle -w \
+exec --no-startup-id swayidle -w \
     timeout 300 'swaylock-fancy -p &' \
     timeout 600 'swaymsg "output * dpms off"' \
-         resume 'swaymsg "output * dpms on"' \
+    resume 'swaymsg "output * dpms on"' \
     before-sleep 'swaylock-fancy'
+
+exec --no-startup-id wlsunset -l 47.3 -L 8.5
 
 set $mode_screenshot (w)indow, (a)rea, (s)creen | Shift to save to file
 bindsym $mod+Print mode "$mode_screenshot"
