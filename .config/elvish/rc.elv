@@ -39,22 +39,11 @@ only-when-external top {
   alias:new top htop
 }
 
-set edit:small-word-abbr = [
+set edit:abbr = [
   &gs='git status -s'
-  &gd='git diff'
-  &gl='git log --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary'
-  &ga='git add'
-  &glb="git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
-  &gc='git commit --verbose'
-  &gcf='git commit --amend --verbose'
-  &gca='git commit -a --verbose'
-  &gcaf='git commit -a --verbose --amend'
-  &gcm='git commit --verbose -m'
-  &gcam='git commit --verbose -am'
+  &gl='git log --graph --topo-order --abbrev-commit --date=short --decorate  --boundary'
   &gf='git fetch -p'
   &gt='git trim'
-  &gob='git checkout -b'
-  &go='git checkout'
   &gom='git checkout master'
   &gP='git push'
   &gPP='git push --force-with-lease'
@@ -64,16 +53,28 @@ set edit:small-word-abbr = [
   &grh='git rebase -i HEAD~'
   &gra='git rebase --abort'
   &grc='git rebase --continue'
-  &gmm='git merge'
-  &gm='git merge --ff'
+  &gCa='git cherry-pick --abort'
+  &gCc='git cherry-pick --continue'
   &gma='git merge --abort'
   &gmc='git merge --continue'
   &gRo='git pull; and git reset --hard @{u}'
-  &gRm='git pull; and git reset --hard origin/master'
   &gro='git pull; and git reset --soft @{u}'
+]
+set edit:small-word-abbr = [
+  &gd='git diff'
+  &ga='git add'
+  &glb="git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
+  &gc='git commit --verbose'
+  &gcf='git commit --amend --verbose'
+  &gca='git commit -a --verbose'
+  &gcaf='git commit -a --verbose --amend'
+  &gcm='git commit --verbose -m'
+  &gcam='git commit --verbose -am'
+  &gob='git checkout -b'
+  &go='git checkout'
+  &gmm='git merge'
+  &gm='git merge --ff'
   &gC='git cherry-pick'
-  &gCa='git cherry-pick --abort'
-  &gCc='git cherry-pick --continue'
 ]
 
 only-when-external nvim {
@@ -114,8 +115,8 @@ fn please {
 }
 alias:new whatsmyip curl -s ipinfo.io/ip
 
-set edit:small-word-abbr['|cl'] = "| wl-copy"
-set edit:small-word-abbr['<cl'] = "< wl-copy"
+set edit:abbr['|cl'] = "| wl-copy"
+set edit:abbr['<cl'] = "< wl-copy"
 set edit:small-word-abbr['cl>'] = "wl-paste >"
 set edit:small-word-abbr['cl|'] = "wl-paste |"
 
