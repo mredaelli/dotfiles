@@ -43,8 +43,8 @@
     "backlight": {
         "format": "{percent}% {icon}",
         "format-icons": ["", ""],
-        "on-scroll-up":"backlight increase",
-        "on-scroll-down":"backlight decrease",
+        "on-scroll-up":"~/bin/backlight increase",
+        "on-scroll-down":"~/bin/backlight decrease",
     },
     "battery": {
         "states": {
