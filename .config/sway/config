@@ -4,13 +4,11 @@ include ../i3/config
 
 set $notifier mako
 set $screenshotter_cmd 'grimshot copy area'
-# set $menu wofi
 set $msg swaymsg
 set $locker swaylock-fancy
 
-# Workaround for this commit:
-# <https://github.com/swaywm/sway/commit/65a751a21f61b30808b7e703257c6ca3b71f50eb>
-exec systemctl --user import-environment WAYLAND_DISPLAY XDG_SESSION_TYPE XDG_SESSION_DESKTOP QT_QPA_PLATFORM
+# https://wiki.archlinux.org/title/PipeWire#xdg-desktop-portal-wlr
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_SESSION_TYPE XDG_SESSION_DESKTOP QT_QPA_PLATFORM XDG_CURRENT_DESKTOP
 
 bindsym Ctrl+Print exec grimshot save area
 bindsym $mod+Alt+Space exec makoctl dismiss
