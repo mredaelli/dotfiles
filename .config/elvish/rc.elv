@@ -127,3 +127,6 @@ fn nix-shell {|@a|
     (which .any-nix-shell-wrapper) elvish $@a
 }
 set edit:rprompt = (constantly (styled (echo $E:ANY_NIX_SHELL_PKGS) green))
+
+set edit:insert:binding[Ctrl-w] = { edit:kill-small-word-left  }
+set edit:insert:binding["Ctrl-["] = $edit:command:start~
