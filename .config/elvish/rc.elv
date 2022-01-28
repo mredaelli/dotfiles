@@ -15,6 +15,9 @@ eval (starship init elvish)
 eval (zoxide init elvish | slurp)
 
 set long-running-notifications:threshold = 60
+set long-running-notifications:never-notify = [ 
+  vi vim nvim nano less more bat ssh sshl wezterm bash fish
+]
 
 set edit:max-height = 20
 
