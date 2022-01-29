@@ -18,15 +18,11 @@
   colorMoved = default
 
 [merge]
-    tool = nfugitive
+    tool = vim_mergetool
     conflictstyle = diff3
 
-[mergetool "nvimdiff4"]
-    cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-    trustExitCode = true
-
-[mergetool "nfugitive"]
-    cmd = nvim -f -c "Gvdiffsplit" "$MERGED"
+[mergetool "vim_mergetool"]
+    cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
     trustExitCode = true
 
 [color]

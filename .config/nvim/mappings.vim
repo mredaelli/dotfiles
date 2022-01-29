@@ -1,10 +1,22 @@
 let maplocalleader = "\\"
 let mapleader = ' '
 
+" x for cut
+nnoremap x d
+xnoremap x d
+nnoremap xx dd
+nnoremap X D
+
+" s also in pending mode
+omap s <Plug>Lightspeed_s
+omap S <Plug>Lightspeed_S
+omap > w
+
+
 " Moving between buffers
 nnoremap <C-\> :b#<CR>
-nnoremap <leader>d :Sayonara!<CR>
-nnoremap <leader>D :%bd<cr>
+nnoremap <silent> <leader>d :Sayonara!<CR>
+nnoremap <silent> <leader>D :%bd<cr>
 
 " nmap J <Plug>(interactiveJoin)
 " xmap J <Plug>(interactiveJoin)
@@ -38,93 +50,9 @@ nnoremap <silent> <CR> :nohls<CR><CR>
 
 nnoremap <Leader>g :silent grep<Space>
 
-if new_nvim
-  command! -nargs=1 Rg call luaeval('require("fzf-commands").rg(_A)', <f-args>)
-  nnoremap <Leader>r :<c-u>Rg<space>
-
-  nnoremap <Leader>f :Telescope git_files show_untracked=false recurse_submodules=true<CR>
-  nnoremap <Leader>F :Telescope find_files<CR>
-  nnoremap <Leader>b :Telescope buffers<CR>
-  nnoremap <Leader>th :Telescope command_history<CR>
-  nnoremap <Leader>tt :Telescope tags<CR>
-  nnoremap <Leader>tr :Telescope live_grep<CR>
-  nnoremap <Leader>tc :Telescope commands<CR>
-  nnoremap <Leader>tm :Telescope marks<CR>
-  nnoremap <Leader>ts :Telescope treesitter<CR>
-  nnoremap <Leader>/ :Telescope current_buffer_fuzzy_find<CR>
-  nnoremap <Leader>tT :Telescope current_buffer_tags<CR>
-  nnoremap <Leader>q :Telescope quickfix<CR>
-  nnoremap <Leader>l :Telescope loclist<CR>
-  nnoremap <Leader>tH :Telescope help_tags<CR>
-  nnoremap <Leader>tr :Telescope lsp_references<CR>
-  nnoremap <Leader>tS :Telescope lsp_workspace_symbols<CR>
-  nnoremap <Leader>ta :Telescope lsp_code_actions<CR>
-  nnoremap <Leader>t] :Telescope lsp_code_definitions<CR>
-  nnoremap <Leader>td :Telescope lsp_code_document_diagnostics<CR>
-  nnoremap <Leader>tD :Telescope lsp_code_workspace_diagnostics<CR>
-  nnoremap <Leader>gh :Telescope git_commits<CR>
-  nnoremap <Leader>gH :Telescope git_bcommits<CR>
-  nnoremap <Leader>gB :Telescope git_branches<CR>
-  " nnoremap <Leader>tdv <cmd>lua require('telescope').extensions.dap.variables()<cr>
-  " require'telescope'.extensions.dap.commands{}
-" require'telescope'.extensions.dap.configurations{}
-" require'telescope'.extensions.dap.list_breakpoints{}
-" require'telescope'.extensions.dap.variables{}
-else
-  nnoremap <Leader>f :GitFiles --recurse-submodules<CR>
-  nnoremap <Leader>F t:ProjectFiles<CR>
-  nnoremap <Leader>b :Buffers<CR>
-  nnoremap <Leader>h :History<CR>
-  nnoremap <Leader>tt :BTags<CR>
-  nnoremap <Leader>r :Rg<Space>
-  nnoremap <Leader>tc :Commands<CR>
-endif
-
-nnoremap <Leader>gf :Git fetch<CR>
-nnoremap <Leader>gs :Git<CR>
-nnoremap <Leader>gp :Git pull<CR>
-nnoremap <Leader>gP :Git push<CR>
-nnoremap <Leader>gPP :GPushForce<CR>
-nnoremap <Leader>gl :GV<CR>
-nnoremap <Leader>gL :GV!<CR>
-nnoremap <Leader>gb :Twiggy<CR>
-nnoremap <Leader>grm :Git rebase master<CR>
-
-nnoremap <Leader>gA :Git add %:p<cr><cr>
-
-nnoremap ]h :GitGutterNextHunk<CR>
-nnoremap [h :GitGutterPrevHunk<CR>
-nnoremap <leader>ga :GitGutterStageHunk<CR>
-nnoremap <leader>gu :GitGutterUndoHunk<CR>
-nnoremap <leader>gd :GitGutterPreviewHunk<CR>
-
-
-onoremap ih <Plug>(GitGutterTextObjectInnerPending)
-onoremap ah <Plug>(GitGutterTextObjectOuterPending)
-xnoremap ih <Plug>(GitGutterTextObjectInnerVisual)
-xnoremap ah <Plug>(GitGutterTextObjectOuterVisual)
 
 nnoremap <silent> [d :Lfprev<CR>
 nnoremap <silent> ]d :Lfnext<CR>
-
-
-"GitGutterLineNrHighlightsEnable
-
-function! s:PushForceSafe()
-  if confirm('Are you sure you want to force-push?', "&Yes\n&No", 1)==1
-    execute('Git push --force-with-lease')
-  endif
-endfunction
-
-command! -bang GPushForce call s:PushForceSafe()
-
-function! s:changebranch(branch)
-  if a:branch =~ 'remotes/'
-    execute 'Git checkout --track ' . a:branch
-  else
-    execute 'Git checkout' . a:branch
-  endif
-endfunction
 
 " commenting with Ctrl-/
 nmap <C-_>  gcc

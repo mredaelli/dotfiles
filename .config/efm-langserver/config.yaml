@@ -175,6 +175,9 @@ languages:
     - <<: *markdown-markdownlint
     - <<: *markdown-pandoc
 
+  pandoc:
+    - <<: *markdown-pandoc
+
   rst:
     - <<: *rst-lint
     - <<: *rst-pandoc

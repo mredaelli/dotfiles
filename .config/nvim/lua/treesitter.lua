@@ -1,11 +1,5 @@
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "all",
-  rainbow = {
-    enable = true
-  },
-  context_commentstring = {
-    enable = true
-  },
+  ensure_installed = "maintained",
   highlight = {
     enable = true,
   },
@@ -19,10 +13,17 @@ require'nvim-treesitter.configs'.setup {
     },
   },
   indent = {
-    enable = false
+    enable = true,
   },
   autotag = {
     enable = true,
+  },
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+  },
+  context_commentstring = {
+    enable = true
   },
   textobjects = {
     select = {
@@ -50,6 +51,8 @@ require'nvim-treesitter.configs'.setup {
     },
   },
 }
+
+require('spellsitter').setup()
 
 vim.cmd[[set foldmethod=expr]]
 vim.cmd[[set foldexpr=nvim_treesitter#foldexpr()]]

@@ -1,51 +1,72 @@
 call plug#begin('~/.local/share/nvim/plugged')
     Plug 'nvim-lua/plenary.nvim' " for gitsigns and telescope
+    Plug 'nvim-lua/popup.nvim' " telescope
 
-    Plug 'kana/vim-textobj-user', { 'for': ['markdown', 'pandoc', 'mail' ] }
-    Plug 'wellle/targets.vim'
-    Plug 'tpope/vim-unimpaired'
-    Plug 'tpope/vim-eunuch'
-    Plug 'kyazdani42/nvim-web-devicons'
-    Plug 'tpope/vim-surround'
-
-    Plug 'sheerun/vim-polyglot'
+    Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+    Plug 'nvim-telescope/telescope-symbols.nvim' " emoji etc
+    Plug 'crispgm/telescope-heading.nvim' " markdown. Works?
+    Plug 'lukas-reineke/indent-blankline.nvim'
+    Plug 'p00f/nvim-ts-rainbow'
+    " Unnecessary?
+    Plug 'vijaymarupudi/nvim-fzf'
+    Plug 'vijaymarupudi/nvim-fzf-commands'
 
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} 
     Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-    " Plug 'nvim-treesitter/nvim-treesitter-refactor'
+    Plug 'JoosepAlviste/nvim-ts-context-commentstring'
+    Plug 'nvim-treesitter/nvim-treesitter-refactor'
     Plug 'windwp/nvim-ts-autotag'
     Plug 'lewis6991/spellsitter.nvim'
 
+    Plug 'sheerun/vim-polyglot'
     Plug 'dmix/elvish.vim', { 'on_ft': ['elvish']}
+    Plug 'satabin/hocon-vim'
+
+    Plug 'vim-pandoc/vim-pandoc'
+    Plug 'vim-pandoc/vim-pandoc-syntax'
+    Plug 'kana/vim-textobj-user'
+    Plug 'wellle/targets.vim'
+    Plug 'echasnovski/mini.nvim', { 'branch': 'stable' } " For surround
+
+    Plug 'tpope/vim-unimpaired'
+    Plug 'tpope/vim-eunuch'
+    Plug 'anuvyklack/pretty-fold.nvim'
+    Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
+    Plug 'tpope/vim-commentary'
+    " in this order!
+    Plug 'ggandor/lightspeed.nvim'
+    Plug 'svermeulen/vim-cutlass'
+
+    Plug 'kyazdani42/nvim-web-devicons'
 
     Plug 'neovim/nvim-lspconfig'
     Plug 'nvim-lua/lsp_extensions.nvim'
     Plug 'kosayoda/nvim-lightbulb'
+    Plug 'onsails/lspkind-nvim'
+    Plug 'scalameta/nvim-metals'   
+    Plug 'ray-x/lsp_signature.nvim'
+    Plug 'nvim-lua/lsp-status.nvim'
     " Plug 'folke/trouble.nvim'
 
-    Plug 'anuvyklack/pretty-fold.nvim'
-    
-    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+    Plug 'hkupty/iron.nvim'
+    " Plug 'mfussenegger/nvim-dap'
+    " Plug 'theHamsta/nvim-dap-virtual-text'
+    " Plug 'nvim-telescope/telescope-dap.nvim'
+
 
     Plug 'hrsh7th/nvim-cmp'
     Plug 'hrsh7th/cmp-buffer'
     Plug 'hrsh7th/cmp-nvim-lsp'
     Plug 'hrsh7th/cmp-path'
     Plug 'hrsh7th/cmp-cmdline'
-    Plug 'onsails/lspkind-nvim'
-    Plug 'scalameta/nvim-metals'   
 
     Plug 'hrsh7th/cmp-vsnip'
     Plug 'hrsh7th/vim-vsnip'
 
-    Plug 'ray-x/lsp_signature.nvim'
-
-    Plug 'hkupty/iron.nvim'
-
-    Plug 'nvim-lua/lsp-status.nvim'
-
-    " Git
     Plug 'tpope/vim-fugitive'
+    Plug 'TimUntersberger/neogit'
+    Plug 'samoshkin/vim-mergetool'
     Plug 'junegunn/gv.vim'
     Plug 'tpope/vim-git'
     Plug 'rhysd/git-messenger.vim'
@@ -61,33 +82,10 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'dbmrq/vim-ditto', { 'for': ['markdown', 'pandoc', 'mail' ] }
     Plug 'reedes/vim-lexical', { 'for': ['markdown', 'pandoc', 'mail' ] }
 
-    " Pandoc
-    Plug 'vim-pandoc/vim-pandoc', { 'for': ['markdown', 'pandoc'] }
-    " Plug 'vim-pandoc/vim-pandoc-after', { 'for': ['markdown', 'pandoc'] }
-    Plug 'vim-pandoc/vim-pandoc-syntax', { 'for': ['markdown', 'pandoc'] }
-
-    Plug 'nvim-lua/popup.nvim'
-    Plug 'nvim-telescope/telescope.nvim'
-    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-    Plug 'vijaymarupudi/nvim-fzf'
-    Plug 'vijaymarupudi/nvim-fzf-commands'
-    " Plug 'mfussenegger/nvim-dap'
-    " Plug 'theHamsta/nvim-dap-virtual-text'
-    " Plug 'nvim-telescope/telescope-dap.nvim'
-    "
-    Plug 'lukas-reineke/indent-blankline.nvim'
-    Plug 'p00f/nvim-ts-rainbow'
-    Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-
-    Plug 'satabin/hocon-vim'
 
     Plug 'lervag/wiki.vim'
 
-    Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-
-    Plug 'tpope/vim-commentary'
-
-    Plug 'ggandor/lightspeed.nvim'
+    Plug 'RRethy/vim-illuminate'
     Plug 'edluffy/specs.nvim'
     Plug 'elihunter173/dirbuf.nvim'
 
@@ -96,7 +94,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'AndrewRadev/inline_edit.vim'
     Plug 'bogado/file-line'
 
+    Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
     " themes
     Plug 'catppuccin/nvim'
 call plug#end()
-
