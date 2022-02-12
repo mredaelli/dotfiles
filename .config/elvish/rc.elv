@@ -42,9 +42,10 @@ only-when-external top {
   alias:new top htop
 }
 
-set edit:abbr = [
+set edit:small-word-abbr = [
   &gs='git status -s'
-  &gl='git log --graph --topo-order --abbrev-commit --date=short --decorate  --boundary'
+  &gbb='git branch --no-merged'
+  &gl='git log'
   &gf='git fetch -p'
   &gt='git trim'
   &gom='git checkout master'
@@ -62,9 +63,9 @@ set edit:abbr = [
   &gmc='git merge --continue'
   &gRo='git pull; and git reset --hard @{u}'
   &gro='git pull; and git reset --soft @{u}'
-]
-set edit:small-word-abbr = [
   &gd='git diff'
+  &gdc='git diff --cached'
+  &gds='git diff --staged'
   &ga='git add'
   &glb="git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
   &gc='git commit --verbose'
@@ -105,7 +106,7 @@ only-when-external fd {
 fn mkcd {|a| e:mkdir -p $a; cd $a }
 
 set E:LESS = "-i -R"
-set E:EDITOR = "vim"
+set E:EDITOR = "nvim"
 
 set paths = [~/bin $@paths]
 

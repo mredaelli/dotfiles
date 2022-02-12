@@ -81,3 +81,31 @@
     stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
     review = !nvim -p $(git files) +\"tabdo Gvdiffsplit $REVIEW_BASE | wincmd h | Gitsigns change_base $REVIEW_BASE\"
     reviewone = !nvim +\"Gvdiffsplit $REVIEW_BASE | wincmd h | Gitsigns change_base $REVIEW_BASE\"
+
+    # https://github.com/GitAlias/gitalias/
+    search-commits = !"f() { \
+        query=\"$1\"; \
+        shift; \
+        git log -S\"$query\" \"$@\"; \
+    }; f \"$@\""
+
+
+    log-list = log --graph --topo-order --date=short --abbrev-commit --decorate --all --boundary --pretty=format:'%Cgreen%ad %Cred%h%Creset -%C(yellow)%d%Creset %s %Cblue[%cn]%Creset %Cblue%G?%Creset'
+    log = log-list
+
+    current-branch = rev-parse --abbrev-ref HEAD
+
+    clone-lean = clone --depth 1 --filter=combine:blob:none+tree:0 --no-checkout
+    cloner = clone --recurse-submodules
+
+    branch-commit-first = "!f() { \
+        branch="${1:-$(git current-branch)}"; \
+        count="${2:-1}"; \
+        git log --reverse --pretty=%H "$branch" | \
+        head -"$count"; \
+    }; f"
+
+    # when you need to rebase someone's branch on master
+    rum =!"f() { git fetch; git checkout ${1:-$(git current-branch)}; git reset --hard @{u}; git rebase -i origin/master }; f"
+
+    clean-branch = !"f() { git rebase -i $(git branch-commit-first) } f"
