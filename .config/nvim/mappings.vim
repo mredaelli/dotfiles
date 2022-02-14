@@ -1,17 +1,10 @@
 let maplocalleader = "\\"
 let mapleader = ' '
 
-" x for cut
-nnoremap x d
-xnoremap x d
-nnoremap xx dd
-nnoremap X D
-
 " s also in pending mode
 omap s <Plug>Lightspeed_s
 omap S <Plug>Lightspeed_S
 omap > w
-
 
 " Moving between buffers
 nnoremap <C-\> :b#<CR>

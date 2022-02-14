@@ -43,7 +43,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'tpope/vim-commentary'
     " in this order!
     Plug 'ggandor/lightspeed.nvim'
-    Plug 'svermeulen/vim-cutlass'
 
     Plug 'kyazdani42/nvim-web-devicons'
 
