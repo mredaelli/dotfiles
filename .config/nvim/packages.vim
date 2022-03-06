@@ -26,6 +26,9 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'windwp/nvim-ts-autotag'
     Plug 'lewis6991/spellsitter.nvim'
 
+    Plug 'jose-elias-alvarez/null-ls.nvim'
+    Plug 'ThePrimeagen/refactoring.nvim'
+
     Plug 'sheerun/vim-polyglot'
     Plug 'dmix/elvish.vim', { 'on_ft': ['elvish']}
     Plug 'satabin/hocon-vim'
@@ -101,6 +104,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'bogado/file-line'
 
     Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+
+    Plug 'nvim-neorg/neorg'
 
     " themes
     Plug 'catppuccin/nvim'

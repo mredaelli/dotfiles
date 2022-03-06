@@ -160,7 +160,7 @@ local cmd = {
 require("lspconfig").angularls.setup({
 	capabilities = capabilities,
 	cmd = cmd,
-	on_new_config = function(new_config, new_root_dir)
+	on_new_config = function(new_config, _new_root_dir)
 		new_config.cmd = cmd
 	end,
 })
@@ -216,11 +216,35 @@ lspconfig.sumneko_lua.setup({
 lspconfig.vimls.setup({ on_attach = on_attach, capabilities = capabilities })
 lspconfig.rust_analyzer.setup({ on_attach = on_attach, capabilities = capabilities })
 lspconfig.bashls.setup({ on_attach = on_attach, capabilities = capabilities })
-lspconfig.efm.setup({
-	capabilities = capabilities,
+-- lspconfig.efm.setup({
+-- 	capabilities = capabilities,
+-- 	on_attach = on_attach,
+-- 	init_options = { documentFormatting = true},
+-- 	root_dir = require"lspconfig".util.root_pattern {".git/", "."},
+-- })
+local null_ls = require("null-ls")
+null_ls.setup({
 	on_attach = on_attach,
-	init_options = { documentFormatting = true},
-	root_dir = require"lspconfig".util.root_pattern {".git/", "."},
+	sources = {
+		null_ls.builtins.formatting.stylua,
+		-- null_ls.builtins.completion.spell,
+		null_ls.builtins.formatting.nixpkgs_fmt,
+		null_ls.builtins.diagnostics.statix,
+		null_ls.builtins.diagnostics.shellcheck,
+		null_ls.builtins.formatting.shfmt,
+		null_ls.builtins.diagnostics.flake8,
+		null_ls.builtins.diagnostics.mypy,
+		null_ls.builtins.formatting.black,
+		null_ls.builtins.formatting.isort,
+		-- null_ls.builtins.formatting.autopep8,
+		-- null_ls.builtins.formatting.yapf,
+		null_ls.builtins.diagnostics.yamllint,
+		null_ls.builtins.formatting.prettierd,
+		null_ls.builtins.formatting.eslint_d,
+		-- null_ls.builtins.formatting.scalafmt,
+		-- null_ls.builtins.formatting.rustfmt,
+		null_ls.builtins.code_actions.refactoring,
+	},
 })
 
 -- Scala
@@ -236,4 +260,3 @@ MetalsConfig.settings = {
 }
 MetalsConfig.capabilities = capabilities
 MetalsConfig.on_attach = on_attach
-

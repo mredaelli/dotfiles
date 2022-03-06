@@ -21,22 +21,22 @@ require("diffview").setup({
 })
 -- require("trouble").setup({})
 
-require('pretty-fold').setup{}
-require('pretty-fold.preview').setup_keybinding('h')
+require("pretty-fold").setup({})
+require("pretty-fold.preview").setup_keybinding("h")
 
-require('specs').setup{}
-require('spellsitter').setup()
+require("specs").setup({})
+require("spellsitter").setup()
 
-require('mini.surround').setup({
+require("mini.surround").setup({
 	mappings = {
-    add = '<leader>sa',
-    delete = '<leader>sd',
-    find = '<leader>sf',
-    find_left = '<leader>sF',
-    highlight = '<leader>sh',
-    replace = '<leader>sr',
-    update_n_lines = '<leader>sn',
-  }
+		add = "<leader>sa",
+		delete = "<leader>sd",
+		find = "<leader>sf",
+		find_left = "<leader>sF",
+		highlight = "<leader>sh",
+		replace = "<leader>sr",
+		update_n_lines = "<leader>sn",
+	},
 })
 
 local catppuccin = require("catppuccin")
@@ -82,7 +82,55 @@ catppuccin.setup({
 		bufferline = false,
 		markdown = true,
 		lightspeed = true,
-		hop=false,
+		hop = false,
 	},
 })
 catppuccin.load()
+
+local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+
+-- These two are optional and provide syntax highlighting
+-- for Neorg tables and the @document.meta tag
+parser_configs.norg_meta = {
+	install_info = {
+		url = "https://github.com/nvim-neorg/tree-sitter-norg-meta",
+		files = { "src/parser.c" },
+		branch = "main",
+	},
+}
+
+parser_configs.norg_table = {
+	install_info = {
+		url = "https://github.com/nvim-neorg/tree-sitter-norg-table",
+		files = { "src/parser.c" },
+		branch = "main",
+	},
+}
+
+require("neorg").setup({
+	load = {
+		["core.defaults"] = {},
+		["core.norg.dirman"] = {
+			config = {
+				workspaces = {
+					kb = "~/carte/kb",
+					zettel = "~/carte/zettel",
+					journal = "~/carte/journal",
+				},
+			},
+		},
+		["core.norg.completion"] = {
+			config = { -- Note that this table is optional and doesn't need to be provided
+			},
+		},
+		["core.norg.concealer"] = {
+			config = { -- Note that this table is optional and doesn't need to be provided
+			},
+		},
+		["core.norg.journal"] = {
+			 config = { -- Note that this table is optional and doesn't need to be provided
+				workspace = 'journal'
+			 }
+		}
+	},
+})
