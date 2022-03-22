@@ -1,13 +1,16 @@
 {
-    "modules-left": ["sway/workspaces"],
+    "modules-left": ["sway/workspaces", "sway/mode"],
     "modules-center": ["custom/media"],
-    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "disk", "temperature", "backlight", "battery", "clock", "tray"],
+    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "disk", "temperature", "backlight", "battery", "clock","custom/notification", "tray"],
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
             "activated": "",
             "deactivated": ""
         }
+    },
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
     },
     "tray": {
         "spacing": 10
@@ -83,7 +86,7 @@
         },
         "on-click": "pavucontrol"
     },
-  "custom/media": {
+    "custom/media": {
         "format": "{icon}{}",
         "return-type": "json",
         "format-icons": {
@@ -93,6 +96,20 @@
         "max-length":70,
         "exec": "playerctl metadata --format '{\"text\": \"{{markup_escape(title)}}\", \"tooltip\": \"{{markup_escape(playerName)}} : {{markup_escape(title)}}\", \"alt\": \"{{markup_escape(status)}}\", \"class\": \"{{markup_escape(status)}}\"}' -F",
         "on-click": "playerctl play-pause",
-      }
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+          "notification": "<span foreground='red'><sup></sup></span>",
+          "none": "",
+          "dnd-notification": "<span foreground='red'><sup></sup></span>",
+          "dnd-none": ""
+        },
+        "return-type": "json",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    }
 }
-                 playerctl

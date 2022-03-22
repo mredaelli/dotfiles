@@ -1,27 +1,146 @@
 # output HDMI-A-1 bg ~/wallpaper.png stretch
 
-include ../i3/config
+set $mod Mod4
 
-set $notifier mako
-set $screenshotter_cmd 'grimshot copy area'
-set $msg swaymsg
-set $locker swaylock-fancy
+set $msg i3-msg
+set $term wezterm start
+set $shell elvish
 
-# https://wiki.archlinux.org/title/PipeWire#xdg-desktop-portal-wlr
-exec systemctl --user import-environment WAYLAND_DISPLAY XDG_SESSION_TYPE XDG_SESSION_DESKTOP QT_QPA_PLATFORM XDG_CURRENT_DESKTOP
+floating_modifier $mod
+focus_on_window_activation urgent
 
-bindsym Ctrl+Print exec grimshot save area
-bindsym $mod+Alt+Space exec makoctl dismiss
+bindsym $mod+Shift+Return exec $term
+bindsym $mod+bar exec $term
+bindsym $mod+Shift+f exec firefox
+bindsym $mod+Shift+r exec $term --class ranger ranger
+bindsym $mod+Shift+s exec ~/bin/web-search.sh
+bindsym $mod+Shift+w exec ~/bin/wallpaper
+bindsym $mod+Shift+q kill
+bindsym $mod+Ctrl+l exec $term --session ~/lari_session
 
-for_window [title="Firefox — Sharing Indicator"] floating enable, resize set 10 10
+# ikhal
+bindsym $mod+Shift+c exec $term --class ikhal ikhal
+for_window [class="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
 
-exec --no-startup-id swayidle -w \
-    timeout 300 'swaylock-fancy -p &' \
-    timeout 600 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
-    before-sleep 'swaylock-fancy'
+bindsym $mod+Shift+m exec $term --class spt spt
+for_window [class="spt"] floating enable, resize set 1000 800, move position center, border pixel 5, move scratchpad, scratchpad show
+bindsym $mod+space scratchpad show
 
-exec --no-startup-id wlsunset -l 47.3 -L 8.5
+# quick terminal
+bindsym $mod+Shift+t exec $term --class taskwarrior elvish
+for_window [class="taskwarrior"] floating enable, resize set 1000 600, move position center, border pixel 5
+
+bindsym $mod+Ctrl+r reload
+bindsym $mod+Shift+Ctrl+r restart
+bindsym $mod+Ctrl+n exec sh -c '[[ "$(nmcli network)" == "enabled" ]] && nmcli network off || nmcli network on'
+bindsym $mod+Ctrl+1 exec ~/bin/one_monitor.sh && notify-send 'Switched to one monitor'
+bindsym $mod+Ctrl+2 exec ~/bin/two_monitors.sh && notify-send 'Switched to two monitors'
+
+bindsym $mod+d exec rofi -show run || rofi --show run
+bindsym $mod+w exec rofi -show window
+
+bindsym $mod+r split toggle
+bindsym $mod+u focus parent
+# move up one level
+bindsym $mod+p mark i3ha, focus parent, focus parent, mark i3hb, [con_mark="i3ha"] focus, move window to mark i3hb, unmark i3ha, unmark i3hb
+
+bindsym $mod+f fullscreen toggle
+
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
+
+
+set $picpath ~/media/pictures
+
+bindsym Print exec 'grimshot copy area'
+
+# Screen brightness controls
+bindsym XF86MonBrightnessUp exec light -A 10
+bindsym XF86MonBrightnessDown exec light -U 10
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# bindsym $mod+Shift+space floating toggle
+# bindsym $mod+space focus mode_toggle
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+bindsym $mod+Prior workspace prev
+bindsym $mod+Next workspace next
+bindsym $mod+backslash workspace back_and_forth
+
+bindsym $mod+Shift+1 move container to workspace 1,   workspace 1
+bindsym $mod+Shift+2 move container to workspace 2,   workspace 2
+bindsym $mod+Shift+3 move container to workspace 3,   workspace 3
+bindsym $mod+Shift+4 move container to workspace 4,   workspace 4
+bindsym $mod+Shift+5 move container to workspace 5,   workspace 5
+bindsym $mod+Shift+6 move container to workspace 6,   workspace 6
+bindsym $mod+Shift+7 move container to workspace 7,   workspace 7
+bindsym $mod+Shift+8 move container to workspace 8,   workspace 8
+bindsym $mod+Shift+9 move container to workspace 9,   workspace 9
+bindsym $mod+Shift+0 move container to workspace 10,  workspace 10
+
+bindsym $mod+Control+Left resize shrink width 10 px or 10 ppt
+bindsym $mod+Control+Down resize grow height 10 px or 10 ppt
+bindsym $mod+Control+Up resize shrink height 10 px or 10 ppt
+bindsym $mod+Control+Right resize grow width 10 px or 10 ppt
+
+for_window [urgent=latest] focus
+for_window [window_role="GtkFileChooserDialog"] resize set 800 600, move position center
+
+set $mode_system (l)ock, (e)xit, (s)uspend, (r)eboot, (p)oweroff
+bindsym $mod+x mode "$mode_system"
+mode "$mode_system" {
+    bindsym l exec --no-startup-id exec swaylock-fancy, mode "default"
+    bindsym e exec --no-startup-id swaymsg exit, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot
+    bindsym p exec --no-startup-id systemctl poweroff
+    bindsym s exec --no-startup-id systemctl suspend, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+set $mode_backlight Adjust backlight hjkl
+bindsym $mod+b mode "$mode_backlight"
+mode "$mode_backlight" {
+    bindsym h exec backlight min
+    bindsym j exec backlight decrease
+    bindsym k exec backlight increase
+    bindsym l exec backlight max
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+set $mode_volume Adjust volume hjkl
+bindsym $mod+v mode "$mode_volume"
+mode "$mode_volume" {
+    bindsym h exec amixer -D pipewire sset Master 0
+    bindsym j exec amixer -D pipewire sset Master 5%-
+    bindsym k exec amixer -D pipewire sset Master 5%+
+    bindsym l exec amixer -D pipewire sset Master 100%
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
 
 set $mode_screenshot (w)indow, (a)rea, (s)creen | Shift to save to file
 bindsym $mod+Print mode "$mode_screenshot"
@@ -36,6 +155,24 @@ mode "$mode_screenshot" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+
+font pango:JetBrainsMono 13
+
+bar {
+  swaybar_command waybar
+}
+
+# https://wiki.archlinux.org/title/PipeWire#xdg-desktop-portal-wlr
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_SESSION_TYPE XDG_SESSION_DESKTOP QT_QPA_PLATFORM XDG_CURRENT_DESKTOP
+
+bindsym Ctrl+Print exec grimshot save area
+#bindsym $mod+Alt+Space exec makoctl dismiss
+bindsym $mod+Shift+n exec swaync-client -t -sw 
+bindsym $mod+Alt+Space exec swaync-client --close-all
+
+for_window [title="Firefox — Sharing Indicator"] floating enable, resize set 10 10
+
+
 xwayland disable
 
 input * {
@@ -47,3 +184,13 @@ input * {
 
 for_window [app_id="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
 for_window [app_id="spt"] floating enable, resize set 1000 800, move position center, border pixel 5, move scratchpad, scratchpad show
+
+exec --no-startup-id nextcloud
+exec --no-startup-id grimshot
+exec --no-startup-id swaync
+exec --no-startup-id swayidle -w \
+    timeout 300 'swaylock-fancy -p &' \
+    timeout 600 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'swaylock-fancy'
+exec --no-startup-id wlsunset -l 47.3 -L 8.5

@@ -6,28 +6,35 @@ base="/sys/class/backlight"
 device="$(ls "${base}" -1 | head)"
 
 if [ -z "$device" ]; then
-   exit 1
+	eexit 1
 fi
 
 device="${base}/${device}"
 max=$(cat "$device/max_brightness")
-step=$(( $max / 50 ))
-step=$(( $step > 0 ? $step : 1 ))
+step=$((max / 50))
+step=$((step > 0 ? step : 1))
 current=$(cat "$device/brightness")
 
 case $instruction in
 increase)
-   new=$(($current+$step))
-   new=$(( $new < $max ? $new : $max ))
-   ;;
+	new=$((current + step))
+	new=$((new < max ? new : max))
+	;;
 decrease)
-   new=$(($current-$step))
-   new=$(( $new > 0 ? $new : 0 ))
-   ;;
+	new=$((current - step))
+	new=$((new > 0 ? new : 0))
+	;;
+min)
+	new=$step
+	;;
+max)
+	new=$max
+	;;
 *)
-  exit 1
+	eexit 1
+	;;
 esac
 
 sudo sh -c "echo $new > $device/brightness"
 
-echo $(( $new*100/$max ))%
+echo $((new * 100 / max))%
