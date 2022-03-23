@@ -1,7 +1,7 @@
 ## hook for direnv
 set @edit:before-readline = $@edit:before-readline {
 	try {
-		var m = [("/nix/store/m4cm100c4rs9ymwg3a982xkp6s9vknh0-direnv-2.29.0/bin/direnv" export elvish | from-json)]
+		var m = [("/run/current-system/sw/bin/direnv" export elvish | from-json)]
 		if (> (count $m) 0) {
 			set m = (all $m)
 			keys $m | each {|k|
