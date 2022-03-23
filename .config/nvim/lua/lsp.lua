@@ -70,8 +70,8 @@ local on_attach = function(client)
 		client.signature_help_trigger_characters = { "(", ",", "=" }
 	end
 
-	map("n", "<Leader>e", "<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>")
-	map("n", "<Leader>E", "<cmd>TroubleToggle<CR>")
+	map("n", "<C-e>", "<cmd>lua vim.diagnostic.open_float()<CR>")
+	-- map("n", "<Leader>E", "<cmd>TroubleToggle<CR>")
 	if client.resolved_capabilities.document_highlight then
 		map("n", "<Leader>h", "<cmd>lua vim.lsp.buf.document_highlight()<CR>")
 		vim.cmd([[augroup LspHighlight]])

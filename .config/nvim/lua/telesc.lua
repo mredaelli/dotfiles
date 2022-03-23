@@ -1,15 +1,15 @@
 local actions = require("telescope.actions")
-local telescope = require('telescope')
+local telescope = require("telescope")
 
-telescope.setup {
-  extensions = {
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = "smart_case",
-    }
-  },
+telescope.setup({
+	extensions = {
+		fzf = {
+			fuzzy = true,
+			override_generic_sorter = true,
+			override_file_sorter = true,
+			case_mode = "smart_case",
+		},
+	},
 	defaults = {
 		mappings = {
 			n = {
@@ -21,12 +21,12 @@ telescope.setup {
 		},
 		prompt_prefix = ">",
 	},
-}
-telescope.load_extension('fzf')
-telescope.load_extension('heading')
+})
+telescope.load_extension("fzf")
+telescope.load_extension("heading")
 -- require('telescope').load_extension('dap')
 
-vim.cmd [[
+vim.cmd([[
   command! -nargs=1 Rg call luaeval('require("fzf-commands").rg(_A)', <f-args>)
   " nnoremap <Leader>r :<c-u>Rg<space>
   nnoremap <Leader>r <cmd>Telescope live_grep<CR>
@@ -45,12 +45,15 @@ vim.cmd [[
   nnoremap <Leader>l <cmd>Telescope loclist<CR>
   nnoremap <Leader>tH <cmd>Telescope help_tags<CR>
   nnoremap <Leader>tr <cmd>Telescope lsp_references<CR>
+  nnoremap <Leader>tr <cmd>Telescope lsp_references<CR>
   nnoremap <Leader>tS <cmd>Telescope lsp_workspace_symbols<CR>
   nnoremap <Leader>ta <cmd>Telescope lsp_code_actions<CR>
   nnoremap <Leader>t] <cmd>Telescope lsp_code_definitions<CR>
-  nnoremap <Leader>td <cmd>Telescope lsp_code_document_diagnostics<CR>
-  nnoremap <Leader>tD <cmd>Telescope lsp_code_workspace_diagnostics<CR>
+  nnoremap <Leader>e <cmd>Telescope diagnostics bufnr=0<CR>
+  nnoremap <Leader>E <cmd>Telescope diagnostics<CR>
+  nnoremap <Leader>td <cmd>Telescope diagnostics bufnr=0<CR>
+  nnoremap <Leader>tD <cmd>Telescope diagnostics<CR>
   nnoremap <Leader>gh <cmd>Telescope git_commits<CR>
   nnoremap <Leader>gH <cmd>Telescope git_bcommits<CR>
   nnoremap <Leader>gB <cmd>Telescope git_branches<CR>
-]]
+]])
