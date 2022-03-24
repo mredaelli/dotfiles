@@ -1,7 +1,4 @@
-# output HDMI-A-1 bg ~/wallpaper.png stretch
-
 set $mod Mod4
-
 set $msg i3-msg
 set $term wezterm start
 set $shell elvish
@@ -9,55 +6,55 @@ set $shell elvish
 floating_modifier $mod
 focus_on_window_activation urgent
 
+for_window [urgent=latest] focus
+for_window [window_role="GtkFileChooserDialog"] resize set 800 600, move position center
+
+# Apps and config shortcuts
+
 bindsym $mod+Shift+Return exec $term
 bindsym $mod+bar exec $term
-bindsym $mod+Shift+f exec firefox
 bindsym $mod+Shift+r exec $term --class ranger ranger
-bindsym $mod+Shift+s exec ~/bin/web-search.sh
-bindsym $mod+Shift+w exec ~/bin/wallpaper
 bindsym $mod+Shift+q kill
-bindsym $mod+Ctrl+l exec $term --session ~/lari_session
 
-# ikhal
+bindsym $mod+Shift+f exec firefox
+for_window [title="Firefox — Sharing Indicator"] floating enable, resize set 10 10
+
 bindsym $mod+Shift+c exec $term --class ikhal ikhal
-for_window [class="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
+for_window [app_id="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
 
-bindsym $mod+Shift+m exec $term --class spt spt
-for_window [class="spt"] floating enable, resize set 1000 800, move position center, border pixel 5, move scratchpad, scratchpad show
-bindsym $mod+space scratchpad show
-
-# quick terminal
-bindsym $mod+Shift+t exec $term --class taskwarrior elvish
-for_window [class="taskwarrior"] floating enable, resize set 1000 600, move position center, border pixel 5
-
-bindsym $mod+Ctrl+r reload
-bindsym $mod+Shift+Ctrl+r restart
 bindsym $mod+Ctrl+n exec sh -c '[[ "$(nmcli network)" == "enabled" ]] && nmcli network off || nmcli network on'
-bindsym $mod+Ctrl+1 exec ~/bin/one_monitor.sh && notify-send 'Switched to one monitor'
-bindsym $mod+Ctrl+2 exec ~/bin/two_monitors.sh && notify-send 'Switched to two monitors'
 
 bindsym $mod+d exec rofi -show run || rofi --show run
 bindsym $mod+w exec rofi -show window
 
+bindsym $mod+n exec swaync-client -t -sw 
+bindsym $mod+Shift+n exec swaync-client --close-all
+
+# Music
+bindsym $mod+Alt+n exec playerctl next
+bindsym $mod+Alt+p exec playerctl previous
+bindsym $mod+Alt+l exec playerctl position 20-
+bindsym $mod+Alt+0 exec playerctl position 0
+bindsym $mod+Alt+h exec playerctl position 20+
+bindsym $mod+Alt+Space exec playerctl play-pause
+bindsym $mod+Alt+j exec amixer -D pipewire sset Master 5%-
+bindsym $mod+Alt+k exec amixer -D pipewire sset Master 5%+
+bindsym $mod+Alt+s exec playerctl shuffle Toggle; notify-send $(playerctl shuffle)
+bindsym $mod+Alt+Return exec $term --class ncspot ncspot
+for_window [app_id="ncspot"] floating enable, resize set 1000 800, move position center, border pixel 5, move scratchpad, scratchpad show
+bindsym $mod+space scratchpad show
+
+
+bindsym $mod+Ctrl+r reload
+bindsym $mod+Shift+Ctrl+r restart
+
 bindsym $mod+r split toggle
 bindsym $mod+u focus parent
-# move up one level
-bindsym $mod+p mark i3ha, focus parent, focus parent, mark i3hb, [con_mark="i3ha"] focus, move window to mark i3hb, unmark i3ha, unmark i3hb
 
 bindsym $mod+f fullscreen toggle
-
 bindsym $mod+s layout stacking
 bindsym $mod+t layout tabbed
 bindsym $mod+e layout toggle split
-
-
-set $picpath ~/media/pictures
-
-bindsym Print exec 'grimshot copy area'
-
-# Screen brightness controls
-bindsym XF86MonBrightnessUp exec light -A 10
-bindsym XF86MonBrightnessDown exec light -U 10
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down
@@ -68,6 +65,8 @@ bindsym $mod+Shift+h move left
 bindsym $mod+Shift+j move down
 bindsym $mod+Shift+k move up
 bindsym $mod+Shift+l move right
+# move up one level
+bindsym $mod+p mark i3ha, focus parent, focus parent, mark i3hb, [con_mark="i3ha"] focus, move window to mark i3hb, unmark i3ha, unmark i3hb
 
 # bindsym $mod+Shift+space floating toggle
 # bindsym $mod+space focus mode_toggle
@@ -102,8 +101,6 @@ bindsym $mod+Control+Down resize grow height 10 px or 10 ppt
 bindsym $mod+Control+Up resize shrink height 10 px or 10 ppt
 bindsym $mod+Control+Right resize grow width 10 px or 10 ppt
 
-for_window [urgent=latest] focus
-for_window [window_role="GtkFileChooserDialog"] resize set 800 600, move position center
 
 set $mode_system (l)ock, (e)xit, (s)uspend, (r)eboot, (p)oweroff
 bindsym $mod+x mode "$mode_system"
@@ -155,23 +152,13 @@ mode "$mode_screenshot" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+bindsym Print exec grimshot copy area
+bindsym Ctrl+Print exec grimshot save area
 
 font pango:JetBrainsMono 13
 
-bar {
-  swaybar_command waybar
-}
-
 # https://wiki.archlinux.org/title/PipeWire#xdg-desktop-portal-wlr
 exec systemctl --user import-environment WAYLAND_DISPLAY XDG_SESSION_TYPE XDG_SESSION_DESKTOP QT_QPA_PLATFORM XDG_CURRENT_DESKTOP
-
-bindsym Ctrl+Print exec grimshot save area
-#bindsym $mod+Alt+Space exec makoctl dismiss
-bindsym $mod+Shift+n exec swaync-client -t -sw 
-bindsym $mod+Alt+Space exec swaync-client --close-all
-
-for_window [title="Firefox — Sharing Indicator"] floating enable, resize set 10 10
-
 
 xwayland disable
 
@@ -182,8 +169,9 @@ input * {
     tap enabled
 }
 
-for_window [app_id="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
-for_window [app_id="spt"] floating enable, resize set 1000 800, move position center, border pixel 5, move scratchpad, scratchpad show
+bar {
+  swaybar_command waybar
+}
 
 exec --no-startup-id nextcloud
 exec --no-startup-id grimshot
@@ -194,3 +182,4 @@ exec --no-startup-id swayidle -w \
     resume 'swaymsg "output * dpms on"' \
     before-sleep 'swaylock-fancy'
 exec --no-startup-id wlsunset -l 47.3 -L 8.5
+exec --no-startup-id kanshi
