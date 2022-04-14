@@ -147,6 +147,13 @@ lspconfig.tsserver.setup({
 	end,
 })
 
+local dart_path = vim.fn["resolve"](vim.fn["exepath"]("dart"))
+lspconfig.dartls.setup({
+	cmd = { "dart", dart_path:gsub("dart$", "") .. "snapshots/analysis_server.dart.snapshot", "--lsp" },
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
+
 local project_library_path = "."
 local cmd = {
 	"ngserver",
