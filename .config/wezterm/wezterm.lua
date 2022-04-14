@@ -2,10 +2,6 @@ local wezterm = require("wezterm")
 
 local KEYMOD = "CTRL|SHIFT"
 
-function set_title(title)
-	return "printf '\\x1b]0;" .. title .. "\\x1b\\\\'"
-end
-
 function key(k, a, mod)
 	local d = {
 		mods = mod or KEYMOD,
@@ -26,19 +22,24 @@ function workspace(name, path)
 		args = {
 			"elvish",
 			"-c",
-			"wezterm cli split-pane --horizontal elvish; nvim; exec elvish",
+			"wezterm cli split-pane --horizontal elvish; direnv exec . nvim; exec elvish",
 		},
 	}
 	return { name = name, spawn = action }
 end
 
 local keys = {
-	key("u", { SwitchToWorkspace = workspace("caltask2") }),
-	key("i", { SwitchToWorkspace = workspace("genius") }),
+	key("s", { SwitchToWorkspace = workspace("lari/crawlers/spiders") }, "CTRL|SUPER"),
+	key("c", { SwitchToWorkspace = workspace("lari/crawlers/crawlers") }, "CTRL|SUPER"),
+	key("f", { SwitchToWorkspace = workspace("lari/platform/frontend") }, "CTRL|SUPER"),
+	key("b", { SwitchToWorkspace = workspace("lari/platform/backend") }, "CTRL|SUPER"),
+	key("l", { SwitchToWorkspace = workspace("lari/crawlers/laricli") }, "CTRL|SUPER"),
+	key("a", { SwitchToWorkspace = workspace("lari/systems/server-admin") }, "CTRL|SUPER"),
+	key("e", { SwitchToWorkspace = workspace("lari/systems/ssh_everywhere") }, "CTRL|SUPER"),
 	key("0", { SwitchToWorkspace = { name = "default" } }),
 	key(">", { SwitchWorkspaceRelative = 1 }),
-
 	key("<", { SwitchWorkspaceRelative = -1 }),
+
 	key("k", { ScrollByLine = -3 }),
 	key("j", { ScrollByLine = 3 }),
 	key("h", { ScrollToPrompt = -1 }),
@@ -73,14 +74,6 @@ local keys = {
 	key("s", { Search = { CaseSensitiveString = "" } }),
 	key("y", { CopyTo = "Clipboard" }),
 	key("p", { PasteFrom = "Clipboard" }),
-
-	key("x", {
-		Multiple = {
-			{ SendString = "ciaoi\n" },
-			{ SpawnCommandInNewTab = { args = { "fish", "-C", set_title("src") .. "; cd ~/src" } } },
-			{ SpawnCommandInNewTab = { args = { "fish", "-C", set_title("media") .. "; cd ~/media" } } },
-		},
-	}),
 }
 
 for i = 1, 9 do
@@ -175,7 +168,6 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 			{ Text = " *" .. tab.active_pane.title .. " " },
 		}
 	end
-	return
 end)
 
 return {
@@ -184,7 +176,7 @@ return {
 			name = "unix",
 		},
 	},
-	default_gui_startup_args = { "connect", "unix" },
+	-- default_gui_startup_args = { "connect", "unix" },
 	enable_wayland = true,
 	font = wezterm.font({
 		family = "JetBrains Mono",
@@ -198,7 +190,6 @@ return {
 	disable_default_key_bindings = true,
 	enable_kitty_graphics = true,
 	tab_bar_at_bottom = true,
-	-- hide_tab_bar_if_only_one_tab = true,
 	use_fancy_tab_bar = false,
 	inactive_pane_hsb = {
 		saturation = 0.9,
