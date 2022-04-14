@@ -257,6 +257,7 @@ vim.cmd([[augroup end]])
 MetalsConfig = require("metals").bare_config()
 MetalsConfig.settings = {
 	showImplicitArguments = true,
+	useGlobalExecutable = true,
 }
 MetalsConfig.capabilities = capabilities
 MetalsConfig.on_attach = on_attach
