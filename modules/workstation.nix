@@ -26,7 +26,7 @@
       transmission_gtk
       calibre
       nextcloud-client
-      gnome3.libsecret
+      libsecret
       visidata
       fx
       mdcat
@@ -72,9 +72,13 @@
   };
 
   security.rtkit.enable = true;
+  programs.dconf.enable = true;
 
   services = {
-    gnome.gnome-keyring.enable = true;
+    gnome = {
+      gnome-keyring.enable = true;
+      at-spi2-core.enable = true;
+    };
     pipewire = {
       enable = true;
       alsa.enable = true;
