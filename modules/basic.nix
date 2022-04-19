@@ -13,6 +13,7 @@
       psmisc
       procs
       htop
+      bottom
 
       bc
       zip
@@ -54,6 +55,9 @@
       khard
       vdirsyncer
       khal
+
+      glow
+      lnav
     ];
     variables = {
       EDITOR = "nvim";
