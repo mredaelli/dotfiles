@@ -18,6 +18,7 @@ bindsym $mod+Shift+q kill
 
 bindsym $mod+Shift+f exec firefox
 for_window [title="Firefox — Sharing Indicator"] floating enable, resize set 10 10
+for_window [title="Extension: (Tree Style Tab) - Close tabs? — Mozilla Firefox"] floating enable, resize set 300 100
 
 bindsym $mod+Shift+c exec $term --class ikhal ikhal
 for_window [app_id="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
