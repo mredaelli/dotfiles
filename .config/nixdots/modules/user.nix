@@ -4,7 +4,7 @@
     extraUsers.turing = {
       isNormalUser = true;
       uid = 1000;
-      shell = pkgs.elvish;
+      shell = pkgs.fish;
       extraGroups = [ "audio" "wheel" "networkmanager" "davfs2" "adbusers" "docker" "scanner" "lp" "sway" "video"];
     };
   };

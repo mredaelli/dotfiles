@@ -37,8 +37,6 @@
 
       ncspot
 
-      efm-langserver
-      nixpkgs-fmt
       yamllint
       vim-vint
       shellcheck

@@ -22,7 +22,7 @@ require("diffview").setup({
 -- require("trouble").setup({})
 
 require("pretty-fold").setup({})
-require("pretty-fold.preview").setup_keybinding("h")
+-- require("pretty-fold.preview").setup_keybinding("h")
 
 require("specs").setup({})
 require("spellsitter").setup()

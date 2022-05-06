@@ -1,47 +1,17 @@
 { config, pkgs, options, ... }:
 {
+  imports = [
+    ./server.nix
+  ];
   environment = {
     systemPackages = with pkgs; [
-      cachix
-      yadm
-
-      bash
-      fish
-      elvish
-
-      lsof
-      psmisc
-      procs
-      htop
-      bottom
-
-      bc
-      zip
-      unzip
-      curl
       imagemagick
-      fzf
       restic
       bashmount
-      direnv
       so
+      imagemagick
+      restic
 
-      exa
-      ranger
-      fd
-      ripgrep
-      bat
-      sd
-      dua
-
-      zoxide
-      starship
-      any-nix-shell
-
-      unstable.neovim
-
-      git
-      gitAndTools.delta
       gitui
 
       ultralist
@@ -57,25 +27,6 @@
       khal
 
       glow
-      lnav
     ];
-    variables = {
-      EDITOR = "nvim";
-    };
-    shells = [ pkgs.elvish pkgs.bash pkgs.fish ];
-  };
-
-  programs = {
-    fish = {
-      # enable = true;
-      promptInit = ''
-        any-nix-shell fish --info-right | source
-      '';
-    };
-    bash.enableCompletion = true;
-  };
-
-  users = {
-    defaultUserShell = pkgs.elvish;
   };
 }
