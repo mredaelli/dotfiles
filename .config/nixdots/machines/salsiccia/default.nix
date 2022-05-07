@@ -8,7 +8,6 @@
       ../../modules/user.nix
 
       ./postgres.nix
-      ./postfix.nix
       ./nginx.nix
       ../../modules/wallabag.nix
       ./wallabag.nix
@@ -16,6 +15,7 @@
       ./vaultwarden.nix
       ./nextcloud.nix
 
+      # ./postfix.nix
       #      ./syncthing.nix
       #      ./radicale.nix
     ];
@@ -39,7 +39,7 @@
   system.autoUpgrade.enable = true;
   services.openssh.enable = true;
 
-  networking.firewall.allowedTCPPorts = [ 22 80 443 53589 ];
+  networking.firewall.allowedTCPPorts = [ 22 80 443 ];
 
   system.stateVersion = "20.03"; # Did you read the comment?
 }

@@ -8,7 +8,7 @@ in
     hostName = host;
     https = true;
     autoUpdateApps.enable = true;
-    autoUpdateApps.startAt = "05:00:00";
+    autoUpdateApps.startAt = "04:00:00";
     home = "/data/nextcloud";
 
     config = {
