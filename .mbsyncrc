@@ -7,7 +7,7 @@ SyncState *
 IMAPAccount fast
 Host imap.fastmail.com
 User massimo@typish.io
-PassCmd "secret-tool lookup user massimo domain typish.io"
+PassCmd "pass fastmail"
 SSLVersions TLSv1.2
 SSLType IMAPS
 AuthMechs LOGIN

@@ -26,7 +26,8 @@
       transmission_gtk
       calibre
       nextcloud-client
-      libsecret
+      pass
+      pass-secret-service
       visidata
       fx
       mdcat
@@ -64,23 +65,28 @@
     fonts = with pkgs; [
       noto-fonts
       gentium
-      jetbrains-mono
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     ];
   };
 
-  security.rtkit.enable = true;
-  programs.dconf.enable = true;
+  programs = {
+    dconf.enable = true;
+    gnupg.agent = {
+      enable = true;
+      pinentryFlavor = "curses";
+      enableSSHSupport = true;
+    };
+  };
 
   services = {
-    gnome = {
-      gnome-keyring.enable = true;
-      at-spi2-core.enable = true;
-    };
+    pcscd.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
       pulse.enable = true;
     };
+    dbus.packages = with pkgs; [
+      pass-secret-service
+    ];
   };
 }
