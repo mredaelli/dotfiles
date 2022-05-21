@@ -3,6 +3,7 @@ require("treesitter")
 require("dap")
 require("completion")
 require("telesc")
+require("zettel")
 
 require("iron").core.set_config({
 	preferred = {
@@ -16,7 +17,9 @@ require("diffview").setup({
 	diff_binaries = false,
 	use_icons = true,
 	file_panel = {
-		width = 35,
+		win_config = {
+			width = 35,
+		},
 	},
 })
 -- require("trouble").setup({})
@@ -128,9 +131,61 @@ require("neorg").setup({
 			},
 		},
 		["core.norg.journal"] = {
-			 config = { -- Note that this table is optional and doesn't need to be provided
-				workspace = 'journal'
-			 }
-		}
+			config = { -- Note that this table is optional and doesn't need to be provided
+				workspace = "journal",
+			},
+		},
 	},
 })
+
+require("mkdnflow").setup({
+	filetypes = { md = true, rmd = true, markdown = true },
+	create_dirs = true,
+	perspective = {
+		priority = "first",
+		fallback = "current",
+		root_tell = false,
+	},
+	wrap = false,
+	bib = {
+		default_path = nil,
+		find_in_root = true,
+	},
+	silent = false,
+	use_mappings_table = true,
+	mappings = {
+		MkdnNextLink = { "n", "<Tab>" },
+		MkdnPrevLink = { "n", "<S-Tab>" },
+		MkdnNextHeading = { "n", "<leader>]" },
+		MkdnPrevHeading = { "n", "<leader>[" },
+		MkdnGoBack = { "n", "<BS>" },
+		MkdnGoForward = { "n", "<Del>" },
+		MkdnFollowLink = { { "n", "v" }, "<CR>" },
+		MkdnDestroyLink = { "n", "<M-CR>" },
+		MkdnYankAnchorLink = { "n", "ya" },
+		MkdnYankFileAnchorLink = { "n", "yfa" },
+		MkdnIncreaseHeading = { "n", "+" },
+		MkdnDecreaseHeading = { "n", "-" },
+		MkdnToggleToDo = { "n", "<C-Space>" },
+		MkdnNewListItem = false,
+	},
+	links = {
+		style = "markdown",
+		implicit_extension = nil,
+		transform_implicit = false,
+		transform_explicit = function(text)
+			text = text:gsub(" ", "-")
+			text = text:lower()
+			text = os.date("%Y-%m-%d_") .. text
+			return text
+		end,
+	},
+	to_do = {
+		symbols = { " ", "-", "X" },
+		update_parents = true,
+		not_started = " ",
+		in_progress = "-",
+		complete = "X",
+	},
+})
+require("mdeval").setup({eval_options={}})

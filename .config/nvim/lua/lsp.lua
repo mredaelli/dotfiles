@@ -50,7 +50,7 @@ vim.cmd([[command! FormatEnable lua FormatToggle(false)]])
 
 _G.formatting = function()
 	if not vim.g[string.format("format_disabled_%s", vim.bo.filetype)] then
-		vim.lsp.buf.formatting_seq_sync(vim.g[string.format("format_options_%s", vim.bo.filetype)] or {}, 1000)
+		vim.lsp.buf.formatting_seq_sync(vim.g[string.format("format_options_%s", vim.bo.filetype)] or {}, 2000)
 	end
 end
 
@@ -223,12 +223,9 @@ lspconfig.sumneko_lua.setup({
 lspconfig.vimls.setup({ on_attach = on_attach, capabilities = capabilities })
 lspconfig.rust_analyzer.setup({ on_attach = on_attach, capabilities = capabilities })
 lspconfig.bashls.setup({ on_attach = on_attach, capabilities = capabilities })
--- lspconfig.efm.setup({
--- 	capabilities = capabilities,
--- 	on_attach = on_attach,
--- 	init_options = { documentFormatting = true},
--- 	root_dir = require"lspconfig".util.root_pattern {".git/", "."},
--- })
+require("vue")
+-- lspconfig.html.setup({ on_attach = on_attach, capabilities = capabilities })
+-- lspconfig.cssls.setup({ on_attach = on_attach, capabilities = capabilities })
 local null_ls = require("null-ls")
 null_ls.setup({
 	on_attach = on_attach,
@@ -246,11 +243,13 @@ null_ls.setup({
 		-- null_ls.builtins.formatting.autopep8,
 		-- null_ls.builtins.formatting.yapf,
 		null_ls.builtins.diagnostics.yamllint,
-		null_ls.builtins.formatting.prettierd,
-		null_ls.builtins.formatting.eslint_d,
+		null_ls.builtins.formatting.prettier,
+		null_ls.builtins.formatting.eslint,
 		-- null_ls.builtins.formatting.scalafmt,
 		-- null_ls.builtins.formatting.rustfmt,
 		null_ls.builtins.code_actions.refactoring,
+		null_ls.builtins.diagnostics.alex,
+		null_ls.builtins.diagnostics.proselint,
 	},
 })
 

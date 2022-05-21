@@ -26,6 +26,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'windwp/nvim-ts-autotag'
     Plug 'lewis6991/spellsitter.nvim'
 
+    Plug 'jakewvincent/mkdnflow.nvim'
+
     Plug 'jose-elias-alvarez/null-ls.nvim'
     Plug 'ThePrimeagen/refactoring.nvim'
 
@@ -33,9 +35,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'dmix/elvish.vim', { 'on_ft': ['elvish']}
     Plug 'satabin/hocon-vim'
 
-    Plug 'vim-pandoc/vim-pandoc'
-    Plug 'vim-pandoc/vim-pandoc-syntax'
-    Plug 'kana/vim-textobj-user'
     Plug 'wellle/targets.vim'
     Plug 'echasnovski/mini.nvim', { 'branch': 'stable' } " For surround
 
@@ -59,6 +58,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     " Plug 'folke/trouble.nvim'
 
     Plug 'hkupty/iron.nvim'
+    Plug 'jubnzv/mdeval.nvim'
     " Plug 'mfussenegger/nvim-dap'
     " Plug 'theHamsta/nvim-dap-virtual-text'
     " Plug 'nvim-telescope/telescope-dap.nvim'
@@ -92,7 +92,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'reedes/vim-lexical', { 'for': ['markdown', 'pandoc', 'mail' ] }
 
 
-    Plug 'lervag/wiki.vim'
+    Plug 'mickael-menu/zk-nvim'
 
     Plug 'RRethy/vim-illuminate'
     Plug 'edluffy/specs.nvim'

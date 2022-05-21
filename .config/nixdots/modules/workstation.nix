@@ -45,6 +45,7 @@
       sumneko-lua-language-server
       stylua
       pandoc
+      unstable.zk
 
       i3status-rust
 

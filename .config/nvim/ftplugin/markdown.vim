@@ -10,4 +10,3 @@
 let g:pandoc#spell#default_langs = ['en_US', 'it']
 
 " SoftPencil
-UniCycleOn
