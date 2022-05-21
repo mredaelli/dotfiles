@@ -78,6 +78,8 @@
     };
   };
 
+  security.pam.services.turing.gnupg.enable = true;
+
   services = {
     pcscd.enable = true;
     pipewire = {
