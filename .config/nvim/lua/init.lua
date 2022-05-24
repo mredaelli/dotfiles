@@ -187,6 +187,13 @@ require("mkdnflow").setup({
 		not_started = " ",
 		in_progress = "-",
 		complete = "X",
-	},
+			config = { -- Note that this table is optional and doesn't need to be provided
+				workspace = "journal",
+			},
+		},
 })
 require("mdeval").setup({ eval_options = {} })
+
+local other = require("other")
+local opts = { noremap = true, silent = true }
+vim.api.nvim_set_keymap("n", "<leader>o", '<cmd>lua require("other")()<CR>', opts)

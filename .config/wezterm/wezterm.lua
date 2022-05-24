@@ -15,14 +15,15 @@ function key(k, a, mod)
 	return d
 end
 
+local shell = "fish"
 function workspace(name, path)
 	local cwd = path or ("/home/turing/src/" .. name)
 	local action = {
 		cwd = cwd,
 		args = {
-			"elvish",
+			shell,
 			"-c",
-			"wezterm cli split-pane --horizontal elvish; direnv exec . nvim; exec elvish",
+			"wezterm cli split-pane --horizontal " .. shell .. "; direnv exec . nvim; exec " .. shell,
 		},
 	}
 	return { name = name, spawn = action }
@@ -36,6 +37,8 @@ local keys = {
 	key("l", { SwitchToWorkspace = workspace("lari/crawlers/laricli") }, "CTRL|SUPER"),
 	key("a", { SwitchToWorkspace = workspace("lari/systems/server-admin") }, "CTRL|SUPER"),
 	key("e", { SwitchToWorkspace = workspace("lari/systems/ssh_everywhere") }, "CTRL|SUPER"),
+	key("q", { SwitchToWorkspace = workspace("lari/platform/automated-qa") }, "CTRL|SUPER"),
+	key("d", { SwitchToWorkspace = workspace("lari/platform/laridiff") }, "CTRL|SUPER"),
 	key("0", { SwitchToWorkspace = { name = "default" } }),
 	key(">", { SwitchWorkspaceRelative = 1 }),
 	key("<", { SwitchWorkspaceRelative = -1 }),

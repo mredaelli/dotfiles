@@ -142,7 +142,6 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 lspconfig.pyright.setup({ on_attach = on_attach, capabilities = capabilities })
-lspconfig.angularls.setup({ on_attach = on_attach, capabilities = capabilities })
 lspconfig.tsserver.setup({
 	capabilities = capabilities,
 	on_attach = function(client)
@@ -169,6 +168,7 @@ local cmd = {
 }
 
 require("lspconfig").angularls.setup({
+	on_attach = on_attach,
 	capabilities = capabilities,
 	cmd = cmd,
 	on_new_config = function(new_config, _new_root_dir)

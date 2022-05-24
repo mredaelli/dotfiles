@@ -1,7 +1,7 @@
 set $mod Mod4
 set $msg i3-msg
 set $term wezterm start
-set $shell elvish
+set $shell fish
 
 floating_modifier $mod
 focus_on_window_activation urgent

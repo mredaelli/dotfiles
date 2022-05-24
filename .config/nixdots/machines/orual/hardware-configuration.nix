@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" "usb_storage" "sd_mod" "rtsx_pci_sdmmc" ];
@@ -14,38 +15,49 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "rpool/enc/local/root";
+    {
+      device = "rpool/enc/local/root";
       fsType = "zfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/DBF9-38ED";
+    {
+      device = "/dev/disk/by-uuid/DBF9-38ED";
       fsType = "vfat";
     };
 
   fileSystems."/cache" =
-    { device = "rpool/enc/local/cache";
+    {
+      device = "rpool/enc/local/cache";
       fsType = "zfs";
     };
 
   fileSystems."/nix" =
-    { device = "rpool/unenc/nix";
+    {
+      device = "rpool/unenc/nix";
       fsType = "zfs";
     };
 
   fileSystems."/var" =
-    { device = "rpool/enc/local/var";
+    {
+      device = "rpool/enc/local/var";
+      fsType = "zfs";
+    };
+
+  fileSystems."/home" =
+    {
+      device = "rpool/enc/safe/home";
       fsType = "zfs";
     };
 
   fileSystems."/persistent" =
-    { device = "rpool/enc/safe/persistent";
+    {
+      device = "rpool/enc/safe/persistent";
       fsType = "zfs";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/f60f51e6-59f0-41ba-a5c8-f9bd438d2dce"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/f60f51e6-59f0-41ba-a5c8-f9bd438d2dce"; }];
 
   hardware.enableRedistributableFirmware = true;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

@@ -128,7 +128,7 @@ end
 
 set -x TASKRC ~/.config/taskwarrior/taskrc
 
-alias yadmr="sudo yadm -Y /etc/yadm"
+direnv hook fish | source
 
 if status --is-interactive
   echo
