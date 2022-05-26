@@ -22,7 +22,6 @@ require("diffview").setup({
 		},
 	},
 })
--- require("trouble").setup({})
 
 require("pretty-fold").setup({})
 -- require("pretty-fold.preview").setup_keybinding("h")
@@ -65,7 +64,7 @@ catppuccin.setup({
 				information = "italic",
 			},
 		},
-		-- lsp_trouble = true,
+		lsp_trouble = true,
 		-- lsp_saga = true,
 		gitsigns = true,
 		telescope = true,
@@ -188,4 +187,4 @@ require("mkdnflow").setup({
 		complete = "X",
 	},
 })
-require("mdeval").setup({eval_options={}})
+require("mdeval").setup({ eval_options = {} })

@@ -55,7 +55,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'scalameta/nvim-metals'   
     Plug 'ray-x/lsp_signature.nvim'
     Plug 'nvim-lua/lsp-status.nvim'
-    " Plug 'folke/trouble.nvim'
+    Plug 'folke/trouble.nvim'
 
     Plug 'hkupty/iron.nvim'
     Plug 'jubnzv/mdeval.nvim'

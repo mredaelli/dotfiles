@@ -71,7 +71,7 @@ local on_attach = function(client)
 	end
 
 	map("n", "<C-e>", "<cmd>lua vim.diagnostic.open_float()<CR>")
-	-- map("n", "<Leader>E", "<cmd>TroubleToggle<CR>")
+	map("n", "<Leader>xx", "<cmd>TroubleToggle<CR>")
 	if client.resolved_capabilities.document_highlight then
 		map("n", "<Leader>h", "<cmd>lua vim.lsp.buf.document_highlight()<CR>")
 		vim.cmd([[augroup LspHighlight]])
@@ -130,6 +130,10 @@ local on_attach = function(client)
 	--   supported = true
 	-- },
 	-- workspace_symbol = false
+	map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev({ severity= 'ERROR' })<CR>")
+	map("n", "]d", "<cmd>lua vim.diagnostic.goto_next({ severity= 'ERROR' })<CR>")
+	map("n", "[D", "<cmd>lua vim.diagnostic.goto_prev({ severity= 'WARNING' })<CR>")
+	map("n", "]D", "<cmd>lua vim.diagnostic.goto_next({ severity= 'WARNING' })<CR>")
 
 	print(msg)
 end
@@ -267,3 +271,5 @@ MetalsConfig.settings = {
 }
 MetalsConfig.capabilities = capabilities
 MetalsConfig.on_attach = on_attach
+
+require("trouble").setup({})
