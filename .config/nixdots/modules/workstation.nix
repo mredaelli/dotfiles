@@ -33,6 +33,7 @@
       mdcat
       rmlint
       gthumb
+      viddy
 
       git-trim
 
@@ -67,6 +68,12 @@
       noto-fonts
       gentium
       (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      league-of-moveable-type
+      source-serif
+      open-fonts
+      work-sans
+      source-sans
+      alegreya-sans
     ];
   };
 
