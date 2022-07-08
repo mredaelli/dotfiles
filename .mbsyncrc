@@ -23,7 +23,7 @@ Subfolders Verbatim
 Channel fast-inbox
 Far :fast-remote:
 Near :fast-local:
-Patterns INBOX Drafts Sent
+Patterns INBOX Drafts Sent Archive papers
 
 Channel fast-all
 Far :fast-remote:
