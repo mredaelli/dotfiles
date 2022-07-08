@@ -34,7 +34,7 @@
       starship
       any-nix-shell
 
-      unstable.neovim
+      neovim
       nixpkgs-fmt
 
       git

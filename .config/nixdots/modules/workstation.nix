@@ -12,7 +12,7 @@
     homeBinInPath = true;
     systemPackages = with pkgs; [
       kitty
-      unstable.wezterm
+      wezterm
       libnotify
       pavucontrol
       imv
@@ -23,7 +23,7 @@
       zathura
       mpv
       zotero
-      transmission_gtk
+      transmission-gtk
       calibre
       nextcloud-client
       pass
@@ -45,7 +45,7 @@
       sumneko-lua-language-server
       stylua
       pandoc
-      unstable.zk
+      zk
 
       i3status-rust
 

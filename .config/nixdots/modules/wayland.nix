@@ -25,8 +25,8 @@
         export GTK_THEME=Matcha-dark-sea
         export XCURSOR_SIZE=40
         export XCURSOR_THEME=Qogir-dark
-        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-theme $XCURSOR_THEME
-        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-size $XCURSOR_SIZE
+        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-theme $XCURSOR_THEME || true
+        ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-size $XCURSOR_SIZE || true
       '';
       extraPackages = with pkgs; [
         swaylock-fancy
@@ -35,8 +35,8 @@
         playerctl
         wl-clipboard
         sway-contrib.grimshot
-        unstable.swaynotificationcenter #mako
-        unstable.rofi-wayland
+        swaynotificationcenter #mako
+        rofi-wayland
         wlsunset
         xdg-desktop-portal-wlr
         xdg-desktop-portal
