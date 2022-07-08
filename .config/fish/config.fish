@@ -12,6 +12,10 @@ if type -q htop
   alias top="htop"
 end
 
+if type -q viddy
+  alias watch="viddy"
+end
+
 if type -q bat
   alias cat="bat";
   alias catt="bat --style plain";
