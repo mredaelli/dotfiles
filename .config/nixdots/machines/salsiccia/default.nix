@@ -21,7 +21,7 @@
     ];
 
   security.acme = {
-    email = "massimo.acme@typish.io";
+    defaults.email = "massimo.acme@typish.io";
     acceptTerms = true;
   };
 
