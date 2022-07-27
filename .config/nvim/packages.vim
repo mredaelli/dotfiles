@@ -108,5 +108,5 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'nvim-neorg/neorg'
 
     " themes
-    Plug 'catppuccin/nvim'
+    Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 call plug#end()

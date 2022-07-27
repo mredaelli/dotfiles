@@ -5,9 +5,11 @@ require("completion")
 require("telesc")
 require("zettel")
 
-require("iron").core.set_config({
-	preferred = {
-		python = "ipython",
+require("iron").core.setup({
+	config = {
+		preferred = {
+			python = "ipython",
+		},
 	},
 })
 
@@ -47,21 +49,21 @@ catppuccin.setup({
 	colorscheme = "dark_catppuccin",
 	transparent_background = true,
 	styles = {
-		comments = "italic",
-		functions = "NONE",
-		keywords = "bold",
+		comments = { "italic" },
+		functions = {},
+		keywords = { "bold" },
 		-- strings = "NONE",
-		variables = "italic",
+		variables = { "italic" },
 	},
 	integrations = {
 		treesitter = true,
 		native_lsp = {
 			enabled = true,
 			styles = {
-				errors = "italic",
-				hints = "italic",
-				warnings = "italic",
-				information = "italic",
+				errors = { "italic" },
+				hints = { "italic" },
+				warnings = { "italic" },
+				information = { "italic" },
 			},
 		},
 		lsp_trouble = true,
@@ -87,7 +89,7 @@ catppuccin.setup({
 		hop = false,
 	},
 })
-catppuccin.load()
+vim.cmd([[colorscheme catppuccin]])
 
 local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
 
