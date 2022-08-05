@@ -14,9 +14,13 @@ telescope.setup({
 		mappings = {
 			n = {
 				["<esc>"] = actions.close,
+				["<C-b>"] = actions.results_scrolling_up,
+				["<C-f>"] = actions.results_scrolling_down,
 			},
 			i = {
 				["<esc>"] = actions.close,
+				["<C-b>"] = actions.results_scrolling_up,
+				["<C-f>"] = actions.results_scrolling_down,
 			},
 		},
 		prompt_prefix = ">",

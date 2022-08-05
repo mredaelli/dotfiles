@@ -40,7 +40,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     Plug 'tpope/vim-unimpaired'
     Plug 'tpope/vim-eunuch'
-    Plug 'anuvyklack/pretty-fold.nvim'
+    " Plug 'anuvyklack/pretty-fold.nvim'
     Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
     Plug 'tpope/vim-commentary'
     " in this order!

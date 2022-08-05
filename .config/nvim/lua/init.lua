@@ -25,7 +25,7 @@ require("diffview").setup({
 	},
 })
 
-require("pretty-fold").setup({})
+-- require("pretty-fold").setup({})
 -- require("pretty-fold.preview").setup_keybinding("h")
 
 require("specs").setup({})

@@ -55,5 +55,5 @@ require'nvim-treesitter.configs'.setup {
 
 require('spellsitter').setup()
 
-vim.cmd[[set foldmethod=expr]]
-vim.cmd[[set foldexpr=nvim_treesitter#foldexpr()]]
+-- vim.cmd[[set foldmethod=expr]]
+-- vim.cmd[[set foldexpr=nvim_treesitter#foldexpr()]]
