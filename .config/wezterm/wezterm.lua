@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 
 local KEYMOD = "CTRL|SHIFT"
 
-function key(k, a, mod)
+local function key(k, a, mod)
 	local d = {
 		mods = mod or KEYMOD,
 		key = k,
@@ -16,7 +16,7 @@ function key(k, a, mod)
 end
 
 local shell = "fish"
-function workspace(name, path)
+local function workspace(name, path)
 	local cwd = path or ("/home/turing/src/" .. name)
 	local action = {
 		cwd = cwd,
@@ -29,6 +29,43 @@ function workspace(name, path)
 	return { name = name, spawn = action }
 end
 
+local hints = {}
+local function hint(pattern, k, action)
+	local act
+	if action then
+		act = wezterm.action_callback(action)
+	else
+		act = nil
+	end
+	table.insert(hints, {
+		key = k,
+		mods = "",
+		action = wezterm.action({ QuickSelectArgs = { patterns = { pattern }, action = act } }),
+	})
+	table.insert(hints, { key = k, mods = "SHIFT", action = wezterm.action({ Search = { Regex = pattern } }) })
+end
+
+hint("(?:\\S.+\\S)", "l")
+hint("(?:\\S*?/[\r\\S]+)|(?:\\S[\r\\S]*\\.[a-zA-Z0-9\r]{2,7})", "p")
+local url_regex =
+	"(?:https?://(www[.])?[-a-zA-Z0-9@:%._+~#=]{1,256}[.][a-zA-Z0-9()]{1,6}\\b[-a-zA-Z0-9()@:%_+.~#?&/=]*)"
+hint(url_regex, "u")
+hint(url_regex, "f", function(window, pane)
+	local url = window:get_selection_text_for_pane(pane)
+	wezterm.open_with(url)
+end)
+local key_tables = {
+	hints = hints,
+	resize = {
+		{ key = "h", action = { AdjustPaneSize = { "Left", 1 } } },
+		{ key = "l", action = { AdjustPaneSize = { "Right", 1 } } },
+		{ key = "k", action = { AdjustPaneSize = { "Up", 1 } } },
+		{ key = "j", action = { AdjustPaneSize = { "Down", 1 } } },
+		{ key = "Escape", action = "PopKeyTable" },
+		{ key = "=", action = "IncreaseFontSize" },
+		{ key = "-", action = "DecreaseFontSize" },
+	},
+}
 local keys = {
 	key("s", { SwitchToWorkspace = workspace("lari/crawlers/spiders") }, "CTRL|SUPER"),
 	key("c", { SwitchToWorkspace = workspace("lari/crawlers/crawlers") }, "CTRL|SUPER"),
@@ -36,6 +73,7 @@ local keys = {
 	key("b", { SwitchToWorkspace = workspace("lari/platform/backend") }, "CTRL|SUPER"),
 	key("l", { SwitchToWorkspace = workspace("lari/crawlers/laricli") }, "CTRL|SUPER"),
 	key("a", { SwitchToWorkspace = workspace("lari/systems/server-admin") }, "CTRL|SUPER"),
+	key("A", { SwitchToWorkspace = workspace("lari/systems/admin") }, "CTRL|SUPER"),
 	key("e", { SwitchToWorkspace = workspace("lari/systems/ssh_everywhere") }, "CTRL|SUPER"),
 	key("q", { SwitchToWorkspace = workspace("lari/platform/automated-qa") }, "CTRL|SUPER"),
 	key("d", { SwitchToWorkspace = workspace("lari/platform/laridiff") }, "CTRL|SUPER"),
@@ -43,19 +81,23 @@ local keys = {
 	key(">", { SwitchWorkspaceRelative = 1 }),
 	key("<", { SwitchWorkspaceRelative = -1 }),
 
-	key("k", { ScrollByLine = -3 }),
-	key("j", { ScrollByLine = 3 }),
-	key("h", { ScrollToPrompt = -1 }),
-	key("l", { ScrollToPrompt = 1 }),
+	key("UpArrow", { ScrollByLine = -3 }),
+	key("DownArrow", { ScrollByLine = 3 }),
 	key("b", { ScrollByPage = -1 }),
 	key("f", { ScrollByPage = 1 }),
 
+	key("r", { ActivateKeyTable = { name = "resize", one_shot = false } }),
+
 	key("]", { ActivatePaneDirection = "Next" }),
 	key("[", { ActivatePaneDirection = "Prev" }),
-	key("z", "TogglePaneZoomState"),
+	key("h", { ActivatePaneDirection = "Left" }),
+	key("j", { ActivatePaneDirection = "Down" }),
+	key("k", { ActivatePaneDirection = "Up" }),
+	key("l", { ActivatePaneDirection = "Right" }),
 	key("Enter", { SplitHorizontal = { domain = "CurrentPaneDomain" } }),
 	key("\\", { SplitHorizontal = { domain = "CurrentPaneDomain" } }),
 	key("_", { SplitVertical = { domain = "CurrentPaneDomain" } }),
+	key("z", "TogglePaneZoomState"),
 	key("w", { CloseCurrentPane = { confirm = true } }),
 
 	key("t", { SpawnTab = "CurrentPaneDomain" }),
@@ -68,11 +110,7 @@ local keys = {
 	key("*", "ShowLauncher"),
 	--key="9", mods="ALT", action=wezterm.action{ShowLauncherArgs={flags="FUZZY|WORKSPACES"}}},
 
-	key("+", "IncreaseFontSize", "LEADER|SHIFT"),
-	key("_", "DecreaseFontSize", "LEADER|SHIFT"),
-
-	key("r", "ReloadConfiguration"),
-
+	key("u", { ActivateKeyTable = { name = "hints" } }),
 	key("v", "ActivateCopyMode"),
 	key("s", { Search = { CaseSensitiveString = "" } }),
 	key("y", { CopyTo = "Clipboard" }),
@@ -82,39 +120,6 @@ local keys = {
 for i = 1, 9 do
 	table.insert(keys, key(tostring(i), { ActivateTab = i }, "CTRL"))
 end
-for _, i in pairs({ "Left", "Right", "Up", "Down" }) do
-	table.insert(keys, key(i .. "Arrow", { AdjustPaneSize = { i, 1 } }))
-end
-
-function hint(pattern, k, action)
-	local act
-	if action then
-		act = wezterm.action_callback(action)
-	else
-		act = nil
-	end
-	table.insert(keys, {
-		key = k,
-		mods = "LEADER",
-		action = wezterm.action({
-			QuickSelectArgs = {
-				patterns = { pattern },
-				action = act,
-			},
-		}),
-	})
-	table.insert(keys, { key = k, mods = "LEADER|SHIFT", action = wezterm.action({ Search = { Regex = pattern } }) })
-end
-
-hint("(?:\\S.+\\S)", "l")
-hint("(?:\\S*?/[\r\\S]+)|(?:\\S[\r\\S]*\\.[a-zA-Z0-9\r]{2,7})", "p")
-local url_regex =
-	"(?:https?://(www[.])?[-a-zA-Z0-9@:%._+~#=]{1,256}[.][a-zA-Z0-9()]{1,6}\\b[-a-zA-Z0-9()@:%_+.~#?&/=]*)"
-hint(url_regex, "u")
-hint(url_regex, "f", function(window, pane)
-	local url = window:get_selection_text_for_pane(pane)
-	wezterm.open_with(url)
-end)
 
 local catppuccin = {
 	foreground = "#dadae8",
@@ -146,9 +151,13 @@ local catppuccin = {
 }
 
 wezterm.on("update-right-status", function(window, pane)
-	status = window:active_workspace()
+	local status = window:active_workspace()
 	if window:leader_is_active() then
 		status = status .. ", LEADER"
+	end
+	local name = window:active_key_table()
+	if name then
+		status = "TABLE: " .. name
 	end
 	local compose = window:composition_status()
 	if compose then
@@ -188,8 +197,8 @@ return {
 	}),
 	line_height = 1.15,
 	check_for_updates = false,
-	leader = { key = " ", mods = "CTRL|SHIFT", timeout_milliseconds = 1000 },
 	keys = keys,
+	key_tables = key_tables,
 	disable_default_key_bindings = true,
 	enable_kitty_graphics = true,
 	tab_bar_at_bottom = true,
