@@ -84,9 +84,10 @@ abbr gm 'git merge --ff'
 abbr gma 'git merge --abort'
 abbr gmc 'git merge --continue'
 
-abbr gRo 'git pull; and git reset --hard @{u}'
-abbr gRm 'git pull; and git reset --hard origin/master'
-abbr gro 'git pull; and git reset --soft @{u}'
+abbr gRo 'git fetch; and git reset --hard @{u}'
+abbr gRm 'git fetch; and git reset --hard origin/master'
+abbr gro 'git fetch; and git reset --soft @{u}'
+abbr grw 'git reword'
 
 abbr gC 'git cherry-pick'
 abbr gCa 'git cherry-pick --abort'
