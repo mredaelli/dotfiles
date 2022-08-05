@@ -96,6 +96,8 @@
         "max-length":70,
         "exec": "playerctl metadata --format '{\"text\": \"{{markup_escape(title)}}\", \"tooltip\": \"{{markup_escape(playerName)}} : {{markup_escape(title)}}\", \"alt\": \"{{markup_escape(status)}}\", \"class\": \"{{markup_escape(status)}}\"}' -F",
         "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next",
+        "on-click-middle": "playerctl previous",
     },
     "custom/notification": {
         "tooltip": false,
