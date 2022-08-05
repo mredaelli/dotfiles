@@ -1,6 +1,6 @@
 set $mod Mod4
 set $msg i3-msg
-set $term wezterm start
+set $term wezterm start --always-new-process
 set $shell fish
 
 floating_modifier $mod
