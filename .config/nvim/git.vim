@@ -6,8 +6,18 @@ endfunction
 
 command! -bang GPushForce call s:PushForceSafe()
 
+ function! s:ToggleGstatus() abort
+	for l:winnr in range(1, winnr('$'))
+		if !empty(getwinvar(l:winnr, 'fugitive_status'))
+			execute l:winnr.'close'
+		else
+			Git
+		endif
+	endfor
+endfunction
+
 nnoremap <Leader>gf :Git fetch<CR>
-nnoremap <Leader>gs :Git<CR>
+nnoremap <Leader>gs :call <SID>ToggleGstatus()<CR>
 nnoremap <Leader>gp :Git pull<CR>
 nnoremap <Leader>gP :Git! push<CR>
 nnoremap <Leader>gPP :GPushForce<CR>
