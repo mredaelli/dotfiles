@@ -3,13 +3,30 @@ require("treesitter")
 require("dap")
 require("completion")
 require("telesc")
-require("zettel")
+-- require("zettel")
 
-require("iron").core.setup({
+require("iron.core").setup({
 	config = {
-		preferred = {
-			python = "ipython",
+		repl_definition = {
+			python = {
+				command = { "ipython" },
+			},
 		},
+		repl_open_cmd = 'belowright 15 split',
+	},
+	keymaps = {
+		send_motion = "<space>ic",
+		visual_send = "<space>ic",
+		send_file = "<space>if",
+		send_line = "<space>il",
+		send_mark = "<space>im",
+		-- mark_motion = "<space>ic",
+		-- mark_visual = "<space>ic",
+		-- remove_mark = "<space>id",
+		cr = "<space>i<cr>",
+		interrupt = "<space>i<space>",
+		exit = "<space>iq",
+		clear = "<space>iC",
 	},
 })
 
@@ -187,10 +204,10 @@ require("mkdnflow").setup({
 		not_started = " ",
 		in_progress = "-",
 		complete = "X",
-			config = { -- Note that this table is optional and doesn't need to be provided
-				workspace = "journal",
-			},
+		config = { -- Note that this table is optional and doesn't need to be provided
+			workspace = "journal",
 		},
+	},
 })
 require("mdeval").setup({ eval_options = {} })
 
