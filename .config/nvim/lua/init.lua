@@ -12,7 +12,7 @@ require("iron.core").setup({
 				command = { "ipython" },
 			},
 		},
-		repl_open_cmd = 'belowright 15 split',
+		repl_open_cmd = "belowright 15 split",
 	},
 	keymaps = {
 		send_motion = "<space>ic",
@@ -48,22 +48,10 @@ require("diffview").setup({
 require("specs").setup({})
 require("spellsitter").setup()
 
-require("mini.surround").setup({
-	mappings = {
-		add = "<leader>sa",
-		delete = "<leader>sd",
-		find = "<leader>sf",
-		find_left = "<leader>sF",
-		highlight = "<leader>sh",
-		replace = "<leader>sr",
-		update_n_lines = "<leader>sn",
-	},
-})
-
+vim.g.catppuccin_flavour = "macchiato"
 local catppuccin = require("catppuccin")
 
 catppuccin.setup({
-	colorscheme = "dark_catppuccin",
 	transparent_background = true,
 	styles = {
 		comments = { "italic" },
@@ -102,8 +90,8 @@ catppuccin.setup({
 		barbar = false,
 		bufferline = false,
 		markdown = true,
-		lightspeed = true,
 		hop = false,
+		leap = true,
 	},
 })
 vim.cmd([[colorscheme catppuccin]])
@@ -128,33 +116,33 @@ parser_configs.norg_table = {
 	},
 }
 
-require("neorg").setup({
-	load = {
-		["core.defaults"] = {},
-		["core.norg.dirman"] = {
-			config = {
-				workspaces = {
-					kb = "~/carte/kb",
-					zettel = "~/carte/zettel",
-					journal = "~/carte/journal",
-				},
-			},
-		},
-		["core.norg.completion"] = {
-			config = { -- Note that this table is optional and doesn't need to be provided
-			},
-		},
-		["core.norg.concealer"] = {
-			config = { -- Note that this table is optional and doesn't need to be provided
-			},
-		},
-		["core.norg.journal"] = {
-			config = { -- Note that this table is optional and doesn't need to be provided
-				workspace = "journal",
-			},
-		},
-	},
-})
+-- require("neorg").setup({
+	-- load = {
+		-- ["core.defaults"] = {},
+		-- ["core.norg.dirman"] = {
+			-- config = {
+				-- workspaces = {
+					-- kb = "~/carte/kb",
+					-- zettel = "~/carte/zettel",
+					-- journal = "~/carte/journal",
+				-- },
+			-- },
+		-- },
+		-- ["core.norg.completion"] = {
+			-- config = { -- Note that this table is optional and doesn't need to be provided
+			-- },
+		-- },
+		-- ["core.norg.concealer"] = {
+			-- config = { -- Note that this table is optional and doesn't need to be provided
+			-- },
+		-- },
+		-- ["core.norg.journal"] = {
+			-- config = { -- Note that this table is optional and doesn't need to be provided
+				-- workspace = "journal",
+			-- },
+		-- },
+	-- },
+-- })
 
 require("mkdnflow").setup({
 	filetypes = { md = true, rmd = true, markdown = true },
@@ -211,6 +199,12 @@ require("mkdnflow").setup({
 })
 require("mdeval").setup({ eval_options = {} })
 
-local other = require("other")
 local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap("n", "<leader>o", '<cmd>lua require("other")()<CR>', opts)
+
+local leap = require("leap")
+leap.add_default_mappings()
+leap.opts.highlight_unlabeled_phase_one_targets = true
+leap.opts.case_sensitive = true
+
+require("Comment").setup()

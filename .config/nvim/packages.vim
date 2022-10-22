@@ -36,15 +36,14 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'satabin/hocon-vim'
 
     Plug 'wellle/targets.vim'
-    Plug 'echasnovski/mini.nvim', { 'branch': 'stable' } " For surround
 
     Plug 'tpope/vim-unimpaired'
     Plug 'tpope/vim-eunuch'
     " Plug 'anuvyklack/pretty-fold.nvim'
     Plug 'mhinz/vim-sayonara', { 'on': 'Sayonara' }
-    Plug 'tpope/vim-commentary'
+    Plug 'numToStr/Comment.nvim'
     " in this order!
-    Plug 'ggandor/lightspeed.nvim'
+    Plug 'ggandor/leap.nvim'
 
     Plug 'kyazdani42/nvim-web-devicons'
 
@@ -108,5 +107,5 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'nvim-neorg/neorg'
 
     " themes
-    Plug 'catppuccin/nvim', {'as': 'catppuccin'}
+    Plug 'catppuccin/nvim', {'as': 'catppuccin', 'tag': 'v0.2.4'}
 call plug#end()

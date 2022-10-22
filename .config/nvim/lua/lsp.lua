@@ -139,7 +139,7 @@ local on_attach = function(client)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 lspconfig.pyright.setup({ on_attach = on_attach, capabilities = capabilities })
 lspconfig.tsserver.setup({
@@ -189,6 +189,7 @@ local function get_lua_runtime()
 
 	return result
 end
+
 lspconfig.sumneko_lua.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
@@ -251,11 +252,14 @@ null_ls.setup({
 		null_ls.builtins.formatting.eslint,
 		-- null_ls.builtins.formatting.scalafmt,
 		-- null_ls.builtins.formatting.rustfmt,
+		null_ls.builtins.formatting.elm_format,
 		null_ls.builtins.code_actions.refactoring,
 		null_ls.builtins.diagnostics.alex,
 		null_ls.builtins.diagnostics.proselint,
 	},
 })
+
+require("lspconfig").elmls.setup({})
 
 -- Scala
 vim.cmd([[augroup lsp]])
