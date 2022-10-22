@@ -161,7 +161,7 @@ font pango:JetBrainsMono 13
 # https://wiki.archlinux.org/title/PipeWire#xdg-desktop-portal-wlr
 exec systemctl --user import-environment WAYLAND_DISPLAY XDG_SESSION_TYPE XDG_SESSION_DESKTOP QT_QPA_PLATFORM XDG_CURRENT_DESKTOP
 
-xwayland disable
+xwayland enable
 
 input * {
     xkb_layout "us"
