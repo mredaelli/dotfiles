@@ -2,6 +2,7 @@ if not functions -q fisher
     set -q XDG_CONFIG_HOME; or set XDG_CONFIG_HOME ~/.config
     curl https://git.io/fisher --create-dirs -sLo $XDG_CONFIG_HOME/fish/functions/fisher.fish
     fish -c fisher
+    fisher update
 end
 
 alias du="du -h"
@@ -50,7 +51,7 @@ abbr kdiff 'kitty +kitten diff'
 ## git
 abbr gs 'git status -s'
 abbr gd 'git diff'
-abbr gl 'git log --graph --topo-order --abbrev-commit --date=short --decorate --all --boundary'
+abbr gl 'git log --oneline'
 abbr ga 'git add'
 
 abbr glb "git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'"
@@ -94,6 +95,7 @@ abbr gCa 'git cherry-pick --abort'
 abbr gCc 'git cherry-pick --continue'
 
 abbr :e 'vi'
+abbr :q 'exit'
 
 set PATH ~/bin $PATH
 
@@ -106,18 +108,6 @@ function mkcd
     cd $argv;
 end
 
-set fish_cursor_default block
-set fish_cursor_insert line
-set fish_cursor_visual block
-fish_vi_key_bindings
-
-if type -q starship
-  starship init fish | source
-else
-  set -g theme_title_display_process yes
-  set -g theme_color_scheme solarized-dark
-end
-
 if type -q any-nix-shell
    any-nix-shell fish | source
 end
@@ -127,11 +117,23 @@ if type -q fd
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 end
 
-set -x TASKRC ~/.config/taskwarrior/taskrc
-
 direnv hook fish | source
 
 if status --is-interactive
+  set fish_cursor_default block
+  set fish_cursor_insert line
+  set fish_cursor_visual block
+  fish_vi_key_bindings
+
+  if type -q starship
+    starship init fish | source
+  else
+    set -g theme_title_display_process yes
+    set -g theme_color_scheme solarized-dark
+  end
+
+  zoxide init fish | source
+
   echo
   echo  Remember ytop du-dust sd procs gitui using tig thefuck buku fzf newsboat broot
   echo
@@ -140,3 +142,9 @@ if status --is-interactive
   end
   echo
 end
+set -Ux FZF_DEFAULT_OPTS "\
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+set -Ux BAT_THEME "Catppuccin-mocha"
+
