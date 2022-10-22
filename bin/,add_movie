@@ -1,8 +1,11 @@
 #!/bin/sh
-if ping -w 1 192.168.0.10 &> /dev/null
+if
+	ping -w 1 192.168.0.10 >/dev/null &
 then
-  HOST=192.168.0.10
+	HOST=192.168.0.10
 else
-  HOST=10.0.25.10
+	HOST=10.0.25.10
 fi
-transmission-remote $HOST:9091 -a "$1" -c /storage/Downloads/Incomplete -s -w /storage/Videos/Movies/ -n gatto:gatto
+for i in "$@"; do
+	transmission-remote $HOST:9091 -a "$i" -c /storage/Downloads/Incomplete -s -w /storage/Videos/Movies/ -n gatto:gatto
+done
