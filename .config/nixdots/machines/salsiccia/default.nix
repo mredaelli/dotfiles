@@ -14,9 +14,10 @@
       ./miniflux.nix
       ./vaultwarden.nix
       ./nextcloud.nix
+      ./poems.nix
 
       # ./postfix.nix
-      #      ./syncthing.nix
+      ./syncthing.nix
       #      ./radicale.nix
     ];
 

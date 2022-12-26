@@ -87,7 +87,7 @@ in
     services.phpfpm.pools."${poolName}" = {
       user = "${cfg.user}";
       group = "nginx";
-      phpPackage = pkgs.php74;
+      phpPackage = pkgs.php82;
       settings = {
         "listen.owner" = "nginx";
         "listen.group" = "nginx";
@@ -174,7 +174,7 @@ in
       wantedBy = [ "multi-user.target" ];
       before = [ "phpfpm-wallabag.service" ];
       after = [ "mysql.service" "postgresql.service" ];
-      path = with pkgs; [ coreutils php74 phpPackages.composer ];
+      path = with pkgs; [ coreutils php82 phpPackages.composer ];
 
       serviceConfig = {
         User = cfg.user;

@@ -4,12 +4,13 @@ in
 {
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud24;
+    package = pkgs.nextcloud25;
     hostName = host;
     https = true;
     autoUpdateApps.enable = true;
     autoUpdateApps.startAt = "04:00:00";
     home = "/data/nextcloud";
+    enableBrokenCiphersForSSE = false;
 
     config = {
       overwriteProtocol = "https";
