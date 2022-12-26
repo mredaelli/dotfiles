@@ -19,7 +19,7 @@
     extraBackends = [ pkgs.epkowa ];
   };
   environment = {
-    systemPackages = with pkgs; [ gscan2pdf keepassxc unstable.innernet ];
+    systemPackages = with pkgs; [ gscan2pdf keepassxc innernet ];
   };
 
   # virtualisation.virtualbox.host = {
