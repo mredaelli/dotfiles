@@ -135,11 +135,7 @@ if status --is-interactive
   zoxide init fish | source
 
   echo
-  echo  Remember ytop du-dust sd procs gitui using tig thefuck buku fzf newsboat broot
-  echo
-  if type -q task
-    task next
-  end
+  echo  Remember using procs tig thefuck fzf git-absorb
   echo
 end
 set -Ux FZF_DEFAULT_OPTS "\

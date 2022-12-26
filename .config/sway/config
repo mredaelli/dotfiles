@@ -119,10 +119,10 @@ mode "$mode_system" {
 set $mode_backlight Adjust backlight hjkl
 bindsym $mod+b mode "$mode_backlight"
 mode "$mode_backlight" {
-    bindsym h exec backlight min
-    bindsym j exec backlight decrease
-    bindsym k exec backlight increase
-    bindsym l exec backlight max
+    bindsym h exec ,backlight min
+    bindsym j exec ,backlight decrease
+    bindsym k exec ,backlight increase
+    bindsym l exec ,backlight max
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
