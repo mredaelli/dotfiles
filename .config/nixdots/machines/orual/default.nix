@@ -3,6 +3,7 @@
   imports = [
     ./hardware-configuration.nix
     <nixos-hardware/lenovo/thinkpad>
+    ./wireguard.nix
     ../../modules/common_settings.nix
     ../../modules/basic.nix
     ../../modules/wayland.nix
@@ -18,7 +19,10 @@
     nixos.source = "/persistent/etc/nixos";
     "NetworkManager/system-connections".source = "/persistent/etc/NetworkManager/system-connections";
     adjtime.source = "/persistent/etc/adjtime";
-    machine-id.source = "/persistent/etc/machine-id";
+    machine-id = {
+      source = "/persistent/etc/machine-id";
+      mode = "0444";
+    };
   };
   systemd.tmpfiles.rules = [
     "L+ /var/lib/systemd/backlight - - - - /persistent/var/lib/systemd/backlight"
@@ -30,10 +34,10 @@
   '';
 
   boot = {
-    extraModprobeConfig = ''
-      blacklist nouveau
-      options nouveau modeset=0
-    '';
+    # extraModprobeConfig = ''
+    #   blacklist nouveau
+    #   options nouveau modeset=0
+    # '';
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -44,19 +48,25 @@
     firewall = {
       allowedTCPPorts = [ 22 50000 50001 ];
       allowedUDPPorts = [ 50000 ];
+      checkReversePath = "loose";
     };
     hostId = "5f87931e";
     hostName = "orual";
+    hosts = {
+      "104.199.65.124" = [ "ap-gew4.spotify.com" ];
+    };
     networkmanager.enable = true;
   };
 
   environment.systemPackages = with pkgs; [
     jp
-    rtorrent
+    jesec-rtorrent
+    flood
     wally-cli
     keepassxc
-    unstable.innernet
+    innernet
     kanshi
+    signal-desktop
   ];
 
   virtualisation.docker = {
@@ -66,6 +76,8 @@
       flags = [ "until=240h" ];
     };
   };
+  # netmaker
+  environment.etc.hosts.mode = "0644";
 
   services = {
     openssh.enable = true;
@@ -81,19 +93,12 @@
       trim.enable = true;
     };
     fstrim.enable = true;
-    udev.extraRules = ''
-       # Remove NVIDIA USB xHCI Host Controller devices, if present
-       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c0330", ATTR{power/control}="auto", ATTR{remove}="1"
-       # Remove NVIDIA USB Type-C UCSI devices, if present
-       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x0c8000", ATTR{power/control}="auto", ATTR{remove}="1"
-       # Remove NVIDIA Audio devices, if present
-       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x040300", ATTR{power/control}="auto", ATTR{remove}="1"
-       # Remove NVIDIA VGA/3D controller devices
-       ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x03[0-9]*", ATTR{power/control}="auto", ATTR{remove}="1"
-     '';
-     thinkfan = {
-       enable = true;
-     };
+    thinkfan = {
+      enable = true;
+    };
+    tailscale = {
+      enable = true;
+    };
   };
 
   system.stateVersion = "21.05";
