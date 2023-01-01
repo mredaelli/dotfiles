@@ -1,4 +1,13 @@
 return {
+	{
+		"folke/which-key.nvim",
+		config = function()
+			vim.g.timeoutlen = 400
+			local which = require("which-key")
+			which.setup({})
+		end,
+	},
+
 	"antoinemadec/FixCursorHold.nvim",
 
 	"ThePrimeagen/refactoring.nvim",
@@ -6,12 +15,14 @@ return {
 	"sheerun/vim-polyglot",
 
 	"wellle/targets.vim",
-	{"ggandor/leap.nvim", config=function()
-		local leap = require("leap")
+	{
+		"ggandor/leap.nvim",
+		config = function()
+			local leap = require("leap")
 			leap.add_default_mappings()
 			leap.opts.highlight_unlabeled_phase_one_targets = true
 			leap.opts.case_sensitive = true
-		end
+		end,
 	},
 
 	"tpope/vim-unimpaired",
@@ -47,19 +58,21 @@ return {
 		end,
 	},
 
-	{ "edluffy/specs.nvim", config = { show_jumps=true} },
+	{ "edluffy/specs.nvim", config = { show_jumps = true } },
 	"elihunter173/dirbuf.nvim",
 
 	{ "kyazdani42/nvim-web-devicons", config = { default = true } },
-	{ "lukas-reineke/indent-blankline.nvim", config = function()
-			vim.g.indent_blankline_buftype_exclude = {'terminal'}
-			vim.g.indent_blankline_filetype_exclude = {'help'}
-			vim.g.indent_blankline_char = '▏'
-			vim.g.indent_blankline_space_char = ' '
-			vim.g.indent_blankline_space_char_blankline_highlight_list = {'IndentNegative', 'StatusLine'}
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			vim.g.indent_blankline_buftype_exclude = { "terminal" }
+			vim.g.indent_blankline_filetype_exclude = { "help" }
+			vim.g.indent_blankline_char = "▏"
+			vim.g.indent_blankline_space_char = " "
+			vim.g.indent_blankline_space_char_blankline_highlight_list = { "IndentNegative", "StatusLine" }
 			vim.g.indent_blankline_show_trailing_blankline_indent = 0
 			vim.g.indent_blankline_use_treesitter = 1
-		end
+		end,
 	},
 	"p00f/nvim-ts-rainbow",
 
