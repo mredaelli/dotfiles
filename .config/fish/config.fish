@@ -108,9 +108,14 @@ function mkcd
     cd $argv;
 end
 
+if type -q tig
+   abbr tig "tig status"
+end
+
 if type -q any-nix-shell
    any-nix-shell fish | source
 end
+abbr ,i 'nix-shell -p'
 
 if type -q fd
   export FZF_DEFAULT_COMMAND='fd --type f'
