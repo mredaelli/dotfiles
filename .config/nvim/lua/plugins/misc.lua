@@ -47,7 +47,7 @@ return {
 		end,
 	},
 
-	{ "edluffy/specs.nvim", config = true },
+	{ "edluffy/specs.nvim", config = { show_jumps=true} },
 	"elihunter173/dirbuf.nvim",
 
 	{ "kyazdani42/nvim-web-devicons", config = { default = true } },
