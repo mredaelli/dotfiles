@@ -1,16 +1,12 @@
-{ config, pkgs, options, ... }:
-{
-  nix.extraOptions = ''
-    keep-outputs = true
-    keep-derivations = true
-  '';
-
-  environment = {
-    pathsToLink = [
-      "/share/nix-direnv"
-    ];
-    homeBinInPath = true;
-    systemPackages = with pkgs; [
+{ config
+, pkgs
+, options
+, lib
+, ...
+}:
+let
+  packages = with pkgs;
+    [
       kitty
       wezterm
       libnotify
@@ -18,18 +14,18 @@
       imv
       nitrogen
       tridactyl-native
-      libreoffice
-      gimp
+#      libreoffice
+#      gimp
       zathura
       mpv
-      zotero
+#      zotero
       transmission-gtk
-      calibre
-      nextcloud-client
-      pass
-      pass-secret-service
-      visidata
-      fx
+#      calibre
+#      nextcloud-client
+#      pass
+#      pass-secret-service
+#3      visidata
+ #     fx
       mdcat
       rmlint
       gthumb
@@ -39,14 +35,8 @@
 
       ncspot
 
-      yamllint
-      vim-vint
-      shellcheck
-      shfmt
-      sumneko-lua-language-server
-      stylua
-      pandoc
-      zk
+#      pandoc
+#      zk
 
       i3status-rust
 
@@ -56,47 +46,74 @@
 
       matcha-gtk-theme
       qogir-icon-theme
-    ] ++ (with nodePackages; [
+    ];
+  devPackages = with pkgs; [
+    yamllint
+    vim-vint
+    shellcheck
+    shfmt
+    sumneko-lua-language-server
+    stylua
+  ]
+  ++ (with pkgs.nodePackages;
+    [
       vim-language-server
       bash-language-server
     ]);
-  };
-
-  fonts = {
-    fontDir.enable = true;
-    fonts = with pkgs; [
-      noto-fonts
-      gentium
-      (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-      league-of-moveable-type
-      source-serif
-      open-fonts
-      work-sans
-      source-sans
-      alegreya-sans
-    ];
-  };
-
-  programs = {
-    dconf.enable = true;
-    gnupg.agent = {
-      enable = true;
-      pinentryFlavor = "curses";
-      enableSSHSupport = true;
+in
+{
+  options.workstation = {
+    withDev = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
     };
   };
 
-  security.pam.services.turing.gnupg.enable = true;
+  config = {
+    nix.extraOptions = ''
+      keep-outputs = true
+      keep-derivations = true
+    '';
 
-  services = {
-    pcscd.enable = true;
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      pulse.enable = true;
+    environment = {
+      pathsToLink = [
+        "/share/nix-direnv"
+      ];
+      homeBinInPath = true;
+
+      systemPackages = packages ++ (if config.workstation.withDev then devPackages else [ ]);
     };
-    dbus.packages = with pkgs; [
-      pass-secret-service
-    ];
+
+    fonts = {
+      fontDir.enable = true;
+      fonts = with pkgs; [
+        noto-fonts
+        gentium
+        (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+      ];
+    };
+
+    programs = {
+      dconf.enable = true;
+#      gnupg.agent = {
+#        enable = true;
+#        pinentryFlavor = "curses";
+#        enableSSHSupport = true;
+#      };
+    };
+
+#    security.pam.services.turing.gnupg.enable = true;
+
+    services = {
+      pcscd.enable = true;
+      pipewire = {
+        enable = true;
+        alsa.enable = true;
+        pulse.enable = true;
+      };
+ #     dbus.packages = with pkgs; [
+ #       pass-secret-service
+ #     ];
+    };
   };
 }
