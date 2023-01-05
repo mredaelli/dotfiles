@@ -45,6 +45,7 @@
         imv
         kanshi
         firefox-wayland
+        gsettings-desktop-schemas
       ];
     };
   };
