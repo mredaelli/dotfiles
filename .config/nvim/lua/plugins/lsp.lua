@@ -17,7 +17,7 @@ end
 
 local on_attach = function(client)
 	local msg = "LSP " .. client.name
-	if client.resolved_capabilities.document_formatting then
+	if client.server_capabilities.document_formatting then
 		msg = msg .. " fmt"
 		vim.cmd([[augroup Format]])
 		vim.cmd([[autocmd! * <buffer>]])
@@ -25,14 +25,14 @@ local on_attach = function(client)
 		vim.cmd([[augroup END]])
 	end
 
-	if client.resolved_capabilities.signature_help then
+	if client.server_capabilities.signature_help then
 		require("lsp_signature").on_attach()
 		client.signature_help_trigger_characters = { "(", ",", "=" }
 	end
 
 	map("n", "<C-e>", "<cmd>lua vim.diagnostic.open_float()<CR>")
 	map("n", "<Leader>xx", "<cmd>TroubleToggle<CR>")
-	if client.resolved_capabilities.document_highlight then
+	if client.server_capabilities.document_highlight then
 		map("n", "<Leader>h", "<cmd>lua vim.lsp.buf.document_highlight()<CR>")
 		vim.cmd([[augroup LspHighlight]])
 		vim.cmd([[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]])
@@ -40,38 +40,38 @@ local on_attach = function(client)
 		vim.cmd([[augroup END]])
 		msg = msg .. " high"
 	end
-	if client.resolved_capabilities.document_range_formatting then
+	if client.server_capabilities.document_range_formatting then
 		map("v", "<Leader>=", "<cmd>lua vim.lsp.buf.document_range_formatting()<CR>")
 		map("x", "<Leader>=", "<cmd>lua vim.lsp.buf.document_range_formatting()<CR>")
 		msg = msg .. " rfmt"
 	end
-	if client.resolved_capabilities.document_symbol then
+	if client.server_capabilities.document_symbol then
 		map("n", "<Leader>s", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
 		msg = msg .. " symb"
 	end
-	if client.resolved_capabilities.code_action then
+	if client.server_capabilities.code_action then
 		map("n", "<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 		vim.cmd([[augroup lightbulbSymbol]])
 		vim.cmd([[autocmd CursorHold  <buffer> lua require'nvim-lightbulb'.update_lightbulb()]])
 		vim.cmd([[augroup END]])
 		msg = msg .. " action"
 	end
-	if client.resolved_capabilities.goto_definition then
+	if client.server_capabilities.goto_definition then
 		map("n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<CR>")
 		msg = msg .. " def"
 	end
-	if client.resolved_capabilities.completion then
+	if client.server_capabilities.completion then
 		msg = msg .. " compl"
 	end
-	if client.resolved_capabilities.hover then
+	if client.server_capabilities.hover then
 		map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
 		msg = msg .. " hover"
 	end
-	if client.resolved_capabilities.find_references then
+	if client.server_capabilities.find_references then
 		map("n", "<Leader>*", ":lua vim.lsp.buf.references()<CR>")
 		msg = msg .. " refs"
 	end
-	if client.resolved_capabilities.rename then
+	if client.server_capabilities.rename then
 		map("n", "<leader>cn", "<cmd>lua vim.lsp.buf.rename()<CR>")
 		msg = msg .. " ren"
 	end
@@ -164,11 +164,11 @@ return {
 			vim.cmd([[command! FormatEnable lua FormatToggle(false)]])
 
 			lspconfig.pyright.setup({ on_attach = on_attach, capabilities = capabilities })
-
+			lspconfig.marksman.setup({})
 			lspconfig.tsserver.setup({
 				capabilities = capabilities,
 				on_attach = function(client)
-					client.resolved_capabilities.document_formatting = false
+					client.server_capabilities.document_formatting = false
 					on_attach(client)
 				end,
 			})
@@ -269,11 +269,25 @@ return {
 				"jose-elias-alvarez/null-ls.nvim",
 				config = function()
 					local null_ls = require("null-ls")
+					local h = require("null-ls.helpers")
+					local methods = require("null-ls.methods")
+
+					local FORMATTING = methods.internal.FORMATTING
+
+					local pandoc = h.make_builtin({
+						name = "pandoc",
+						method = FORMATTING,
+						filetypes = { "markdown" },
+						generator_opts = {
+							command = "mkdownfmt",
+							to_stdin = true,
+						},
+						factory = h.formatter_factory,
+					})
 					null_ls.setup({
 						on_attach = on_attach,
 						sources = {
 							null_ls.builtins.formatting.stylua,
-							-- null_ls.builtins.completion.spell,
 							null_ls.builtins.formatting.nixpkgs_fmt,
 							null_ls.builtins.diagnostics.statix,
 							null_ls.builtins.diagnostics.shellcheck,
@@ -281,17 +295,22 @@ return {
 							null_ls.builtins.diagnostics.flake8,
 							null_ls.builtins.formatting.black,
 							null_ls.builtins.formatting.isort,
-							-- null_ls.builtins.formatting.autopep8,
-							-- null_ls.builtins.formatting.yapf,
 							null_ls.builtins.diagnostics.yamllint,
-							null_ls.builtins.formatting.prettier,
+							null_ls.builtins.formatting.prettier.with({
+								filetypes = { "html", "json", "yaml", "javascript", "typescript" },
+							}),
 							null_ls.builtins.formatting.eslint,
-							-- null_ls.builtins.formatting.scalafmt,
-							-- null_ls.builtins.formatting.rustfmt,
 							null_ls.builtins.formatting.elm_format,
 							null_ls.builtins.code_actions.refactoring,
 							null_ls.builtins.diagnostics.alex,
 							null_ls.builtins.diagnostics.proselint,
+							pandoc,
+							-- null_ls.builtins.completion.spell,
+							-- null_ls.builtins.formatting.autopep8,
+							-- null_ls.builtins.formatting.yapf,
+							-- null_ls.builtins.formatting.scalafmt,
+							-- null_ls.builtins.formatting.rustfmt,
+							-- null_ls.builtins.formatting.cbfmt
 						},
 						update_in_insert = false,
 						debounce = 2000,
