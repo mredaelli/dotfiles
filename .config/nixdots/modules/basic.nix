@@ -8,25 +8,15 @@
       imagemagick
       restic
       bashmount
-      so
-      imagemagick
-      restic
 
       gitui
 
-      ultralist
-
       mu
-      neomutt
+      aerc
       w3m
       urlscan
       ripmime
       isync
-      khard
-      vdirsyncer
-      khal
-
-      glow
     ];
   };
 }

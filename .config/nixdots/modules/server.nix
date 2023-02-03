@@ -9,7 +9,6 @@
       fish
 
       lsof
-      psmisc
       procs
       htop
       bottom
@@ -29,6 +28,7 @@
       bat
       sd
       dua
+      procs
 
       zoxide
       starship
