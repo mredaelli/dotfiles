@@ -8,62 +8,57 @@ let
   packages = with pkgs;
     [
       kitty
-      wezterm
+      unstable.wezterm
       libnotify
       pavucontrol
       imv
       nitrogen
       tridactyl-native
-#      libreoffice
-#      gimp
       zathura
       mpv
-#      zotero
       transmission-gtk
-#      calibre
-#      nextcloud-client
-#      pass
-#      pass-secret-service
-#3      visidata
- #     fx
-      mdcat
       rmlint
-      gthumb
-      viddy
-
-      git-trim
-
-      ncspot
-
-#      pandoc
-#      zk
-
       i3status-rust
-
-      nix-direnv
-
       alsaUtils
-
       matcha-gtk-theme
       qogir-icon-theme
     ];
-  devPackages = with pkgs; [
+  morePackages = with pkgs; [
+    ncspot
+    gthumb
+    mdcat
+    viddy
+    zk
+    zotero
+    libreoffice
+    gimp
+    calibre
+    nextcloud-client
+    pass
+    pass-secret-service
+    visidata
+    fx
+  ];
+    devPackages = with pkgs;
+  [
+  nix-direnv
+    git-trim
     yamllint
     vim-vint
     shellcheck
     shfmt
     sumneko-lua-language-server
     stylua
-  ]
-  ++ (with pkgs.nodePackages;
+    ]
+    ++ (with pkgs.nodePackages;
     [
-      vim-language-server
-      bash-language-server
+    vim-language-server
+    bash-language-server
     ]);
-in
-{
-  options.workstation = {
-    withDev = lib.mkOption {
+    in
+    {
+    options.workstation = {
+    full = lib.mkOption {
       type = lib.types.bool;
       default = true;
     };
@@ -81,7 +76,7 @@ in
       ];
       homeBinInPath = true;
 
-      systemPackages = packages ++ (if config.workstation.withDev then devPackages else [ ]);
+      systemPackages = packages ++ (if config.workstation.full then (devPackages ++ morePackages) else [ ]);
     };
 
     fonts = {
@@ -95,14 +90,14 @@ in
 
     programs = {
       dconf.enable = true;
-#      gnupg.agent = {
-#        enable = true;
-#        pinentryFlavor = "curses";
-#        enableSSHSupport = true;
-#      };
+      gnupg.agent = {
+        enable = true;
+        pinentryFlavor = "curses";
+        enableSSHSupport = true;
+      };
     };
 
-#    security.pam.services.turing.gnupg.enable = true;
+    security.pam.services.turing.gnupg.enable = true;
 
     services = {
       pcscd.enable = true;
@@ -111,9 +106,9 @@ in
         alsa.enable = true;
         pulse.enable = true;
       };
- #     dbus.packages = with pkgs; [
- #       pass-secret-service
- #     ];
+      dbus.packages = with pkgs; [
+        pass-secret-service
+      ];
     };
   };
-}
+  }

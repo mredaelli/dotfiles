@@ -7,7 +7,7 @@ in
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 30d";
+      options = "--delete-older-than 10d";
     };
     settings.auto-optimise-store = true;
   };
@@ -51,8 +51,10 @@ in
   services = {
     openssh = {
       enable = true;
-      permitRootLogin = "no";
-      passwordAuthentication = false;
+      settings = {
+        PasswordAuthentication = false;
+        PermitRootLogin = "no";
+      };  
     };
   };
 }

@@ -9,6 +9,7 @@
       restic
       bashmount
 
+      so
       gitui
 
       mu

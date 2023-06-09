@@ -53,7 +53,8 @@ return {
 			vim.cmd([[
   nnoremap <Leader>r <cmd>Telescope live_grep<CR>
   nnoremap <Leader>f <cmd>Telescope git_files show_untracked=false recurse_submodules=true<CR>
-  nnoremap <Leader>F <cmd>Telescope find_files<CR>
+  nnoremap <Leader>F <cmd>Telescope file_browser path=%:p:h<CR>
+  " nnoremap <Leader>F <cmd>Telescope find_files<CR>
   nnoremap <Leader>b <cmd>Telescope buffers<CR>
   nnoremap <Leader>th <cmd>Telescope command_history<CR>
   nnoremap <Leader>tc <cmd>Telescope commands<CR>

@@ -17,6 +17,9 @@
 [diff]
   colorMoved = default
 
+[push]
+    autoSetupRemote = true
+
 [merge]
     tool = vim_mergetool
     conflictstyle = diff3

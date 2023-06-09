@@ -8,16 +8,13 @@ _G.formatting = function()
 	end
 end
 
-local map = function(mode, key, result, noremap)
-	if noremap == nil then
-		noremap = true
-	end
-	vim.api.nvim_buf_set_keymap(0, mode, key, result, { noremap = noremap, silent = true })
-end
 
-local on_attach = function(client)
+local on_attach = function(client, bufnr)
+    local map = function(mode, key, result, noremap)
+            vim.keymap.set(mode, key, result, { noremap = noremap or true, silent = true, buffer=bufnr  })
+    end
 	local msg = "LSP " .. client.name
-	if client.server_capabilities.document_formatting then
+	if client.server_capabilities.documentFormattingProvider then
 		msg = msg .. " fmt"
 		vim.cmd([[augroup Format]])
 		vim.cmd([[autocmd! * <buffer>]])
@@ -25,14 +22,14 @@ local on_attach = function(client)
 		vim.cmd([[augroup END]])
 	end
 
-	if client.server_capabilities.signature_help then
+	if client.server_capabilities.signatureHelpProvider then
 		require("lsp_signature").on_attach()
 		client.signature_help_trigger_characters = { "(", ",", "=" }
 	end
 
 	map("n", "<C-e>", "<cmd>lua vim.diagnostic.open_float()<CR>")
 	map("n", "<Leader>xx", "<cmd>TroubleToggle<CR>")
-	if client.server_capabilities.document_highlight then
+	if client.server_capabilities.documentHighlightProvider then
 		map("n", "<Leader>h", "<cmd>lua vim.lsp.buf.document_highlight()<CR>")
 		vim.cmd([[augroup LspHighlight]])
 		vim.cmd([[autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()]])
@@ -40,38 +37,38 @@ local on_attach = function(client)
 		vim.cmd([[augroup END]])
 		msg = msg .. " high"
 	end
-	if client.server_capabilities.document_range_formatting then
+	if client.server_capabilities.documentRangeFormattingProvider then
 		map("v", "<Leader>=", "<cmd>lua vim.lsp.buf.document_range_formatting()<CR>")
 		map("x", "<Leader>=", "<cmd>lua vim.lsp.buf.document_range_formatting()<CR>")
 		msg = msg .. " rfmt"
 	end
-	if client.server_capabilities.document_symbol then
+	if client.server_capabilities.documentSymbolProvider then
 		map("n", "<Leader>s", "<cmd>lua vim.lsp.buf.document_symbol()<CR>")
 		msg = msg .. " symb"
 	end
-	if client.server_capabilities.code_action then
+	if client.server_capabilities.codeActionProvider then
 		map("n", "<Leader>a", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 		vim.cmd([[augroup lightbulbSymbol]])
 		vim.cmd([[autocmd CursorHold  <buffer> lua require'nvim-lightbulb'.update_lightbulb()]])
 		vim.cmd([[augroup END]])
 		msg = msg .. " action"
 	end
-	if client.server_capabilities.goto_definition then
+	if client.server_capabilities.gotoDefinitionProvider then
 		map("n", "<C-]>", "<cmd>lua vim.lsp.buf.definition()<CR>")
 		msg = msg .. " def"
 	end
-	if client.server_capabilities.completion then
+	if client.server_capabilities.completionProvider then
 		msg = msg .. " compl"
 	end
-	if client.server_capabilities.hover then
+	if client.server_capabilities.hoverProvider then
 		map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
 		msg = msg .. " hover"
 	end
-	if client.server_capabilities.find_references then
+	if client.server_capabilities.referencesProvider then
 		map("n", "<Leader>*", ":lua vim.lsp.buf.references()<CR>")
 		msg = msg .. " refs"
 	end
-	if client.server_capabilities.rename then
+	if client.server_capabilities.renameProvider then
 		map("n", "<leader>cn", "<cmd>lua vim.lsp.buf.rename()<CR>")
 		msg = msg .. " ren"
 	end
@@ -122,8 +119,7 @@ return {
 		"neovim/nvim-lspconfig",
 		config = function()
 			local lspconfig = require("lspconfig")
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			require("lsp_extensions").inlay_hints({
 				highlight = "Comment",
@@ -164,7 +160,7 @@ return {
 			vim.cmd([[command! FormatEnable lua FormatToggle(false)]])
 
 			lspconfig.pyright.setup({ on_attach = on_attach, capabilities = capabilities })
-			lspconfig.marksman.setup({})
+			lspconfig.marksman.setup({ on_attach = on_attach, capabilities = capabilities })
 			lspconfig.tsserver.setup({
 				capabilities = capabilities,
 				on_attach = function(client)
@@ -182,7 +178,7 @@ return {
 				end,
 			})
 
-			lspconfig.sumneko_lua.setup({
+			lspconfig.lua_ls.setup({
 				capabilities = capabilities,
 				on_attach = on_attach,
 				cmd = { "lua-language-server" },

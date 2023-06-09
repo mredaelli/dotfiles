@@ -50,7 +50,7 @@
 
   programs = {
     fish = {
-      # enable = true;
+      enable = true;
       promptInit = ''
         any-nix-shell fish --info-right | source
       '';
