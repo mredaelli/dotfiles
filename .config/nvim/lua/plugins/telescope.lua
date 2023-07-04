@@ -50,6 +50,7 @@ return {
 				{ noremap = true, silent = true }
 			)
 			vim.api.nvim_set_keymap("n", "<leader>tf", ":Telescope file_browser<CR>", { noremap = true })
+			vim.keymap.set("n", "<leader>t<space>", ":Telescope resume<cr>", { noremap = true })
 			vim.cmd([[
   nnoremap <Leader>r <cmd>Telescope live_grep<CR>
   nnoremap <Leader>f <cmd>Telescope git_files show_untracked=false recurse_submodules=true<CR>
@@ -66,7 +67,6 @@ return {
   nnoremap <Leader>q <cmd>Telescope quickfix<CR>
   nnoremap <Leader>l <cmd>Telescope loclist<CR>
   nnoremap <Leader>tH <cmd>Telescope help_tags<CR>
-  nnoremap <Leader>tr <cmd>Telescope lsp_references<CR>
   nnoremap <Leader>tr <cmd>Telescope lsp_references<CR>
   nnoremap <Leader>tS <cmd>Telescope lsp_workspace_symbols<CR>
   nnoremap <Leader>ta <cmd>Telescope lsp_code_actions<CR>

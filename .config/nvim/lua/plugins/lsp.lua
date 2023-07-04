@@ -4,7 +4,9 @@ end
 
 _G.formatting = function()
 	if not vim.g[string.format("format_disabled_%s", vim.bo.filetype)] then
-		vim.lsp.buf.formatting_seq_sync(vim.g[string.format("format_options_%s", vim.bo.filetype)] or {}, 5000)
+		local fo = vim.g[string.format("format_options_%s", vim.bo.filetype)] or {}
+		fo["async"] = false
+		vim.lsp.buf.format(fo, 5000)
 	end
 end
 

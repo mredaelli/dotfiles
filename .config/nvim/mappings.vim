@@ -1,20 +1,16 @@
 let maplocalleader = "\\"
 let mapleader = ' '
 
-" s also in pending mode
-omap s <Plug>Lightspeed_s
-omap S <Plug>Lightspeed_S
-omap > w
+" don't jump to start of selection when copying
+vnoremap y ygv<esc>
+
+nnoremap H ^
+nnoremap L $
 
 " Moving between buffers
 nnoremap <C-\> :b#<CR>
 nnoremap <silent> <leader>d :Sayonara!<CR>
 nnoremap <silent> <leader>D :%bd<cr>
-
-" nmap J <Plug>(interactiveJoin)
-" xmap J <Plug>(interactiveJoin)
-nmap <leader>J <Plug>(interactiveGJoin)
-xmap <leader>J <Plug>(interactiveGJoin)
 
 " Moving between tabs
 nnoremap ]t :tabnext<CR>
@@ -28,8 +24,6 @@ nnoremap Q gQ
 " reload config on <leader>R
 nnoremap <leader>R :so $MYVIMRC<CR>
 
-" prevent entering Ex mode by error
-nnoremap Q <nop>
 nnoremap <leader><space> :up<cr>
 
 " select pasted text
@@ -48,8 +42,8 @@ nnoremap <silent> [d :Lfprev<CR>
 nnoremap <silent> ]d :Lfnext<CR>
 
 " commenting with Ctrl-/
-nmap <C-_>  gcc
-vmap <C-_>  gc
+nmap <C-/>  gcc
+vmap <C-/>  gc
 
 nnoremap <C-k> <C-y>
 nnoremap <C-j> <C-e>
@@ -72,19 +66,6 @@ tnoremap <C-w>- <C-\><C-n>:resize -5<CR>
 tnoremap <C-w>< <C-\><C-n>:vertical:resize -10<CR>
 tnoremap <C-w>> <C-\><C-n>:vertical:resize +10<CR>
 
-""""""""""" terminal
-
-tnoremap <Esc><Esc> <C-\><C-n>
-
-nnoremap <leader>tt :tabnew term://fish<CR>
-tnoremap <leader>tt <C-\><C-n>:tabnew term://fish<CR>
-
-nnoremap <leader>t- :new +terminal<CR>
-tnoremap <leader>t- <C-\><C-n>:new +terminal<CR>
-
-nnoremap <leader>t\| :vnew +terminal<CR>
-tnoremap <leader>t\| <C-\><C-n>:vnew +terminal<cr>
-
 " Alt+[hjkl] to navigate through windows in insert mode
 tnoremap <A-h> <C-\><C-n><C-w>h
 tnoremap <A-j> <C-\><C-n><C-w>j
@@ -99,6 +80,3 @@ nnoremap <A-l> <C-w>l
 
 " Do not include white space characters when using $ in visual mode
 xnoremap $ g_
-
-nnoremap <C-s> :NvimTreeToggle<CR>
-" nnoremap <C-s> :NvimTreeFindFile<CR>

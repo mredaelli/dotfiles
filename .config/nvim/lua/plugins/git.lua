@@ -29,21 +29,34 @@ end
 		},
 	},
 	{ "lewis6991/gitsigns.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config={
-	keymaps = {
-		["n ]h"] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
-		["n [h"] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'" },
+			on_attach = function(bufnr)
+				    local gs = package.loaded.gitsigns
 
-		["n <leader>ga"] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-		["v <leader>ga"] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-		["n <leader>gr"] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-		["n <leader>gu"] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-		["v <leader>ru"] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-		["n <leader>gd"] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-		["n <leader>gb"] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
 
-		-- Text objects
-		["o ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-		["x ih"] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-	},
+    map('n', ']h', function()
+      if vim.wo.diff then return ']c' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+    map('n', '[h', function()
+      if vim.wo.diff then return '[c' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, {expr=true})
+
+		map('n', '<leader>ga', gs.stage_hunk)
+		map('v', '<leader>ga', function() gs.stage_hunk({vim.fn.line("."), vim.fn.line("v")}) end )
+		map('n', '<leader>gr', gs.undo_stage_hunk)
+		map('n', '<leader>gu', gs.reset_hunk)
+		map('v', '<leader>ru', function() gs.reset_hunk({vim.fn.line("."), vim.fn.line("v")}) end)
+		map('n', '<leader>gd', gs.preview_hunk)
+		map('n', '<leader>gb', function() gs.blame_line(true) end)
+	end
 } },
 }

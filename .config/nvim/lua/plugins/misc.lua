@@ -28,9 +28,30 @@ return {
 	"tpope/vim-unimpaired",
 	"tpope/vim-eunuch",
 	"mhinz/vim-sayonara",
+	{
+		"chrisgrieser/nvim-early-retirement",
+		config = true,
+		event = "VeryLazy",
+		retirementAgeMins = 60,
+	},
 	{ "numToStr/Comment.nvim", config = true },
 
-	"dbeniamine/cheat.sh-vim",
+	{
+		"dbeniamine/cheat.sh-vim",
+		config = function()
+			vim.g.CheatSheetStayInOrigBuf = 0
+			vim.g.CheatSheetReaderCmd = "new"
+			vim.g.CheatSheetShowCommentsByDefault = 1
+			vim.g.CheatDoNotReplaceKeywordPrg = 1
+			vim.g.CheatSheetDoNotMap = 1
+			vim.cmd([[
+				nnoremap <script> <silent> <leader>cs
+										\ :call cheat#cheat("", getcurpos()[1], getcurpos()[1], 0, 0, '!')<CR>
+				vnoremap <script> <silent> <leader>cs
+										\ :call cheat#cheat("", -1, -1, 2, 0, '!')<CR>
+			]])
+		end,
+	},
 
 	"jubnzv/mdeval.nvim",
 	"jakewvincent/mkdnflow.nvim",
@@ -58,7 +79,7 @@ return {
 		end,
 	},
 
-	{ "edluffy/specs.nvim", config = { show_jumps = true } },
+	{ "edluffy/specs.nvim",    config = { show_jumps = true } },
 	"elihunter173/dirbuf.nvim",
 
 	{ "kyazdani42/nvim-web-devicons", config = { default = true } },
