@@ -48,7 +48,7 @@ end
 hint("(?:\\S.+\\S)", "l")
 hint("(?:\\S*?/[\r\\S]+)|(?:\\S[\r\\S]*\\.[a-zA-Z0-9\r]{2,7})", "p")
 local url_regex =
-	"(?:https?://(www[.])?[-a-zA-Z0-9@:%._+~#=]{1,256}[.][a-zA-Z0-9()]{1,6}\\b[-a-zA-Z0-9()@:%_+.~#?&/=]*)"
+"(?:https?://(www[.])?[-a-zA-Z0-9@:%._+~#=]{1,256}[.][a-zA-Z0-9()]{1,6}\\b[-a-zA-Z0-9()@:%_+.~#?&/=]*)"
 hint(url_regex, "u")
 hint(url_regex, "f", function(window, pane)
 	local url = window:get_selection_text_for_pane(pane)
@@ -57,13 +57,13 @@ end)
 local key_tables = {
 	hints = hints,
 	resize = {
-		{ key = "h", action = { AdjustPaneSize = { "Left", 1 } } },
-		{ key = "l", action = { AdjustPaneSize = { "Right", 1 } } },
-		{ key = "k", action = { AdjustPaneSize = { "Up", 1 } } },
-		{ key = "j", action = { AdjustPaneSize = { "Down", 1 } } },
+		{ key = "h",      action = { AdjustPaneSize = { "Left", 1 } } },
+		{ key = "l",      action = { AdjustPaneSize = { "Right", 1 } } },
+		{ key = "k",      action = { AdjustPaneSize = { "Up", 1 } } },
+		{ key = "j",      action = { AdjustPaneSize = { "Down", 1 } } },
 		{ key = "Escape", action = "PopKeyTable" },
-		{ key = "=", action = "IncreaseFontSize" },
-		{ key = "-", action = "DecreaseFontSize" },
+		{ key = "=",      action = "IncreaseFontSize" },
+		{ key = "-",      action = "DecreaseFontSize" },
 	},
 }
 local keys = {
@@ -115,40 +115,14 @@ local keys = {
 	key("s", { Search = { CaseSensitiveString = "" } }),
 	key("y", { CopyTo = "Clipboard" }),
 	key("p", { PasteFrom = "Clipboard" }),
+	key("l", { ActivatePaneDirection = "Right" }),
+	key("d", "ShowDebugOverlay"),
+	key("u", { CharSelect = { copy_on_select = true, copy_to = "ClipboardAndPrimarySelection" } }),
 }
 
 for i = 1, 9 do
 	table.insert(keys, key(tostring(i), { ActivateTab = i }, "CTRL"))
 end
-
-local catppuccin = {
-	foreground = "#dadae8",
-	background = "#1e1e29",
-	cursor_bg = "#b1e3ad",
-	cursor_border = "#b1e3ad",
-	cursor_fg = "#1E1E28",
-	compose_cursor = "orange", -- ?
-	selection_bg = "#332e41",
-	selection_fg = "#e5b4e2",
-	split = "#e5b4e2",
-	ansi = { "#6e6c7e", "#e38c8f", "#b1e3ad", "#ebddaa", "#a4b9ef", "#c6aae8", "#e5b4e2", "#dadae8" },
-	brights = { "#6e6c7e", "#e38c8f", "#b1e3ad", "#ebddaa", "#a4b9ef", "#c6aae8", "#e5b4e2", "#dadae8" },
-	tab_bar = {
-		background = "#15121c",
-		active_tab = {
-			bg_color = "#1e1e29",
-			fg_color = "#dadae8",
-			intensity = "Normal", -- "Half", "Normal" or "Bold" intensity for the
-			underline = "None", -- "None", "Single" or "Double" underline for
-			italic = false,
-			strikethrough = false,
-		},
-		inactive_tab = {
-			bg_color = "#1b1923",
-			fg_color = "#a4b9ef",
-		},
-	},
-}
 
 wezterm.on("update-right-status", function(window, pane)
 	local status = window:active_workspace()
@@ -182,41 +156,39 @@ wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_wid
 	end
 end)
 
-return {
-	unix_domains = {
-		{
-			name = "unix",
-		},
-	},
-	-- default_gui_startup_args = { "connect", "unix" },
-	enable_wayland = true,
-	font = wezterm.font({
-		family = "JetBrains Mono",
-		harfbuzz_features = { "calt=1", "clig=1", "liga=1" },
-		weight = "Medium",
-	}),
-	line_height = 1.15,
-	check_for_updates = false,
-	keys = keys,
-	key_tables = key_tables,
-	disable_default_key_bindings = true,
-	enable_kitty_graphics = true,
-	tab_bar_at_bottom = true,
-	use_fancy_tab_bar = false,
-	inactive_pane_hsb = {
-		saturation = 0.9,
-		brightness = 0.7,
-	},
-	color_schemes = { ["Catppuccin"] = catppuccin },
-	color_scheme = "Catppuccin",
-	set_environment_variables = {
-		VTE_VERSION = "6003", -- https://github.com/wez/wezterm/issues/115
-	},
-	window_padding = {
-		left = "0",
-		right = "0",
-		top = "0",
-		bottom = "0",
-	},
-	warn_about_missing_glyphs=false,
+local config = wezterm.config_builder()
+config:set_strict_mode(true)
+config.unix_domains = { { name = "unix" } }
+-- default_gui_startup_args = { "connect", "unix" },
+config.enable_wayland = true
+config.font = wezterm.font({
+	family = "JetBrains Mono",
+	harfbuzz_features = { "calt=1", "clig=1", "liga=1" },
+	weight = "Medium",
+})
+config.line_height = 1.15
+config.check_for_updates = false
+config.keys = keys
+config.key_tables = key_tables
+config.disable_default_key_bindings = true
+config.enable_kitty_graphics = true
+config.tab_bar_at_bottom = true
+config.use_fancy_tab_bar = false
+config.inactive_pane_hsb = {
+	saturation = 0.9,
+	brightness = 0.7,
 }
+config.color_scheme = "catppuccin-mocha"
+config.set_environment_variables = {
+	VTE_VERSION = "6003", -- https://github.com/wez/wezterm/issues/115
+}
+config.window_padding = {
+	left = "0",
+	right = "0",
+	top = "0",
+	bottom = "0",
+}
+config.warn_about_missing_glyphs = false
+config.hide_mouse_cursor_when_typing = false
+
+return config

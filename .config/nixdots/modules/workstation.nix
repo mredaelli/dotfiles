@@ -32,7 +32,6 @@ let
     gimp
     calibre
     nextcloud-client
-    pass
     fx
   ];
   devPackages = with pkgs; [
@@ -97,15 +96,13 @@ in
     security.pam.services.turing.gnupg.enable = true;
 
     services = {
+      gnome.gnome-keyring.enable = true;
       pcscd.enable = true;
       pipewire = {
         enable = true;
         alsa.enable = true;
         pulse.enable = true;
       };
-      dbus.packages = with pkgs; [
-        pass-secret-service
-      ];
     };
   };
 }

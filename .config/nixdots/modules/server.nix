@@ -20,7 +20,7 @@
       direnv
 
       eza
-      ranger
+      joshuto
       fd
       ripgrep
       bat

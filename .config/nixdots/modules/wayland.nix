@@ -59,7 +59,7 @@
     vt = 2;
     settings = {
       default_session = {
-        command = "${lib.makeBinPath [pkgs.greetd.tuigreet] }/tuigreet --time --cmd sway";
+        command = "${lib.makeBinPath [pkgs.greetd.tuigreet] }/tuigreet --time --cmd 'sway --unsupported-gpu'";
         user = "greeter";
       };
     };
