@@ -20,7 +20,7 @@
       direnv
 
       eza
-      joshuto
+      yazi
       fd
       ripgrep
       bat
