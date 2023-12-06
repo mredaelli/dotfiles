@@ -82,7 +82,6 @@
 
 
   services = {
-    openssh.enable = true;
     cron = {
       enable = true;
       systemCronJobs = [

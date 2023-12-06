@@ -23,7 +23,7 @@
   systemd.tmpfiles.rules = [
     "L+ /var/lib/systemd/backlight - - - - /persistent/var/lib/systemd/backlight"
   ];
-  users.extraUsers.turing.passwordFile = "/persistent/etc/turing-password";
+  users.extraUsers.turing.hashedPasswordFile = "/persistent/etc/turing-password";
   security.sudo.extraConfig = ''
     # rollback results in sudo lectures after each reboot
     Defaults lecture = never
@@ -42,6 +42,7 @@
     };
   };
 
+  virtualisation.docker.enable = true;
   networking = {
     hostName = "gimli";
     hostId = "b93e7d6e";
@@ -77,10 +78,6 @@
       nssmdns = true;
       openFirewall = true;
     };
-    openssh = {
-      enable = true;
-      permitRootLogin = "no";
-    };
 
     syncthing = {
       enable = true;
@@ -89,23 +86,25 @@
       configDir = "/home/turing/sync/.config/syncthing";
       overrideDevices = true;
       overrideFolders = true;
-      devices = {
-        "lightsong" = { id = "4K4M525-DTMUO2S-6BLRAWU-DW4PIRM-X5LUXJP-2R7G5IU-N7LHIM5-JPI5WAD"; };
-        "salsiccia" = { id = "BZVCRAX-RABVSZT-EI3G25R-JS3AB4G-PCSD75V-D5OKJM7-SSWNKFY-JWL3DQ6"; };
-        "tablet" = { id = "XL44HFN-ZVOEC4Y-333RP5A-ETT7LIH-K7U7TCP-JXDN67G-BOGSYUE-LWBZUQT"; };
-      };
-      folders = {
-        "Sync" = {
-          path = "/home/turing/sync";
-          devices = [ "lightsong" ];
+      settings = {
+        devices = {
+          "lightsong" = { id = "4K4M525-DTMUO2S-6BLRAWU-DW4PIRM-X5LUXJP-2R7G5IU-N7LHIM5-JPI5WAD"; };
+          "salsiccia" = { id = "BZVCRAX-RABVSZT-EI3G25R-JS3AB4G-PCSD75V-D5OKJM7-SSWNKFY-JWL3DQ6"; };
+          "tablet" = { id = "XL44HFN-ZVOEC4Y-333RP5A-ETT7LIH-K7U7TCP-JXDN67G-BOGSYUE-LWBZUQT"; };
         };
-        "kb" = {
-          path = "/home/turing/carte/kb";
-          devices = [ "lightsong" ];
-        };
-        "zotero" = {
-          path = "/home/turing/Zotero/tablet";
-          devices = [ "lightsong" ];
+        folders = {
+          "Sync" = {
+            path = "/home/turing/sync";
+            devices = [ "lightsong" ];
+          };
+          "kb" = {
+            path = "/home/turing/carte/kb";
+            devices = [ "lightsong" ];
+          };
+          "zotero" = {
+            path = "/home/turing/Zotero/tablet";
+            devices = [ "lightsong" ];
+          };
         };
       };
     };
