@@ -43,7 +43,12 @@ in
 
       package = mkOption {
         type = types.package;
-        default = pkgs.wallabag;
+        default = pkgs.wallabag.overrideAttrs (o: {
+          postPatch = ''
+            ls app/config/services.yml
+            sed -i 's_../../src/_${cfg.dataDir}/src/_g' app/config/services.yml
+          '';
+        });
         description = ''
           Wallabag package to use.
         '';
@@ -195,6 +200,7 @@ in
         rm -rf var/cache/*
         rm -f app
         ln -sf ${appDir} app
+        # ln -sf ${cfg.package}/src .
         ln -sf ${cfg.package}/composer.{json,lock} .
 
         export WALLABAG_DATA="${cfg.dataDir}"
@@ -204,8 +210,10 @@ in
           # yes no | php ${cfg.package}/bin/console --env=prod wallabag:install
           touch installed
         else
+          echo "Migrating"
           php ${cfg.package}/bin/console --env=prod doctrine:migrations:migrate --no-interaction
         fi
+        echo "Cleaning cache"
         php ${cfg.package}/bin/console --env=prod cache:clear
       '';
     };

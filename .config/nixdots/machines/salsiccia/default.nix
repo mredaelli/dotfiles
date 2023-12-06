@@ -18,7 +18,7 @@
 
       # ./postfix.nix
       ./syncthing.nix
-      #      ./radicale.nix
+      # ./searx.nix
     ];
 
   security.acme = {

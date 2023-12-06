@@ -31,6 +31,7 @@ in
           mailer_port:       false
           mailer_encryption: ~
           mailer_auth_mode:  ~
+          mailer_dsn:  ~
 
           locale: en
           secret: ${secret}
