@@ -11,17 +11,15 @@
       lsof
       procs
       htop
-      bottom
 
       bc
-      zip
-      unzip
+      ouch
       curl
       fzf
       bashmount
       direnv
 
-      exa
+      eza
       ranger
       fd
       ripgrep
@@ -39,8 +37,6 @@
 
       git
       gitAndTools.delta
-
-      lnav
     ];
     variables = {
       EDITOR = "nvim";

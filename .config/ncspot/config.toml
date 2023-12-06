@@ -5,8 +5,6 @@ notify = true
 [keybindings]
 "]" = "seek +5000"
 "[" = "seek -5000"
-"Shift+l" = "seek +60000"
-"Shift+h" = "seek -60000"
 "Ctrl+f" = "move down 10"
 "Ctrl+b" = "move up 10"
 n = "next"

@@ -12,12 +12,13 @@
     ../../modules/bluetooth.nix
     ../../modules/laptop.nix
     ../../modules/zfs.nix
+    ../../modules/nvidia.nix
   ];
 
   # erase your darlings
   environment.etc = {
     nixos.source = "/persistent/etc/nixos";
-    "NetworkManager/system-connections".source = "/persistent/etc/NetworkManager/system-connections";
+    # "NetworkManager/system-connections".source = "/persistent/etc/NetworkManager/system-connections";
     adjtime.source = "/persistent/etc/adjtime";
     machine-id = {
       source = "/persistent/etc/machine-id";
@@ -32,12 +33,10 @@
     # rollback results in sudo lectures after each reboot
     Defaults lecture = never
   '';
+  services.logind.lidSwitchExternalPower = "ignore";
 
   boot = {
-    # extraModprobeConfig = ''
-    #   blacklist nouveau
-    #   options nouveau modeset=0
-    # '';
+    # blacklistedKernelModules = [ "nouveau" ];
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -52,9 +51,6 @@
     };
     hostId = "5f87931e";
     hostName = "orual";
-    hosts = {
-      "104.199.65.124" = [ "ap-gew4.spotify.com" ];
-    };
     networkmanager.enable = true;
   };
 
@@ -66,7 +62,9 @@
     keepassxc
     innernet
     kanshi
-    signal-desktop
+    vscode
+    azure-cli
+    azure-functions-core-tools
   ];
 
   virtualisation.docker = {
@@ -78,6 +76,10 @@
   };
   # netmaker
   environment.etc.hosts.mode = "0644";
+  networking.hosts = {
+    "159.100.245.195" = [ "headscale.lari.systems" ];
+  };
+
 
   services = {
     openssh.enable = true;
@@ -99,6 +101,11 @@
     tailscale = {
       enable = true;
     };
+  printing.enable = true;
+  avahi.enable = true;
+  avahi.nssmdns = true;
+  # for a WiFi printer
+  avahi.openFirewall = true;
   };
 
   system.stateVersion = "21.05";

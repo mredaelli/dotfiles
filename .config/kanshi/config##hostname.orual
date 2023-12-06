@@ -1,14 +1,13 @@
-profile {
+profile road {
  output eDP-1 scale 1 mode 1920x1080
 }
 
-profile {
-	output eDP-1 mode 1920x1080 position 0,1000 scale 1.15
-	output HDMI-A-1 position 1669,600 scale 1.5
+profile multihead {
+	output "LG Electronics LG HDR 4K 0x0000B732" mode 3840x2160@30Hz position 2261,330 scale 1.5
+	output "Samsung Electric Company S24E650 0x00007D43" mode 1920x1080@50Hz position 1181,190 transform normal transform 90
+	output eDP-1 disable
 }
 
-profile {
-	output eDP-1 mode 1920x1080 position 0,1000 scale 1.15
-	output HDMI-A-1 position 1669,600 scale 1.5
-  output DP-2 position 4229,680 transform normal transform 90
+profile desk {
+	output 'LG Electronics LG HDR 4K 0x0000B732' mode 3840x2160@30Hz position 3000,0 scale 1.5
 }

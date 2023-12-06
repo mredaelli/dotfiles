@@ -161,7 +161,27 @@ return {
 			vim.cmd([[command! FormatDisable lua FormatToggle(true)]])
 			vim.cmd([[command! FormatEnable lua FormatToggle(false)]])
 
-			lspconfig.pyright.setup({ on_attach = on_attach, capabilities = capabilities })
+                        local pyright_opts = {
+                          single_file_support = true,
+                          settings = {
+                            pyright = {
+                              disableLanguageServices = false,
+                              disableOrganizeImports = false
+                            },
+                            python = {
+                              analysis = {
+                                autoImportCompletions = true,
+                                autoSearchPaths = true,
+                                diagnosticMode = "openFilesOnly", -- openFilesOnly, workspace
+                                typeCheckingMode = "basic", -- off, basic, strict
+                                useLibraryCodeForTypes = false
+                              }
+                            }
+                          },
+                          capabilities = capabilities,
+                          on_attach = on_attach
+                        }
+			lspconfig.pyright.setup(pyright_opts)
 			lspconfig.marksman.setup({ on_attach = on_attach, capabilities = capabilities })
 			lspconfig.tsserver.setup({
 				capabilities = capabilities,

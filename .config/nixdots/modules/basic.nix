@@ -8,16 +8,6 @@
       imagemagick
       restic
       bashmount
-
-      so
-      gitui
-
-      mu
-      aerc
-      w3m
-      urlscan
-      ripmime
-      isync
     ];
   };
 }

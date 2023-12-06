@@ -25,15 +25,11 @@
         export XCURSOR_THEME=Qogir-dark
         export XDG_CURRENT_DESKTOP=sway
         export XDG_SESSION_TYPE=wayland
-        export XWAYLAND_NO_GLAMOR=1
+        # export XWAYLAND_NO_GLAMOR=1
         export _JAVA_AWT_WM_NONREPARENTING=1
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-theme $XCURSOR_THEME || true
         ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-size $XCURSOR_SIZE || true
-      '' + (if config.workstation.nvidia then
-        ''
-          export WLR_NO_HARDWARE_CURSORS=1 
-          #export WLR_RENDERER=vulkan
-        '' else "");
+      '';
       extraPackages = with pkgs;
         [
           swaylock-fancy

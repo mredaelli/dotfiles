@@ -1,7 +1,7 @@
 {
     "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["custom/media"],
-    "modules-right": ["idle_inhibitor", "pulseaudio", "network", "cpu", "memory", "disk", "temperature", "backlight", "battery", "clock","custom/notification", "tray"],
+    "modules-center": ["mpris"],
+    "modules-right": ["idle_inhibitor", "pulseaudio", "wireplumber", "network", "cpu", "memory", "disk", "temperature", "backlight", "battery", "clock","custom/notification", "tray"],
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
@@ -15,28 +15,43 @@
     "tray": {
         "spacing": 10
     },
+    "mpris": {
+        "format": "{player_icon} {status_icon} {dynamic}",
+        "dynamic-len": 80,
+        "dynamic-importance-order":["title", "artist", "position", "length","album"],
+        "status-icons": {
+          "paused": " ",
+          "stopped": "⏹",
+          "playing": " ",
+        },
+        "player-icons": {
+          "default": "",
+          "ncspot": "",
+          "firefox":""
+        },
+    },
     "clock": {
        "format":"{:%m-%dT%H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}",
-        "on-click":"kitty --class ikhal ikhal"
+        "on-click":"wezterm start --class ikhal ikhal"
     },
     "disk": {
         "format": "{percentage_free}% ",
         "tooltip-format": "{percentage_free}% ({free}) remaining on {path}",
-        "on-click": "kitty dua ~ i",
+        "on-click": "wezterm start dua ~ i",
         "path": "/home",
     },
     "cpu": {
         "interval":5,
         "format": "{usage}% {load} ",
-        "on-click": "kitty htop",
+        "on-click": "wezterm start htop",
         "tooltip": false
     },
     "memory": {
         "interval":5,
         "format": "{}% ",
-        "on-click": "kitty htop",
+        "on-click": "wezterm start htop",
     },
     "temperature": {
         "critical-threshold": 80,
@@ -66,7 +81,7 @@
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "on-click-middle": "kitty nmtui"
+        "on-click-middle": "wezterm start nmtui"
     },
     "pulseaudio": {
         "format": "{volume}% {icon} {format_source}",
@@ -86,19 +101,6 @@
         },
         "on-click": "pavucontrol"
     },
-    "custom/media": {
-        "format": "{icon}{}",
-        "return-type": "json",
-        "format-icons": {
-          "Playing": " ",
-          "Paused": " ",
-        },
-        "max-length":70,
-        "exec": "playerctl metadata --format '{\"text\": \"{{markup_escape(title)}}\", \"tooltip\": \"{{markup_escape(playerName)}} : {{markup_escape(title)}}\", \"alt\": \"{{markup_escape(status)}}\", \"class\": \"{{markup_escape(status)}}\"}' -F",
-        "on-click": "playerctl play-pause",
-        "on-click-right": "playerctl next",
-        "on-click-middle": "playerctl previous",
-    },
     "custom/notification": {
         "tooltip": false,
         "format": "{icon}",
@@ -113,5 +115,10 @@
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw",
         "escape": true
-    }
+    },"wireplumber": {
+    "format": "{volume}% {icon}",
+    "format-muted": "",
+    "on-click": "helvum",
+    "format-icons": ["", "", ""]
+}
 }

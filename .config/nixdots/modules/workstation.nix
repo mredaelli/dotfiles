@@ -7,8 +7,7 @@
 let
   packages = with pkgs;
     [
-      kitty
-      unstable.wezterm
+      wezterm
       libnotify
       pavucontrol
       imv
@@ -18,7 +17,6 @@ let
       mpv
       transmission-gtk
       rmlint
-      i3status-rust
       alsaUtils
       matcha-gtk-theme
       qogir-icon-theme
@@ -35,13 +33,13 @@ let
     calibre
     nextcloud-client
     pass
-    pass-secret-service
-    visidata
     fx
   ];
-    devPackages = with pkgs;
-  [
-  nix-direnv
+  devPackages = with pkgs; [
+    so
+    cht-sh
+    gitui
+    nix-direnv
     git-trim
     yamllint
     vim-vint
@@ -49,15 +47,14 @@ let
     shfmt
     sumneko-lua-language-server
     stylua
-    ]
-    ++ (with pkgs.nodePackages;
-    [
+  ]
+  ++ (with pkgs.nodePackages; [
     vim-language-server
     bash-language-server
-    ]);
-    in
-    {
-    options.workstation = {
+  ]);
+in
+{
+  options.workstation = {
     full = lib.mkOption {
       type = lib.types.bool;
       default = true;
@@ -81,7 +78,7 @@ let
 
     fonts = {
       fontDir.enable = true;
-      fonts = with pkgs; [
+      packages = with pkgs; [
         noto-fonts
         gentium
         (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
@@ -111,4 +108,4 @@ let
       ];
     };
   };
-  }
+}
