@@ -80,6 +80,8 @@ in
       packages = with pkgs; [
         noto-fonts
         gentium
+        alegreya
+        corefonts
         (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
       ];
     };

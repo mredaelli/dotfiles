@@ -10,6 +10,7 @@ in
       options = "--delete-older-than 10d";
     };
     settings.auto-optimise-store = true;
+    settings.experimental-features = [ "nix-command" "flakes" ];
   };
 
   documentation = {
@@ -34,9 +35,9 @@ in
     pulseaudio = true;
 
     packageOverrides = pkgs: {
-      unstable = import <nixos-unstable> {
-        config = config.nixpkgs.config;
-      };
+      #unstable = import <nixos-unstable> {
+      #  config = config.nixpkgs.config;
+      #};
       jre = pkgs.jdk11;
       fenix = import (fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz") { };
     };

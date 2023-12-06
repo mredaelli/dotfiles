@@ -48,19 +48,19 @@
     networkmanager.enable = true;
     firewall.enable = false;
     wireguard.interfaces = {
-      wg0 = {
-        ips = [ "10.0.25.90/24" ];
-        listenPort = 51820;
-        privateKeyFile = "/persistent/wireguard/private";
-        peers = [
-          {
-            publicKey = "VTaS8M1bema9RmA0RYYOiy1HiNPDVSCENBN/iRXeuUw=";
-            allowedIPs = [ "10.0.25.0/24" ];
-            endpoint = "88.198.194.32:51820";
-            persistentKeepalive = 25;
-          }
-        ];
-      };
+      #   wg0 = {
+      #     ips = [ "10.0.25.90/24" ];
+      #     listenPort = 51820;
+      #     privateKeyFile = "/persistent/wireguard/private";
+      #     peers = [
+      #       {
+      #         publicKey = "VTaS8M1bema9RmA0RYYOiy1HiNPDVSCENBN/iRXeuUw=";
+      #         allowedIPs = [ "10.0.25.0/24" ];
+      #         endpoint = "88.198.194.32:51820";
+      #         persistentKeepalive = 25;
+      #       }
+      #     ];
+      #   };
     };
   };
 
@@ -72,6 +72,11 @@
   };
 
   services = {
+    avahi = {
+      enable = true;
+      nssmdns = true;
+      openFirewall = true;
+    };
     openssh = {
       enable = true;
       permitRootLogin = "no";
@@ -114,11 +119,10 @@
 
     printing = {
       enable = true;
-      drivers = [ pkgs.brlaser pkgs.brgenml1lpr pkgs.brgenml1cupswrapper ];
+      drivers = [ pkgs.cups-brother-hl3140cw ];
     };
     fstrim.enable = true;
   };
-
 
   system.stateVersion = "18.03";
 }
