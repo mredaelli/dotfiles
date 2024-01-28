@@ -56,23 +56,18 @@
 
   environment.systemPackages = with pkgs; [
     jp
-    jesec-rtorrent
-    flood
     wally-cli
-    keepassxc
-    innernet
-    kanshi
     vscode
-    azure-cli
-    azure-functions-core-tools
   ];
 
   virtualisation.docker = {
     enable = true;
+    storageDriver = "zfs";
     autoPrune = {
       enable = true;
       flags = [ "until=240h" ];
     };
+    listenOptions = [ "/run/docker.sock" "0.0.0.0:2376" ];
   };
   # netmaker
   environment.etc.hosts.mode = "0644";
@@ -100,12 +95,13 @@
     tailscale = {
       enable = true;
     };
-  printing.enable = true;
-  avahi.enable = true;
-  avahi.nssmdns = true;
-  # for a WiFi printer
-  avahi.openFirewall = true;
+    printing.enable = true;
+    avahi.enable = true;
+    avahi.nssmdns = true;
+    # for a WiFi printer
+    avahi.openFirewall = true;
   };
+  programs.nix-ld.enable = true;
 
   system.stateVersion = "21.05";
 }

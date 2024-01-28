@@ -36,8 +36,13 @@ extract = [
 	{ exec = 'unar "%1"', desc = "Extract here", for = "windows" },
 ]
 play = [
-	{ exec = 'mpv "$@"', orphan = true, for = "unix" },
-	{ exec = 'mpv "%1"', orphan = true, for = "windows" },
+	{ exec = 'mpv "$@"', orphan = true, for = "unix", desc = "Play in mpv in background" },
+	{ exec = 'mpv "%1"', orphan = true, for = "windows", desc = "Play in mpv in background" },
+	{ exec = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info", for = "unix" },
+]
+play_block = [
+	{ exec = 'mpv "$@"', block = true, for = "unix", desc = "Play in mpv in foreground" },
+	{ exec = 'mpv "%1"', block = true, for = "windows", desc = "Play in mpv in foreground" },
 	{ exec = '''mediainfo "$1"; echo "Press enter to exit"; read''', block = true, desc = "Show media info", for = "unix" },
 ]
 
@@ -48,7 +53,7 @@ rules = [
 	{ mime = "text/*",  use = [ "edit", "reveal" ] },
 	{ mime = "image/*", use = [ "open", "reveal" ] },
 	{ mime = "video/*", use = [ "play", "reveal" ] },
-	{ mime = "audio/*", use = [ "play", "reveal" ] },
+	{ mime = "audio/*", use = [ "play_block", "play", "reveal" ] },
 	{ mime = "inode/x-empty", use = [ "edit", "reveal" ] },
 
 	{ mime = "application/json", use = [ "edit", "reveal" ] },

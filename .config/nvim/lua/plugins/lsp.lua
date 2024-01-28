@@ -5,16 +5,14 @@ end
 _G.formatting = function()
 	if not vim.g[string.format("format_disabled_%s", vim.bo.filetype)] then
 		local fo = vim.g[string.format("format_options_%s", vim.bo.filetype)] or {}
-		fo["async"] = false
 		vim.lsp.buf.format(fo, 5000)
 	end
 end
 
-
 local on_attach = function(client, bufnr)
-    local map = function(mode, key, result, noremap)
-            vim.keymap.set(mode, key, result, { noremap = noremap or true, silent = true, buffer=bufnr  })
-    end
+	local map = function(mode, key, result, noremap)
+		vim.keymap.set(mode, key, result, { noremap = noremap or true, silent = true, buffer = bufnr })
+	end
 	local msg = "LSP " .. client.name
 	if client.server_capabilities.documentFormattingProvider then
 		msg = msg .. " fmt"
@@ -161,26 +159,26 @@ return {
 			vim.cmd([[command! FormatDisable lua FormatToggle(true)]])
 			vim.cmd([[command! FormatEnable lua FormatToggle(false)]])
 
-                        local pyright_opts = {
-                          single_file_support = true,
-                          settings = {
-                            pyright = {
-                              disableLanguageServices = false,
-                              disableOrganizeImports = false
-                            },
-                            python = {
-                              analysis = {
-                                autoImportCompletions = true,
-                                autoSearchPaths = true,
-                                diagnosticMode = "openFilesOnly", -- openFilesOnly, workspace
-                                typeCheckingMode = "basic", -- off, basic, strict
-                                useLibraryCodeForTypes = false
-                              }
-                            }
-                          },
-                          capabilities = capabilities,
-                          on_attach = on_attach
-                        }
+			local pyright_opts = {
+				single_file_support = true,
+				settings = {
+					pyright = {
+						disableLanguageServices = false,
+						disableOrganizeImports = false,
+					},
+					python = {
+						analysis = {
+							autoImportCompletions = true,
+							autoSearchPaths = true,
+							diagnosticMode = "openFilesOnly", -- openFilesOnly, workspace
+							typeCheckingMode = "basic", -- off, basic, strict
+							useLibraryCodeForTypes = false,
+						},
+					},
+				},
+				capabilities = capabilities,
+				on_attach = on_attach,
+			}
 			lspconfig.pyright.setup(pyright_opts)
 			lspconfig.marksman.setup({ on_attach = on_attach, capabilities = capabilities })
 			lspconfig.tsserver.setup({
@@ -284,7 +282,7 @@ return {
 				end,
 			},
 			{
-				"jose-elias-alvarez/null-ls.nvim",
+				"nvimtools/none-ls.nvim",
 				config = function()
 					local null_ls = require("null-ls")
 					local h = require("null-ls.helpers")
@@ -311,7 +309,8 @@ return {
 							null_ls.builtins.diagnostics.shellcheck,
 							null_ls.builtins.formatting.shfmt,
 							null_ls.builtins.diagnostics.flake8,
-							null_ls.builtins.formatting.black,
+							null_ls.builtins.formatting.ruff,
+							null_ls.builtins.formatting.ruff_format,
 							null_ls.builtins.formatting.isort,
 							null_ls.builtins.diagnostics.yamllint,
 							null_ls.builtins.formatting.prettier.with({
