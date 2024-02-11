@@ -30,7 +30,7 @@
 
       zoxide
       starship
-      any-nix-shell
+      nix-your-shell
 
       neovim
       nixpkgs-fmt
@@ -48,7 +48,7 @@
     fish = {
       enable = true;
       promptInit = ''
-        any-nix-shell fish --info-right | source
+        nix-your-shell fish | source
       '';
     };
     bash.enableCompletion = true;

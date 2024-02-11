@@ -11,6 +11,7 @@ in
     };
     settings.auto-optimise-store = true;
     settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.trusted-users = [ "root" "turing" ];
   };
 
   documentation = {
