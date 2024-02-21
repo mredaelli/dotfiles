@@ -60,11 +60,22 @@ in
     };
   };
 
+
   config = {
     nix.extraOptions = ''
       keep-outputs = true
       keep-derivations = true
     '';
+
+    xdg.mime.defaultApplications = {
+      "application/pdf" = "org.pwmt.zathura.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "writer.desktop";
+      "application/vnd.oasis.opendocument.text" = "writer.desktop";
+      "image/jpg" = "imv.desktop";
+      "image/jpeg" = "imv.desktop";
+      "image/gif" = "imv.desktop";
+      "image/webp" = "imv.desktop";
+    };
 
     environment = {
       pathsToLink = [
