@@ -1,35 +1,12 @@
 [user]
     email=massimo@typish.io
-	name=Massimo Redaelli
+	  name=Massimo Redaelli
      
-[core]
-    pager = delta
-    excludesfile = ~/.gitignore_global
-
-[interactive]
-  diffFilter = delta --color-only
-
-[delta]
-    navigate = true  # use n and N to move between diff sections
-    plus-style="syntax #012800" 
-    minus-style="normal #340001"
-
-[diff]
-  colorMoved = default
-
-[push]
-    autoSetupRemote = true
-
-[merge]
-    tool = vim_mergetool
-    conflictstyle = diff3
-
-[mergetool "vim_mergetool"]
-    cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
-    trustExitCode = true
+[branch]
+    sort = -committerdate
 
 [color]
-	ui = true
+  	ui = true
 
 [color "branch"]
     current = yellow reverse
@@ -41,23 +18,66 @@
     changed = green
     untracked = red
 
-[status]
-	submodulesummary = 1
-
-[includeIf "gitdir:~/src/lari/"]
-	path = src/lari/lari.gitconfig
-
-[sendemail]
-	smtpserver = smtp.fastmail.com
-	smtpuser = massimo@typish.io
-	smtpencryption = tls
-	smtpserverport = 587
+[core]
+    pager = delta
+    excludesfile = ~/.gitignore_global
+    autocrlf = input
+    safecrlf = true
 
 [credential]
     helper = libsecret
 
 [commit]
-	verbose = true
+   	verbose = true
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    plus-style="syntax #012800" 
+    minus-style="normal #340001"
+    features = decorations  # line numbers
+
+[diff]
+	submodule = log
+  colorMoved = default
+  algorithm = histogram
+
+[interactive]
+    diffFilter = delta --color-only
+
+[log]
+    date = iso
+
+[merge]
+    tool = vim_mergetool
+    conflictstyle = zdiff3
+
+[mergetool "vim_mergetool"]
+    cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+    trustExitCode = true
+
+[pull]
+	rebase = true
+
+[push]
+	  recurseSubmodules = on-demand
+    autoSetupRemote = true
+    followtags = true
+
+[rebase]
+  	autoStash = true
+    autosquash = true
+
+[sendemail]
+	  smtpserver = smtp.fastmail.com
+	  smtpuser = massimo@typish.io
+	  smtpencryption = tls
+	  smtpserverport = 587
+
+[status]
+	submodulesummary = true
+
+[submodule]
+	recurse = true
 
 [url "https://github.com/"]
     insteadOf = gh:
@@ -65,18 +85,11 @@
     insteadOf = gist:
 [url "https://bitbucket.org/"]
     insteadOf = bb:
-[diff]
-	submodule = log
+[url "git@github.com:"]
+    insteadOf = "https://github.com/"
 
-
-[submodule]
-	recurse = 1
-[push]
-	recurseSubmodules = on-demand
-[pull]
-	rebase = true
-[rebase]
-	autoStash = true
+[includeIf "gitdir:~/src/lari/"]
+	path = src/lari/lari.gitconfig
 
 [alias]
     # https://blog.jez.io/cli-code-review/
