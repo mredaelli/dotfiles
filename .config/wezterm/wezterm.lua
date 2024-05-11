@@ -191,4 +191,14 @@ config.window_padding = {
 config.warn_about_missing_glyphs = false
 config.hide_mouse_cursor_when_typing = false
 
+config.ssh_domains = {
+	{
+		name = "hank",
+		remote_address = "hank",
+	},
+	{
+		name = "hunk",
+		remote_address = "hunk",
+	},
+}
 return config
