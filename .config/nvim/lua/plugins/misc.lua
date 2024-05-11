@@ -8,6 +8,21 @@ return {
 		end,
 	},
 
+	{
+		"michaelb/sniprun",
+		config = function()
+			local lsp_status = require("sniprun")
+			lsp_status.setup({
+				display = { "TerminalWithCode" },
+				selected_interpreters = { "Python3_fifo" },
+				repl_enable = { "Python3_fifo" },
+			})
+			vim.api.nvim_set_keymap("v", "s", "<Plug>SnipRun", { silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>s", "<Plug>SnipRunOperator", { silent = true })
+			vim.api.nvim_set_keymap("n", "<leader>ss", "<Plug>SnipRun", { silent = true })
+		end,
+	},
+
 	"antoinemadec/FixCursorHold.nvim",
 
 	"ThePrimeagen/refactoring.nvim",

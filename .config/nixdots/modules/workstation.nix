@@ -46,6 +46,7 @@ let
     shfmt
     sumneko-lua-language-server
     stylua
+    vimPlugins.sniprun
   ]
   ++ (with pkgs.nodePackages; [
     vim-language-server

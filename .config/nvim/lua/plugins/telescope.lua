@@ -5,7 +5,6 @@ return {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"nvim-lua/plenary.nvim",
 			"nvim-lua/popup.nvim",
-			"nvim-telescope/telescope-symbols.nvim",
 			"crispgm/telescope-heading.nvim",
 			"nvim-telescope/telescope-file-browser.nvim",
 		},
@@ -61,14 +60,12 @@ return {
   nnoremap <Leader>tc <cmd>Telescope commands<CR>
   nnoremap <Leader>tm <cmd>Telescope marks<CR>
   nnoremap <Leader>tt <cmd>Telescope treesitter<CR>
-  nnoremap <Leader>ts <cmd>Telescope symbols<CR>
   nnoremap <Leader>/ <cmd>Telescope current_buffer_fuzzy_find<CR>
   nnoremap <Leader>tT <cmd>Telescope current_buffer_tags<CR>
   nnoremap <Leader>q <cmd>Telescope quickfix<CR>
   nnoremap <Leader>l <cmd>Telescope loclist<CR>
   nnoremap <Leader>tH <cmd>Telescope help_tags<CR>
   nnoremap <Leader>tr <cmd>Telescope lsp_references<CR>
-  nnoremap <Leader>tS <cmd>Telescope lsp_workspace_symbols<CR>
   nnoremap <Leader>ta <cmd>Telescope lsp_code_actions<CR>
   nnoremap <Leader>t] <cmd>Telescope lsp_code_definitions<CR>
   nnoremap <Leader>e <cmd>Telescope diagnostics bufnr=0<CR>
