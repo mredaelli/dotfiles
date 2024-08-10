@@ -4,17 +4,18 @@ in
 {
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud26;
+    package = pkgs.nextcloud29;
     hostName = host;
     https = true;
     autoUpdateApps.enable = true;
     autoUpdateApps.startAt = "04:00:00";
     home = "/data/nextcloud";
-    enableBrokenCiphersForSSE = false;
+    settings = {
+      overwriteprotocol = "https";
+      default_phone_region = "CH";
+    };
 
     config = {
-      overwriteProtocol = "https";
-
       dbtype = "pgsql";
       dbuser = "nextcloud";
       dbhost = "/run/postgresql";

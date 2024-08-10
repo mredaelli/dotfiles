@@ -3,14 +3,15 @@
   services.postgresql = {
     enable = true;
     ensureDatabases = [ "wallabag" "nextcloud" ];
+    package = pkgs.postgresql_14;
     ensureUsers = [
       {
         name = "nextcloud";
-        ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
+        ensureDBOwnership = true;#ensurePermissions."DATABASE nextcloud" = "ALL PRIVILEGES";
       }
       {
         name = "wallabag";
-        ensurePermissions."DATABASE wallabag" = "ALL PRIVILEGES";
+        ensureDBOwnership = true;#ensurePermissions."DATABASE wallabag" = "ALL PRIVILEGES";
       }
     ];
   };

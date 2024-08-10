@@ -9,16 +9,15 @@
 
       ./postgres.nix
       ./nginx.nix
-      ../../modules/wallabag.nix
-      ./wallabag.nix
+      # ../../modules/wallabag.nix
+      ./shiori.nix
       ./miniflux.nix
       ./vaultwarden.nix
       ./nextcloud.nix
-      ./poems.nix
 
       # ./postfix.nix
       ./syncthing.nix
-      # ./searx.nix
+      ../../pgup.nix
     ];
 
   security.acme = {
@@ -27,7 +26,6 @@
   };
 
   boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2;
   boot.loader.grub.device = "/dev/sda";
 
   networking.hostName = "salsiccia";

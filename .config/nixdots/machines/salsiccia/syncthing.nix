@@ -1,32 +1,40 @@
 { config, pkgs, ... }:
-let dir = "/data/syncthing/data";
-in {
+let
+  dir = "/data/syncthing/data";
+  password = builtins.readFile /var/secrets/syncthing.pw;
+in
+{
   services.syncthing = {
     enable = true;
-      dataDir = dir;
-      configDir = "/data/syncthing/config";
-      overrideDevices = true;
-      overrideFolders = true;
+    dataDir = dir;
+    user = "nextcloud";
+    configDir = "/data/syncthing/config";
+    overrideDevices = true;
+    overrideFolders = true;
+    settings = {
       devices = {
-        "lightsong" = { id = "4K4M525-DTMUO2S-6BLRAWU-DW4PIRM-X5LUXJP-2R7G5IU-N7LHIM5-JPI5WAD"; };
-        "gimli" = { id = "K23RLID-SJQSJPD-ARXYHSY-2XFIKKV-KXUK4M3-VVM2PIY-GFTGBFK-2PNWYAX"; };
-                "tablet" = { id = "XL44HFN-ZVOEC4Y-333RP5A-ETT7LIH-K7U7TCP-JXDN67G-BOGSYUE-LWBZUQT"; };
+        "lightsong" = { id = "CUY27IF-2TJRXUG-T2O4VQA-LI33JLO-AH4IVF3-X6NANGF-RMSET4V-AR23RQI"; };
+        "boox" = { id = "PRY2SZN-IAZG7I7-3EHZXOU-63OYFCE-5WCLAFY-XL4EQLZ-JRO76US-JNPROQU"; };
       };
       folders = {
-        "Sync" = {
-          path = "${dir}/sync";
-          devices = [ "lightsong" "gimli" ];
-        };
         "kb" = {
-          path = "${dir}/kb";
-          devices = [ "lightsong" "gimli" "tablet"];
+          path = "${dir}/nextcloud/kb";
+          devices = [ "lightsong" "boox" ];
+        };
+        "boox" = {
+          path = "${dir}/nextcloud/boox";
+          devices = [ "boox" ];
         };
         "zotero" = {
-          path = "${dir}/zotero-tablet";
-          devices = [ "lightsong" "gimli" "tablet"];
+          path = "${dir}/nextcloud/zotero";
+          devices = [ "boox" ];
         };
       };
-
+      gui = {
+        user = "typish";
+        password = password;
+      };
+    };
   };
   services.nginx.virtualHosts."sync.typish.io" = {
     enableACME = true;
