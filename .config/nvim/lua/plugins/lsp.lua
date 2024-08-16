@@ -1,26 +1,8 @@
-FormatToggle = function(value)
-	vim.g[string.format("format_disabled_%s", vim.bo.filetype)] = value
-end
-
-_G.formatting = function()
-	if not vim.g[string.format("format_disabled_%s", vim.bo.filetype)] then
-		local fo = vim.g[string.format("format_options_%s", vim.bo.filetype)] or {}
-		vim.lsp.buf.format(fo, 5000)
-	end
-end
-
 local on_attach = function(client, bufnr)
 	local map = function(mode, key, result, noremap)
 		vim.keymap.set(mode, key, result, { noremap = noremap or true, silent = true, buffer = bufnr })
 	end
 	local msg = "LSP " .. client.name
-	if client.server_capabilities.documentFormattingProvider then
-		msg = msg .. " fmt"
-		vim.cmd([[augroup Format]])
-		vim.cmd([[autocmd! * <buffer>]])
-		vim.cmd([[autocmd BufWritePost <buffer> lua formatting()]])
-		vim.cmd([[augroup END]])
-	end
 
 	if client.server_capabilities.signatureHelpProvider then
 		require("lsp_signature").on_attach()
@@ -165,6 +147,7 @@ return {
 					pyright = {
 						disableLanguageServices = false,
 						disableOrganizeImports = false,
+						autoImportCompletion = true,
 					},
 					python = {
 						analysis = {
@@ -181,12 +164,25 @@ return {
 			}
 			lspconfig.pyright.setup(pyright_opts)
 			lspconfig.marksman.setup({ on_attach = on_attach, capabilities = capabilities })
+			lspconfig.denols.setup({
+				capabilities = capabilities,
+				-- on_attach = function(client)
+				-- 	client.server_capabilities.document_formatting = false
+				-- 	on_attach(client)
+				-- end,
+				on_attach = on_attach,
+				root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+				single_file_support = false,
+			})
+
 			lspconfig.tsserver.setup({
 				capabilities = capabilities,
 				on_attach = function(client)
 					client.server_capabilities.document_formatting = false
 					on_attach(client)
 				end,
+				root_dir = lspconfig.util.root_pattern("package.json"),
+				single_file_support = false,
 			})
 
 			lspconfig.angularls.setup({
@@ -238,12 +234,38 @@ return {
 			lspconfig.rust_analyzer.setup({ on_attach = on_attach, capabilities = capabilities })
 
 			lspconfig.bashls.setup({ on_attach = on_attach, capabilities = capabilities })
+			-- lspconfig.statix.setup({ on_attach = on_attach, capabilities = capabilities })
+			lspconfig.nixd.setup({ on_attach = on_attach, capabilities = capabilities })
+			-- lspconfig.nil_ls.setup({ on_attach = on_attach, capabilities = capabilities })
+			lspconfig.bashls.setup({ on_attach = on_attach, capabilities = capabilities })
+			lspconfig.yamlls.setup({ on_attach = on_attach, capabilities = capabilities })
+			lspconfig.eslint.setup({ on_attach = on_attach, capabilities = capabilities })
 		end,
 		dependencies = {
 			"nvim-lua/lsp_extensions.nvim",
 			"kosayoda/nvim-lightbulb",
 			"onsails/lspkind-nvim",
 			"ray-x/lsp_signature.nvim",
+			{
+				"stevearc/conform.nvim",
+				opts = {
+					formatters_by_ft = {
+						-- lua = { "stylua" },
+						python = { "ruff_organize_imports", "ruff_format" },
+						rust = { "rustfmt" },
+						bash = { "shfmt" },
+						javascript = { "prettierd", "prettier", stop_after_first = true },
+						typescript = { "prettierd", "prettier", stop_after_first = true },
+						html = { "prettierd", "prettier", stop_after_first = true },
+						json = { "prettierd", "prettier", stop_after_first = true },
+					},
+					format_on_save = {
+						timeout_ms = 1000,
+						async = true,
+						lsp_format = "fallback",
+					},
+				},
+			},
 			{
 				"nvim-lua/lsp-status.nvim",
 				config = function()
@@ -279,59 +301,6 @@ return {
 					}
 					-- MetalsConfig.capabilities = capabilities
 					MetalsConfig.on_attach = on_attach
-				end,
-			},
-			{
-				"nvimtools/none-ls.nvim",
-				config = function()
-					local null_ls = require("null-ls")
-					local h = require("null-ls.helpers")
-					local methods = require("null-ls.methods")
-
-					local FORMATTING = methods.internal.FORMATTING
-
-					local pandoc = h.make_builtin({
-						name = "pandoc",
-						method = FORMATTING,
-						filetypes = { "markdown" },
-						generator_opts = {
-							command = "mkdownfmt",
-							to_stdin = true,
-						},
-						factory = h.formatter_factory,
-					})
-					null_ls.setup({
-						on_attach = on_attach,
-						sources = {
-							null_ls.builtins.formatting.stylua,
-							null_ls.builtins.formatting.nixpkgs_fmt,
-							null_ls.builtins.diagnostics.statix,
-							null_ls.builtins.diagnostics.shellcheck,
-							null_ls.builtins.formatting.shfmt,
-							null_ls.builtins.diagnostics.flake8,
-							null_ls.builtins.formatting.ruff,
-							null_ls.builtins.formatting.ruff_format,
-							null_ls.builtins.formatting.isort,
-							null_ls.builtins.diagnostics.yamllint,
-							null_ls.builtins.formatting.prettier.with({
-								filetypes = { "html", "json", "yaml", "javascript", "typescript" },
-							}),
-							null_ls.builtins.formatting.eslint,
-							null_ls.builtins.formatting.elm_format,
-							null_ls.builtins.code_actions.refactoring,
-							null_ls.builtins.diagnostics.alex,
-							null_ls.builtins.diagnostics.proselint,
-							pandoc,
-							-- null_ls.builtins.completion.spell,
-							-- null_ls.builtins.formatting.autopep8,
-							-- null_ls.builtins.formatting.yapf,
-							-- null_ls.builtins.formatting.scalafmt,
-							-- null_ls.builtins.formatting.rustfmt,
-							-- null_ls.builtins.formatting.cbfmt
-						},
-						update_in_insert = false,
-						debounce = 2000,
-					})
 				end,
 			},
 		},

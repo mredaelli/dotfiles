@@ -8,10 +8,11 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "ahci" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
+  boot.kernelModules = [ "kvm-intel" "xe" ];
   boot.extraModulePackages = [ ];
+  boot.kernelParams = ["i915.force_probe:!7d55" "xe.force_probe:7d55"];
 
   fileSystems."/" =
     { device = "rpool/enc/local/root";
@@ -51,10 +52,14 @@
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/0662-7545";
+    { device = "/dev/disk/by-uuid/9691-07C7";
       fsType = "vfat";
+      options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  swapDevices = [{ device = "/dev/sda2"; }];
+  swapDevices = [];
+
+  nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
 }

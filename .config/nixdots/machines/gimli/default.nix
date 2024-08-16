@@ -10,8 +10,22 @@
     ../../modules/bluetooth.nix
     ../../modules/laptop.nix
     ../../modules/zfs.nix
-    "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/lenovo/thinkpad/x1"
+    "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/lenovo/thinkpad/x1/12th-gen"
   ];
+
+
+  hardware.opengl = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver
+      libvdpau-va-gl
+      onevpl-intel-gpu
+    ];
+  };
+  boot.kernelPackages = pkgs.linuxPackages_6_8;
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
+
+  services.fprintd.enable = true;
 
   # erase your darlings
   environment.etc = {
@@ -65,8 +79,8 @@
     };
   };
 
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "turing" ];
+  # virtualisation.virtualbox.host.enable = true;
+  # users.extraGroups.vboxusers.members = [ "turing" ];
 
   programs = {
     adb.enable = true;
@@ -75,45 +89,8 @@
   services = {
     avahi = {
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
       openFirewall = true;
-    };
-
-    syncthing = {
-      enable = true;
-      user = "turing";
-      dataDir = "/home/turing/sync";
-      configDir = "/home/turing/sync/.config/syncthing";
-      overrideDevices = true;
-      overrideFolders = true;
-      settings = {
-        devices = {
-          "lightsong" = { id = "4K4M525-DTMUO2S-6BLRAWU-DW4PIRM-X5LUXJP-2R7G5IU-N7LHIM5-JPI5WAD"; };
-          "salsiccia" = { id = "BZVCRAX-RABVSZT-EI3G25R-JS3AB4G-PCSD75V-D5OKJM7-SSWNKFY-JWL3DQ6"; };
-          "tablet" = { id = "XL44HFN-ZVOEC4Y-333RP5A-ETT7LIH-K7U7TCP-JXDN67G-BOGSYUE-LWBZUQT"; };
-        };
-        folders = {
-          "Sync" = {
-            path = "/home/turing/sync";
-            devices = [ "lightsong" ];
-          };
-          "kb" = {
-            path = "/home/turing/carte/kb";
-            devices = [ "lightsong" ];
-          };
-          "zotero" = {
-            path = "/home/turing/Zotero/tablet";
-            devices = [ "lightsong" ];
-          };
-        };
-      };
-    };
-
-    cron = {
-      enable = true;
-      systemCronJobs = [
-        "0 */4 * * *      turing   . /etc/profile;DISPLAY=:0.0 time vdirsyncer sync > /tmp/davsync.log 2>&1"
-      ];
     };
 
     printing = {

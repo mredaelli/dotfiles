@@ -36,9 +36,9 @@ in
     pulseaudio = true;
 
     packageOverrides = pkgs: {
-      #unstable = import <nixos-unstable> {
-      #  config = config.nixpkgs.config;
-      #};
+      unstable = import <nixos-unstable> {
+        config = config.nixpkgs.config;
+      };
       jre = pkgs.jdk11;
       fenix = import (fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz") { };
     };
@@ -56,7 +56,7 @@ in
       settings = {
         PasswordAuthentication = false;
         PermitRootLogin = "no";
-      };  
+      };
     };
   };
 }

@@ -39,18 +39,21 @@ let
     cht-sh
     gitui
     nix-direnv
+    devenv
     git-trim
     yamllint
     vim-vint
     shellcheck
-    shfmt
+    nixd
     sumneko-lua-language-server
+    shfmt
     stylua
     vimPlugins.sniprun
   ]
   ++ (with pkgs.nodePackages; [
     vim-language-server
     bash-language-server
+    yaml-language-server
   ]);
 in
 {
