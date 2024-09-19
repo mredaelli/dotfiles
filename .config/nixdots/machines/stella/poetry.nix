@@ -16,6 +16,7 @@
           add_header Referrer-Policy "same-origin";
           add_header X-Content-Type-Options nosniff;
           add_header Strict-Transport-Security 'max-age=31536000; includeSubDomains; preload';
+          add_header Server-Timing "total;dur=$request_time";
         '';
       in
       {
