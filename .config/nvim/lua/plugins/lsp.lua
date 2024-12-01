@@ -175,7 +175,7 @@ return {
 				single_file_support = false,
 			})
 
-			lspconfig.tsserver.setup({
+			lspconfig.ts_ls.setup({
 				capabilities = capabilities,
 				on_attach = function(client)
 					client.server_capabilities.document_formatting = false
@@ -240,6 +240,11 @@ return {
 			lspconfig.bashls.setup({ on_attach = on_attach, capabilities = capabilities })
 			lspconfig.yamlls.setup({ on_attach = on_attach, capabilities = capabilities })
 			lspconfig.eslint.setup({ on_attach = on_attach, capabilities = capabilities })
+			lspconfig.beancount.setup({
+				init_options = { journal_file = os.getenv("BEANCOUNT_FILE") },
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
 		end,
 		dependencies = {
 			"nvim-lua/lsp_extensions.nvim",
@@ -250,7 +255,7 @@ return {
 				"stevearc/conform.nvim",
 				opts = {
 					formatters_by_ft = {
-						-- lua = { "stylua" },
+						lua = { "stylua" },
 						python = { "ruff_organize_imports", "ruff_format" },
 						rust = { "rustfmt" },
 						bash = { "shfmt" },
@@ -258,31 +263,13 @@ return {
 						typescript = { "prettierd", "prettier", stop_after_first = true },
 						html = { "prettierd", "prettier", stop_after_first = true },
 						json = { "prettierd", "prettier", stop_after_first = true },
+						beancount = { "bean-format" },
 					},
 					format_on_save = {
 						timeout_ms = 1000,
-						async = true,
 						lsp_format = "fallback",
 					},
 				},
-			},
-			{
-				"nvim-lua/lsp-status.nvim",
-				config = function()
-					local lsp_status = require("lsp-status")
-					local err = "😡"
-					local warn = "😱"
-					local info = "🙏"
-					local hint = "🙈"
-					lsp_status.config({
-						indicator_errors = err,
-						indicator_warnings = warn,
-						indicator_info = info,
-						indicator_hint = hint,
-						status_symbol = "",
-					})
-					lsp_status.register_progress()
-				end,
 			},
 			"folke/trouble.nvim",
 			{

@@ -8,6 +8,7 @@ return {
             "hrsh7th/cmp-cmdline",
             "L3MON4D3/LuaSnip",
             "saadparwaiz1/cmp_luasnip",
+            'crispgm/cmp-beancount',
         },
         config = function()
             vim.cmd([[set shortmess+=c]])
@@ -63,6 +64,12 @@ return {
                     -- { name = 'snippy' }, -- For snippy users.
                 }, {
                     { name = "buffer" },
+                    {
+                      name = 'beancount',
+                      option = {
+                        account = os.getenv("BEANCOUNT_FILE"),
+                      }
+                    }
                 }),
             })
 
