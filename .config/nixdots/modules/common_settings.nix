@@ -57,6 +57,7 @@ in
       settings = {
         PasswordAuthentication = false;
         PermitRootLogin = "no";
+        AcceptEnv = "VTE_VERSION TERM COLORTERM";
       };
     };
   };

@@ -180,7 +180,7 @@ config.inactive_pane_hsb = {
 }
 config.color_scheme = "catppuccin-mocha"
 config.set_environment_variables = {
-	VTE_VERSION = "6003", -- https://github.com/wez/wezterm/issues/115
+	-- VTE_VERSION = "6003", -- https://github.com/wez/wezterm/issues/115
 }
 config.window_padding = {
 	left = "0",
@@ -201,4 +201,7 @@ config.ssh_domains = {
 		remote_address = "hunk",
 	},
 }
+-- https://github.com/wez/wezterm/issues/5990
+config.front_end = "WebGpu"
+config.webgpu_power_preference = 'HighPerformance'
 return config
