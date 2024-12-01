@@ -33,6 +33,7 @@ in
 
   nixpkgs.config = baseConfig // {
     allowUnfree = true;
+    android_sdk.accept_license = true;
     pulseaudio = true;
 
     packageOverrides = pkgs: {

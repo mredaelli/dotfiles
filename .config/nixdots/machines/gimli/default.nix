@@ -27,6 +27,12 @@
 
   services.fprintd.enable = true;
 
+  nixpkgs.overlays = [
+    (self: super: {
+    neovim = super.neovim.override { withPython3 = true; extraPython3Packages = p: with p; [ beancount ]; };
+    })
+  ];
+
   # erase your darlings
   environment.etc = {
     nixos.source = "/persistent/etc/nixos";
