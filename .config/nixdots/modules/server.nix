@@ -51,7 +51,7 @@
         nix-your-shell fish | source
       '';
     };
-    bash.enableCompletion = true;
+    bash.completion.enable = true;
   };
 
   users = {

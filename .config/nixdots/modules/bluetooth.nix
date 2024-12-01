@@ -6,10 +6,7 @@
     ];
   };
 
-  hardware = {
-    opengl.driSupport32Bit = true;
-    bluetooth.enable = true;
-  };
+  hardware.bluetooth.enable = true;
 
   services = {
     blueman.enable = true;

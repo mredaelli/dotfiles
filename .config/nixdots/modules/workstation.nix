@@ -15,9 +15,9 @@ let
       tridactyl-native
       zathura
       mpv
-      transmission-gtk
+      transmission_4-gtk
       rmlint
-      alsaUtils
+      alsa-utils
       matcha-gtk-theme
       qogir-icon-theme
     ];

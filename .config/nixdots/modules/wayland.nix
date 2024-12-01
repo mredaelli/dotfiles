@@ -2,10 +2,7 @@
 {
   # remember to load the video card kernel module in hardware-configuration
 
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-  };
+  hardware.graphics.enable = true;
 
   # environment.noXlibs = true;
 
@@ -44,7 +41,7 @@
           xdg-desktop-portal-wlr
           xdg-desktop-portal
           xdg-desktop-portal-gtk
-          xdg_utils
+          xdg-utils
           imv
           kanshi
           firefox-wayland

@@ -14,15 +14,11 @@
   ];
 
 
-  hardware.opengl = {
-    enable = true;
-    extraPackages = with pkgs; [
-      intel-media-driver
-      libvdpau-va-gl
-      onevpl-intel-gpu
-    ];
-  };
-  boot.kernelPackages = pkgs.linuxPackages_6_8;
+  hardware.graphics.extraPackages = with pkgs; [
+    intel-media-driver
+    libvdpau-va-gl
+    vpl-gpu-rt
+  ];
   environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
 
   services.fprintd.enable = true;
