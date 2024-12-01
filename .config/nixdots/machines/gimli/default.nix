@@ -5,6 +5,7 @@
     ../../modules/common_settings.nix
     ../../modules/basic.nix
     ../../modules/wayland.nix
+    ../../modules/intel.nix
     ../../modules/workstation.nix
     ../../modules/user.nix
     ../../modules/bluetooth.nix
@@ -12,14 +13,6 @@
     ../../modules/zfs.nix
     "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/lenovo/thinkpad/x1/12th-gen"
   ];
-
-
-  hardware.graphics.extraPackages = with pkgs; [
-    intel-media-driver
-    libvdpau-va-gl
-    vpl-gpu-rt
-  ];
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
 
   services.fprintd.enable = true;
 
