@@ -43,8 +43,7 @@ let
     git-trim
     yamllint
     vim-vint
-    shellcheck
-    nixd
+    shfmt
     sumneko-lua-language-server
     shfmt
     stylua

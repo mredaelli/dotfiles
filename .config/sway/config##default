@@ -31,6 +31,25 @@ bindsym $mod+w exec rofi -show window
 bindsym $mod+n exec swaync-client -t -sw 
 bindsym $mod+Shift+n exec swaync-client --close-all
 
+set $monitor_laptop eDP-1
+set $monitor_lg "LG Electronics LG HDR 4K 0x0000B732"
+set $monitor_samsung "Samsung Electric Company S24E650 0x00007D43"
+bindswitch --reload --locked lid:on output $monitor_laptop disable
+bindswitch --reload --locked lid:off output $monitor_laptop enable
+
+set $mode_monitors Toggle monitor (0), (1), (2), (m)=all
+bindsym $mod+m mode "$mode_monitors"
+mode "$mode_monitors" {
+    bindsym 0 output "$monitor_laptop" toggle, mode "default"
+    bindsym 1 output "$monitor_lg" toggle, mode "default"
+    bindsym 2 output "$monitor_samsung" toggle, mode "default"
+    bindsym m output * enabled, mode "default"
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+
 # Music
 bindsym $mod+Alt+n exec playerctl next
 bindsym $mod+Alt+p exec playerctl previous
@@ -47,6 +66,7 @@ bindsym $mod+space scratchpad show
 
 
 bindsym $mod+Ctrl+r reload
+bindsym $mod+Ctrl+x restart
 bindsym $mod+Shift+Ctrl+r restart
 
 bindsym $mod+r split toggle
@@ -175,7 +195,6 @@ bar {
 }
 
 exec --no-startup-id nextcloud
-exec --no-startup-id grimshot
 exec --no-startup-id swaync
 exec --no-startup-id swayidle -w \
     timeout 300 'swaylock-fancy -p &' \
@@ -184,6 +203,8 @@ exec --no-startup-id swayidle -w \
     before-sleep 'swaylock-fancy'
 exec --no-startup-id wlsunset -l 47.3 -L 8.5
 exec --no-startup-id kanshi
-exec --no-startup-id pass-secret-service
+ 
+exec --no-startup-id dbus-sway-environment
+exec --no-startup-id  configure-gtk
 
 seat seat0 xcursor_theme Qogir-dark 40

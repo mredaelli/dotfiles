@@ -11,3 +11,12 @@ profile multihead {
 profile desk {
 	output 'LG Electronics LG HDR 4K 0x0000B732' mode 3840x2160@30Hz position 3000,0 scale 1.5
 }
+profile multihead1 {
+	output "Synaptics Inc Non-PnP 0x0000FD4E" mode 1920x1080 position 2261,330 scale 1
+	output "Samsung Electric Company S24E650 0x00007D43" mode 1920x1080@50Hz position 1181,190 transform normal transform 90
+	output eDP-1 disable
+}
+
+profile desk1 {
+	output 'Synaptics Inc Non-PnP 0x0000FD4E' mode 1920x1080 position 3000,0 scale 1
+}

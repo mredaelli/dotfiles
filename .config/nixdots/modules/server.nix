@@ -26,6 +26,7 @@
       bat
       sd
       dua
+      duf
       procs
 
       zoxide

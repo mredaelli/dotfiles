@@ -86,8 +86,8 @@
 [url "https://bitbucket.org/"]
     insteadOf = bb:
 
-[includeIf "gitdir:~/src/lari/"]
-	path = src/lari/lari.gitconfig
+[includeIf "gitdir:~/lari/"]
+	path = lari/lari.gitconfig
 
 [alias]
     # https://blog.jez.io/cli-code-review/

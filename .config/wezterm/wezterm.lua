@@ -17,7 +17,7 @@ end
 
 local shell = "fish"
 local function workspace(name, path)
-	local cwd = path or ("/home/turing/src/" .. name)
+	local cwd = path or ("/home/turing/lari/" .. name)
 	local action = {
 		cwd = cwd,
 		args = {
@@ -67,16 +67,16 @@ local key_tables = {
 	},
 }
 local keys = {
-	key("s", { SwitchToWorkspace = workspace("lari/crawlers/spiders") }, "CTRL|SUPER"),
-	key("c", { SwitchToWorkspace = workspace("lari/crawlers/crawlers") }, "CTRL|SUPER"),
-	key("f", { SwitchToWorkspace = workspace("lari/platform/frontend") }, "CTRL|SUPER"),
-	key("b", { SwitchToWorkspace = workspace("lari/platform/backend") }, "CTRL|SUPER"),
-	key("l", { SwitchToWorkspace = workspace("lari/crawlers/laricli") }, "CTRL|SUPER"),
-	key("a", { SwitchToWorkspace = workspace("lari/systems/server-admin") }, "CTRL|SUPER"),
-	key("A", { SwitchToWorkspace = workspace("lari/systems/admin") }, "CTRL|SUPER"),
-	key("e", { SwitchToWorkspace = workspace("lari/systems/ssh_everywhere") }, "CTRL|SUPER"),
-	key("q", { SwitchToWorkspace = workspace("lari/platform/automated-qa") }, "CTRL|SUPER"),
-	key("d", { SwitchToWorkspace = workspace("lari/platform/laridiff") }, "CTRL|SUPER"),
+	key("s", { SwitchToWorkspace = workspace("crawlers/spiders") }, "CTRL|SUPER"),
+	key("c", { SwitchToWorkspace = workspace("crawlers/crawlers") }, "CTRL|SUPER"),
+	key("f", { SwitchToWorkspace = workspace("platform/frontend") }, "CTRL|SUPER"),
+	key("b", { SwitchToWorkspace = workspace("platform/backend") }, "CTRL|SUPER"),
+	key("l", { SwitchToWorkspace = workspace("crawlers/laricli") }, "CTRL|SUPER"),
+	key("a", { SwitchToWorkspace = workspace("systems/server-admin") }, "CTRL|SUPER"),
+	key("A", { SwitchToWorkspace = workspace("systems/admin") }, "CTRL|SUPER"),
+	key("e", { SwitchToWorkspace = workspace("systems/ssh_everywhere") }, "CTRL|SUPER"),
+	key("q", { SwitchToWorkspace = workspace("platform/automated-qa") }, "CTRL|SUPER"),
+	key("d", { SwitchToWorkspace = workspace("platform/laridiff") }, "CTRL|SUPER"),
 	key("0", { SwitchToWorkspace = { name = "default" } }),
 	key(">", { SwitchWorkspaceRelative = 1 }),
 	key("<", { SwitchWorkspaceRelative = -1 }),
