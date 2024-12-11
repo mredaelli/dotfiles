@@ -45,6 +45,8 @@ let
     vim-vint
     shfmt
     sumneko-lua-language-server
+    nixd
+    nixfmt-classic
     shfmt
     stylua
     vimPlugins.sniprun

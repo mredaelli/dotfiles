@@ -28,107 +28,101 @@ let
     name = "configure-gtk";
     destination = "/bin/configure-gtk";
     executable = true;
-    text =
-      let
-        schema = pkgs.gsettings-desktop-schemas;
-        datadir = "${schema}/share/gsettings-schemas/${schema.name}";
-      in
-      ''
-        gnome_schema=org.gnome.desktop.interface
-        gsettings set $gnome_schema gtk-theme 'Matcha-dark-sea'
-        gsettings set $gnome_schema cursor-theme Qogir-dark
-        gsettings set $gnome_schema cursor-size 40
-      '';
+    text = ''
+      gnome_schema=org.gnome.desktop.interface
+      gsettings set $gnome_schema gtk-theme 'Matcha-dark-sea'
+      gsettings set $gnome_schema cursor-theme Qogir-dark
+      gsettings set $gnome_schema cursor-size 40
+    '';
   };
+  rofi-stuff = pkgs.rofi-wayland.override {
+    plugins = with pkgs; [
+      (rofi-calc.prev.rofi-calc.override {
+        rofi-unwrapped = prev.rofi-wayland-unwrapped;
+      })
+      rofi-emoji-wayland
+      rofi-top
+      rofi-bluetooth
+      rofi-power-menu
+      rofi-file-browser
+    ];
+  };
+in {
 
-in
-{
-  # remember to load the video card kernel module in hardware-configuration
-
-  hardware.graphics.enable = true;
-
-  # environment.noXlibs = true;
-
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  programs = {
-    sway = {
-      enable = true;
-      wrapperFeatures.gtk = true;
-      # wrapperFeatures.base = true;
-      # extraSessionCommands = ''
-      #   export GTK_THEME=Matcha-dark-sea
-      #   export MOZ_ENABLE_WAYLAND=1
-      #   export MOZ_WEBRENDER=1
-      #   export QT_QPA_PLATFORM="wayland;xcb"
-      #   export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-      #   export SDL_VIDEODRIVER=wayland
-      #   export XCURSOR_SIZE=40
-      #   export XCURSOR_THEME=Qogir-dark
-      #   export XDG_CURRENT_DESKTOP=sway
-      #   export XDG_SESSION_TYPE=wayland
-      #   # export XWAYLAND_NO_GLAMOR=1
-      #   export _JAVA_AWT_WM_NONREPARENTING=1
-      #   ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-theme $XCURSOR_THEME || true
-      #   ${pkgs.glib}/bin/gsettings set org.gnome.desktop.interface cursor-size $XCURSOR_SIZE || true
-      # '';
-      # extraPackages = with pkgs;
-      #   [
-      #     swaylock-fancy
-      #     swayidle
-      #     waybar
-      #     playerctl
-      #     wl-clipboard
-      #     sway-contrib.grimshot
-      #     swaynotificationcenter #mako
-      #     rofi-wayland
-      #     wlsunset
-      #     xdg-desktop-portal-wlr
-      #     xdg-desktop-portal
-      #     xdg-desktop-portal-gtk
-      #     xdg_utils
-      #     imv
-      #     kanshi
-      #     firefox-wayland
-      #     gsettings-desktop-schemas
-      #   ];
+  options.wayland = {
+    wm = lib.mkOption {
+      type = lib.types.enum [ "sway" "niri" ];
+      default = "sway";
+    };
+    launcher = lib.mkOption {
+      type = lib.types.enum [ "rofi" "albert" ];
+      default = "rofi";
     };
   };
-  environment.systemPackages = with pkgs; [
-    dbus # make dbus-update-activation-environment available in the path
-    dbus-sway-environment
-    configure-gtk
-    wayland
-    glib # gsettings
-    swaylock-fancy
-    swayidle
-    waybar
-    playerctl
-    wl-clipboard
-    sway-contrib.grimshot
-    swaynotificationcenter #mako
-    rofi-wayland
-    wlsunset
-    xdg_utils
-    imv
-    kanshi
-    firefox-wayland
-    # wdisplays # tool to configure displays
-  ];
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    # gtk portal needed to make gtk apps happy
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
 
-  boot.kernelParams = [ "console=tty1" ];
-  services.greetd = {
-    enable = true;
-    vt = 2;
-    settings = {
-      default_session = {
-        command = "${lib.makeBinPath [pkgs.greetd.tuigreet] }/tuigreet --time --cmd 'sway --unsupported-gpu'";
-        user = "greeter";
+  config = let
+    useSway = options.wayland.wm == "sway";
+    useNiri = options.wayland.wm == "niri";
+    useAlbert = options.wayland.launcher == "albert";
+    useRofi = options.wayland.launcher == "rofi";
+    sessionCmd = if useSway then "sway" else "niri-session";
+  in {
+    hardware.graphics.enable = true;
+
+    # environment.noXlibs = true;
+
+    environment.sessionVariables.NIXOS_OZONE_WL = "1";
+    security.pam.services.swaylock = { };
+    environment.systemPackages = with pkgs;
+      [
+        dbus # make dbus-update-activation-environment available in the path
+        dbus-sway-environment
+        configure-gtk
+        wayland
+        glib # gsettings
+
+        swaylock-fancy
+        swaylock-effects
+        swayidle
+        waybar
+        playerctl
+        wl-clipboard
+        sway-contrib.grimshot
+        swaynotificationcenter
+        wlsunset
+        xdg-utils
+        imv
+        kanshi
+        firefox-wayland
+        # wdisplays # tool to configure displays
+      ] ++ lib.optionals useSway [ sway ] ++ lib.optionals useNiri [ niri ]
+      ++ lib.optionals useRofi [ rofi-stuff ]
+      ++ lib.optionals useAlbert [ albert ];
+    xdg.portal = {
+      enable = true;
+      wlr.enable = true;
+      # gtk portal needed to make gtk apps happy
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      config.common.default = "*";
+    };
+
+    boot.kernelParams = [ "console=tty1" ];
+    # environment.etc."greetd/environments".text = ''
+    #     sway
+    #     niri-session
+    #     fish
+    #     bash
+    #   '';
+    services.greetd = {
+      enable = true;
+      vt = 2;
+      settings = {
+        default_session = {
+          command = "${
+              lib.makeBinPath [ pkgs.greetd.tuigreet ]
+            }/tuigreet --time --cmd '${sessionCmd}'";
+          user = "greeter";
+        };
       };
     };
   };
