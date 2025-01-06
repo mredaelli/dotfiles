@@ -1,5 +1,8 @@
 { config, pkgs, lib, options, ... }:
-{
+let
+  nixos-hardware =
+    builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; };
+in {
   imports = [
     ./hardware-configuration.nix
     <nixos-hardware/lenovo/thinkpad>
@@ -7,15 +10,35 @@
     ../../modules/common_settings.nix
     ../../modules/basic.nix
     ../../modules/wayland.nix
+    "${nixos-hardware}/common/cpu/intel/cpu-only.nix"
+    "${nixos-hardware}/common/gpu/intel"
+    <nixos-hardware/common/gpu/nvidia/disable.nix>
+    "${nixos-hardware}/common/pc/laptop/ssd"
+    "${nixos-hardware}/common/hidpi.nix"
+    # ../../modules/intel.nix
     ../../modules/workstation.nix
     ../../modules/user.nix
     ../../modules/bluetooth.nix
     ../../modules/laptop.nix
     ../../modules/zfs.nix
     # ../../modules/nvidia.nix
-    # <nixos-hardware/common/gpu/nvidia/disable.nix>
   ];
 
+  hardware.intelgpu.vaapiDriver = "intel-media-driver";
+  hardware.enableAllFirmware = true;
+  # power off NVIDIA
+  # hardware.bumblebee.enable = true;
+  # nixpkgs.overlays = [ # https://github.com/NixOS/nixpkgs/issues/319838
+  #    (self: super: {
+  #      bumblebee = super.bumblebee.override {
+  #        nvidia_x11_i686 = null;
+  #        libglvnd_i686 = null;
+  #      };
+  #      primus = super.primus.override {
+  #        primusLib_i686 = null;
+  #      };
+  #    })
+  # ];
 
   # erase your darlings
   environment.etc = {
@@ -37,6 +60,7 @@
   '';
   services.logind.lidSwitchExternalPower = "ignore";
   services.fprintd.enable = true;
+  services.fwupd.enable = true;
 
   boot = {
     # blacklistedKernelModules = [ "nouveau" ];
@@ -62,7 +86,6 @@
     networkmanager.enable = true;
   };
 
-
   environment.systemPackages = with pkgs; [
     jp
     wally-cli
@@ -71,6 +94,7 @@
     zoom-us
     teams-for-linux
     psst
+    devenv
   ];
 
   virtualisation.docker = {
@@ -93,41 +117,15 @@
     enable = true;
     extraBackends = [ pkgs.hplipWithPlugin ];
   };
-  
-  # Intel graphics
-  hardware.opengl.extraPackages = with pkgs; [
-    intel-media-driver
-    libvdpau-va-gl
-    onevpl-intel-gpu
-  ];
-  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; };
-
-  # power off NVIDIA
-  hardware.bumblebee.enable = true;
-  nixpkgs.overlays = [ # https://github.com/NixOS/nixpkgs/issues/319838
-     (self: super: {
-       bumblebee = super.bumblebee.override {
-         nvidia_x11_i686 = null;
-         libglvnd_i686 = null;
-       };
-       primus = super.primus.override {
-         primusLib_i686 = null;
-       };
-     })
-  ];
 
   services = {
-    zfs = {
-      autoScrub.enable = true;
-      trim.enable = true;
+    zfs.autoSnapshot = {
+      enable = true;
+      monthly = 3;
     };
     fstrim.enable = true;
-    thinkfan = {
-      enable = true;
-    };
-    tailscale = {
-      enable = true;
-    };
+    thinkfan = { enable = true; };
+    tailscale = { enable = true; };
     printing.enable = true;
     printing.drivers = [ pkgs.hplipWithPlugin ];
     avahi = {

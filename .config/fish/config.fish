@@ -6,7 +6,7 @@ if not functions -q fisher
 end
 
 alias du="du -h"
-alias df="df -h"
+alias df="duf"
 alias free="free -m"
 
 if type -q htop
