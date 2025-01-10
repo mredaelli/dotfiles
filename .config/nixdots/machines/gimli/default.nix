@@ -1,55 +1,65 @@
 { config, pkgs, options, lib, ... }:
-{
+let
+  nixos-hardware =
+    builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; };
+in {
   imports = [
     ./hardware-configuration.nix
     ../../modules/common_settings.nix
     ../../modules/basic.nix
     ../../modules/wayland.nix
-    ../../modules/intel.nix
     ../../modules/workstation.nix
     ../../modules/user.nix
     ../../modules/bluetooth.nix
     ../../modules/laptop.nix
     ../../modules/zfs.nix
-    "${builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; }}/lenovo/thinkpad/x1/12th-gen"
+    "${nixos-hardware}/common/cpu/intel/cpu-only.nix"
+    "${nixos-hardware}/common/gpu/intel"
+    "${nixos-hardware}/common/pc/laptop/ssd"
+    "${nixos-hardware}/common/hidpi.nix"
+    "${nixos-hardware}/lenovo/thinkpad/x1/12th-gen"
   ];
 
+  hardware.intelgpu.vaapiDriver = "intel-media-driver";
+  hardware.enableAllFirmware = true;
+  boot.kernelParams = [ "i915.force_probe=7d55" ];
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
+  };
+
+  wayland.wm = "sway";
+  #wayland.launcher = "albert";
+
   services.fprintd.enable = true;
+  services.fwupd.enable = true;
 
   nixpkgs.overlays = [
     (self: super: {
-    neovim = super.neovim.override { withPython3 = true; extraPython3Packages = p: with p; [ beancount ]; };
+      neovim = super.neovim.override {
+        withPython3 = true;
+        extraPython3Packages = p: with p; [ beancount ];
+      };
     })
   ];
 
   # erase your darlings
   environment.etc = {
     nixos.source = "/persistent/etc/nixos";
-    "NetworkManager/system-connections".source = "/persistent/etc/NetworkManager/system-connections";
+    "NetworkManager/system-connections".source =
+      "/persistent/etc/NetworkManager/system-connections";
     adjtime.source = "/persistent/etc/adjtime";
     machine-id.source = "/persistent/etc/machine-id";
   };
   systemd.tmpfiles.rules = [
     "L+ /var/lib/systemd/backlight - - - - /persistent/var/lib/systemd/backlight"
   ];
-  users.extraUsers.turing.hashedPasswordFile = "/persistent/etc/turing-password";
+  users.extraUsers.turing.hashedPasswordFile =
+    "/persistent/etc/turing-password";
   security.sudo.extraConfig = ''
     # rollback results in sudo lectures after each reboot
     Defaults lecture = never
   '';
-
-  boot = {
-    loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
-    };
-    initrd = {
-      postDeviceCommands = lib.mkAfter ''
-        zfs rollback -r rpool/enc/local/root@blank
-        zfs rollback -r rpool/enc/local/var@blank
-      '';
-    };
-  };
 
   virtualisation.docker.enable = true;
   networking = {
@@ -57,29 +67,35 @@
     hostId = "b93e7d6e";
     networkmanager.enable = true;
     firewall.enable = false;
-    wireguard.interfaces = {
-      #   wg0 = {
-      #     ips = [ "10.0.25.90/24" ];
-      #     listenPort = 51820;
-      #     privateKeyFile = "/persistent/wireguard/private";
-      #     peers = [
-      #       {
-      #         publicKey = "VTaS8M1bema9RmA0RYYOiy1HiNPDVSCENBN/iRXeuUw=";
-      #         allowedIPs = [ "10.0.25.0/24" ];
-      #         endpoint = "88.198.194.32:51820";
-      #         persistentKeepalive = 25;
-      #       }
-      #     ];
-      #   };
+    wg-quick.interfaces = {
+      wg0 = {
+        address = [ "10.0.25.90/24" ];
+        listenPort = 51820;
+        privateKeyFile = "/persistent/wireguard/private_box";
+        peers = [{
+          publicKey = "VTaS8M1bema9RmA0RYYOiy1HiNPDVSCENBN/iRXeuUw=";
+          allowedIPs = [ "10.0.25.0/24" ];
+          endpoint = "sella.dalv.it:51820";
+          persistentKeepalive = 25;
+        }];
+      };
+      wg1 = {
+        address = [ "10.13.13.5/24" ];
+        listenPort = 51821;
+        autostart = false;
+        dns = [ "10.8.6.4" ];
+        privateKeyFile = "/persistent/wireguard/private_vpn";
+        peers = [{
+          publicKey = "exFbOwx7z57P3QZhA8OgkNRe8LjORNbsI/qUMDILLRQ=";
+          allowedIPs = [ "0.0.0.0/0" "::/0" ];
+          endpoint = "152.67.64.161:5000";
+          persistentKeepalive = 25;
+        }];
+      };
     };
   };
 
-  # virtualisation.virtualbox.host.enable = true;
-  # users.extraGroups.vboxusers.members = [ "turing" ];
-
-  programs = {
-    adb.enable = true;
-  };
+  programs = { adb.enable = true; };
 
   services = {
     avahi = {
@@ -92,7 +108,6 @@
       enable = true;
       drivers = [ pkgs.cups-brother-hl3140cw ];
     };
-    fstrim.enable = true;
   };
 
   system.stateVersion = "18.03";

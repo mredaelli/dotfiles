@@ -37,9 +37,7 @@ let
   };
   rofi-stuff = pkgs.rofi-wayland.override {
     plugins = with pkgs; [
-      (rofi-calc.prev.rofi-calc.override {
-        rofi-unwrapped = prev.rofi-wayland-unwrapped;
-      })
+      (rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; })
       rofi-emoji-wayland
       rofi-top
       rofi-bluetooth
@@ -62,42 +60,44 @@ in {
 
   config = let
     useSway = options.wayland.wm == "sway";
-    useNiri = options.wayland.wm == "niri";
-    useAlbert = options.wayland.launcher == "albert";
-    useRofi = options.wayland.launcher == "rofi";
     sessionCmd = if useSway then "sway" else "niri-session";
+    sessions =
+      "${pkgs.niri}/share/wayland-sessions:${pkgs.sway}/share/wayland-sessions";
   in {
     hardware.graphics.enable = true;
 
     # environment.noXlibs = true;
-
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
     security.pam.services.swaylock = { };
-    environment.systemPackages = with pkgs;
-      [
-        dbus # make dbus-update-activation-environment available in the path
-        dbus-sway-environment
-        configure-gtk
-        wayland
-        glib # gsettings
+    environment.systemPackages = with pkgs; [
+      dbus # make dbus-update-activation-environment available in the path
+      dbus-sway-environment
+      configure-gtk
+      wayland
+      glib # gsettings
 
-        swaylock-fancy
-        swaylock-effects
-        swayidle
-        waybar
-        playerctl
-        wl-clipboard
-        sway-contrib.grimshot
-        swaynotificationcenter
-        wlsunset
-        xdg-utils
-        imv
-        kanshi
-        firefox-wayland
-        # wdisplays # tool to configure displays
-      ] ++ lib.optionals useSway [ sway ] ++ lib.optionals useNiri [ niri ]
-      ++ lib.optionals useRofi [ rofi-stuff ]
-      ++ lib.optionals useAlbert [ albert ];
+      swaylock-fancy
+      swaylock-effects
+      swayidle
+      waybar
+      playerctl
+      wl-clipboard
+      sway-contrib.grimshot
+      swaynotificationcenter
+      wlsunset
+      xdg-utils
+      imv
+      kanshi
+      firefox-wayland
+      # wdisplays # tool to configure displays
+
+      sway
+      rofi-stuff
+
+      niri
+      xwayland-satellite
+      albert
+    ];
     xdg.portal = {
       enable = true;
       wlr.enable = true;
@@ -107,12 +107,6 @@ in {
     };
 
     boot.kernelParams = [ "console=tty1" ];
-    # environment.etc."greetd/environments".text = ''
-    #     sway
-    #     niri-session
-    #     fish
-    #     bash
-    #   '';
     services.greetd = {
       enable = true;
       vt = 2;
@@ -120,7 +114,7 @@ in {
         default_session = {
           command = "${
               lib.makeBinPath [ pkgs.greetd.tuigreet ]
-            }/tuigreet --time --cmd '${sessionCmd}'";
+            }/tuigreet --time --cmd '${sessionCmd}' --remember-session --remember --user-menu --asterisks --sessions ${sessions}";
           user = "greeter";
         };
       };

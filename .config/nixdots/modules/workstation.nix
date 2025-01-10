@@ -1,26 +1,20 @@
-{ config
-, pkgs
-, options
-, lib
-, ...
-}:
+{ config, pkgs, options, lib, ... }:
 let
-  packages = with pkgs;
-    [
-      wezterm
-      libnotify
-      pavucontrol
-      imv
-      nitrogen
-      tridactyl-native
-      zathura
-      mpv
-      transmission_4-gtk
-      rmlint
-      alsa-utils
-      matcha-gtk-theme
-      qogir-icon-theme
-    ];
+  packages = with pkgs; [
+    wezterm
+    libnotify
+    pavucontrol
+    imv
+    nitrogen
+    tridactyl-native
+    zathura
+    mpv
+    transmission_4-gtk
+    rmlint
+    alsa-utils
+    matcha-gtk-theme
+    qogir-icon-theme
+  ];
   morePackages = with pkgs; [
     ncspot
     gthumb
@@ -33,38 +27,37 @@ let
     calibre
     nextcloud-client
     fx
+    tlrc
   ];
-  devPackages = with pkgs; [
-    so
-    cht-sh
-    gitui
-    nix-direnv
-    devenv
-    git-trim
-    yamllint
-    vim-vint
-    shfmt
-    sumneko-lua-language-server
-    nixd
-    nixfmt-classic
-    shfmt
-    stylua
-    vimPlugins.sniprun
-  ]
-  ++ (with pkgs.nodePackages; [
-    vim-language-server
-    bash-language-server
-    yaml-language-server
-  ]);
-in
-{
+  devPackages = with pkgs;
+    [
+      so
+      cht-sh
+      gitui
+      nix-direnv
+      devenv
+      git-trim
+      yamllint
+      vim-vint
+      shfmt
+      sumneko-lua-language-server
+      nixd
+      nixfmt-classic
+      shfmt
+      stylua
+      vimPlugins.sniprun
+    ] ++ (with pkgs.nodePackages; [
+      vim-language-server
+      bash-language-server
+      yaml-language-server
+    ]);
+in {
   options.workstation = {
     full = lib.mkOption {
       type = lib.types.bool;
       default = true;
     };
   };
-
 
   config = {
     nix.extraOptions = ''
@@ -74,7 +67,8 @@ in
 
     xdg.mime.defaultApplications = {
       "application/pdf" = "org.pwmt.zathura.desktop";
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" = "writer.desktop";
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document" =
+        "writer.desktop";
       "application/vnd.oasis.opendocument.text" = "writer.desktop";
       "image/jpg" = "imv.desktop";
       "image/jpeg" = "imv.desktop";
@@ -83,12 +77,13 @@ in
     };
 
     environment = {
-      pathsToLink = [
-        "/share/nix-direnv"
-      ];
+      pathsToLink = [ "/share/nix-direnv" ];
       homeBinInPath = true;
 
-      systemPackages = packages ++ (if config.workstation.full then (devPackages ++ morePackages) else [ ]);
+      systemPackages = packages ++ (if config.workstation.full then
+        (devPackages ++ morePackages)
+      else
+        [ ]);
     };
 
     fonts = {

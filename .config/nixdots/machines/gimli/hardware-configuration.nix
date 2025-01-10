@@ -10,9 +10,12 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" "xe" ];
+  boot.kernelModules = [ 
+    "kvm-intel"
+    #"xe" 
+  ];
   boot.extraModulePackages = [ ];
-  boot.kernelParams = ["i915.force_probe:!7d55" "xe.force_probe:7d55"];
+  # boot.kernelParams = ["i915.force_probe:!7d55" "xe.force_probe:7d55"];
 
   fileSystems."/" =
     { device = "rpool/enc/local/root";

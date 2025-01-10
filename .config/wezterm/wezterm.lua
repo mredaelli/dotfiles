@@ -48,7 +48,7 @@ end
 hint("(?:\\S.+\\S)", "l")
 hint("(?:\\S*?/[\r\\S]+)|(?:\\S[\r\\S]*\\.[a-zA-Z0-9\r]{2,7})", "p")
 local url_regex =
-"(?:https?://(www[.])?[-a-zA-Z0-9@:%._+~#=]{1,256}[.][a-zA-Z0-9()]{1,6}\\b[-a-zA-Z0-9()@:%_+.~#?&/=]*)"
+	"(?:https?://(www[.])?[-a-zA-Z0-9@:%._+~#=]{1,256}[.][a-zA-Z0-9()]{1,6}\\b[-a-zA-Z0-9()@:%_+.~#?&/=]*)"
 hint(url_regex, "u")
 hint(url_regex, "f", function(window, pane)
 	local url = window:get_selection_text_for_pane(pane)
@@ -57,13 +57,13 @@ end)
 local key_tables = {
 	hints = hints,
 	resize = {
-		{ key = "h",      action = { AdjustPaneSize = { "Left", 1 } } },
-		{ key = "l",      action = { AdjustPaneSize = { "Right", 1 } } },
-		{ key = "k",      action = { AdjustPaneSize = { "Up", 1 } } },
-		{ key = "j",      action = { AdjustPaneSize = { "Down", 1 } } },
+		{ key = "h", action = { AdjustPaneSize = { "Left", 1 } } },
+		{ key = "l", action = { AdjustPaneSize = { "Right", 1 } } },
+		{ key = "k", action = { AdjustPaneSize = { "Up", 1 } } },
+		{ key = "j", action = { AdjustPaneSize = { "Down", 1 } } },
 		{ key = "Escape", action = "PopKeyTable" },
-		{ key = "=",      action = "IncreaseFontSize" },
-		{ key = "-",      action = "DecreaseFontSize" },
+		{ key = "=", action = "IncreaseFontSize" },
+		{ key = "-", action = "DecreaseFontSize" },
 	},
 }
 local keys = {
@@ -202,6 +202,6 @@ config.ssh_domains = {
 	},
 }
 -- https://github.com/wez/wezterm/issues/5990
-config.front_end = "WebGpu"
-config.webgpu_power_preference = 'HighPerformance'
+--config.front_end = "WebGpu"
+--config.webgpu_power_preference = "HighPerformance"
 return config
