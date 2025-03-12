@@ -1,5 +1,5 @@
 {
-    "modules-left": ["sway/workspaces", "sway/mode"],
+    "modules-left": ["niri/workspaces", "sway/workspaces", "sway/mode"],
     "modules-center": ["mpris"],
     "modules-right": ["idle_inhibitor", "pulseaudio", "wireplumber", "network", "cpu", "memory", "disk", "temperature", "backlight", "battery", "clock","custom/notification", "tray"],
     "idle_inhibitor": {
@@ -8,6 +8,13 @@
             "activated": "",
             "deactivated": ""
         }
+    },
+    "niri/workspaces": {
+      "format": "{value} {icon} ",
+      "format-icons": {
+        "active": "",
+        "default": ""
+      }
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
