@@ -139,7 +139,7 @@ window-rule {
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+Shift+Return { spawn "wezterm"; }
+    Mod+Shift+Return { spawn "wezterm-gui" "start" "--always-new-process"; }
     Mod+Shift+D { spawn "rofi" "-show" "run"; }
     Mod+D { spawn "albert" "show" ; }
     Super+Alt+L { spawn "swaylock"; }

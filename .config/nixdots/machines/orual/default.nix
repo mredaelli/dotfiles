@@ -12,7 +12,7 @@ in {
     ../../modules/wayland.nix
     "${nixos-hardware}/common/cpu/intel/cpu-only.nix"
     "${nixos-hardware}/common/gpu/intel"
-    <nixos-hardware/common/gpu/nvidia/disable.nix>
+    <nixos-hardware/common/gpu/nvidia>
     "${nixos-hardware}/common/pc/laptop/ssd"
     "${nixos-hardware}/common/hidpi.nix"
     # ../../modules/intel.nix
@@ -24,7 +24,10 @@ in {
     # ../../modules/nvidia.nix
   ];
 
+  hardware.nvidia.open = false;
   hardware.intelgpu.vaapiDriver = "intel-media-driver";
+  # services.xserver.videoDrivers = [ "i915" "nvidia" ];
+
   hardware.enableAllFirmware = true;
   # power off NVIDIA
   # hardware.bumblebee.enable = true;
@@ -85,6 +88,8 @@ in {
     hostName = "orual";
     networkmanager.enable = true;
   };
+
+  fonts = { packages = with pkgs; [ corefonts ]; };
 
   environment.systemPackages = with pkgs; [
     jp
