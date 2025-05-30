@@ -1,5 +1,4 @@
-{ config, pkgs, options, ... }:
-{
+{ config, pkgs, options, ... }: {
   environment = {
     systemPackages = with pkgs; [
       cachix
@@ -7,20 +6,18 @@
 
       bash
       fish
+      nix-your-shell
 
       lsof
       procs
-      htop
 
       bc
       ouch
       curl
       fzf
       bashmount
-      direnv
 
       eza
-      yazi
       fd
       ripgrep
       bat
@@ -29,19 +26,13 @@
       duf
       procs
 
-      zoxide
-      starship
-      nix-your-shell
-
       neovim
       nixpkgs-fmt
 
       git
       gitAndTools.delta
     ];
-    variables = {
-      EDITOR = "nvim";
-    };
+    variables = { EDITOR = "nvim"; };
     shells = [ pkgs.bash pkgs.fish ];
   };
 
@@ -52,10 +43,18 @@
         nix-your-shell fish | source
       '';
     };
+
+    bat = {
+      enable = true;
+      extraPackages = with pkgs.bat-extras; [ batgrep ];
+    };
     bash.completion.enable = true;
+    direnv.enable = true;
+    htop.enable = true;
+    starship.enable = true;
+    thefuck.enable = true;
+    yazi.enable = true;
   };
 
-  users = {
-    defaultUserShell = pkgs.fish;
-  };
+  users = { defaultUserShell = pkgs.fish; };
 }

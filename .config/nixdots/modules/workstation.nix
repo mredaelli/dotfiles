@@ -93,7 +93,7 @@ in {
         gentium
         alegreya
         corefonts
-        (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+        nerd-fonts.jetbrains-mono
       ];
     };
 
@@ -104,6 +104,7 @@ in {
         # pinentryFlavor = "curses";
         enableSSHSupport = true;
       };
+      zoxide.enable = true;
     };
 
     security.pam.services.turing.gnupg.enable = true;

@@ -34,3 +34,11 @@ symbol = "⊢"
 
 [python]
 format = '[${symbol}${pyenv_prefix}${version}]($style) '
+
+[time]
+disabled = false
+format = '🕙 [$time]($style) '
+time_format = '%R'
+
+[status]
+disabled = false

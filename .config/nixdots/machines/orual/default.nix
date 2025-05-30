@@ -13,7 +13,7 @@ in {
     "${nixos-hardware}/common/cpu/intel/cpu-only.nix"
     "${nixos-hardware}/common/gpu/intel"
     <nixos-hardware/common/gpu/nvidia>
-    "${nixos-hardware}/common/pc/laptop/ssd"
+    "${nixos-hardware}/common/pc/ssd"
     "${nixos-hardware}/common/hidpi.nix"
     # ../../modules/intel.nix
     ../../modules/workstation.nix

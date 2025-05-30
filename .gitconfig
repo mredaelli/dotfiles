@@ -79,13 +79,6 @@
 [submodule]
 	recurse = true
 
-[url "https://github.com/"]
-    insteadOf = gh:
-[url "https://gist.github.com/"]
-    insteadOf = gist:
-[url "https://bitbucket.org/"]
-    insteadOf = bb:
-
 [includeIf "gitdir:~/lari/"]
 	path = lari/lari.gitconfig
 

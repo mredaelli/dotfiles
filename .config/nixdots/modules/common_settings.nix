@@ -1,8 +1,6 @@
 { config, pkgs, options, ... }:
-let
-  baseConfig = { allowUnfree = true; };
-in
-{
+let baseConfig = { allowUnfree = true; };
+in {
   nix = {
     gc = {
       automatic = true;
@@ -14,6 +12,8 @@ in
     settings.trusted-users = [ "root" "turing" ];
   };
 
+  system.rebuild.enableNg = true;
+
   documentation = {
     doc.enable = false;
     info.enable = false;
@@ -21,14 +21,14 @@ in
 
   i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "it_IT.UTF-8/UTF-8" ];
 
-  imports = [
-    ../cachix.nix
-  ];
+  imports = [ ../cachix.nix ];
 
   nixpkgs.overlays = [
-    (self: super: with super; {
-      # spotifyd = super.spotifyd.override { withMpris = true; };
-    })
+    (self: super:
+      with super;
+      {
+        # spotifyd = super.spotifyd.override { withMpris = true; };
+      })
   ];
 
   nixpkgs.config = baseConfig // {
@@ -37,11 +37,10 @@ in
     pulseaudio = true;
 
     packageOverrides = pkgs: {
-      unstable = import <nixos-unstable> {
-        config = config.nixpkgs.config;
-      };
+      unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
       jre = pkgs.jdk11;
-      fenix = import (fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz") { };
+      fenix = import (fetchTarball
+        "https://github.com/nix-community/fenix/archive/main.tar.gz") { };
     };
   };
 

@@ -20,11 +20,19 @@ end
 if type -q bat
   alias cat="bat";
   alias catt="bat --style plain";
+  alias bathelp='bat --plain --language=help'
+  function help
+    $argv --help 2>&1 | bathelp
+  end
+  abbr -a --position anywhere -- --help '--help | bat -plhelp'
+  abbr -a --position anywhere -- -h '-h | bat -plhelp'
+  export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+  alias rgb="batgrep"
 end
 
-if type -q exa
-  alias ls='exa --icons'
-  alias ll='exa -l --git --icons --color-scale'
+if type -q eza
+  alias ls='eza --icons'
+  alias ll='eza -l --git --icons --color-scale'
 end
 
 alias less='less -r'
@@ -36,14 +44,7 @@ if type -q nvim
   alias vmux="abduco -e '^g' -A nvim-session nvim"
 end
 
-if type -q ultralist
-  abbr ul "ultralist"
-  alias u="ultralist l"
-  alias uc="ultralist l group:context"
-  alias up="ultralist l group:project"
-end
-
-alias psg='ps au | grep'
+alias psg='ps au | rg'
 
 alias cdgr='cd (git rev-parse --show-toplevel)'
 abbr kdiff 'kitty +kitten diff'
@@ -99,10 +100,6 @@ abbr :q 'exit'
 
 set PATH ~/bin $PATH
 
-function mutt
-    bash --login -c 'cd ~/downloads; neomutt' $argv;
-end
-
 function mkcd
     mkdir -pv $argv;
     cd $argv;
@@ -112,36 +109,21 @@ if type -q tig
    abbr tig "tig status"
 end
 
-if type -q any-nix-shell
-   any-nix-shell fish | source
-end
 abbr ,i 'nix-shell -p'
+function ,x
+  nix-shell -p $argv[1] --run "$argv"
+end
 
 if type -q fd
   export FZF_DEFAULT_COMMAND='fd --type f'
   export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 end
 
-direnv hook fish | source
-
 if status --is-interactive
   set fish_cursor_default block
   set fish_cursor_insert line
   set fish_cursor_visual block
   fish_vi_key_bindings
-
-  if type -q starship
-    starship init fish | source
-  else
-    set -g theme_title_display_process yes
-    set -g theme_color_scheme solarized-dark
-  end
-
-  zoxide init fish | source
-
-  echo
-  echo  Remember using procs tig thefuck fzf git-absorb
-  echo
 end
 set -Ux FZF_DEFAULT_OPTS "\
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
