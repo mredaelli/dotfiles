@@ -8,7 +8,10 @@
       ../../modules/server.nix
       ../../modules/user.nix
       ./nginx.nix
+      # ./seafile.nix
       ./poetry.nix
+      ./dedications.nix
+      ./calcal.nix
       ./vaultwarden.nix
       ./shiori.nix
       ./syncthing.nix
@@ -33,18 +36,76 @@
 
   services.zfs = {
     trim.enable = true;
-    autoSnapshot = {
-      enable = true;
-      frequent = 0;
-      hourly = 12;
-      daily = 3;
-      weekly = 0;
-      monthly = 0;
-    };
     autoScrub = {
       enable = true;
     };
   };
+  services.sanoid = {
+    enable = true;
+    
+   templates.production = {
+      hourly = 12; 
+      daily = 10; 
+      monthly = 2;
+      autoprune = true;
+      autosnap = true;
+    };
+    datasets."rpool" = {
+      useTemplate = [ "production" ];
+      recursive = true;
+    };
+  };
+
+  services.monica = {
+    enable = true;
+    hostname = "monica.typish.io";
+    dataDir = "/data/monica";
+    appKeyFile = "/var/secrets/monica";
+    nginx = {
+       enableACME = true;
+       forceSSL = true;
+    };
+    config = { APP_DISABLE_SIGNUP = "true"; };
+  };
+  services.atuin = {
+    enable = true;
+    openFirewall=true;
+    host="0.0.0.0";
+  };
+  services.nginx.virtualHosts."atuin.typish.io" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      extraConfig = ''
+        proxy_pass http://localhost:8888;
+        proxy_pass_request_headers on;
+        proxy_set_header        Host $host;
+        proxy_set_header        X-Real-IP $remote_addr;
+        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header        X-Forwarded-Proto $scheme;
+        proxy_read_timeout      600s;
+        proxy_send_timeout      600s;
+      '';
+    };
+  };
+
+  services.nginx.virtualHosts."calcal.typish.dev" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      extraConfig = ''
+        proxy_pass http://localhost:7777;
+        proxy_pass_request_headers on;
+        proxy_set_header        Host $host;
+        proxy_set_header        X-Real-IP $remote_addr;
+        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header        X-Forwarded-Proto $scheme;
+        proxy_read_timeout      600s;
+        proxy_send_timeout      600s;
+      '';
+    };
+  };
+
 
   systemd.services.b2Backup = {
     enable = true;
@@ -62,7 +123,7 @@
         ${zfs} snapshot -r rpool@backup
 
         echo Backing up on b2
-        ${pkgs.restic}/bin/restic backup /.zfs/snapshot/backup/var/lib/ /data/.zfs/snapshot/backup/ /var/lib/private/.zfs/snapshot/backup/
+        ${pkgs.restic}/bin/restic backup /.zfs/snapshot/backup/var/secrets/ /.zfs/snapshot/backup/var/lib/ /data/.zfs/snapshot/backup/ /var/lib/private/.zfs/snapshot/backup/
 
         echo Destroying local backup snapshot
         ${zfs} destroy -r rpool@backup
@@ -72,7 +133,7 @@
 
         echo Done
       '';
-    startAt = "Every Night";
+    startAt = "daily";
     serviceConfig = {
       EnvironmentFile = "/var/secrets/restic.env";
       Type = "oneshot";
@@ -85,6 +146,7 @@
   system.autoUpgrade.enable = true;
 
   services.openssh.enable = true;
+  services.fail2ban.enable = true;
 
   system.stateVersion = "23.11";
 }

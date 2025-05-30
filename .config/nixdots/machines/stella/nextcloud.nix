@@ -4,7 +4,7 @@ in
 {
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud29;
+    package = pkgs.nextcloud31;
     hostName = host;
     https = true;
     autoUpdateApps.enable = true;
@@ -13,7 +13,9 @@ in
     settings = {
       overwriteprotocol = "https";
       default_phone_region = "CH";
+      maintenance_window_start = "1";
     };
+    phpOptions."opcache.interned_strings_buffer" = "12";
 
     config = {
       dbtype = "pgsql";
