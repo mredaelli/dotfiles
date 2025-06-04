@@ -26,22 +26,8 @@ in {
 
   hardware.nvidia.open = false;
   hardware.intelgpu.vaapiDriver = "intel-media-driver";
-  # services.xserver.videoDrivers = [ "i915" "nvidia" ];
 
   hardware.enableAllFirmware = true;
-  # power off NVIDIA
-  # hardware.bumblebee.enable = true;
-  # nixpkgs.overlays = [ # https://github.com/NixOS/nixpkgs/issues/319838
-  #    (self: super: {
-  #      bumblebee = super.bumblebee.override {
-  #        nvidia_x11_i686 = null;
-  #        libglvnd_i686 = null;
-  #      };
-  #      primus = super.primus.override {
-  #        primusLib_i686 = null;
-  #      };
-  #    })
-  # ];
 
   # erase your darlings
   environment.etc = {
@@ -68,7 +54,6 @@ in {
   boot = {
     # blacklistedKernelModules = [ "nouveau" ];
     kernel.sysctl = { "vm.swappiness" = 10; };
-    # kernelPackages = pkgs.linuxPackages_6_10;
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
