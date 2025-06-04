@@ -46,6 +46,7 @@ let
       shfmt
       stylua
       vimPlugins.sniprun
+      markdown-oxide
     ] ++ (with pkgs.nodePackages; [
       vim-language-server
       bash-language-server

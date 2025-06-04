@@ -28,6 +28,7 @@
 
       neovim
       nixpkgs-fmt
+      nix-index
 
       git
       gitAndTools.delta
@@ -52,7 +53,7 @@
     direnv.enable = true;
     htop.enable = true;
     starship.enable = true;
-    thefuck.enable = true;
+    pay-respects.enable = true;
     yazi.enable = true;
   };
 

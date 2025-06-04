@@ -28,13 +28,6 @@ nnoremap <Leader>grm :Git rebase master<CR>
 
 nnoremap <Leader>gA :Git add %:p<cr><cr>
 
-nnoremap ]h :GitGutterNextHunk<CR>
-nnoremap [h :GitGutterPrevHunk<CR>
-nnoremap <leader>ga :GitGutterStageHunk<CR>
-nnoremap <leader>gu :GitGutterUndoHunk<CR>
-nnoremap <leader>gd :GitGutterPreviewHunk<CR>
-
-
 onoremap ih <Plug>(GitGutterTextObjectInnerPending)
 onoremap ah <Plug>(GitGutterTextObjectOuterPending)
 xnoremap ih <Plug>(GitGutterTextObjectInnerVisual)

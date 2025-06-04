@@ -19,6 +19,7 @@ end
 
 if type -q bat
   alias cat="bat";
+  alias less="bat";
   alias catt="bat --style plain";
   alias bathelp='bat --plain --language=help'
   function help
@@ -34,8 +35,6 @@ if type -q eza
   alias ls='eza --icons'
   alias ll='eza -l --git --icons --color-scale'
 end
-
-alias less='less -r'
 
 if type -q nvim
   alias nano='nvim'

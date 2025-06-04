@@ -7,11 +7,10 @@ local info = "🙏"
 vim.fn.sign_define("LspDiagnosticsSignErrpr", { text = err })
 vim.fn.sign_define("LspDiagnosticsSignWarning", { text = warn })
 
-
 return {
 	{
 		"nvim-lualine/lualine.nvim",
-		config = {
+		opts = {
 			options = {
 				theme = "catppuccin",
 				icons_enabled = true,
@@ -19,27 +18,35 @@ return {
 				globalstatus = true,
 			},
 			sections = {
-				lualine_a = { {
-					"mode",
-					fmt = function(mode_name)
-						return mode_name:sub(1, 1).upper
-					end,
-				} },
-				lualine_b = { {
-					"branch",
-					icon = "",
-					fmt = function(name)
-						return name:sub(1, 10)
-					end,
-				} },
+				lualine_a = {
+					{
+						"mode",
+						fmt = function(mode_name)
+							return mode_name:sub(1, 1).upper
+						end,
+					},
+				},
+				lualine_b = {
+					{
+						"branch",
+						icon = "",
+						fmt = function(name)
+							return name:sub(1, 10)
+						end,
+					},
+				},
 				lualine_c = {
 					{ "filename", file_status = true, path = 1, shorting_target = 40 },
 					"diff",
-					{ "diagnostics", sources = { "nvim_diagnostic" }, symbols = {
-						error = err,
-						warn = warn,
-						info = info,
-					} },
+					{
+						"diagnostics",
+						sources = { "nvim_diagnostic" },
+						symbols = {
+							error = err,
+							warn = warn,
+							info = info,
+						},
+					},
 				},
 				lualine_x = { { "fileformat", full_path = true, shorten = true }, "filetype" },
 				lualine_y = { "progress" },

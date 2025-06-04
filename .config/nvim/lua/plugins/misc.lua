@@ -96,7 +96,7 @@ return {
 
 	"elihunter173/dirbuf.nvim",
 
-	{ "kyazdani42/nvim-web-devicons", config = { default = true } },
+	{ "kyazdani42/nvim-web-devicons", opts = { default = true } },
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		config = function()

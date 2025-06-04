@@ -22,7 +22,7 @@ return {
 	{
 		"lewis6991/gitsigns.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		config = {
+		opts = {
 			on_attach = function(bufnr)
 				local gs = package.loaded.gitsigns
 
@@ -37,7 +37,7 @@ return {
 						return "]c"
 					end
 					vim.schedule(function()
-						gs.next_hunk()
+						gs.nav_hunk("next")
 					end)
 					return "<Ignore>"
 				end, { expr = true })
@@ -47,7 +47,7 @@ return {
 						return "[c"
 					end
 					vim.schedule(function()
-						gs.prev_hunk()
+						gs.nav_hunk("prev")
 					end)
 					return "<Ignore>"
 				end, { expr = true })

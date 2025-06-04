@@ -1,14 +1,13 @@
 return {
- 	{
+	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = {
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		"JoosepAlviste/nvim-ts-context-commentstring",
-		"nvim-treesitter/nvim-treesitter-refactor",
-		"windwp/nvim-ts-autotag",
-		{ "lewis6991/spellsitter.nvim", config = true },
-	},
-		config = {
+			"nvim-treesitter/nvim-treesitter-textobjects",
+			"JoosepAlviste/nvim-ts-context-commentstring",
+			"nvim-treesitter/nvim-treesitter-refactor",
+			"windwp/nvim-ts-autotag",
+		},
+		opts = {
 			ensure_installed = "all",
 			highlight = {
 				enable = true,
@@ -62,5 +61,5 @@ return {
 				},
 			},
 		},
-	}
+	},
 }

@@ -35,9 +35,6 @@ nnoremap <leader>cd :cd %:p:h<CR>
 " clear last search
 nnoremap <silent> <CR> :nohls<CR><CR>
 
-nnoremap <Leader>g :silent grep<Space>
-
-
 nnoremap <silent> [d :Lfprev<CR>
 nnoremap <silent> ]d :Lfnext<CR>
 

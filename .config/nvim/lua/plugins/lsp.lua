@@ -163,7 +163,7 @@ return {
 				on_attach = on_attach,
 			}
 			lspconfig.pyright.setup(pyright_opts)
-			lspconfig.marksman.setup({ on_attach = on_attach, capabilities = capabilities })
+			lspconfig.markdown_oxide.setup({ on_attach = on_attach, capabilities = capabilities })
 			lspconfig.denols.setup({
 				capabilities = capabilities,
 				-- on_attach = function(client)
