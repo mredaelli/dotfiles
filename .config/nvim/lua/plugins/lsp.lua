@@ -234,9 +234,9 @@ return {
 			lspconfig.rust_analyzer.setup({ on_attach = on_attach, capabilities = capabilities })
 
 			lspconfig.bashls.setup({ on_attach = on_attach, capabilities = capabilities })
-			-- lspconfig.statix.setup({ on_attach = on_attach, capabilities = capabilities })
-			lspconfig.nixd.setup({ on_attach = on_attach, capabilities = capabilities })
-			-- lspconfig.nil_ls.setup({ on_attach = on_attach, capabilities = capabilities })
+			lspconfig.statix.setup({ on_attach = on_attach, capabilities = capabilities })
+			-- lspconfig.nixd.setup({ on_attach = on_attach, capabilities = capabilities })
+			lspconfig.nil_ls.setup({ on_attach = on_attach, capabilities = capabilities })
 			lspconfig.bashls.setup({ on_attach = on_attach, capabilities = capabilities })
 			lspconfig.yamlls.setup({ on_attach = on_attach, capabilities = capabilities })
 			lspconfig.eslint.setup({ on_attach = on_attach, capabilities = capabilities })
@@ -264,6 +264,7 @@ return {
 						html = { "prettierd", "prettier", stop_after_first = true },
 						json = { "prettierd", "prettier", stop_after_first = true },
 						beancount = { "bean-format" },
+						nix = { "nixfmt" },
 					},
 					format_on_save = {
 						timeout_ms = 1000,

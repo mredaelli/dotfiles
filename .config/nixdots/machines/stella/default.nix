@@ -1,24 +1,31 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../../modules/common_settings.nix
-      ../../modules/server.nix
-      ../../modules/user.nix
-      ./nginx.nix
-      # ./seafile.nix
-      ./poetry.nix
-      ./dedications.nix
-      ./calcal.nix
-      ./vaultwarden.nix
-      ./shiori.nix
-      ./syncthing.nix
-      ./postgres.nix
-      ./miniflux.nix
-      ./nextcloud.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/common_settings.nix
+    ../../modules/server.nix
+    ../../modules/user.nix
+    ./nginx.nix
+    ./poetry.nix
+    ./dedications.nix
+    ./calcal.nix
+    ./vaultwarden.nix
+    ./shiori.nix
+    ./syncthing.nix
+    ./postgres.nix
+    ./miniflux.nix
+    ./nextcloud.nix
+    ./atuin.nix
+    ./readeck.nix
+    ./monica.nix
+    # ./gokapi.nix
+  ];
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -31,8 +38,19 @@
     enableIPv6 = true;
     networkmanager.enable = true;
     interfaces.enp0s6.useDHCP = true;
-    firewall.allowedTCPPorts = [ 22 80 443 ];
+    firewall.allowedTCPPorts = [
+      22
+      80
+      443
+    ];
   };
+
+  nix.settings.allowed-users = [ "@wheel" ];
+
+  system.autoUpgrade.enable = true;
+
+  services.openssh.enable = true;
+  services.fail2ban.enable = true;
 
   services.zfs = {
     trim.enable = true;
@@ -42,10 +60,10 @@
   };
   services.sanoid = {
     enable = true;
-    
-   templates.production = {
-      hourly = 12; 
-      daily = 10; 
+
+    templates.production = {
+      hourly = 12;
+      daily = 10;
       monthly = 2;
       autoprune = true;
       autosnap = true;
@@ -53,39 +71,6 @@
     datasets."rpool" = {
       useTemplate = [ "production" ];
       recursive = true;
-    };
-  };
-
-  services.monica = {
-    enable = true;
-    hostname = "monica.typish.io";
-    dataDir = "/data/monica";
-    appKeyFile = "/var/secrets/monica";
-    nginx = {
-       enableACME = true;
-       forceSSL = true;
-    };
-    config = { APP_DISABLE_SIGNUP = "true"; };
-  };
-  services.atuin = {
-    enable = true;
-    openFirewall=true;
-    host="0.0.0.0";
-  };
-  services.nginx.virtualHosts."atuin.typish.io" = {
-    enableACME = true;
-    forceSSL = true;
-    locations."/" = {
-      extraConfig = ''
-        proxy_pass http://localhost:8888;
-        proxy_pass_request_headers on;
-        proxy_set_header        Host $host;
-        proxy_set_header        X-Real-IP $remote_addr;
-        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header        X-Forwarded-Proto $scheme;
-        proxy_read_timeout      600s;
-        proxy_send_timeout      600s;
-      '';
     };
   };
 
@@ -105,7 +90,6 @@
       '';
     };
   };
-
 
   systemd.services.b2Backup = {
     enable = true;
@@ -140,13 +124,6 @@
       User = "root";
     };
   };
-
-  nix.settings.allowed-users = [ "@wheel" ];
-
-  system.autoUpgrade.enable = true;
-
-  services.openssh.enable = true;
-  services.fail2ban.enable = true;
 
   system.stateVersion = "23.11";
 }

@@ -26,9 +26,15 @@
       duf
       procs
 
-      neovim
-      nixpkgs-fmt
       nix-index
+
+      neovim
+
+      nil
+      statix
+      nixfmt-rfc-style
+      sumneko-lua-language-server
+      stylua
 
       git
       gitAndTools.delta
