@@ -3,7 +3,6 @@ set $msg i3-msg
 set $term wezterm start --always-new-process
 set $shell fish
 
-exec --no-startup-id transmission-gtk
 exec --no-startup-id swaymsg "output eDP-1 disable"
 #exec --no-startup-id swaymsg "output HDMI-A-1 mode 1920x1080@60Hz"
 exec --no-startup-id swaymsg "output HDMI-A-1 scale 2.5"
