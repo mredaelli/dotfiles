@@ -45,12 +45,17 @@ My Saved Places.
 \#*#
 
 .direnv/
+.devenv/
 .git/
 .idea/
 .pytest_cache
+.android/
+.dart_tool/
+.stack_work/
+.yarn/
+.cabal-sandbox/
 node_modules/
 .vscode/
-public/
 dist/
 .mypy_cache/
 .ruff_cache/
@@ -59,3 +64,5 @@ __pycache__/
 target/
 build/
 .devenv/
+dist/
+venv/

@@ -189,6 +189,7 @@ input * {
 
     tap enabled
 }
+seat seat0 xcursor_theme Quintom_Ink 40
 
 bar {
   swaybar_command waybar
@@ -204,7 +205,3 @@ exec --no-startup-id swayidle -w \
 exec --no-startup-id wlsunset -l 47.3 -L 8.5
 exec --no-startup-id kanshi
  
-exec --no-startup-id dbus-sway-environment
-exec --no-startup-id  configure-gtk
-
-seat seat0 xcursor_theme Qogir-dark 40

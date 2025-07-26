@@ -1,4 +1,10 @@
-{ config, pkgs, options, ... }: {
+{
+  config,
+  pkgs,
+  options,
+  ...
+}:
+{
   environment = {
     systemPackages = with pkgs; [
       cachix
@@ -38,9 +44,22 @@
 
       git
       gitAndTools.delta
+      (pkgs.writeScriptBin "vi" ''
+        #!/bin/sh
+        exec ${pkgs.neovim}/bin/nvim "$@"
+      '')
+      (pkgs.writeScriptBin "vim" ''
+        #!/bin/sh
+        exec ${pkgs.neovim}/bin/nvim "$@"
+      '')
     ];
-    variables = { EDITOR = "nvim"; };
-    shells = [ pkgs.bash pkgs.fish ];
+    variables = {
+      EDITOR = "nvim";
+    };
+    shells = [
+      pkgs.bash
+      pkgs.fish
+    ];
   };
 
   programs = {
@@ -63,5 +82,7 @@
     yazi.enable = true;
   };
 
-  users = { defaultUserShell = pkgs.fish; };
+  users = {
+    defaultUserShell = pkgs.fish;
+  };
 }
