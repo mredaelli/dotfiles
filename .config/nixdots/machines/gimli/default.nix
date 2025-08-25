@@ -15,7 +15,7 @@ in {
     ../../modules/zfs.nix
     "${nixos-hardware}/common/cpu/intel/cpu-only.nix"
     "${nixos-hardware}/common/gpu/intel"
-    "${nixos-hardware}/common/pc/laptop/ssd"
+    "${nixos-hardware}/common/pc/ssd"
     "${nixos-hardware}/common/hidpi.nix"
     "${nixos-hardware}/lenovo/thinkpad/x1/12th-gen"
   ];
@@ -33,6 +33,13 @@ in {
 
   services.fprintd.enable = true;
   services.fwupd.enable = true;
+  services.sanoid = {
+    enable = true;
+    datasets."rpool/enc/safe" = {
+      useTemplate = [ "safe" ];
+      recursive = true;
+    };
+  };
 
   nixpkgs.overlays = [
     (self: super: {

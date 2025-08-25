@@ -1,6 +1,15 @@
-{ config, pkgs, options, ... }:
-let baseConfig = { allowUnfree = true; };
-in {
+{
+  config,
+  pkgs,
+  options,
+  ...
+}:
+let
+  baseConfig = {
+    allowUnfree = true;
+  };
+in
+{
   nix = {
     gc = {
       automatic = true;
@@ -8,8 +17,14 @@ in {
       options = "--delete-older-than 10d";
     };
     settings.auto-optimise-store = true;
-    settings.experimental-features = [ "nix-command" "flakes" ];
-    settings.trusted-users = [ "root" "turing" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    settings.trusted-users = [
+      "root"
+      "turing"
+    ];
   };
 
   system.rebuild.enableNg = true;
@@ -19,16 +34,19 @@ in {
     info.enable = false;
   };
 
-  i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "it_IT.UTF-8/UTF-8" ];
+  i18n.supportedLocales = [
+    "en_US.UTF-8/UTF-8"
+    "it_IT.UTF-8/UTF-8"
+  ];
 
   imports = [ ../cachix.nix ];
 
   nixpkgs.overlays = [
-    (self: super:
-      with super;
-      {
+    (
+      self: super: with super; {
         # spotifyd = super.spotifyd.override { withMpris = true; };
-      })
+      }
+    )
   ];
 
   nixpkgs.config = baseConfig // {
@@ -39,8 +57,7 @@ in {
     packageOverrides = pkgs: {
       unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
       jre = pkgs.jdk11;
-      fenix = import (fetchTarball
-        "https://github.com/nix-community/fenix/archive/main.tar.gz") { };
+      fenix = import (fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz") { };
     };
   };
 
@@ -57,6 +74,15 @@ in {
         PasswordAuthentication = false;
         PermitRootLogin = "no";
         AcceptEnv = "VTE_VERSION TERM COLORTERM TERMPROGRAM";
+      };
+    };
+    sanoid = {
+      templates.safe = {
+        hourly = 12;
+        daily = 10;
+        monthly = 2;
+        autoprune = true;
+        autosnap = true;
       };
     };
   };
