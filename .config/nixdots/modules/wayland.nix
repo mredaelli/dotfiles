@@ -123,9 +123,19 @@ in
       };
       xdg.portal = {
         enable = true;
-        wlr.enable = true;
+        wlr = {
+          enable = true;
+          settings = {
+            screencast = {
+              max_fps = 30;
+              # exec_before = "disable_notifications.sh";
+              # exec_after = "enable_notifications.sh";
+              chooser_type = "simple";
+              chooser_cmd = "${pkgs.slurp}/bin/slurp -f %o -or";
+            };
+          };
+        };
         extraPortals = [
-          pkgs.xdg-desktop-portal-wlr
           pkgs.xdg-desktop-portal-gtk
         ];
         config.common.default = "*";

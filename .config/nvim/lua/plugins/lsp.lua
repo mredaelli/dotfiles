@@ -240,6 +240,11 @@ return {
 			lspconfig.bashls.setup({ on_attach = on_attach, capabilities = capabilities })
 			lspconfig.yamlls.setup({ on_attach = on_attach, capabilities = capabilities })
 			lspconfig.eslint.setup({ on_attach = on_attach, capabilities = capabilities })
+			lspconfig.jdtls.setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+			-- vim.lsp.enable("jdtls")
 			lspconfig.beancount.setup({
 				init_options = { journal_file = os.getenv("BEANCOUNT_FILE") },
 				on_attach = on_attach,
@@ -251,6 +256,7 @@ return {
 			"kosayoda/nvim-lightbulb",
 			"onsails/lspkind-nvim",
 			"ray-x/lsp_signature.nvim",
+			"mfussenegger/nvim-jdtls",
 			{
 				"stevearc/conform.nvim",
 				opts = {
@@ -265,6 +271,7 @@ return {
 						json = { "prettierd", "prettier", stop_after_first = true },
 						beancount = { "bean-format" },
 						nix = { "nixfmt" },
+						java = { "astyle" },
 					},
 					format_on_save = {
 						timeout_ms = 1000,

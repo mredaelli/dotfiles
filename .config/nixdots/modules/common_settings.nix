@@ -20,6 +20,7 @@ in
     settings.experimental-features = [
       "nix-command"
       "flakes"
+      "configurable-impure-env"
     ];
     settings.trusted-users = [
       "root"

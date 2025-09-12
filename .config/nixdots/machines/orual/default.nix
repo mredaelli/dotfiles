@@ -1,8 +1,14 @@
-{ config, pkgs, lib, options, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  options,
+  ...
+}:
 let
-  nixos-hardware =
-    builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; };
-in {
+  nixos-hardware = builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; };
+in
+{
   imports = [
     ./hardware-configuration.nix
     <nixos-hardware/lenovo/thinkpad>
@@ -53,7 +59,9 @@ in {
 
   boot = {
     # blacklistedKernelModules = [ "nouveau" ];
-    kernel.sysctl = { "vm.swappiness" = 10; };
+    kernel.sysctl = {
+      "vm.swappiness" = 10;
+    };
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
@@ -65,8 +73,15 @@ in {
 
   networking = {
     firewall = {
-      allowedTCPPorts = [ 22 50000 50001 ];
-      allowedUDPPorts = [ 50000 51820 ];
+      allowedTCPPorts = [
+        22
+        50000
+        50001
+      ];
+      allowedUDPPorts = [
+        50000
+        51820
+      ];
       checkReversePath = "loose";
     };
     hostId = "5f87931e";
@@ -74,7 +89,9 @@ in {
     networkmanager.enable = true;
   };
 
-  fonts = { packages = with pkgs; [ corefonts ]; };
+  fonts = {
+    packages = with pkgs; [ corefonts ];
+  };
 
   environment.systemPackages = with pkgs; [
     jp
@@ -94,7 +111,10 @@ in {
       enable = true;
       flags = [ "until=240h" ];
     };
-    listenOptions = [ "/run/docker.sock" "0.0.0.0:2376" ];
+    listenOptions = [
+      "/run/docker.sock"
+      "0.0.0.0:2376"
+    ];
   };
   # netmaker
   environment.etc.hosts.mode = "0644";
@@ -109,13 +129,20 @@ in {
   };
 
   services = {
-    zfs.autoSnapshot = {
+    sanoid = {
       enable = true;
-      monthly = 3;
+      datasets."rpool/enc/safe" = {
+        useTemplate = [ "safe" ];
+        recursive = true;
+      };
     };
     fstrim.enable = true;
-    thinkfan = { enable = true; };
-    tailscale = { enable = true; };
+    thinkfan = {
+      enable = true;
+    };
+    tailscale = {
+      enable = true;
+    };
     printing.enable = true;
     printing.drivers = [ pkgs.hplipWithPlugin ];
     avahi = {

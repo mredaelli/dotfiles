@@ -97,6 +97,8 @@ abbr gCc 'git cherry-pick --continue'
 abbr :e 'vi'
 abbr :q 'exit'
 
+abbr kc 'kubectl'
+
 set PATH ~/bin $PATH
 
 function mkcd
@@ -111,6 +113,9 @@ end
 abbr ,i 'nix-shell -p'
 function ,x
   nix-shell -p $argv[1] --run "$argv"
+end
+function ,rgv
+  rg --vimgrep "find" laricli | vim -c cb! -c copen -c only -
 end
 
 if type -q fd
