@@ -42,6 +42,8 @@
       sumneko-lua-language-server
       stylua
 
+      yazi
+
       git
       gitAndTools.delta
       (pkgs.writeScriptBin "vi" ''
@@ -79,7 +81,6 @@
     htop.enable = true;
     starship.enable = true;
     pay-respects.enable = true;
-    yazi.enable = true;
   };
 
   users = {
