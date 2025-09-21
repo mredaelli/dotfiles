@@ -204,6 +204,7 @@ config.ssh_domains = {
 		remote_address = "hunk",
 	},
 }
--- config.front_end = "WebGpu"
--- config.webgpu_power_preference = "HighPerformance"
+-- https://github.com/wez/wezterm/issues/5990
+--config.front_end = "WebGpu"
+--config.webgpu_power_preference = "HighPerformance"
 return config

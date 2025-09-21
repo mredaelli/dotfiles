@@ -20,6 +20,7 @@ let
     alsa-utils
     matcha-gtk-theme
     qogir-icon-theme
+    atuin
   ];
   morePackages = with pkgs; [
     ncspot

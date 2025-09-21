@@ -59,7 +59,7 @@ output "eDP-1" {
 }
 
 layout {
-    gaps 10
+    gaps 4
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -74,6 +74,7 @@ layout {
         proportion 0.33333
         proportion 0.5
         proportion 0.66667
+        proportion 0.95
         // fixed 1920
     }
 
@@ -100,12 +101,14 @@ layout {
     struts { }
 }
 
+spawn-at-startup "swaync"
 spawn-at-startup "waybar"
+spawn-at-startup "swayidle" "-w"  "timeout" "300" "swaylock --screenshots --effect-greyscale --effect-pixelate 10 &"  "timeout" "600" "niri msg action power-off-monitors" "before-sleep" "swaylock-fancy" "resume"  "niri msg action power-on-monitors"
 spawn-at-startup "albert"
-spawn-at-startup "wlsunset"
-spawn-at-startup "swayidle" "-w"  "timeout" "300" "swaylock --screenshots --effect-greyscale --effect-pixelate 10 &"  "timeout" "600" "niri msg action power-off-monitors" "before-sleep" "swaylock --screenshots --effect-greyscale --effect-pixelate 10"
-// "resume" "swaymsg 'output * dpms on'"
+spawn-at-startup "wlsunset" "-l" "47.3" "-L" "8.5"
+spawn-at-startup "kanshi"
 spawn-at-startup "blueman-applet"
+spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_SESSION_TYPE" "XDG_SESSION_DESKTOP" "QT_QPA_PLATFORM" "XDG_CURRENT_DESKTOP"
 
 prefer-no-csd
 
@@ -117,15 +120,6 @@ animations {
     // slowdown 3.0
 }
 
-// Work around WezTerm's initial configure bug
-// by setting an empty default-column-width.
-window-rule {
-    // This regular expression is intentionally made as specific as possible,
-    // since this is the default config, and we want no false positives.
-    // You can get away with just app-id="wezterm" if you want.
-    match app-id=r#"^org\.wezfurlong\.wezterm$"#
-    default-column-width {}
-}
 
 window-rule {
     match app-id=r#"^org\.keepassxc\.KeePassXC$"#
@@ -135,26 +129,37 @@ window-rule {
     // block-out-from "screencast"
 }
 
-
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     Mod+Shift+Return { spawn "wezterm-gui" "start" "--always-new-process"; }
-    Mod+Shift+D { spawn "rofi" "-show" "run"; }
+    Mod+Return { spawn "wezterm-gui" "start" "--always-new-process"; }
+    Mod+Shift+Q { close-window; }
+
+    Mod+Shift+F { spawn "firefox"; }
+
     Mod+D { spawn "albert" "show" ; }
-    Super+Alt+L { spawn "swaylock"; }
+    Mod+Shift+D { spawn "rofi" "-show" "run"; }
+    Mod+Shift+w { spawn "rofi" "-show" "window"; }
+
+    Mod+n { spawn "sway-client" "-t" "-sw"; }
+    Mod+Shift+n { spawn "sway-client" "--close-all"; }
+
+    Super+Alt+L { spawn "swaylock-fancy"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-"; }
     XF86AudioMute        allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
     XF86AudioMicMute     allow-when-locked=true { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
 
-    Mod+Shift+Q { close-window; }
 
     Mod+H     { focus-column-left; }
     Mod+L     { focus-column-right; }
     Mod+Shift+H     { move-column-left; }
     Mod+Shift+L     { move-column-right; }
+
+    Mod+X   { spawn "wlr-which-key" "--initial-keys" "x"; }
+    Mod+s   { spawn "wlr-which-key" "--initial-keys" "r"; }
 
     Mod+J     { focus-window-or-workspace-down; }
     Mod+K     { focus-window-or-workspace-up; }
@@ -243,18 +248,16 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
-    Mod+Ctrl+4 { move-column-to-workspace 4; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
-    Mod+Ctrl+7 { move-column-to-workspace 7; }
-    Mod+Ctrl+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+9 { move-column-to-workspace 9; }
+    Mod+Shift+1 { move-window-to-workspace 1; }
+    Mod+Shift+2 { move-window-to-workspace 2; }
+    Mod+Shift+3 { move-window-to-workspace 3; }
+    Mod+Shift+4 { move-window-to-workspace 4; }
+    Mod+Shift+5 { move-window-to-workspace 5; }
+    Mod+Shift+6 { move-window-to-workspace 6; }
+    Mod+Shift+7 { move-window-to-workspace 7; }
+    Mod+Shift+8 { move-window-to-workspace 8; }
+    Mod+Shift+9 { move-window-to-workspace 9; }
 
-    // Alternatively, there are commands to move just a single window:
-    // Mod+Ctrl+1 { move-window-to-workspace 1; }
 
     // Switches focus between the current and the previous workspace.
     Mod+Backslash { focus-workspace-previous; }
@@ -271,8 +274,8 @@ binds {
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
-    Mod+F { maximize-column; }
-    Mod+Shift+F { fullscreen-window; }
+    Mod+W { maximize-column; }
+    Mod+F { fullscreen-window; }
     Mod+C { center-column; }
 
     // Finer width adjustments.

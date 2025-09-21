@@ -13,15 +13,11 @@ for_window [window_role="GtkFileChooserDialog"] resize set 800 600, move positio
 
 bindsym $mod+Shift+Return exec $term
 bindsym $mod+bar exec $term
-bindsym $mod+Shift+r exec $term --class ranger ranger
 bindsym $mod+Shift+q kill
 
 bindsym $mod+Shift+f exec firefox
 for_window [title="Firefox — Sharing Indicator"] floating enable, resize set 10 10
 for_window [title="Extension: (Tree Style Tab) - Close tabs? — Mozilla Firefox"] floating enable, resize set 300 100
-
-bindsym $mod+Shift+c exec $term --class ikhal ikhal
-for_window [app_id="ikhal"] floating enable, resize set 1000 600, move position center, border pixel 5
 
 bindsym $mod+Ctrl+n exec sh -c '[[ "$(nmcli network)" == "enabled" ]] && nmcli network off || nmcli network on'
 
@@ -195,7 +191,7 @@ bar {
   swaybar_command waybar
 }
 
-exec --no-startup-id nextcloud
+# exec --no-startup-id nextcloud
 exec --no-startup-id swaync
 exec --no-startup-id swayidle -w \
     timeout 300 'swaylock-fancy -p &' \

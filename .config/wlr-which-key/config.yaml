@@ -1,0 +1,65 @@
+# Theming
+font: JetBrainsMono 13
+background: "#282828d0"
+color: "#fbf1c7"
+border: "#8ec07c"
+separator: " ➜ "
+border_width: 2
+corner_r: 10
+padding: 15 # Defaults to corner_r
+# rows_per_column: 5 # No limit by default
+# column_padding: 25 # Defaults to padding
+
+# Anchor and margin
+anchor: center # One of center, left, right, top, bottom, bottom-left, top-left, etc.
+# Only relevant when anchor is not center
+margin_right: 0
+margin_bottom: 0
+margin_left: 0
+margin_top: 0
+
+# Permits key bindings that conflict with compositor key bindings.
+# Default is `false`.
+# inhibit_compositor_keyboard_shortcuts: false
+
+# Try to guess the correct keyboard layout to use. Default is `false`.
+# auto_kbd_layout: true
+
+menu:
+  - key: "r"
+    desc: Resize
+    submenu:
+      - key: "h"
+        desc: Shrink width
+        cmd: niri msg action set-column-width "-5%"
+        keep_open: true
+      - key: "l"
+        desc: Expand width
+        cmd: niri msg action set-column-width "+5%"
+        keep_open: true
+      - key: "j"
+        desc: Shrink height
+        cmd: niri msg action set-window-height "-5%"
+        keep_open: true
+      - key: "k"
+        desc: Expand height
+        cmd: niri msg action set-window-height "+5%"
+        keep_open: true
+  - key: "x"
+    desc: System
+    submenu:
+      - key: "l"
+        desc: Lock
+        cmd: swaylock-fancy
+      - key: "e"
+        desc: Exit
+        cmd: niri msg action quit
+      - key: "s"
+        desc: Suspend
+        cmd: systemctl suspend
+      - key: "r"
+        desc: Reboot
+        cmd: systemctl reboot
+      - key: "p"
+        desc: Poweroff
+        cmd: systemctl poweroff

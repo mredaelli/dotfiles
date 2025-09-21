@@ -86,6 +86,7 @@ in
         configure-gtk
 
         swaylock-fancy
+        unstable.wlr-which-key
         swayidle
         waybar
         playerctl

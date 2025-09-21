@@ -4,65 +4,61 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "thunderbolt" "nvme" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ 
-    "kvm-intel"
-    #"xe" 
-  ];
+  boot.kernelModules = [ "kvm-intel" "xe" ];
   boot.extraModulePackages = [ ];
-  # boot.kernelParams = ["i915.force_probe:!7d55" "xe.force_probe:7d55"];
+  boot.kernelParams = [ "i915.force_probe=!7d55" "xe.force_probe=7d55" ];
 
-  fileSystems."/" =
-    { device = "rpool/enc/local/root";
-      fsType = "zfs";
-    };
+  fileSystems."/" = {
+    device = "rpool/enc/local/root";
+    fsType = "zfs";
+  };
 
-  fileSystems."/nix" =
-    { device = "rpool/unenc/nix";
-      fsType = "zfs";
-    };
+  fileSystems."/nix" = {
+    device = "rpool/unenc/nix";
+    fsType = "zfs";
+  };
 
-  fileSystems."/var" =
-    { device = "rpool/enc/local/var";
-      fsType = "zfs";
-      neededForBoot = true;
-    };
+  fileSystems."/var" = {
+    device = "rpool/enc/local/var";
+    fsType = "zfs";
+    neededForBoot = true;
+  };
 
-  fileSystems."/cache" =
-    { device = "rpool/enc/local/cache";
-      fsType = "zfs";
-    };
+  fileSystems."/cache" = {
+    device = "rpool/enc/local/cache";
+    fsType = "zfs";
+  };
 
-  fileSystems."/home" =
-    { device = "rpool/enc/safe/home";
-      fsType = "zfs";
-    };
+  fileSystems."/home" = {
+    device = "rpool/enc/safe/home";
+    fsType = "zfs";
+  };
 
-  fileSystems."/mail" =
-    { device = "rpool/enc/safe/home/mail";
-      fsType = "zfs";
-    };
+  fileSystems."/mail" = {
+    device = "rpool/enc/safe/home/mail";
+    fsType = "zfs";
+  };
 
-  fileSystems."/persistent" =
-    { device = "rpool/enc/safe/persistent";
-      fsType = "zfs";
-      neededForBoot = true;
-    };
+  fileSystems."/persistent" = {
+    device = "rpool/enc/safe/persistent";
+    fsType = "zfs";
+    neededForBoot = true;
+  };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/9691-07C7";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/9691-07C7";
+    fsType = "vfat";
+    options = [ "fmask=0022" "dmask=0022" ];
+  };
 
-  swapDevices = [];
+  swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
-  hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware.cpu.intel.updateMicrocode =
+    lib.mkDefault config.hardware.enableRedistributableFirmware;
 
 }
