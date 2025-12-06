@@ -34,7 +34,11 @@ return {
 		"ggandor/leap.nvim",
 		config = function()
 			local leap = require("leap")
-			leap.add_default_mappings()
+			vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
+			vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
+			vim.keymap.set("n", "gs", "<Plug>(leap-from-window)")
+			vim.keymap.set({ "x", "o" }, "x", "<Plug>(leap-forward-till)")
+			vim.keymap.set({ "x", "o" }, "X", "<Plug>(leap-backward-till)")
 			leap.opts.highlight_unlabeled_phase_one_targets = true
 			leap.opts.case_sensitive = true
 		end,

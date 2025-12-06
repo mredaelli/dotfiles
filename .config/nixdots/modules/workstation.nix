@@ -22,7 +22,7 @@ let
     atuin
   ];
   morePackages = with pkgs; [
-    ncspot
+    supersonic
     gthumb
     mdcat
     viddy
@@ -49,6 +49,7 @@ let
       shfmt
       vimPlugins.sniprun
       markdown-oxide
+      mergiraf
     ]
     ++ (with pkgs.nodePackages; [
       vim-language-server

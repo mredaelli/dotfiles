@@ -39,10 +39,10 @@ let
         ${gsettings} set ${gnome_schema} cursor-size 40
       '';
   };
-  rofi-stuff = pkgs.rofi-wayland.override {
+  rofi-stuff = pkgs.rofi.override {
     plugins = with pkgs; [
-      (rofi-calc.override { rofi-unwrapped = rofi-wayland-unwrapped; })
-      rofi-emoji-wayland
+      rofi-calc
+      rofi-emoji
       rofi-top
       rofi-bluetooth
       rofi-power-menu
@@ -63,7 +63,7 @@ in
     launcher = lib.mkOption {
       type = lib.types.enum [
         "rofi"
-        "albert"
+        "anyrun"
       ];
       default = "rofi";
     };
@@ -97,7 +97,7 @@ in
         xdg-utils
         imv
         kanshi
-        firefox-wayland
+        firefox
         # wdisplays # tool to configure displays
 
         # sway
@@ -105,7 +105,7 @@ in
 
         niri
         xwayland-satellite
-        albert
+        anyrun
 
         matcha-gtk-theme
         quintom-cursor-theme
@@ -145,11 +145,10 @@ in
       boot.kernelParams = [ "console=tty1" ];
       services.greetd = {
         enable = true;
-        vt = 2;
         settings = {
           default_session = {
             command = "${
-              lib.makeBinPath [ pkgs.greetd.tuigreet ]
+              lib.makeBinPath [ pkgs.tuigreet ]
             }/tuigreet --time --cmd '${sessionCmd}' --remember-session --remember --user-menu --asterisks --sessions ${sessions}";
             user = "greeter";
           };

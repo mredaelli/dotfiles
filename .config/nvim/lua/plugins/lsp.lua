@@ -100,7 +100,6 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		config = function()
-			local lspconfig = require("lspconfig")
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			require("lsp_extensions").inlay_hints({
@@ -141,6 +140,17 @@ return {
 			vim.cmd([[command! FormatDisable lua FormatToggle(true)]])
 			vim.cmd([[command! FormatEnable lua FormatToggle(false)]])
 
+			vim.lsp.config("*", {
+				capabilities = {
+					textDocument = {
+						semanticTokens = {
+							multilineTokenSupport = true,
+						},
+					},
+				},
+				root_markers = { ".git" },
+			})
+
 			local pyright_opts = {
 				single_file_support = true,
 				settings = {
@@ -162,30 +172,34 @@ return {
 				capabilities = capabilities,
 				on_attach = on_attach,
 			}
-			lspconfig.pyright.setup(pyright_opts)
-			lspconfig.markdown_oxide.setup({ on_attach = on_attach, capabilities = capabilities })
-			lspconfig.denols.setup({
+			vim.lsp.config("pyright", pyright_opts)
+			vim.lsp.enable("pyright")
+			vim.lsp.config("markdown_oxide", { on_attach = on_attach, capabilities = capabilities })
+			vim.lsp.enable("markdown_oxide")
+			vim.lsp.config("denols", {
 				capabilities = capabilities,
 				-- on_attach = function(client)
 				-- 	client.server_capabilities.document_formatting = false
 				-- 	on_attach(client)
 				-- end,
 				on_attach = on_attach,
-				root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
+				-- root_dir = lspconfig.util.root_pattern("deno.json", "deno.jsonc"),
 				single_file_support = false,
 			})
+			vim.lsp.enable("denols")
 
-			lspconfig.ts_ls.setup({
+			vim.lsp.config("ts_ls", {
 				capabilities = capabilities,
 				on_attach = function(client)
 					client.server_capabilities.document_formatting = false
 					on_attach(client)
 				end,
-				root_dir = lspconfig.util.root_pattern("package.json"),
+				-- root_dir = lspconfig.util.root_pattern("package.json"),
 				single_file_support = false,
 			})
+			vim.lsp.enable("ts_ls")
 
-			lspconfig.angularls.setup({
+			vim.lsp.config("angularls", {
 				on_attach = on_attach,
 				capabilities = capabilities,
 				cmd = angular_cmd,
@@ -193,8 +207,9 @@ return {
 					new_config.cmd = angular_cmd
 				end,
 			})
+			vim.lsp.enable("angularls")
 
-			lspconfig.lua_ls.setup({
+			vim.lsp.config("lua_ls", {
 				capabilities = capabilities,
 				on_attach = on_attach,
 				cmd = { "lua-language-server" },
@@ -228,28 +243,39 @@ return {
 					},
 				},
 			})
+			vim.lsp.enable("lua_ls")
 
-			lspconfig.vimls.setup({ on_attach = on_attach, capabilities = capabilities })
+			vim.lsp.config("vimls", { on_attach = on_attach, capabilities = capabilities })
+			vim.lsp.enable("vimls")
 
-			lspconfig.rust_analyzer.setup({ on_attach = on_attach, capabilities = capabilities })
+			vim.lsp.config("rust_analyzer", { on_attach = on_attach, capabilities = capabilities })
+			vim.lsp.enable("rust_analyzer")
 
-			lspconfig.bashls.setup({ on_attach = on_attach, capabilities = capabilities })
-			lspconfig.statix.setup({ on_attach = on_attach, capabilities = capabilities })
-			-- lspconfig.nixd.setup({ on_attach = on_attach, capabilities = capabilities })
-			lspconfig.nil_ls.setup({ on_attach = on_attach, capabilities = capabilities })
-			lspconfig.bashls.setup({ on_attach = on_attach, capabilities = capabilities })
-			lspconfig.yamlls.setup({ on_attach = on_attach, capabilities = capabilities })
-			lspconfig.eslint.setup({ on_attach = on_attach, capabilities = capabilities })
-			lspconfig.jdtls.setup({
+			vim.lsp.config("bashls", { on_attach = on_attach, capabilities = capabilities })
+			vim.lsp.enable("bashls")
+			vim.lsp.config("statix", { on_attach = on_attach, capabilities = capabilities })
+			vim.lsp.enable("statix")
+			-- vim.lsp.config('nixd', { on_attach = on_attach, capabilities = capabilities })
+			vim.lsp.config("nil_ls", { on_attach = on_attach, capabilities = capabilities })
+			vim.lsp.enable("nil_ls")
+			vim.lsp.config("bashls", { on_attach = on_attach, capabilities = capabilities })
+			vim.lsp.enable("bashls")
+			vim.lsp.config("yamlls", { on_attach = on_attach, capabilities = capabilities })
+			vim.lsp.enable("yamlls")
+			vim.lsp.config("eslint", { on_attach = on_attach, capabilities = capabilities })
+			vim.lsp.enable("eslint")
+			vim.lsp.config("jdtls", {
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
+			vim.lsp.enable("jdtls")
 			-- vim.lsp.enable("jdtls")
-			lspconfig.beancount.setup({
+			vim.lsp.config("beancount", {
 				init_options = { journal_file = os.getenv("BEANCOUNT_FILE") },
 				on_attach = on_attach,
 				capabilities = capabilities,
 			})
+			vim.lsp.enable("beancount")
 		end,
 		dependencies = {
 			"nvim-lua/lsp_extensions.nvim",

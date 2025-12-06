@@ -42,12 +42,9 @@ input {
         // middle-emulation
     }
 
-    // Uncomment this to make the mouse warp to the center of newly focused windows.
     // warp-mouse-to-focus
-
-    // Focus windows and outputs automatically when moving the mouse into them.
-    // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
+    focus-follows-mouse max-scroll-amount="50%"
+    workspace-auto-back-and-forth
 }
 
 output "eDP-1" {
@@ -87,7 +84,7 @@ layout {
 
     // You can change the default width of the new windows.
     // If you leave the brackets empty, the windows themselves will decide their initial width.
-    default-column-width { proportion 0.667; }
+    default-column-width { proportion 0.33333; }
 
     focus-ring {
         // off
@@ -103,8 +100,7 @@ layout {
 
 spawn-at-startup "swaync"
 spawn-at-startup "waybar"
-spawn-at-startup "swayidle" "-w"  "timeout" "300" "swaylock --screenshots --effect-greyscale --effect-pixelate 10 &"  "timeout" "600" "niri msg action power-off-monitors" "before-sleep" "swaylock-fancy" "resume"  "niri msg action power-on-monitors"
-spawn-at-startup "albert"
+spawn-at-startup "swayidle" "-w"  "timeout" "300" "swaylock &"  "timeout" "600" "niri msg action power-off-monitors" "before-sleep" "swaylock" "after-resume"  "niri msg action power-on-monitors"
 spawn-at-startup "wlsunset" "-l" "47.3" "-L" "8.5"
 spawn-at-startup "kanshi"
 spawn-at-startup "blueman-applet"
@@ -128,9 +124,32 @@ window-rule {
     block-out-from "screen-capture"
     // block-out-from "screencast"
 }
+
 switch-events {
  lid-close { spawn "swaylock-fancy"; }
 }
+
+window-rule {
+    match app-id=r#"^com.github.com.woxlauncer.wox"#
+
+    open-floating true
+    min-width 100
+    max-width 1200
+    min-height 100
+    max-height 800
+}
+window-rule {
+    match app-id="firefox$" title=r#"^Extension:.*Bitwarden Password Manager"#
+    open-floating true
+}                  
+window-rule {
+    match app-id="firefox$" title=r#"( — |^)Mozilla Firefox$"#
+    default-column-width { proportion 0.66667; }
+}                  
+window-rule {
+    match app-id=r#"^Supersonic$"#
+    default-column-width { proportion 0.33333; }
+}                  
 
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
@@ -141,7 +160,7 @@ binds {
 
     Mod+Shift+F { spawn "firefox"; }
 
-    Mod+D { spawn "albert" "show" ; }
+    Mod+D { spawn "anyrun" ; }
     Mod+Shift+D { spawn "rofi" "-show" "run"; }
     Mod+Shift+w { spawn "rofi" "-show" "window"; }
 
@@ -321,3 +340,5 @@ cursor {
     xcursor-theme "Qogir-dark"
     xcursor-size 40
 }
+
+include "startup.kdl"

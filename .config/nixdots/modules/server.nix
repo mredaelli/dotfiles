@@ -39,13 +39,13 @@
       nil
       statix
       nixfmt-rfc-style
-      sumneko-lua-language-server
+      lua-language-server
       stylua
 
       yazi
 
       git
-      gitAndTools.delta
+      delta
       (pkgs.writeScriptBin "vi" ''
         #!/bin/sh
         exec ${pkgs.neovim}/bin/nvim "$@"

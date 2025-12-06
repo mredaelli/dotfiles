@@ -8,6 +8,9 @@ end
 alias du="du -h"
 alias df="duf"
 alias free="free -m"
+# alias v='nvim'
+# alias vv='f=$(fzf --preview-window "right:50%" --preview "bat --color=always {1}"); test -n "$f" && v "$f"'
+# alias vvv='f=$(rg --line-number --no-heading . | fzf -d: -n 2.. --preview-window "right:50%:+{2}" --preview "bat --color=always --highlight-line {2} {1}"); test -n "$(echo "$f" | cut -d: -f1)" && v "+$(echo "$f" | cut -d: -f2)" "$(echo "$f" | cut -d: -f1)"'
 
 if type -q htop
   alias top="htop"

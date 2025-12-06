@@ -48,12 +48,11 @@
     date = iso
 
 [merge]
-    tool = vim_mergetool
-    conflictstyle = zdiff3
+    conflictstyle = diff3
 
-[mergetool "vim_mergetool"]
-    cmd = vim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
-    trustExitCode = true
+[merge "mergiraf"]
+    name = mergiraf
+    driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
 
 [pull]
 	rebase = true

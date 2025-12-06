@@ -163,7 +163,6 @@ local config = wezterm.config_builder()
 config:set_strict_mode(true)
 config.unix_domains = { { name = "unix" } }
 -- default_gui_startup_args = { "connect", "unix" },
-config.enable_wayland = true
 config.font = wezterm.font({
 	family = "JetBrains Mono",
 	harfbuzz_features = { "calt=1", "clig=1", "liga=1" },
@@ -204,7 +203,6 @@ config.ssh_domains = {
 		remote_address = "hunk",
 	},
 }
--- https://github.com/wez/wezterm/issues/5990
---config.front_end = "WebGpu"
---config.webgpu_power_preference = "HighPerformance"
+-- https://github.com/wezterm/wezterm/issues/5284
+config.enable_wayland = false
 return config
