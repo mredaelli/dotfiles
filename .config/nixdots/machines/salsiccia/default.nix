@@ -1,24 +1,23 @@
 { config, pkgs, ... }:
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../../modules/common_settings.nix
-      ../../modules/server.nix
-      ../../modules/user.nix
+  imports = [
+    ./hardware-configuration.nix
+    ../../modules/common_settings.nix
+    ../../modules/server.nix
+    ../../modules/user.nix
 
-      ./postgres.nix
-      ./nginx.nix
-      # ../../modules/wallabag.nix
-      ./shiori.nix
-      ./miniflux.nix
-      ./vaultwarden.nix
-      ./nextcloud.nix
+    ./postgres.nix
+    ./nginx.nix
+    # ../../modules/wallabag.nix
+    ./shiori.nix
+    ./miniflux.nix
+    ./vaultwarden.nix
+    ./nextcloud.nix
 
-      # ./postfix.nix
-      ./syncthing.nix
-      ../../pgup.nix
-    ];
+    # ./postfix.nix
+    ./syncthing.nix
+    ../../pgup.nix
+  ];
 
   security.acme = {
     defaults.email = "massimo.acme@typish.io";
@@ -38,7 +37,11 @@
   system.autoUpgrade.enable = true;
   services.openssh.enable = true;
 
-  networking.firewall.allowedTCPPorts = [ 22 80 443 ];
+  networking.firewall.allowedTCPPorts = [
+    22
+    80
+    443
+  ];
 
   system.stateVersion = "20.03"; # Did you read the comment?
 }

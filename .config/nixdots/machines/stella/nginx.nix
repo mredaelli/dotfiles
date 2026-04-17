@@ -4,6 +4,9 @@
     defaults.email = "massimo.acme@typish.io";
     acceptTerms = true;
   };
+
+  my.wireguardRestrict.enable = true;
+
   services.nginx = {
     enable = true;
 

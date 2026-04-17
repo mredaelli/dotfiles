@@ -1,10 +1,11 @@
 { config, pkgs, ... }:
-let host = "next.typish.io";
+let
+  host = "next.typish.io";
 in
 {
   services.nextcloud = {
     enable = true;
-    package = pkgs.nextcloud31;
+    package = pkgs.nextcloud32;
     hostName = host;
     https = true;
     autoUpdateApps.enable = true;

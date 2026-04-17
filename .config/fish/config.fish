@@ -132,7 +132,9 @@ if status --is-interactive
   set fish_cursor_visual block
   fish_vi_key_bindings
 
-  atuin init fish | source
+  if type -q atuin
+    atuin init fish | source
+  end
 end
 set -Ux FZF_DEFAULT_OPTS "\
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \

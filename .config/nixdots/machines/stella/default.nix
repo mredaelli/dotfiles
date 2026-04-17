@@ -12,9 +12,6 @@
     ../../modules/server.nix
     ../../modules/user.nix
     ./nginx.nix
-    ./poetry.nix
-    ./dedications.nix
-    ./calcal.nix
     ./vaultwarden.nix
     ./shiori.nix
     ./syncthing.nix
@@ -24,7 +21,8 @@
     ./atuin.nix
     ./readeck.nix
     ./monica.nix
-    # ./gokapi.nix
+    ./silverbullet.nix
+    ./wireguard.nix
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -44,6 +42,14 @@
       443
     ];
   };
+  # services.tailscale = {
+  #   enable = true;
+  # };
+
+  # networking.firewall = {
+  #   trustedInterfaces = [ "tailscale0" ];
+  #   allowedUDPPorts = [ config.services.tailscale.port ];
+  # };
 
   nix.settings.allowed-users = [ "@wheel" ];
 
@@ -74,23 +80,23 @@
     };
   };
 
-  services.nginx.virtualHosts."calcal.typish.dev" = {
-    enableACME = true;
-    forceSSL = true;
-    locations."/" = {
-      extraConfig = ''
-        proxy_pass http://localhost:7777;
-        proxy_pass_request_headers on;
-        proxy_set_header        Host $host;
-        proxy_set_header        X-Real-IP $remote_addr;
-        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header        X-Forwarded-Proto $scheme;
-        proxy_read_timeout      600s;
-        proxy_send_timeout      600s;
-      '';
-    };
-  };
-
+  # services.nginx.virtualHosts."calcal.typish.dev" = {
+  #   enableACME = true;
+  #   forceSSL = true;
+  #   locations."/" = {
+  #     extraConfig = ''
+  #       proxy_pass http://localhost:7777;
+  #       proxy_pass_request_headers on;
+  #       proxy_set_header        Host $host;
+  #       proxy_set_header        X-Real-IP $remote_addr;
+  #       proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+  #       proxy_set_header        X-Forwarded-Proto $scheme;
+  #       proxy_read_timeout      600s;
+  #       proxy_send_timeout      600s;
+  #     '';
+  #   };
+  # };
+  #
   systemd.services.b2Backup = {
     enable = true;
     script =
