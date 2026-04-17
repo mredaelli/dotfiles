@@ -1,8 +1,7 @@
 require("lazyp")
 
 vim.opt.mouse = ""
-vim.g.catppuccin_flavour = "macchiato"
-vim.cmd([[colorscheme catppuccin]])
+vim.cmd([[colorscheme catppuccin-mocha]])
 vim.cmd([[
 	runtime misc.vim
 	runtime mappings.vim

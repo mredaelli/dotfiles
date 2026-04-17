@@ -180,7 +180,7 @@ config.inactive_pane_hsb = {
 	saturation = 0.9,
 	brightness = 0.7,
 }
-config.color_scheme = "catppuccin-mocha"
+config.color_scheme = "Catppuccin Mocha"
 config.set_environment_variables = {
 	-- VTE_VERSION = "6003", -- https://github.com/wez/wezterm/issues/115
 }
@@ -205,4 +205,5 @@ config.ssh_domains = {
 }
 -- https://github.com/wezterm/wezterm/issues/5284
 config.enable_wayland = false
+config.front_end = "OpenGL"
 return config

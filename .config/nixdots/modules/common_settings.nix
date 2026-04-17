@@ -57,13 +57,19 @@ in
     android_sdk.accept_license = true;
     pulseaudio = true;
 
-    packageOverrides = pkgs: {
-      unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
-      jre = pkgs.jdk11;
-      fenix = import (fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz") { };
-      serena = serena-flake.packages.${pkgs.system}.default;
-      micasa = micasa-flake.packages.${pkgs.system}.default;
-    };
+    packageOverrides =
+      let
+        unstable = import <nixos-unstable> { config = baseConfig; };
+      in
+      pkgs: {
+        inherit unstable;
+        jre = pkgs.jdk11;
+        fenix = import (fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz") { };
+        windsurf = unstable.windsurf;
+        worktrunk = pkgs.callPackage ./worktrunk.nix { };
+        serena = serena-flake.packages.${pkgs.system}.default;
+        micasa = micasa-flake.packages.${pkgs.system}.default;
+      };
   };
 
   console.useXkbConfig = true;

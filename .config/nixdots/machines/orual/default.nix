@@ -7,6 +7,7 @@
 }:
 let
   nixos-hardware = builtins.fetchGit { url = "https://github.com/NixOS/nixos-hardware.git"; };
+  rustical = builtins.fetchTarball "https://github.com/lennart-k/rustical/archive/main.tar.gz";
 in
 {
   imports = [
@@ -28,6 +29,8 @@ in
     ../../modules/laptop.nix
     ../../modules/zfs.nix
     # ../../modules/nvidia.nix
+    ./gitlab-mcp.nix
+    # ./rustical.nix
   ];
 
   hardware.nvidia.open = false;
@@ -53,7 +56,7 @@ in
     # rollback results in sudo lectures after each reboot
     Defaults lecture = never
   '';
-  services.logind.lidSwitchExternalPower = "ignore";
+  services.logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
   services.fprintd.enable = true;
   services.fwupd.enable = true;
 
@@ -87,6 +90,11 @@ in
     hostId = "5f87931e";
     hostName = "orual";
     networkmanager.enable = true;
+    localCommands = ''
+      ip rule add to 192.168.0.0/24 priority 2500 lookup main
+      ${pkgs.ethtool}/bin/ethtool --set-ring enp0s31f6 rx 4096 tx 4096
+    '';
+
   };
 
   fonts = {
@@ -96,12 +104,15 @@ in
   environment.systemPackages = with pkgs; [
     jp
     wally-cli
-    vscode
+    unstable.windsurf
+    unstable.claude-code
     ungoogled-chromium
     zoom-us
     teams-for-linux
     psst
-    devenv
+    unstable.devenv
+    zed-editor
+    glab
   ];
 
   virtualisation.docker = {
@@ -116,11 +127,10 @@ in
       "0.0.0.0:2376"
     ];
   };
-  # netmaker
+
   environment.etc.hosts.mode = "0644";
   networking.hosts = {
     "159.100.245.195" = [ "headscale.lari.systems" ];
-    "127.0.0.1" = [ "calcal.typish.io" ];
   };
 
   hardware.sane = {
@@ -131,7 +141,7 @@ in
   services = {
     sanoid = {
       enable = true;
-      datasets."rpool/enc/safe" = {
+      datasets."rpool/enc/safe/home" = {
         useTemplate = [ "safe" ];
         recursive = true;
       };
@@ -140,8 +150,11 @@ in
     thinkfan = {
       enable = true;
     };
-    tailscale = {
+    ollama = {
       enable = true;
+      package = pkgs.ollama-cuda;
+      syncModels = true;
+      loadModels = [ "qwen2.5-coder:3b" ];
     };
     printing.enable = true;
     printing.drivers = [ pkgs.hplipWithPlugin ];
@@ -163,7 +176,21 @@ in
       ''ATTR{power/wakeup}="disabled"''
     ];
   };
+  programs.pay-respects.aiIntegration = {
+    locale = "en-us";
+    model = "qwen2.5-coder:3b";
+    url = "http://127.0.0.1:11434/v1/chat/completions";
+  };
   programs.nix-ld.enable = true;
+  programs.steam = {
+    enable = true;
+    package = pkgs.steam.override {
+      extraEnv = {
+        DISPLAY = ":0";
+      };
+      extraArgs = "-system-composer";
+    };
+  };
 
   system.stateVersion = "21.05";
 }

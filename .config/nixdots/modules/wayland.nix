@@ -33,7 +33,7 @@ let
         export XDG_DATA_DIRS=${datadir}:$XDG_DATA_DIRS
         gnome_schema=org.gnome.desktop.interface
         ${gsettings} set ${gnome_schema} gtk-theme 'Matcha-dark-sea-hdpi'
-        ${gsettings} set ${gnome_schema} icon-theme Quintom_Ink
+        ${gsettings} set ${gnome_schema} icon-theme BeautyLine
         # Put this also in sway config, as `seat seat0 xcursor_theme Quintom_Ink 40`
         ${gsettings} set ${gnome_schema} cursor-theme Quintom_Ink
         ${gsettings} set ${gnome_schema} cursor-size 40
@@ -109,6 +109,7 @@ in
 
         matcha-gtk-theme
         quintom-cursor-theme
+        beauty-line-icon-theme
       ];
       programs = {
         sway = {

@@ -1,138 +1,217 @@
 {
-    "modules-left": ["niri/workspaces", "sway/workspaces", "sway/mode"],
-    "modules-center": ["mpris"],
-    "modules-right": ["idle_inhibitor", "pulseaudio", "wireplumber", "network", "cpu", "memory", "disk", "temperature", "temperature#temp2", "backlight", "battery", "clock","custom/notification", "tray"],
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
+  "modules-left": [
+    "niri/workspaces",
+    "sway/workspaces",
+    "sway/mode",
+    "wlr/taskbar"
+  ],
+  "modules-center": ["mpris"],
+  "modules-right": [
+    "idle_inhibitor",
+    "pulseaudio",
+    "wireplumber",
+    "network",
+    "cpu",
+    "memory",
+    "disk",
+    "temperature",
+    "temperature#temp2",
+    "backlight",
+    "battery",
+    "clock",
+    "systemd-failed-units",
+    "custom/notification",
+    "bluetooth",
+    "tray"
+  ],
+  "bluetooth": {
+    "format": " {status}",
+    "format-on": "✓",
+    "format-off": "✗",
+    "format-disabled": "✗",
+    "format-connected": " {num_connections}",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "on-click": "blueman-manager",
+    "on-click-right": "rfkill unblock bluetooth && bluetoothctl show | grep -q 'Powered: yes' && bluetoothctl power off || bluetoothctl power on"
+  },
+  "wlr/taskbar": {
+    "all-outputs": false,
+    "format": "{icon} ",
+    "icon-size": 16,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "rewrite": {
+      "Firefox Web Browser": "Firefox",
+    }
+  },
+  "systemd-failed-units": {
+    "hide-on-ok": true,
+    "format": "✗{nr_failed}",
+    "format-ok": "✓",
+    "system": true,
+    "user": true
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+  "niri/workspaces": {
+    "format": "{value} {icon} ",
+    "format-icons": {
+      "active": "",
+      "default": ""
+    }
+  },
+  "sway/mode": {
+    "format": "<span style=\"italic\">{}</span>"
+  },
+  "tray": {
+    "spacing": 10
+  },
+  "mpris": {
+    "format": "{player_icon} {status_icon} {dynamic}",
+    "dynamic-len": 60,
+    "dynamic-importance-order": [
+      "title",
+      "artist",
+      "position",
+      "length",
+      "album"
+    ],
+    "status-icons": {
+      "paused": " ",
+      "stopped": "⏹",
+      "playing": " "
     },
-    "niri/workspaces": {
-      "format": "{value} {icon} ",
-      "format-icons": {
-        "active": "",
-        "default": ""
-      }
+    "player-icons": {
+      "default": "",
+      "ncspot": "",
+      "firefox": ""
+    }
+  },
+  "clock": {
+    "format": "{:%d-%m-%YＴ%H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format-alt": "{:%H:%M:%S}",
+        "calendar": {
+                    "mode"          : "year",
+                    "mode-mon-col"  : 3,
+                    "weeks-pos"     : "right",
+                    "on-scroll"     : 1,
+                    "format": {
+                              "months":     "<span color='#ffead3'><b>{}</b></span>",
+                              "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                              "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                              "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                              "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+                              }
+                    },
+        "actions":  {
+                    "on-click-right": "mode",
+                    "on-scroll-up": "tz_up",
+                    "on-scroll-down": "tz_down",
+                    "on-scroll-up": "shift_up",
+                    "on-scroll-down": "shift_down"
+                    }
+  },
+  "disk": {
+    "format": "{percentage_free}% ",
+    "tooltip-format": "{percentage_free}% ({free}) remaining on {path}",
+    "on-click": "wezterm start dua ~ i",
+    "path": "/home"
+  },
+  "cpu": {
+    "interval": 5,
+    "format": "{usage}% {load} ",
+    "on-click": "wezterm start htop",
+    "tooltip": false
+  },
+  "memory": {
+    "interval": 5,
+    "format": "{}% ",
+    "on-click": "wezterm start htop"
+  },
+  "temperature": {
+    "critical-threshold": 60,
+    "format": "{temperatureC}°C {icon}",
+    "format-icons": ["", "", ""],
+    "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input"
+  },
+  "temperature#temp2": {
+    "critical-threshold": 60,
+    "format": "{temperatureC}°C {icon}",
+    "format-icons": ["", "", ""],
+    "hwmon-path": "/sys/class/hwmon/hwmon0/temp3_input"
+  },
+  "backlight": {
+    "format": "{percent}% {icon}",
+    "format-icons": ["", ""],
+    "on-scroll-up": "~/bin/,backlight increase",
+    "on-scroll-down": "~/bin/,backlight decrease"
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
     },
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
+    "format": "{capacity}% {icon}",
+    "format-charging": "{capacity}% ",
+    "format-plugged": "{capacity}% ",
+    "format-alt": "{time} {icon}",
+    "format-icons": ["", "", "", "", ""]
+  },
+  "network": {
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "Disconnected ⚠",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "on-click-middle": "wezterm start nmtui"
+  },
+  "pulseaudio": {
+    "format": "{volume}% {icon} {format_source}",
+    "format-bluetooth": "{volume}% {icon} {format_source}",
+    "format-bluetooth-muted": " {icon} {format_source}",
+    "format-muted": " {format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
     },
-    "tray": {
-        "spacing": 10
+    "on-click": "pavucontrol",
+    "on-click-right": "supersonic-wayland"
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": " {icon} ",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": ""
     },
-    "mpris": {
-        "format": "{player_icon} {status_icon} {dynamic}",
-        "dynamic-len": 60,
-        "dynamic-importance-order":["title", "artist", "position", "length","album"],
-        "status-icons": {
-          "paused": " ",
-          "stopped": "⏹",
-          "playing": " ",
-        },
-        "player-icons": {
-          "default": "",
-          "ncspot": "",
-          "firefox":""
-        },
-    },
-    "clock": {
-       "format":"{:%m-%dT%H:%M}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}",
-        "on-click":"wezterm start --class ikhal ikhal"
-    },
-    "disk": {
-        "format": "{percentage_free}% ",
-        "tooltip-format": "{percentage_free}% ({free}) remaining on {path}",
-        "on-click": "wezterm start dua ~ i",
-        "path": "/home",
-    },
-    "cpu": {
-        "interval":5,
-        "format": "{usage}% {load} ",
-        "on-click": "wezterm start htop",
-        "tooltip": false
-    },
-    "memory": {
-        "interval":5,
-        "format": "{}% ",
-        "on-click": "wezterm start htop",
-    },
-    "temperature": {
-        "critical-threshold": 60,
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""],
-        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input"
-    },
-    "temperature#temp2": {
-        "critical-threshold": 60,
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""],
-        "hwmon-path": "/sys/class/hwmon/hwmon0/temp3_input"
-    },
-    "backlight": {
-        "format": "{percent}% {icon}",
-        "format-icons": ["", ""],
-        "on-scroll-up":"~/bin/,backlight increase",
-        "on-scroll-down":"~/bin/,backlight decrease",
-    },
-    "battery": {
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""]
-    },
-    "network": {
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "on-click-middle": "wezterm start nmtui"
-    },
-    "pulseaudio": {
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
-    },
-    "custom/notification": {
-        "tooltip": false,
-        "format": "{icon}",
-        "format-icons": {
-          "notification": "<span foreground='red'><sup></sup></span>",
-          "none": "",
-          "dnd-notification": "<span foreground='red'><sup></sup></span>",
-          "dnd-none": ""
-        },
-        "return-type": "json",
-        "exec": "swaync-client -swb",
-        "on-click": "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
-        "escape": true
-    },"wireplumber": {
+    "return-type": "json",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  },
+  "wireplumber": {
     "format": "{volume}% {icon}",
     "format-muted": "",
     "on-click": "helvum",
     "format-icons": ["", "", ""]
-}
+  }
 }

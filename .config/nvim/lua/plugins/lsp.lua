@@ -174,6 +174,29 @@ return {
 			}
 			vim.lsp.config("pyright", pyright_opts)
 			vim.lsp.enable("pyright")
+			local basedpyright_opts = {
+				single_file_support = true,
+				settings = {
+					basedpyright = {
+						disableLanguageServices = false,
+						disableOrganizeImports = false,
+						autoImportCompletion = true,
+					},
+					python = {
+						analysis = {
+							autoImportCompletions = true,
+							autoSearchPaths = true,
+							diagnosticMode = "openFilesOnly", -- openFilesOnly, workspace
+							typeCheckingMode = "basic", -- off, basic, strict
+							useLibraryCodeForTypes = false,
+						},
+					},
+				},
+				capabilities = capabilities,
+				on_attach = on_attach,
+			}
+			vim.lsp.config("basedpyright", basedpyright_opts)
+			vim.lsp.enable("basedpyright")
 			vim.lsp.config("markdown_oxide", { on_attach = on_attach, capabilities = capabilities })
 			vim.lsp.enable("markdown_oxide")
 			vim.lsp.config("denols", {
@@ -290,7 +313,7 @@ return {
 						lua = { "stylua" },
 						python = { "ruff_organize_imports", "ruff_format" },
 						rust = { "rustfmt" },
-						bash = { "shfmt" },
+						bash = { "beautysh" },
 						javascript = { "prettierd", "prettier", stop_after_first = true },
 						typescript = { "prettierd", "prettier", stop_after_first = true },
 						html = { "prettierd", "prettier", stop_after_first = true },

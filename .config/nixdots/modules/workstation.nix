@@ -6,7 +6,7 @@
 }:
 let
   packages = with pkgs; [
-    wezterm
+    unstable.wezterm
     libnotify
     pavucontrol
     imv
@@ -22,7 +22,7 @@ let
     atuin
   ];
   morePackages = with pkgs; [
-    supersonic
+    supersonic-wayland
     gthumb
     mdcat
     viddy
@@ -42,14 +42,16 @@ let
       cht-sh
       gitui
       nix-direnv
-      devenv
+      # devenv
       git-trim
       yamllint
       vim-vint
-      shfmt
+      beautysh
       vimPlugins.sniprun
       markdown-oxide
       mergiraf
+      worktrunk
+      gh
     ]
     ++ (with pkgs.nodePackages; [
       vim-language-server

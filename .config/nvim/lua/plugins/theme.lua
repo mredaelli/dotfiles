@@ -20,6 +20,7 @@ return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
-		config=false
+		priority = 1000,
+		config = false,
 	},
 }
