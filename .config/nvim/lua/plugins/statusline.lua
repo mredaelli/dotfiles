@@ -12,7 +12,7 @@ return {
 		"nvim-lualine/lualine.nvim",
 		opts = {
 			options = {
-				theme = "catppuccin",
+				theme = "catppuccin-nvim",
 				icons_enabled = true,
 				disabled_filetypes = { "alpha", "Outline", "plugins", "CHADTree", "[No Name]", "OUTLINE", "vim-plug" },
 				globalstatus = true,

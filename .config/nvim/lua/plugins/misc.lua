@@ -113,7 +113,7 @@ return {
 			vim.g.indent_blankline_use_treesitter = 1
 		end,
 	},
-	"p00f/nvim-ts-rainbow",
+	"HiPhish/rainbow-delimiters.nvim",
 
 	"AndrewRadev/inline_edit.vim",
 	"bogado/file-line",
