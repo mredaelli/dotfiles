@@ -32,9 +32,7 @@ in
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-
-  wayland.wm = "sway";
-  #wayland.launcher = "albert";
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   services.fprintd.enable = true;
   services.fwupd.enable = true;
@@ -55,6 +53,13 @@ in
     })
   ];
 
+  environment = {
+    systemPackages = [
+      pkgs.unstable.ollama
+      pkgs.unstable.claude-code
+      pkgs.micasa
+    ];
+  };
   # erase your darlings
   environment.etc = {
     nixos.source = "/persistent/etc/nixos";
@@ -110,6 +115,10 @@ in
         ];
       };
     };
+  };
+  systemd.services."wg-quick-wg0" = {
+    postStart = "resolvectl flush-caches";
+    postStop = "resolvectl flush-caches";
   };
 
   programs = {

@@ -112,6 +112,7 @@ in
 
     security.pam.services.turing.gnupg.enable = true;
 
+    services.resolved.enable = true;
     services = {
       gnome.gnome-keyring.enable = true;
       pcscd.enable = true;

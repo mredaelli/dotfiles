@@ -8,6 +8,8 @@ let
   baseConfig = {
     allowUnfree = true;
   };
+  serena-flake = builtins.getFlake "github:oraios/serena";
+  micasa-flake = builtins.getFlake "github:micasa-dev/micasa";
 in
 {
   nix = {
@@ -59,6 +61,8 @@ in
       unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
       jre = pkgs.jdk11;
       fenix = import (fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz") { };
+      serena = serena-flake.packages.${pkgs.system}.default;
+      micasa = micasa-flake.packages.${pkgs.system}.default;
     };
   };
 

@@ -341,4 +341,4 @@ cursor {
     xcursor-size 40
 }
 
-include "startup.kdl"
+//include "startup.kdl"
