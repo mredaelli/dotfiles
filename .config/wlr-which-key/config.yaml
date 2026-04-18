@@ -63,3 +63,12 @@ menu:
       - key: "p"
         desc: Poweroff
         cmd: systemctl poweroff
+  - key: "o"
+    desc: Obsidian
+    submenu:
+      - key: "k"
+        desc: Kb
+        cmd: wezterm start --cwd ~/syncthing/kb nvim index.md
+      - key: "p"
+        desc: Personal
+        cmd: wezterm start --cwd ~/carte/sites/personal nvim

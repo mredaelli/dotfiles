@@ -8,28 +8,22 @@ return {
 		end,
 	},
 
-	{
-		"michaelb/sniprun",
-		config = function()
-			local lsp_status = require("sniprun")
-			lsp_status.setup({
-				display = { "TerminalWithCode" },
-				selected_interpreters = { "Python3_fifo" },
-				repl_enable = { "Python3_fifo" },
-			})
-			vim.api.nvim_set_keymap("v", "s", "<Plug>SnipRun", { silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>s", "<Plug>SnipRunOperator", { silent = true })
-			vim.api.nvim_set_keymap("n", "<leader>ss", "<Plug>SnipRun", { silent = true })
-		end,
-	},
-
 	"antoinemadec/FixCursorHold.nvim",
 
-	"ThePrimeagen/refactoring.nvim",
+	{
+		"ThePrimeagen/refactoring.nvim",
+		config = function()
+			require("refactoring").setup({})
+			vim.keymap.set({ "n", "x" }, "<leader>R", function()
+				require("refactoring").select_refactor()
+			end)
+		end,
+	},
 
 	"sheerun/vim-polyglot",
 
 	"wellle/targets.vim",
+
 	{
 		"https://codeberg.org/andyg/leap.nvim",
 		config = function()
@@ -47,34 +41,13 @@ return {
 	"tpope/vim-unimpaired",
 	"tpope/vim-eunuch",
 	"mhinz/vim-sayonara",
+
 	{
 		"chrisgrieser/nvim-early-retirement",
 		config = true,
 		event = "VeryLazy",
 		retirementAgeMins = 60,
 	},
-	{ "numToStr/Comment.nvim", config = true },
-
-	{
-		"dbeniamine/cheat.sh-vim",
-		config = function()
-			vim.g.CheatSheetStayInOrigBuf = 0
-			vim.g.CheatSheetReaderCmd = "new"
-			vim.g.CheatSheetShowCommentsByDefault = 1
-			vim.g.CheatDoNotReplaceKeywordPrg = 1
-			vim.g.CheatSheetDoNotMap = 1
-			vim.cmd([[
-				nnoremap <script> <silent> <leader>cs
-										\ :call cheat#cheat("", getcurpos()[1], getcurpos()[1], 0, 0, '!')<CR>
-				vnoremap <script> <silent> <leader>cs
-										\ :call cheat#cheat("", -1, -1, 2, 0, '!')<CR>
-			]])
-		end,
-	},
-
-	"jubnzv/mdeval.nvim",
-	"jakewvincent/mkdnflow.nvim",
-	"mickael-menu/zk-nvim",
 
 	{
 		"RRethy/vim-illuminate",

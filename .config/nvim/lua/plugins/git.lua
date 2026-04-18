@@ -1,7 +1,6 @@
 return {
 
 	"tpope/vim-fugitive",
-	"TimUntersberger/neogit",
 	"samoshkin/vim-mergetool",
 	"junegunn/gv.vim",
 	"tpope/vim-git",

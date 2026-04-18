@@ -103,7 +103,6 @@ spawn-at-startup "waybar"
 spawn-at-startup "swayidle" "-w"  "timeout" "300" "swaylock &"  "timeout" "600" "niri msg action power-off-monitors" "before-sleep" "swaylock" "after-resume"  "niri msg action power-on-monitors"
 spawn-at-startup "wlsunset" "-l" "47.3" "-L" "8.5"
 spawn-at-startup "kanshi"
-spawn-at-startup "blueman-applet"
 spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_SESSION_TYPE" "XDG_SESSION_DESKTOP" "QT_QPA_PLATFORM" "XDG_CURRENT_DESKTOP"
 
 prefer-no-csd
@@ -182,6 +181,7 @@ binds {
 
     Mod+X   { spawn "wlr-which-key" "--initial-keys" "x"; }
     Mod+s   { spawn "wlr-which-key" "--initial-keys" "r"; }
+    Mod+o   { spawn "wlr-which-key" "--initial-keys" "o"; }
 
     Mod+J     { focus-window-or-workspace-down; }
     Mod+K     { focus-window-or-workspace-up; }
