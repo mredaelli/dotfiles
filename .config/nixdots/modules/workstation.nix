@@ -35,29 +35,24 @@ let
     fx
     tlrc
   ];
-  devPackages =
-    with pkgs;
-    [
-      so
-      cht-sh
-      gitui
-      nix-direnv
-      # devenv
-      git-trim
-      yamllint
-      vim-vint
-      beautysh
-      vimPlugins.sniprun
-      markdown-oxide
-      mergiraf
-      worktrunk
-      gh
-    ]
-    ++ (with pkgs.nodePackages; [
-      vim-language-server
-      bash-language-server
-      yaml-language-server
-    ]);
+  devPackages = with pkgs; [
+    so
+    cht-sh
+    gitui
+    nix-direnv
+    git-trim
+    yamllint
+    vim-vint
+    beautysh
+    vimPlugins.sniprun
+    markdown-oxide
+    mergiraf
+    # worktrunk
+    gh
+    vim-language-server
+    bash-language-server
+    yaml-language-server
+  ];
 in
 {
   options.workstation = {

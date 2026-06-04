@@ -32,7 +32,11 @@ in
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_6_21;
+  boot.blacklistedKernelModules = [ "algif_aead" ];
+
+  hardware.sane.enable = true;
+  hardware.sane.extraBackends = [ pkgs.epkowa ];
 
   services.fprintd.enable = true;
   services.fwupd.enable = true;
@@ -58,6 +62,7 @@ in
       pkgs.unstable.ollama
       pkgs.unstable.claude-code
       pkgs.micasa
+      pkgs.android-tools
     ];
   };
   # erase your darlings
@@ -122,7 +127,6 @@ in
   };
 
   programs = {
-    adb.enable = true;
     steam = {
       enable = true;
       remotePlay.openFirewall = true;

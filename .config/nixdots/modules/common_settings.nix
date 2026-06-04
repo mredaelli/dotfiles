@@ -30,8 +30,6 @@ in
     ];
   };
 
-  system.rebuild.enableNg = true;
-
   documentation = {
     doc.enable = false;
     info.enable = false;
@@ -84,7 +82,12 @@ in
       settings = {
         PasswordAuthentication = false;
         PermitRootLogin = "no";
-        AcceptEnv = "VTE_VERSION TERM COLORTERM TERMPROGRAM";
+        AcceptEnv = [
+          "VTE_VERSION"
+          "TERM"
+          "COLORTERM"
+          "TERMPROGRAM"
+        ];
       };
     };
     sanoid = {
