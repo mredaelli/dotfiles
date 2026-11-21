@@ -1,0 +1,99 @@
+# Font settings
+font-family = JetBrains Mono Nerd Font
+font-synthetic-style = false
+font-style = Semibold
+font-feature = calt
+font-feature = clig
+font-feature = liga
+adjust-cell-height = 20%
+# start_search = 
+
+# Shell
+command = fish
+
+# Theme
+theme = catppuccin-mocha.conf
+
+# Window/padding
+window-padding-x = 0
+window-padding-y = 0
+# gtk-titlebar-style = tabs
+# window-show-tab-bar = always
+window-decoration = client
+window-subtitle = working-directory
+gtk-custom-css = style.css
+
+split-divider-color = green
+
+# Tab bar
+gtk-tabs-location = bottom
+
+# Pane navigation (CTRL+SHIFT+key)
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+j=goto_split:bottom
+keybind = ctrl+shift+k=goto_split:top
+keybind = ctrl+shift+l=goto_split:right
+keybind = ctrl+shift+bracket_right=goto_split:next
+keybind = ctrl+shift+bracket_left=goto_split:previous
+
+# Pane splits
+keybind = ctrl+shift+enter=new_split:right
+keybind = ctrl+shift+minus=new_split:down
+
+# Pane zoom toggle
+keybind = ctrl+shift+z=toggle_split_zoom
+
+# Close pane
+keybind = ctrl+shift+w=close_surface
+keybind = ctrl+shift+q=close_window
+
+# Tabs
+keybind = ctrl+shift+t=new_tab
+keybind = ctrl+shift+tab=previous_tab
+keybind = ctrl+tab=next_tab
+# keybind = ctrl+shift+page_down=move_tab:1
+# keybind = ctrl+shift+page_up=move_tab:-1
+
+# Tab switching by number (CTRL+number)
+# keybind = ctrl+one=goto_tab:1
+# keybind = ctrl+two=goto_tab:2
+# keybind = ctrl+three=goto_tab:3
+# keybind = ctrl+four=goto_tab:4
+# keybind = ctrl+five=goto_tab:5
+# keybind = ctrl+six=goto_tab:6
+# keybind = ctrl+seven=goto_tab:7
+# keybind = ctrl+eight=goto_tab:8
+# keybind = ctrl+nine=goto_tab:9
+
+# Scrolling
+keybind = ctrl+shift+up=scroll_page_lines:-3
+keybind = ctrl+shift+down=scroll_page_lines:3
+keybind = ctrl+shift+b=scroll_page_up
+keybind = ctrl+shift+f=scroll_page_down
+
+# Copy/paste
+keybind = ctrl+shift+y=copy_to_clipboard
+keybind = ctrl+shift+p=paste_from_clipboard
+
+# Resize splits (Ghostty uses equalize or manual resize)
+keybind = ctrl+shift+equal=equalize_splits
+keybind = ctrl+shift+/=start_search
+keybind = ctrl+shift+r=reload_config
+
+keybind = global:cmd+shift+backquote=toggle_quick_terminal
+
+# Wayland
+gtk-single-instance = detect
+
+notify-on-command-finish-after=5m
+linux-cgroup=single-instance
+progress-style=true
+auto-update=off
+
+shell-integration-features = ssh-env,sudo,no-ssh-terminfo
+
+unfocused-split-opacity = 0.8
+#unfocused-split-fill=0d2137
+# unfocused-split-fill=002b36
+unfocused-split-fill=003320
+# focus-follows-mouse = true
