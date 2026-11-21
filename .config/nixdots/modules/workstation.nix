@@ -48,8 +48,9 @@ let
     vimPlugins.sniprun
     markdown-oxide
     mergiraf
-    # worktrunk
+    worktrunk
     gh
+    jq
     vim-language-server
     bash-language-server
     yaml-language-server

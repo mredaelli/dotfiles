@@ -51,6 +51,13 @@ alias psg='ps au | rg'
 alias cdgr='cd (git rev-parse --show-toplevel)'
 abbr kdiff 'kitty +kitten diff'
 
+if type -q wt
+  abbr wtm 'wt switch master'
+  abbr wts 'wt switch staging'
+  abbr wtp 'wt switch prod'
+  abbr wtsw 'wt switch'
+end
+ 
 ## git
 abbr gs 'git status -s'
 abbr gd 'git diff'

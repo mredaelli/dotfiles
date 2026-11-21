@@ -57,6 +57,10 @@ output "eDP-1" {
 
 layout {
     gaps 4
+    struts {
+        right 1
+        left 1
+    }
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -95,14 +99,11 @@ layout {
     border {
         off
     }
-    struts { }
 }
 
-spawn-at-startup "swaync"
-spawn-at-startup "waybar"
+spawn-sh-at-startup "while :; do waybar; [ $? -gt 128 ] || break; sleep 1; done"
 spawn-at-startup "swayidle" "-w"  "timeout" "300" "swaylock &"  "timeout" "600" "niri msg action power-off-monitors" "before-sleep" "swaylock" "after-resume"  "niri msg action power-on-monitors"
 spawn-at-startup "wlsunset" "-l" "47.3" "-L" "8.5"
-spawn-at-startup "kanshi"
 spawn-at-startup "systemctl" "--user" "import-environment" "WAYLAND_DISPLAY" "XDG_SESSION_TYPE" "XDG_SESSION_DESKTOP" "QT_QPA_PLATFORM" "XDG_CURRENT_DESKTOP"
 
 prefer-no-csd
@@ -125,7 +126,12 @@ window-rule {
 }
 
 switch-events {
- lid-close { spawn "swaylock-fancy"; }
+    lid-close {
+        spawn "sh" "-c" "niri msg output eDP-1 off; swaylock-fancy"
+    }
+    lid-open {
+        spawn "niri" "msg" "output" "eDP-1" "on"
+    }
 }
 
 window-rule {
@@ -153,8 +159,8 @@ window-rule {
 binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+Shift+Return { spawn "wezterm-gui" "start" "--always-new-process"; }
-    Mod+Return { spawn "wezterm-gui" "start" "--always-new-process"; }
+    Mod+Shift+Return { spawn "ghostty"; }
+    Mod+Return { spawn "ghostty"; }
     Mod+Shift+Q { close-window; }
 
     Mod+Shift+F { spawn "firefox"; }
@@ -339,6 +345,13 @@ binds {
 cursor {
     xcursor-theme "Qogir-dark"
     xcursor-size 40
+}
+window-rule {
+    match is-window-cast-target=true
+
+    border {
+        active-gradient from="#f38ba8ee" to="#cc241dee" angle=45
+    }
 }
 
 //include "startup.kdl"

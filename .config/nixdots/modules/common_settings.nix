@@ -82,6 +82,7 @@ in
         fenix = import (fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz") { };
         micasa = micasa-flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
         llm-agents = llm-agents-flake.packages.${pkgs.stdenv.hostPlatform.system};
+        yazi = unstable.yazi;
       };
   };
 

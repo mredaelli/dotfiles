@@ -1,0 +1,122 @@
+{
+  "env": {
+    "CLAUDE_CODE_DISABLE_1M_CONTEXT": "1"
+  },
+  "permissions": {
+    "allow": [
+      "Bash(~/.claude/bin/gl issue edit *)",
+      "Bash(~/.claude/bin/gl note *)",
+      "Bash(glab issue update *)",
+      "Bash(glab issue close *)"
+    ],
+    "defaultMode": "auto"
+  },
+  "model": "opus",
+  "skillOverrides": {
+    "anthropic-skills:docx": "off",
+    "anthropic-skills:pptx": "off",
+    "anthropic-skills:xlsx": "off",
+    "anthropic-skills:pdf": "off",
+    "anthropic-skills:google-workspace": "off",
+    "anthropic-skills:morning": "off",
+    "anthropic-skills:infra-alerts": "off",
+    "anthropic-skills:import-memory": "off",
+    "anthropic-skills:translating-text": "off",
+    "anthropic-skills:skill-creator": "off"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read|Edit|Write|NotebookEdit|Glob|Grep",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/ask-on-gitignored.py"
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "code-simplifier@claude-plugins-official": false
+  },
+  "extraKnownMarketplaces": {
+    "claude-code-plugins": {
+      "source": {
+        "source": "github",
+        "repo": "anthropics/claude-code"
+      }
+    },
+    "pydantic-skills": {
+      "source": {
+        "source": "github",
+        "repo": "pydantic/skills"
+      }
+    }
+  },
+  "outputStyle": "Concise",
+  "effortLevel": "high",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
+  "promptSuggestionEnabled": false,
+  "awaySummaryEnabled": false,
+  "tui": "fullscreen",
+  "showThinkingSummaries": true,
+  "skipWorkflowUsageWarning": true,
+  "theme": "dark",
+  "editorMode": "normal",
+  "verbose": true,
+  "switchModelsOnFlag": false,
+  "remoteControlAtStartup": false,
+  "skipAutoPermissionPrompt": true,
+  "autoMode": {
+    "allow": [
+      "$defaults",
+      "Bash(glab api:*) read-only GET queries against git.lari.systems projects, merge_requests, issues, and discussions",
+      "Bash(glab mr view:*), Bash(glab mr diff:*), Bash(glab issue view:*) for platform/backend on git.lari.systems",
+      "Bash(pytest:*) in the platform/backend checkout",
+      "Bash(pre-commit run:*) in the platform/backend checkout",
+      "Bash(ruff check:*), Bash(ruff format:*), Bash(mypy:*) in the platform/backend checkout"
+    ],
+    "soft_deny": [
+      "$defaults",
+      "Bash(glab mr merge:*) and Bash(glab mr approve:*) on git.lari.systems platform/backend",
+      "Bash(ansible-playbook:*) runs against any inventory or host group naming prod/production",
+      "Bash(psql:*) statements that DROP, TRUNCATE, or DELETE against any non-local database host"
+    ],
+    "environment": [
+      "### Org-wide",
+      "**Organization**: lari (self-hosted GitLab at git.lari.systems, namespace `platform`)",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: not queryable here (origin is a self-hosted GitLab host, not github.com); assume private — `git.lari.systems:platform/backend.git` is an internal self-hosted remote",
+      "**Internal sharing / snippet hosting**: git.lari.systems (self-hosted GitLab snippets/MRs); treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: ansible-vault (seen in shell history); repo keeps local-only secrets out of git via gitignored `backend/settings/sp_private.key` and `backend/settings/settings_local.py`",
+      "**Default / protected branches**: `master` is the default branch of platform/backend; protection state not queryable (non-github host) — treat `master` as protected",
+      "**CI/CD deploy targets**: GitLab CI pipelines on git.lari.systems (pipeline/coverage badges on master); flux and helm and kubectl seen in shell history for cluster delivery",
+      "**Network posture**: None configured",
+      "**Source control**: The trusted repo and its remote(s) only — `git.lari.systems:platform/backend.git` (namespace `platform` on the self-hosted GitLab), as scoped by the Trusted repo and Repository visibility entries above",
+      "**Trusted internal domains**: git.lari.systems",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: git.lari.systems (GitLab: issues, MRs, CI); local PostgreSQL and Redis for development; Kubernetes cluster reached via kubectl/flux/helm",
+      "**Internal package registry**: None configured — dependency installs observed against pypi.org and files.pythonhosted.org via uv",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; in this repo that includes `backend/settings/settings_local.py`, `backend/settings/settings_test_local.py`, `backend/settings/sp_private.key`, `.envrc`, and the API-key models under `apikey/`; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (hyphen/underscore/dot-delimited — e.g. matches `prod-db`, not `producer`)",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment; Ansible playbooks and flux/helm releases targeting shared clusters",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development on a Django/Python backend (pytest, ruff, mypy, pre-commit, psql) with GitLab MR and issue work via `glab`",
+      "**Trusted repo**: /home/turing/lari/platform/backend and its configured remote `git.lari.systems:platform/backend.git`. Assume private (self-hosted internal GitLab): confidential material is fine there; content ported, repointed, or first read from outside this session's repo is not its own work, whoever directed the port. Visibility scopes confidential material only: secrets and sensitive data (personal & entrusted) are never cleared into any repo by its visibility (see Definitions).",
+      "**Org-specific CLIs**: glab (authenticated against git.lari.systems), ansible-playbook, ansible-vault, flux, helm, kubectl, devenv, uv",
+      "**Routine under user prefix**: routine local development commands run from /home/turing/lari/platform/ checkouts (pytest, ruff, mypy, pre-commit, uv, ./manage.py)"
+    ]
+  },
+  "display": "summarized"
+}

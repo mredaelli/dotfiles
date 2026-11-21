@@ -204,6 +204,54 @@ config.ssh_domains = {
 	},
 }
 -- https://github.com/wezterm/wezterm/issues/5284
-config.enable_wayland = false
-config.front_end = "OpenGL"
+config.enable_wayland = true
+config.front_end = "WebGpu"
+config.webgpu_preferred_adapter = {
+	backend = "Vulkan",
+	device = 39497,
+	device_type = "IntegratedGpu",
+	driver = "Intel open-source Mesa driver",
+	driver_info = "Mesa 25.2.6",
+	name = "Intel(R) Iris(R) Xe Graphics (TGL GT2)",
+	vendor = 32902,
+}
+config.front_end = "WebGpu"
 return config
+
+-- [
+--     {
+--         "backend": "Vulkan",
+--         "device": 39497,
+--         "device_type": "IntegratedGpu",
+--         "driver": "Intel open-source Mesa driver",
+--         "driver_info": "Mesa 25.2.6",
+--         "name": "Intel(R) Iris(R) Xe Graphics (TGL GT2)",
+--         "vendor": 32902,
+--     },
+--     {
+--         "backend": "Vulkan",
+--         "device": 8123,
+--         "device_type": "DiscreteGpu",
+--         "driver": "NVIDIA",
+--         "driver_info": "580.142",
+--         "name": "NVIDIA T500",
+--         "vendor": 4318,
+--     },
+--     {
+--         "backend": "Vulkan",
+--         "device": 0,
+--         "device_type": "Cpu",
+--         "driver": "llvmpipe",
+--         "driver_info": "Mesa 25.2.6 (LLVM 21.1.7)",
+--         "name": "llvmpipe (LLVM 21.1.7, 256 bits)",
+--         "vendor": 65541,
+--     },
+--     {
+--         "backend": "Gl",
+--         "device": 0,
+--         "device_type": "IntegratedGpu",
+--         "driver_info": "4.6 (Core Profile) Mesa 25.2.6",
+--         "name": "Mesa Intel(R) Iris(R) Xe Graphics (TGL GT2)",
+--         "vendor": 32902,
+--     },
+-- ]
