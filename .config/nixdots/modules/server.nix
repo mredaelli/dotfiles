@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  options,
   ...
 }:
 {
@@ -38,7 +36,7 @@
 
       nil
       statix
-      nixfmt-rfc-style
+      nixfmt
       lua-language-server
       stylua
 

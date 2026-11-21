@@ -135,6 +135,13 @@ if status --is-interactive
   if type -q atuin
     atuin init fish | source
   end
+
+  # Eagerly load completions for the `./go` content-import script. Fish only
+  # autoloads completions/go.fish for the bare `go` token, not the `./go` path
+  # form this script is invoked as, so source it here.
+  if test -f $__fish_config_dir/completions/go.fish
+    source $__fish_config_dir/completions/go.fish
+  end
 end
 set -Ux FZF_DEFAULT_OPTS "\
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \

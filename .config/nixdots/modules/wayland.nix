@@ -37,6 +37,7 @@ let
         # Put this also in sway config, as `seat seat0 xcursor_theme Quintom_Ink 40`
         ${gsettings} set ${gnome_schema} cursor-theme Quintom_Ink
         ${gsettings} set ${gnome_schema} cursor-size 40
+        ${gsettings} set ${gnome_schema} gtk-enable-primary-paste true
       '';
   };
   rofi-stuff = pkgs.rofi.override {

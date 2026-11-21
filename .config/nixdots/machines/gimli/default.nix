@@ -48,6 +48,9 @@ in
     };
   };
 
+  security.pam.services.swaylock.rules.auth.fprintd.order =
+    config.security.pam.services.swaylock.rules.auth.unix.order + 10;
+
   nixpkgs.overlays = [
     (self: super: {
       neovim = super.neovim.override {
@@ -59,12 +62,18 @@ in
 
   environment = {
     systemPackages = [
-      pkgs.unstable.ollama
-      pkgs.unstable.claude-code
+      # pkgs.unstable.ollama
+      pkgs.llm-agents.claude-code
+      pkgs.llm-agents.claude-desktop
+      pkgs.unstable.orca-slicer
       pkgs.micasa
       pkgs.android-tools
     ];
   };
+  services.udev.packages = with pkgs; [
+    platformio-core.udev
+    openocd
+  ];
   # erase your darlings
   environment.etc = {
     nixos.source = "/persistent/etc/nixos";
@@ -145,6 +154,42 @@ in
     printing = {
       enable = true;
       drivers = [ pkgs.cups-brother-hl3140cw ];
+    };
+    thinkfan = {
+      enable = true;
+      # sensible quiet-at-idle curve; tune to taste
+      levels = [
+        [
+          0
+          0
+          50
+        ]
+        [
+          1
+          48
+          60
+        ]
+        [
+          2
+          55
+          65
+        ]
+        [
+          3
+          60
+          73
+        ]
+        [
+          4
+          68
+          80
+        ]
+        [
+          7
+          75
+          32767
+        ]
+      ];
     };
   };
   systemd.user.services.atuind = {

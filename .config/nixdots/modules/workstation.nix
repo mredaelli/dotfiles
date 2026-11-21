@@ -6,7 +6,6 @@
 }:
 let
   packages = with pkgs; [
-    unstable.wezterm
     libnotify
     pavucontrol
     imv
@@ -34,6 +33,8 @@ let
     nextcloud-client
     fx
     tlrc
+    devenv
+    llm-agents.claude-code
   ];
   devPackages = with pkgs; [
     so
@@ -76,6 +77,7 @@ in
       "image/jpeg" = "imv.desktop";
       "image/gif" = "imv.desktop";
       "image/webp" = "imv.desktop";
+      "application/epub+zip" = "calibre-ebook-viewer.desktop";
     };
 
     environment = {
@@ -86,6 +88,7 @@ in
         packages ++ (if config.workstation.full then (devPackages ++ morePackages) else [ ]);
     };
 
+    security.rtkit.enable = true;
     fonts = {
       fontDir.enable = true;
       packages = with pkgs; [

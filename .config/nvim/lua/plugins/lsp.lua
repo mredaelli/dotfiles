@@ -299,6 +299,20 @@ return {
 				capabilities = capabilities,
 			})
 			vim.lsp.enable("beancount")
+			local tc = vim.env.HOME .. "/.platformio/packages/toolchain-xtensa-esp-elf/bin"
+			vim.lsp.config("clangd", {
+				cmd = {
+					"clangd",
+					"--background-index",
+					"--query-driver=" .. tc .. "/xtensa-*-elf-*",
+				},
+				-- compile_commands.json names the compiler without a path,
+				-- so clangd must find it on PATH to query its system headers
+				cmd_env = { PATH = tc .. ":" .. vim.env.PATH },
+				filetypes = { "c", "cpp" },
+				root_markers = { "compile_commands.json", "platformio.ini", ".git" },
+			})
+			vim.lsp.enable("clangd")
 		end,
 		dependencies = {
 			"nvim-lua/lsp_extensions.nvim",

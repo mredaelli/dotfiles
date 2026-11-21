@@ -41,13 +41,6 @@ return {
 			telescope.load_extension("heading")
 			telescope.load_extension("file_browser")
 			-- require('telescope').load_extension('dap')
-
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>o",
-				'<cmd>lua require("other")()<CR>',
-				{ noremap = true, silent = true }
-			)
 			vim.api.nvim_set_keymap("n", "<leader>tf", ":Telescope file_browser<CR>", { noremap = true })
 			vim.keymap.set("n", "<leader>t<space>", ":Telescope resume<cr>", { noremap = true })
 			vim.cmd([[

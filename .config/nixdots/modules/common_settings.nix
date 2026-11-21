@@ -1,15 +1,10 @@
-{
-  config,
-  pkgs,
-  options,
-  ...
-}:
+{ ... }:
 let
   baseConfig = {
     allowUnfree = true;
   };
-  serena-flake = builtins.getFlake "github:oraios/serena";
   micasa-flake = builtins.getFlake "github:micasa-dev/micasa";
+  llm-agents-flake = builtins.getFlake "github:numtide/llm-agents.nix";
 in
 {
   nix = {
@@ -18,16 +13,22 @@ in
       dates = "weekly";
       options = "--delete-older-than 10d";
     };
-    settings.auto-optimise-store = true;
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-      "configurable-impure-env"
-    ];
-    settings.trusted-users = [
-      "root"
-      "turing"
-    ];
+    settings = {
+      auto-optimise-store = true;
+      experimental-features = [
+        "nix-command"
+        "flakes"
+        "configurable-impure-env"
+      ];
+      trusted-users = [
+        "root"
+        "turing"
+      ];
+      extra-substituters = [ "https://cache.numtide.com" ];
+      extra-trusted-public-keys = [
+        "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
+      ];
+    };
   };
 
   documentation = {
@@ -48,6 +49,22 @@ in
         # spotifyd = super.spotifyd.override { withMpris = true; };
       }
     )
+    # Steam's 32-bit support pulls a 32-bit pipewire whose scons-based audio
+    # backends (ffado/roc/spandsp) transitively build numpy -> openblas for
+    # i686-linux. That openblas build hangs forever in its check phase on
+    # i686 (zblat3 deadlock), which is upstream issue NixOS/nixpkgs#534670,
+    # fixed by NixOS/nixpkgs#534770 (merged 2026-06-24). Our channel snapshot
+    # predates that merge, so apply the same fix until the channel catches up:
+    # skip the broken test suite on the i686 openblas build.
+    (self: super: {
+      pkgsi686Linux = super.pkgsi686Linux.extend (
+        s: o: {
+          openblas = o.openblas.overrideAttrs (_: {
+            doCheck = false;
+          });
+        }
+      );
+    })
   ];
 
   nixpkgs.config = baseConfig // {
@@ -63,10 +80,8 @@ in
         inherit unstable;
         jre = pkgs.jdk11;
         fenix = import (fetchTarball "https://github.com/nix-community/fenix/archive/main.tar.gz") { };
-        windsurf = unstable.windsurf;
-        worktrunk = pkgs.callPackage ./worktrunk.nix { };
-        serena = serena-flake.packages.${pkgs.system}.default;
-        micasa = micasa-flake.packages.${pkgs.system}.default;
+        micasa = micasa-flake.packages.${pkgs.stdenv.hostPlatform.system}.default;
+        llm-agents = llm-agents-flake.packages.${pkgs.stdenv.hostPlatform.system};
       };
   };
 
