@@ -11,6 +11,8 @@
     ../../modules/common_settings.nix
     ../../modules/server.nix
     ../../modules/user.nix
+    ../../modules/nginx_http2.nix
+    ../../modules/postiz.nix
     ./nginx.nix
     ./vaultwarden.nix
     ./shiori.nix
@@ -22,12 +24,28 @@
     ./readeck.nix
     ./monica.nix
     ./silverbullet.nix
+    ./silverbullet-sync.nix
+    ./silverbullet_personal.nix
     ./wireguard.nix
+    ./matrix.nix
   ];
+  services.postiz = {
+    enable = true;
+    domain = "postiz.typish.dev";
+    dataDir = "/data/postiz"; # default: /var/lib/postiz
+    environmentFile = "/var/secrets/postiz.env"; # default: null (no extra env file)
+  };
 
+  boot.loader.systemd-boot.configurationLimit = 3;
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.supportedFilesystems = [ "zfs" ];
+  boot.blacklistedKernelModules = [
+    "algif_aead"
+    "esp4"
+    "esp6"
+    "rxrpc"
+  ];
 
   networking = {
     hostName = "stella";
@@ -42,14 +60,6 @@
       443
     ];
   };
-  # services.tailscale = {
-  #   enable = true;
-  # };
-
-  # networking.firewall = {
-  #   trustedInterfaces = [ "tailscale0" ];
-  #   allowedUDPPorts = [ config.services.tailscale.port ];
-  # };
 
   nix.settings.allowed-users = [ "@wheel" ];
 
@@ -64,6 +74,24 @@
       enable = true;
     };
   };
+
+  services.hister = {
+    enable = true;
+    dataDir = "/data/nogon";
+    port = 8734;
+    openFirewall = true;
+    settings = {
+      app = {
+        search_url = "https://google.com/search?q={query}";
+        log_level = "info";
+      };
+      server = {
+        address = "100.96.0.1";
+        database = "db.sqlite3";
+      };
+    };
+  };
+
   services.sanoid = {
     enable = true;
 
@@ -80,23 +108,11 @@
     };
   };
 
-  # services.nginx.virtualHosts."calcal.typish.dev" = {
-  #   enableACME = true;
-  #   forceSSL = true;
-  #   locations."/" = {
-  #     extraConfig = ''
-  #       proxy_pass http://localhost:7777;
-  #       proxy_pass_request_headers on;
-  #       proxy_set_header        Host $host;
-  #       proxy_set_header        X-Real-IP $remote_addr;
-  #       proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-  #       proxy_set_header        X-Forwarded-Proto $scheme;
-  #       proxy_read_timeout      600s;
-  #       proxy_send_timeout      600s;
-  #     '';
-  #   };
-  # };
-  #
+  services.gitolite = {
+    enable = true;
+    dataDir = "/data/gitolite";
+    adminPubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJtRIecnDtJ+i39zl1U+bTQ//Q59ILtO4ZywRljOz6lx turing@gimli";
+  };
   systemd.services.b2Backup = {
     enable = true;
     script =
